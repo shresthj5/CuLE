@@ -1,103 +1,122 @@
 import argparse
 import os
 import sys
-import torch
+from pathlib import Path
 
-from Cython.Distutils import build_ext
+from setuptools import find_packages, setup
+from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
-from distutils.cmd import Command
-from setuptools import find_packages, setup, Extension
-from examples.utils.runtime import Runtime
+DEFAULT_CUDA_ARCH_LIST = os.environ.get("TORCH_CUDA_ARCH_LIST")
+if DEFAULT_CUDA_ARCH_LIST is None:
+    DEFAULT_CUDA_ARCH_LIST = "8.0 8.6"
+    os.environ["TORCH_CUDA_ARCH_LIST"] = DEFAULT_CUDA_ARCH_LIST
 
-gpus = torch.cuda.get_arch_list() if torch.cuda.device_count() > 0 else ['70']
 
-codes = [arch[-2] + '0' for arch in gpus]
-arch_gencode = ['-arch=sm_' + codes[0]] + ['-gencode=arch=compute_{0},code=sm_{0}'.format(code) for code in codes]
-
-base_dir = os.path.dirname(os.path.realpath(__file__))
-
-runtime = Runtime()
-CUDA = runtime._locate()
-
-sources = [os.path.join('torchcule', f) for f in ['frontend.cpp', 'backend.cu']]
-third_party_dir = os.path.join(base_dir, 'third_party')
-include_dirs = [base_dir, os.path.join(third_party_dir, 'agency'), os.path.join(third_party_dir, 'pybind11', 'include'), CUDA['include']]
-libraries = ['gomp', 'z']
-cxx_flags = []
-nvcc_flags = arch_gencode + ['-O3', '-Xptxas=-v', '-Xcompiler=-Wall,-Wextra,-fPIC']
-
-parser = argparse.ArgumentParser('CuLE', add_help=False)
-parser.add_argument('--fastbuild', action='store_true', default=False, help='Build CuLE supporting only 2K roms')
-parser.add_argument('--compiler', type=str, default='gcc', help='Host compiler (default: gcc)')
+parser = argparse.ArgumentParser("CuLE", add_help=False)
+parser.add_argument(
+    "--fastbuild",
+    action="store_true",
+    default=False,
+    help="Build CuLE supporting only 2K roms",
+)
+parser.add_argument(
+    "--compiler",
+    type=str,
+    default=None,
+    help="Host compiler passed to nvcc via -ccbin",
+)
+parser.add_argument(
+    "--atari-env-block-size",
+    type=int,
+    default=int(os.environ.get("CULE_ATARI_ENV_BLOCK_SIZE", "1")),
+    help="Compile-time block size for CuLE's env/reset/preprocess CUDA kernels",
+)
+parser.add_argument(
+    "--atari-process-block-size",
+    type=int,
+    default=int(os.environ.get("CULE_ATARI_PROCESS_BLOCK_SIZE", "64")),
+    help="Compile-time block size for CuLE's frame preprocessing CUDA kernel",
+)
 args, remaining_argv = parser.parse_known_args()
-sys.argv = ['setup.py'] + remaining_argv
+sys.argv = [sys.argv[0]] + remaining_argv
+
+supported_env_block_sizes = {1, 32, 64, 128, 256}
+if args.atari_env_block_size not in supported_env_block_sizes:
+    raise SystemExit(
+        "Unsupported --atari-env-block-size={} (expected one of {})".format(
+            args.atari_env_block_size,
+            sorted(supported_env_block_sizes),
+        )
+    )
+if args.atari_process_block_size not in supported_env_block_sizes:
+    raise SystemExit(
+        "Unsupported --atari-process-block-size={} (expected one of {})".format(
+            args.atari_process_block_size,
+            sorted(supported_env_block_sizes),
+        )
+    )
+
+
+base_dir = Path(__file__).resolve().parent
+third_party_dir = base_dir / "third_party"
+
+sources = [
+    str(base_dir / "torchcule" / "frontend.cpp"),
+    str(base_dir / "torchcule" / "backend.cu"),
+]
+
+include_dirs = [
+    str(base_dir),
+    str(third_party_dir / "agency"),
+]
+
+cxx_flags = ["-O3", "-Wall", "-Wextra", "-fPIC"]
+nvcc_flags = [
+    "-O3",
+    "-Xptxas=-v",
+    "-lineinfo",
+    "-Xcompiler=-Wall,-Wextra,-fPIC",
+]
+libraries = ["z"]
+extra_link_args = []
+
+if os.name != "nt":
+    cxx_flags.append("-fopenmp")
+    nvcc_flags.append("-Xcompiler=-fopenmp")
+    extra_link_args.append("-fopenmp")
 
 if args.fastbuild:
-    nvcc_flags += ['-DCULE_FAST_COMPILE']
+    nvcc_flags.append("-DCULE_FAST_COMPILE")
 
-nvcc_flags += ['-ccbin={}'.format(args.compiler)]
+if args.compiler:
+    nvcc_flags.append(f"-ccbin={args.compiler}")
 
-def customize_compiler_for_nvcc(self):
-    """Inject deep into distutils to customize how the dispatch
-    to gcc/nvcc works.
-    If you subclass UnixCCompiler, it's not trivial to get your subclass
-    injected in, and still have the right customizations (i.e.
-    distutils.sysconfig.customize_compiler) run on it. So instead of going
-    the OO route, I have this. Note, it's kindof like a wierd functional
-    subclassing going on.
-    """
+block_size_macro = f"-DCULE_ATARI_ENV_BLOCK_SIZE={args.atari_env_block_size}"
+cxx_flags.append(block_size_macro)
+nvcc_flags.append(block_size_macro)
+process_block_size_macro = f"-DCULE_ATARI_PROCESS_BLOCK_SIZE={args.atari_process_block_size}"
+cxx_flags.append(process_block_size_macro)
+nvcc_flags.append(process_block_size_macro)
 
-    # Tell the compiler it can processes .cu
-    self.src_extensions.append('.cu')
 
-    # Save references to the default compiler_so and _comple methods
-    default_compiler_so = self.compiler_so
-    super = self._compile
-
-    # Now redefine the _compile method. This gets executed for each
-    # object but distutils doesn't have the ability to change compilers
-    # based on source extension: we add it.
-    def _compile(obj, src, ext, cc_args, extra_postargs, pp_opts):
-        if os.path.splitext(src)[1] == '.cu':
-            # use the cuda for .cu files
-            self.set_executable('compiler_so', CUDA['nvcc'])
-            # use only a subset of the extra_postargs, which are 1-1
-            # translated from the extra_compile_args in the Extension class
-            postargs = extra_postargs['nvcc']
-        else:
-            postargs = extra_postargs['gcc']
-
-        super(obj, src, ext, cc_args, postargs, pp_opts)
-        # Reset the default compiler_so, which we might have changed for cuda
-        self.compiler_so = default_compiler_so
-
-    # Inject our redefined _compile method into the class
-    self._compile = _compile
-
-# Run the customize_compiler
-class custom_build_ext(build_ext):
-    def build_extensions(self):
-        customize_compiler_for_nvcc(self.compiler)
-        build_ext.build_extensions(self)
-
-setup(name='torchcule',
-      version='0.1.0',
-      description='A GPU RL environment package for PyTorch',
-      url='https://github.com/NVlabs/cule',
-      author='Steven Dalton',
-      author_email='sdalton1@gmail.com',
-      install_requires=['gym>=0.9.5'],
-      ext_modules=[
-          Extension('torchcule_atari',
-              sources=sources,
-              include_dirs=include_dirs,
-              libraries=libraries,
-              extra_compile_args={'gcc': cxx_flags, 'nvcc': nvcc_flags}
-              )
-          ],
-      # Exclude the build files.
-      packages=find_packages(exclude=['build']),
-      cmdclass={
-          'build_ext': custom_build_ext,
-          }
-      )
+setup(
+    name="torchcule",
+    version="0.1.0",
+    description="A GPU RL environment package for PyTorch",
+    url="https://github.com/NVlabs/cule",
+    author="Steven Dalton",
+    author_email="sdalton1@gmail.com",
+    install_requires=["gymnasium", "ale-py"],
+    ext_modules=[
+        CUDAExtension(
+            name="torchcule_atari",
+            sources=sources,
+            include_dirs=include_dirs,
+            libraries=libraries,
+            extra_compile_args={"cxx": cxx_flags, "nvcc": nvcc_flags},
+            extra_link_args=extra_link_args,
+        )
+    ],
+    packages=find_packages(exclude=["build"]),
+    cmdclass={"build_ext": BuildExtension},
+)

@@ -1,15 +1,38 @@
 import re
-import gym
+try:
+    import gymnasium as gym
+except ImportError:  # pragma: no cover - compatibility fallback
+    import gym  # type: ignore[no-redef]
+
+try:
+    import ale_py
+except ImportError:  # pragma: no cover - compatibility fallback
+    ale_py = None
+
 import os
 
+
+def _register_ale_envs():
+    if ale_py is None or not hasattr(gym, 'register_envs'):
+        return
+
+    try:
+        gym.register_envs(ale_py)
+    except Exception:
+        pass
+
+
 def atari_games():
-    pattern = re.compile('\w+NoFrameskip-v4')
-    return [env_spec.id for env_spec in gym.envs.registry.all() if pattern.match(env_spec.id)]
+    _register_ale_envs()
+    pattern = re.compile(r'^ALE\/\w+-v5$')
+
+    registry = gym.registry.values() if hasattr(gym, 'registry') else gym.envs.registry.all()
+    return [env_spec.id for env_spec in registry if pattern.match(env_spec.id)]
 
 env_names = atari_games()
-env_names.remove('QbertNoFrameskip-v4')
-env_names.remove('ElevatorActionNoFrameskip-v4')
-env_names.remove('DefenderNoFrameskip-v4')
+env_names.remove('ALE/Qbert-v5')
+env_names.remove('ALE/ElevatorAction-v5')
+env_names.remove('ALE/Defender-v5')
 num_ales_list = [1024, 2048, 16, 4096] #[1, 32, 64, 128, 256, 512, 1024, 2048, 4096]
 
 for num_ales in num_ales_list:

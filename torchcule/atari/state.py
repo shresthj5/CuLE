@@ -229,7 +229,12 @@ class State(object):
 
         cart = deserializer.getStr()
 
-        game_name = re.match(r'(\w+)NoFrameskip-v4', str(env.unwrapped.spec.id)).group(1)
+        env_id = str(env.unwrapped.spec.id)
+        match = re.match(r'^(?:ALE/)?(\w+?)(?:NoFrameskip)?-v\d+$', env_id)
+        if match is None:
+            raise ValueError('Unsupported Atari environment id: {}'.format(env_id))
+
+        game_name = match.group(1)
         ale_keys, ale_val_types, rom_type = game_attr_map[game_name]
 
         if rom_type in ['F6', 'F8', 'F8SC']:

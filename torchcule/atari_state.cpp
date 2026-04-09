@@ -268,4 +268,3 @@ struct decode_states_functor
         }
     }
 };
-

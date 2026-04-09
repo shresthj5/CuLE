@@ -1,0 +1,316 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e3]:
+    - generic [ref=e5]:
+      - link "NVIDIA Developer" [ref=e7] [cursor=pointer]:
+        - /url: https://developer.nvidia.com
+        - img [ref=e8]
+      - navigation [ref=e21]:
+        - list [ref=e22]:
+          - listitem [ref=e23]:
+            - link "Home" [ref=e24] [cursor=pointer]:
+              - /url: https://developer.nvidia.com/
+          - listitem [ref=e25]:
+            - link "Blog" [ref=e26] [cursor=pointer]:
+              - /url: https://developer.nvidia.com/blog/
+          - listitem [ref=e27]:
+            - link "Forums" [ref=e28] [cursor=pointer]:
+              - /url: https://forums.developer.nvidia.com/
+          - listitem [ref=e29]:
+            - link "Docs" [ref=e30] [cursor=pointer]:
+              - /url: https://docs.nvidia.com/
+          - listitem [ref=e31]:
+            - link "Downloads" [ref=e32] [cursor=pointer]:
+              - /url: https://developer.nvidia.com/downloads
+          - listitem [ref=e33]:
+            - link "Training" [ref=e34] [cursor=pointer]:
+              - /url: https://www.nvidia.com/en-us/deep-learning-ai/education/
+      - generic [ref=e36]:
+        - button [ref=e38] [cursor=pointer]:
+          - img [ref=e39]
+        - list [ref=e41]:
+          - listitem [ref=e42]:
+            - link "Join" [ref=e43] [cursor=pointer]:
+              - /url: https://developer.nvidia.com/login
+          - listitem [ref=e44]:
+            - link [ref=e45] [cursor=pointer]:
+              - /url: https://developer.nvidia.com/login
+              - img [ref=e46]
+    - navigation [ref=e54]:
+      - list [ref=e55]:
+        - listitem [ref=e56]:
+          - button "Topics" [ref=e57] [cursor=pointer]
+        - listitem [ref=e58]:
+          - button "Platforms and Tools" [ref=e59] [cursor=pointer]
+        - listitem [ref=e60]:
+          - button "Industries" [ref=e61] [cursor=pointer]
+        - listitem [ref=e62]:
+          - button "Resources" [ref=e63] [cursor=pointer]
+  - main [ref=e70]:
+    - generic [ref=e71]:
+      - heading "CUDA GPU Compute Capability" [level=1] [ref=e73]
+      - paragraph [ref=e74]:
+        - link "Compute capability" [ref=e75] [cursor=pointer]:
+          - /url: https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html
+        - text: (CC) defines the hardware features and supported instructions for each NVIDIA GPU architecture. Find the compute capability for your GPU in the table below.
+        - text: For legacy GPUs, refer to
+        - link "Legacy CUDA GPU Compute Capability" [ref=e76] [cursor=pointer]:
+          - /url: https://developer.nvidia.com/cuda/gpus/legacy
+        - text: .
+    - table [ref=e80]:
+      - rowgroup [ref=e81]:
+        - row "Compute Capability Data Center Workstation/Consumer Jetson" [ref=e82]:
+          - columnheader "Compute Capability" [ref=e83]:
+            - heading "Compute Capability" [level=3] [ref=e84]
+          - columnheader "Data Center" [ref=e85]:
+            - heading "Data Center" [level=3] [ref=e86]
+          - columnheader "Workstation/Consumer" [ref=e87]:
+            - heading "Workstation/Consumer" [level=3] [ref=e88]
+          - columnheader "Jetson" [ref=e89]:
+            - heading "Jetson" [level=3] [ref=e90]
+      - rowgroup [ref=e91]:
+        - row "12.1 NVIDIA GB10 (DGX Spark)" [ref=e92]:
+          - cell "12.1" [ref=e93]:
+            - generic [ref=e94]: "12.1"
+          - cell [ref=e95]
+          - cell "NVIDIA GB10 (DGX Spark)" [ref=e96]:
+            - generic [ref=e97]: NVIDIA GB10 (DGX Spark)
+          - cell [ref=e98]
+        - row "12.0 NVIDIA RTX PRO 6000 Blackwell Server Edition NVIDIA RTX PRO 6000 Blackwell Workstation Edition NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition NVIDIA RTX PRO 5000 Blackwell NVIDIA RTX PRO 4500 Blackwell NVIDIA RTX PRO 4000 Blackwell NVIDIA RTX PRO 4000 Blackwell SFF Edition NVIDIA RTX PRO 2000 Blackwell GeForce RTX 5090 GeForce RTX 5080 GeForce RTX 5070 Ti GeForce RTX 5070 GeForce RTX 5060 Ti GeForce RTX 5060 GeForce RTX 5050" [ref=e99]:
+          - cell "12.0" [ref=e100]:
+            - generic [ref=e101]: "12.0"
+          - cell "NVIDIA RTX PRO 6000 Blackwell Server Edition" [ref=e102]:
+            - generic [ref=e103]: NVIDIA RTX PRO 6000 Blackwell Server Edition
+          - cell "NVIDIA RTX PRO 6000 Blackwell Workstation Edition NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition NVIDIA RTX PRO 5000 Blackwell NVIDIA RTX PRO 4500 Blackwell NVIDIA RTX PRO 4000 Blackwell NVIDIA RTX PRO 4000 Blackwell SFF Edition NVIDIA RTX PRO 2000 Blackwell GeForce RTX 5090 GeForce RTX 5080 GeForce RTX 5070 Ti GeForce RTX 5070 GeForce RTX 5060 Ti GeForce RTX 5060 GeForce RTX 5050" [ref=e104]:
+            - generic [ref=e105]:
+              - text: NVIDIA RTX PRO 6000 Blackwell Workstation Edition
+              - text: NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition
+              - text: NVIDIA RTX PRO 5000 Blackwell
+              - text: NVIDIA RTX PRO 4500 Blackwell
+              - text: NVIDIA RTX PRO 4000 Blackwell
+              - text: NVIDIA RTX PRO 4000 Blackwell SFF Edition
+              - text: NVIDIA RTX PRO 2000 Blackwell
+              - text: GeForce RTX 5090
+              - text: GeForce RTX 5080
+              - text: GeForce RTX 5070 Ti
+              - text: GeForce RTX 5070
+              - text: GeForce RTX 5060 Ti
+              - text: GeForce RTX 5060
+              - text: GeForce RTX 5050
+          - cell [ref=e106]
+        - row "11.0 Jetson T5000 Jetson T4000" [ref=e107]:
+          - cell "11.0" [ref=e108]:
+            - generic [ref=e109]: "11.0"
+          - cell [ref=e110]
+          - cell [ref=e111]
+          - cell "Jetson T5000 Jetson T4000" [ref=e112]:
+            - generic [ref=e113]:
+              - text: Jetson T5000
+              - text: Jetson T4000
+        - row "10.3 NVIDIA GB300 NVIDIA B300" [ref=e114]:
+          - cell "10.3" [ref=e115]:
+            - generic [ref=e116]: "10.3"
+          - cell "NVIDIA GB300 NVIDIA B300" [ref=e117]:
+            - generic [ref=e118]:
+              - text: NVIDIA GB300
+              - text: NVIDIA B300
+          - cell [ref=e119]
+          - cell [ref=e120]
+        - row "10.0 NVIDIA GB200 NVIDIA B200" [ref=e121]:
+          - cell "10.0" [ref=e122]:
+            - generic [ref=e123]: "10.0"
+          - cell "NVIDIA GB200 NVIDIA B200" [ref=e124]:
+            - generic [ref=e125]:
+              - text: NVIDIA GB200
+              - text: NVIDIA B200
+          - cell [ref=e126]
+          - cell [ref=e127]
+        - row "9.0 NVIDIA GH200 NVIDIA H200 NVIDIA H100" [ref=e128]:
+          - cell "9.0" [ref=e129]:
+            - generic [ref=e130]: "9.0"
+          - cell "NVIDIA GH200 NVIDIA H200 NVIDIA H100" [ref=e131]:
+            - generic [ref=e132]:
+              - text: NVIDIA GH200
+              - text: NVIDIA H200
+              - text: NVIDIA H100
+          - cell [ref=e133]
+          - cell [ref=e134]
+        - row "8.9 NVIDIA L4 NVIDIA L40 NVIDIA L40S NVIDIA RTX 6000 Ada NVIDIA RTX 5000 Ada NVIDIA RTX 4500 Ada NVIDIA RTX 4000 Ada NVIDIA RTX 4000 SFF Ada NVIDIA RTX 2000 Ada GeForce RTX 4090 GeForce RTX 4080 GeForce RTX 4070 Ti GeForce RTX 4070 GeForce RTX 4060 Ti GeForce RTX 4060 GeForce RTX 4050" [ref=e135]:
+          - cell "8.9" [ref=e136]:
+            - generic [ref=e137]: "8.9"
+          - cell "NVIDIA L4 NVIDIA L40 NVIDIA L40S" [ref=e138]:
+            - generic [ref=e139]:
+              - text: NVIDIA L4
+              - text: NVIDIA L40
+              - text: NVIDIA L40S
+          - cell "NVIDIA RTX 6000 Ada NVIDIA RTX 5000 Ada NVIDIA RTX 4500 Ada NVIDIA RTX 4000 Ada NVIDIA RTX 4000 SFF Ada NVIDIA RTX 2000 Ada GeForce RTX 4090 GeForce RTX 4080 GeForce RTX 4070 Ti GeForce RTX 4070 GeForce RTX 4060 Ti GeForce RTX 4060 GeForce RTX 4050" [ref=e140]:
+            - generic [ref=e141]:
+              - text: NVIDIA RTX 6000 Ada
+              - text: NVIDIA RTX 5000 Ada
+              - text: NVIDIA RTX 4500 Ada
+              - text: NVIDIA RTX 4000 Ada
+              - text: NVIDIA RTX 4000 SFF Ada
+              - text: NVIDIA RTX 2000 Ada
+              - text: GeForce RTX 4090
+              - text: GeForce RTX 4080
+              - text: GeForce RTX 4070 Ti
+              - text: GeForce RTX 4070
+              - text: GeForce RTX 4060 Ti
+              - text: GeForce RTX 4060
+              - text: GeForce RTX 4050
+          - cell [ref=e142]
+        - row "8.7 Jetson AGX Orin Jetson Orin NX Jetson Orin Nano" [ref=e143]:
+          - cell "8.7" [ref=e144]:
+            - generic [ref=e145]: "8.7"
+          - cell [ref=e146]
+          - cell [ref=e147]
+          - cell "Jetson AGX Orin Jetson Orin NX Jetson Orin Nano" [ref=e148]:
+            - generic [ref=e149]:
+              - text: Jetson AGX Orin
+              - text: Jetson Orin NX
+              - text: Jetson Orin Nano
+        - row "8.6 NVIDIA A40 NVIDIA A10 NVIDIA A16 NVIDIA A2 NVIDIA RTX A6000 NVIDIA RTX A5000 NVIDIA RTX A4000 NVIDIA RTX A3000 NVIDIA RTX A2000 GeForce RTX 3090 Ti GeForce RTX 3090 GeForce RTX 3080 Ti GeForce RTX 3080 GeForce RTX 3070 Ti GeForce RTX 3070 GeForce RTX 3060 Ti GeForce RTX 3060 GeForce RTX 3050 Ti GeForce RTX 3050" [ref=e150]:
+          - cell "8.6" [ref=e151]:
+            - generic [ref=e152]: "8.6"
+          - cell "NVIDIA A40 NVIDIA A10 NVIDIA A16 NVIDIA A2" [ref=e153]:
+            - generic [ref=e154]:
+              - text: NVIDIA A40
+              - text: NVIDIA A10
+              - text: NVIDIA A16
+              - text: NVIDIA A2
+          - cell "NVIDIA RTX A6000 NVIDIA RTX A5000 NVIDIA RTX A4000 NVIDIA RTX A3000 NVIDIA RTX A2000 GeForce RTX 3090 Ti GeForce RTX 3090 GeForce RTX 3080 Ti GeForce RTX 3080 GeForce RTX 3070 Ti GeForce RTX 3070 GeForce RTX 3060 Ti GeForce RTX 3060 GeForce RTX 3050 Ti GeForce RTX 3050" [ref=e155]:
+            - generic [ref=e156]:
+              - text: NVIDIA RTX A6000
+              - text: NVIDIA RTX A5000
+              - text: NVIDIA RTX A4000
+              - text: NVIDIA RTX A3000
+              - text: NVIDIA RTX A2000
+              - text: GeForce RTX 3090 Ti
+              - text: GeForce RTX 3090
+              - text: GeForce RTX 3080 Ti
+              - text: GeForce RTX 3080
+              - text: GeForce RTX 3070 Ti
+              - text: GeForce RTX 3070
+              - text: GeForce RTX 3060 Ti
+              - text: GeForce RTX 3060
+              - text: GeForce RTX 3050 Ti
+              - text: GeForce RTX 3050
+          - cell [ref=e157]
+        - row "8.0 NVIDIA A100 NVIDIA A30" [ref=e158]:
+          - cell "8.0" [ref=e159]:
+            - generic [ref=e160]: "8.0"
+          - cell "NVIDIA A100 NVIDIA A30" [ref=e161]:
+            - generic [ref=e162]:
+              - text: NVIDIA A100
+              - text: NVIDIA A30
+          - cell [ref=e163]
+          - cell [ref=e164]
+        - row "7.5 NVIDIA T4 QUADRO RTX 8000 QUADRO RTX 6000 QUADRO RTX 5000 QUADRO RTX 4000 QUADRO RTX 3000 QUADRO T2000 NVIDIA T1200 NVIDIA T1000 NVIDIA T600 NVIDIA T500 NVIDIA T400 GeForce GTX 1650 Ti NVIDIA TITAN RTX GeForce RTX 2080 Ti GeForce RTX 2080 GeForce RTX 2070 GeForce RTX 2060" [ref=e165]:
+          - cell "7.5" [ref=e166]:
+            - generic [ref=e167]: "7.5"
+          - cell "NVIDIA T4" [ref=e168]:
+            - generic [ref=e169]: NVIDIA T4
+          - cell "QUADRO RTX 8000 QUADRO RTX 6000 QUADRO RTX 5000 QUADRO RTX 4000 QUADRO RTX 3000 QUADRO T2000 NVIDIA T1200 NVIDIA T1000 NVIDIA T600 NVIDIA T500 NVIDIA T400 GeForce GTX 1650 Ti NVIDIA TITAN RTX GeForce RTX 2080 Ti GeForce RTX 2080 GeForce RTX 2070 GeForce RTX 2060" [ref=e170]:
+            - generic [ref=e171]:
+              - text: QUADRO RTX 8000
+              - text: QUADRO RTX 6000
+              - text: QUADRO RTX 5000
+              - text: QUADRO RTX 4000
+              - text: QUADRO RTX 3000
+              - text: QUADRO T2000
+              - text: NVIDIA T1200
+              - text: NVIDIA T1000
+              - text: NVIDIA T600
+              - text: NVIDIA T500
+              - text: NVIDIA T400
+              - text: GeForce GTX 1650 Ti
+              - text: NVIDIA TITAN RTX
+              - text: GeForce RTX 2080 Ti
+              - text: GeForce RTX 2080
+              - text: GeForce RTX 2070
+              - text: GeForce RTX 2060
+          - cell [ref=e172]
+    - generic [ref=e173]:
+      - paragraph [ref=e175]: Get started with CUDA today.
+      - paragraph [ref=e177]:
+        - link "Download CUDA Toolkit" [ref=e178] [cursor=pointer]:
+          - /url: https://developer.nvidia.com/cuda-downloads
+        - link "Documentation" [ref=e179] [cursor=pointer]:
+          - /url: https://docs.nvidia.com/cuda/
+  - contentinfo [ref=e183]:
+    - generic [ref=e186]:
+      - generic [ref=e188]:
+        - img [ref=e190]
+        - generic [ref=e192]: Sign up for NVIDIA News
+        - link "Subscribe" [ref=e194] [cursor=pointer]:
+          - /url: https://developer.nvidia.com/email-signup
+      - generic [ref=e195]:
+        - generic [ref=e196]: Follow NVIDIA Developer
+        - generic [ref=e197]:
+          - link "Facebook" [ref=e198] [cursor=pointer]:
+            - /url: https://www.facebook.com/NVIDIAAI/
+            - img [ref=e199]
+          - link "Instagram" [ref=e201] [cursor=pointer]:
+            - /url: https://www.instagram.com/nvidiadeveloper
+            - img [ref=e202]
+          - link "LinkedIn" [ref=e204] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/nvidia-ai
+            - img [ref=e205]
+          - link "Twitter" [ref=e207] [cursor=pointer]:
+            - /url: https://twitter.com/NVIDIAAIDev
+            - img [ref=e208]
+          - link "YouTube" [ref=e210] [cursor=pointer]:
+            - /url: https://www.youtube.com/user/NVIDIADeveloper
+            - img [ref=e211]
+        - paragraph [ref=e214]:
+          - text: Find more news and tutorials on
+          - link "NVIDIA Technical Blog" [ref=e215] [cursor=pointer]:
+            - /url: https://developer.nvidia.com/blog
+    - generic [ref=e217]:
+      - img [ref=e219]
+      - list [ref=e231]:
+        - listitem [ref=e232]:
+          - link "Privacy Policy" [ref=e233] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/privacy-policy/
+          - text: "|"
+        - listitem [ref=e234]:
+          - link "Your Privacy Choices" [ref=e235] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/privacy-center/
+          - text: "|"
+        - listitem [ref=e236]:
+          - link "Terms of Use" [ref=e237] [cursor=pointer]:
+            - /url: https://developer.nvidia.com/legal/terms
+          - text: "|"
+        - listitem [ref=e238]:
+          - link "Accessibility" [ref=e239] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/accessibility/
+          - text: "|"
+        - listitem [ref=e240]:
+          - link "Corporate Policies" [ref=e241] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/company-policies/
+          - text: "|"
+        - listitem [ref=e242]:
+          - link "Contact" [ref=e243] [cursor=pointer]:
+            - /url: https://developer.nvidia.com/contact
+      - generic [ref=e244]: Copyright © 2026 NVIDIA Corporation
+  - region "Cookie banner" [ref=e246]:
+    - dialog "Privacy" [ref=e247]:
+      - generic [ref=e248]:
+        - paragraph [ref=e251]:
+          - text: NVIDIA uses cookies to improve your experience on our web site. We and our third-party partners also use cookies and other tools to collect and record information you provide as well as information about your interactions with our websites for performance improvement, analytics, and to assist in marketing efforts. By continuing to use this site or by clicking one of the buttons below, you agree to the use of cookies and other tools as described in our
+          - link "Privacy Policy" [ref=e252] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/privacy-policy/
+          - text: and
+          - link "Cookie Policy" [ref=e253] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/cookie-policy/
+          - text: (subject to your settings) and accept our
+          - link "Terms of Service" [ref=e254] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/terms-of-service/
+          - text: (which contains important waivers). Please see our
+          - link "Privacy Policy" [ref=e255] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/privacy-policy/
+          - text: for more information on our privacy practices.
+        - generic [ref=e257]:
+          - button "Manage Settings, Opens the preference center dialog" [ref=e258] [cursor=pointer]: Manage Settings
+          - generic [ref=e259]:
+            - button "Turn Off Optional Cookies" [ref=e260] [cursor=pointer]
+            - button "Agree" [ref=e261] [cursor=pointer]

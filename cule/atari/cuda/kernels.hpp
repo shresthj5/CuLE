@@ -13,12 +13,59 @@
 #include <agency/agency.hpp>
 #include <agency/cuda.hpp>
 
+#ifndef CULE_ATARI_ENV_BLOCK_SIZE
+#define CULE_ATARI_ENV_BLOCK_SIZE 1
+#endif
+
 namespace cule
 {
 namespace atari
 {
 namespace cuda
 {
+
+namespace detail
+{
+
+constexpr uint32_t RAM_BYTES_PER_ENV = 128;
+constexpr uint32_t RAM_WORDS_PER_ENV = RAM_BYTES_PER_ENV / sizeof(uint32_t);
+constexpr uint32_t ENV_RAM_LAYOUT_BLOCK_SIZE = CULE_ATARI_ENV_BLOCK_SIZE;
+
+__device__ inline uint32_t ram_word_offset(const uint32_t env_index,
+                                           const uint32_t word_index)
+{
+    const uint32_t block_index = env_index / ENV_RAM_LAYOUT_BLOCK_SIZE;
+    const uint32_t lane_index = env_index % ENV_RAM_LAYOUT_BLOCK_SIZE;
+    return (RAM_WORDS_PER_ENV * ENV_RAM_LAYOUT_BLOCK_SIZE * block_index) +
+           (word_index * ENV_RAM_LAYOUT_BLOCK_SIZE) +
+           lane_index;
+}
+
+__device__ inline void load_env_ram_words(const uint8_t* ram_buffer,
+                                          const uint32_t env_index,
+                                          uint32_t* ram_words)
+{
+    const uint32_t* ram_words_buffer = reinterpret_cast<const uint32_t*>(ram_buffer);
+    #pragma unroll
+    for(int32_t i = 0; i < int32_t(RAM_WORDS_PER_ENV); ++i)
+    {
+        ram_words[i] = ram_words_buffer[ram_word_offset(env_index, i)];
+    }
+}
+
+__device__ inline void store_env_ram_words(uint8_t* ram_buffer,
+                                           const uint32_t env_index,
+                                           const uint32_t* ram_words)
+{
+    uint32_t* ram_words_buffer = reinterpret_cast<uint32_t*>(ram_buffer);
+    #pragma unroll
+    for(int32_t i = 0; i < int32_t(RAM_WORDS_PER_ENV); ++i)
+    {
+        ram_words_buffer[ram_word_offset(env_index, i)] = ram_words[i];
+    }
+}
+
+} // namespace detail
 
 template<typename State_t, size_t NT>
 __launch_bounds__(NT) __global__
@@ -70,7 +117,7 @@ void initialize_states_kernel(const uint32_t num_envs,
 {
     enum
     {
-        NUM_INT_REGS = 128 / sizeof(uint32_t),
+        NUM_INT_REGS = detail::RAM_WORDS_PER_ENV,
     };
 
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
@@ -96,13 +143,7 @@ void initialize_states_kernel(const uint32_t num_envs,
         ram[i] = ram_int[i];
     }
 
-    ram_int = ((uint32_t*) ram_buffer) + (NUM_INT_REGS * NT * blockIdx.x) + threadIdx.x;
-
-    #pragma loop unroll
-    for(int32_t i = 0; i < NUM_INT_REGS; i++)
-    {
-        ram_int[i * NT] = ram[i];
-    }
+    detail::store_env_ram_words(ram_buffer, global_index, ram);
 }
 
 template<typename State_t, size_t NT>
@@ -120,7 +161,7 @@ void reset_kernel(const uint32_t num_envs,
 {
     enum
     {
-        NUM_INT_REGS = 128 / sizeof(uint32_t),
+        NUM_INT_REGS = detail::RAM_WORDS_PER_ENV,
     };
 
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
@@ -150,13 +191,7 @@ void reset_kernel(const uint32_t num_envs,
             ram[i] = ram_int[i];
         }
 
-        ram_int = ((uint32_t*) ram_buffer) + (NUM_INT_REGS * NT * blockIdx.x) + threadIdx.x;
-
-        #pragma loop unroll
-        for(int32_t i = 0; i < NUM_INT_REGS; i++)
-        {
-            ram_int[i * NT] = ram[i];
-        }
+        detail::store_env_ram_words(ram_buffer, global_index, ram);
     }
 }
 
@@ -173,7 +208,7 @@ void step_kernel(const uint32_t num_envs,
 {
     enum
     {
-        NUM_INT_REGS = 128 / sizeof(uint32_t),
+        NUM_INT_REGS = detail::RAM_WORDS_PER_ENV,
     };
 
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
@@ -191,14 +226,7 @@ void step_kernel(const uint32_t num_envs,
 
     {
         state_store_load_helper(s, *states_buffer);
-
-        uint32_t * ram_int = ((uint32_t*) ram_buffer) + (NUM_INT_REGS * NT * blockIdx.x) + threadIdx.x;
-
-        #pragma loop unroll
-        for(int32_t i = 0; i < NUM_INT_REGS; i++)
-        {
-            ram[i] = ram_int[i * NT];
-        }
+        detail::load_env_ram_words(ram_buffer, global_index, ram);
     }
 
     Action player_a_action = ACTION_NOOP;
@@ -227,14 +255,7 @@ void step_kernel(const uint32_t num_envs,
 
     {
         state_store_load_helper(*states_buffer, s);
-
-        uint32_t * ram_int = ((uint32_t*) ram_buffer) + (NUM_INT_REGS * NT * blockIdx.x) + threadIdx.x;
-
-        #pragma loop unroll
-        for(int32_t i = 0; i < NUM_INT_REGS; i++)
-        {
-            ram_int[i * NT] = ram[i];
-        }
+        detail::store_env_ram_words(ram_buffer, global_index, ram);
     }
 }
 
@@ -257,7 +278,9 @@ void get_data_kernel(const int32_t num_envs,
     }
 
     State_t& s = states_buffer[global_index];
-    s.ram = (uint32_t*)(ram_buffer + (128 * global_index));
+    uint32_t ram[detail::RAM_WORDS_PER_ENV];
+    detail::load_env_ram_words(ram_buffer, global_index, ram);
+    s.ram = ram;
 
     const uint32_t old_lives = lives_buffer[global_index];
     const uint32_t new_lives = ALE_t::getLives(s);
@@ -440,13 +463,15 @@ void get_states_kernel(const uint32_t num_envs,
     t = s;
     output_frame_states_buffer[global_index] = frame_states_buffer[index];
 
-    ram_buffer += 128 * global_index;
-    output_states_ram += 256 * index;
+    output_states_ram += 256 * global_index;
+    uint32_t ram_words[detail::RAM_WORDS_PER_ENV];
+    uint32_t* output_ram_words = reinterpret_cast<uint32_t*>(output_states_ram);
+    detail::load_env_ram_words(ram_buffer, index, ram_words);
 
-    #pragma loop unroll
-    for(int32_t i = 0; i < 128; i++)
+    #pragma unroll
+    for(int32_t i = 0; i < int32_t(detail::RAM_WORDS_PER_ENV); ++i)
     {
-        output_states_ram[i] = ram_buffer[i];
+        output_ram_words[i] = ram_words[i];
     }
 }
 
@@ -515,17 +540,12 @@ void set_states_kernel(const uint32_t num_envs,
     t.CurrentM1Mask = &missle_accessor(0, 0, 0, 0);
     t.CurrentBLMask = &ball_accessor(0, 0, 0);
 
-    ram_buffer += 128 * global_index;
-    input_states_ram += 256 * index;
+    input_states_ram += 256 * global_index;
+    const uint32_t* input_ram_words = reinterpret_cast<const uint32_t*>(input_states_ram);
 
-    #pragma loop unroll
-    for(int32_t i = 0; i < 128; i++)
-    {
-        ram_buffer[i] = input_states_ram[i];
-    }
+    detail::store_env_ram_words(ram_buffer, index, input_ram_words);
 }
 
 } // end namespace cuda
 } // end namespace atari
 } // end namespace cule
-

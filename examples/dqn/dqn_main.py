@@ -13,7 +13,7 @@ from train import train
 
 def add_parser_options(parser):
     parser.add_argument('--num-ales', type=int, default=32, help='number of environments (default: 32)')
-    parser.add_argument('--env-name', type=str, default='PongNoFrameskip-v4', help='ATARI game (default: PongNoFrameskip-v4)')
+    parser.add_argument('--env-name', type=str, default='ALE/Pong-v5', help='ATARI game (default: ALE/Pong-v5)')
     parser.add_argument('--t-max', type=int, default=int(50e6), metavar='STEPS', help='Number of training steps (default: 50,000,000)')
     parser.add_argument('--max-episode-length', type=int, default=int(18e3), metavar='LENGTH', help='Max episode length (18,000)')
     parser.add_argument('--history-length', type=int, default=4, help='Number of consecutive states processed')

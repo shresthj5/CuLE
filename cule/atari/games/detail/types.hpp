@@ -2,8 +2,9 @@
 
 #include <cule/config.hpp>
 
-#include <cule/atari/games/detail/types.hpp>
+#include <cule/atari/games/detail/attributes.hpp>
 
+#include <array>
 #include <map>
 #include <string>
 
@@ -86,6 +87,73 @@ static std::map<std::string, GAME_TYPE> rom_game_map =
     { "cfc226d04d7490b69e155abd7741e98c", GAME_DOUBLE_DUNK},
     { "7d3cdde63b16fa637c4484e716839c94", GAME_ROAD_RUNNER},
     { "e72eb8d4410152bdcb69e7fba327b420", GAME_SOLARIS},
+};
+
+static std::map<std::string, GAME_TYPE> canonical_game_map =
+{
+    { "adventure", GAME_ADVENTURE },
+    { "air_raid", GAME_AIR_RAID },
+    { "alien", GAME_ALIEN },
+    { "amidar", GAME_AMIDAR },
+    { "assault", GAME_ASSAULT },
+    { "asterix", GAME_ASTERIX },
+    { "asteroids", GAME_ASTEROIDS },
+    { "atlantis", GAME_ATLANTIS },
+    { "bank_heist", GAME_BANK_HEIST },
+    { "battle_zone", GAME_BATTLE_ZONE },
+    { "beam_rider", GAME_BEAM_RIDER },
+    { "berzerk", GAME_BERZERK },
+    { "bowling", GAME_BOWLING },
+    { "boxing", GAME_BOXING },
+    { "breakout", GAME_BREAKOUT },
+    { "carnival", GAME_CARNIVAL },
+    { "centipede", GAME_CENTIPEDE },
+    { "chopper_command", GAME_CHOPPER },
+    { "crazy_climber", GAME_CRAZY_CLIMBER },
+    { "defender", GAME_DEFENDER },
+    { "demon_attack", GAME_DEMON_ATTACK },
+    { "double_dunk", GAME_DOUBLE_DUNK },
+    { "elevator_action", GAME_ELEVATOR_ACTION },
+    { "enduro", GAME_ENDURO },
+    { "fishing_derby", GAME_FISHING_DERBY },
+    { "freeway", GAME_FREEWAY },
+    { "frostbite", GAME_FROSTBITE },
+    { "gopher", GAME_GOPHER },
+    { "gravitar", GAME_GRAVITAR },
+    { "hero", GAME_HERO },
+    { "ice_hockey", GAME_ICE_HOCKEY },
+    { "jamesbond", GAME_JAMESBOND },
+    { "journey_escape", GAME_JOURNEY_ESCAPE },
+    { "kaboom", GAME_KABOOM },
+    { "kangaroo", GAME_KANGAROO },
+    { "krull", GAME_KRULL },
+    { "kung_fu_master", GAME_KUNG_FU_MASTER },
+    { "montezuma_revenge", GAME_MONTEZUMA_REVENGE },
+    { "ms_pacman", GAME_MS_PACMAN },
+    { "name_this_game", GAME_NAME_THIS_GAME },
+    { "phoenix", GAME_PHOENIX },
+    { "pitfall", GAME_PITFALL },
+    { "pong", GAME_PONG },
+    { "pooyan", GAME_POOYAN },
+    { "private_eye", GAME_PRIVATE_EYE },
+    { "qbert", GAME_QBERT },
+    { "riverraid", GAME_RIVERRAID },
+    { "road_runner", GAME_ROAD_RUNNER },
+    { "robotank", GAME_ROBOTANK },
+    { "seaquest", GAME_SEAQUEST },
+    { "skiing", GAME_SKIING },
+    { "solaris", GAME_SOLARIS },
+    { "space_invaders", GAME_SPACE_INVADERS },
+    { "star_gunner", GAME_STAR_GUNNER },
+    { "tennis", GAME_TENNIS },
+    { "time_pilot", GAME_TIME_PILOT },
+    { "tutankham", GAME_TUTANKHAM },
+    { "up_n_down", GAME_UP_N_DOWN },
+    { "venture", GAME_VENTURE },
+    { "video_pinball", GAME_PINBALL },
+    { "wizard_of_wor", GAME_WIZARD },
+    { "yars_revenge", GAME_YARS_REVENGE },
+    { "zaxxon", GAME_ZAXXON },
 };
 
 const std::array<std::string,_ROM_ATTR_MAX> rom_attr_names =
@@ -215,4 +283,3 @@ static std::map<GAME_TYPE, std::array<std::string,_ROM_ATTR_MAX>> rom_attr_data 
 } // end namespace games
 } // end namespace atari
 } // end namespace cule
-

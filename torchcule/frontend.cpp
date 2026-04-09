@@ -2,11 +2,20 @@
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 
+#include <ATen/cuda/CUDAContext.h>
 #include <cuda_runtime.h>
 
 #include <string>
 
 #include <torchcule/atari_env.hpp>
+
+#ifndef CULE_ATARI_ENV_BLOCK_SIZE
+#define CULE_ATARI_ENV_BLOCK_SIZE 1
+#endif
+
+#ifndef CULE_ATARI_PROCESS_BLOCK_SIZE
+#define CULE_ATARI_PROCESS_BLOCK_SIZE 64
+#endif
 
 namespace py = pybind11;
 
@@ -15,6 +24,9 @@ using AtariRom = cule::atari::rom;
 using AtariRomFormat = cule::atari::ROM_FORMAT;
 
 PYBIND11_MODULE(torchcule_atari, m) {
+    m.attr("ATARI_ENV_BLOCK_SIZE") = py::int_(CULE_ATARI_ENV_BLOCK_SIZE);
+    m.attr("ATARI_PROCESS_BLOCK_SIZE") = py::int_(CULE_ATARI_PROCESS_BLOCK_SIZE);
+
     py::enum_<AtariAction>(m, "AtariAction", py::arithmetic())
     .value("NOOP", AtariAction::ACTION_NOOP)
     .value("RIGHT", AtariAction::ACTION_RIGHT)
@@ -55,8 +67,13 @@ PYBIND11_MODULE(torchcule_atari, m) {
     ;
 
     py::class_<AtariRom>(m, "AtariRom")
-    .def(py::init<const std::string&>())
-    .def("reset", &AtariRom::reset)
+    .def(py::init<const std::string&, const std::string&>(),
+         py::arg("filename"),
+         py::arg("game_name") = "")
+    .def("reset",
+         py::overload_cast<const std::string&, const std::string&>(&AtariRom::reset),
+         py::arg("filename"),
+         py::arg("game_name") = "")
     .def("minimal_actions", &AtariRom::minimal_actions)
     .def("file_name", &AtariRom::file_name)
     .def("game_name", &AtariRom::game_name)
@@ -250,14 +267,16 @@ PYBIND11_MODULE(torchcule_atari, m) {
     )
     .def("sync_other_stream", [](AtariEnv& env)
         {
-            // cudaStream_t stream = at::cuda::getCurrentCUDAStream();
-            // env.sync_other_stream(stream);
+            auto stream = at::cuda::getCurrentCUDAStream();
+            cudaStream_t raw_stream = stream.stream();
+            env.sync_other_stream(raw_stream);
         }
     )
     .def("sync_this_stream", [](AtariEnv& env)
         {
-            // cudaStream_t stream = at::cuda::getCurrentCUDAStream();
-            // env.sync_this_stream(stream);
+            auto stream = at::cuda::getCurrentCUDAStream();
+            cudaStream_t raw_stream = stream.stream();
+            env.sync_this_stream(raw_stream);
         }
     )
     .def("get_states", [](AtariEnv& env, const std::vector<int32_t>& indices)
@@ -280,4 +299,3 @@ PYBIND11_MODULE(torchcule_atari, m) {
     .def("tia_update_size", &AtariEnv::tia_update_size)
     ;
 }
-

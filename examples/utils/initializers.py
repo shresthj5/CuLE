@@ -65,7 +65,7 @@ def env_initialize(args, device):
                                                max_frames=args.max_episode_length)
         observation = torch.from_numpy(train_env.reset()).squeeze(1)
     else:
-        train_env = AtariEnv(args.env_name, args.num_ales, color_mode='gray', repeat_prob=0.0,
+        train_env = AtariEnv(args.env_name, args.num_ales, color_mode='gray',
                              device=device, rescale=True, episodic_life=args.episodic_life, frameskip=4)
         train_env.train()
         observation = train_env.reset(initial_steps=args.ale_start_steps, verbose=args.verbose).squeeze(-1)
@@ -75,7 +75,7 @@ def env_initialize(args, device):
                                               episode_life=False, clip_rewards=False)
         test_env.reset()
     else:
-        test_env = AtariEnv(args.env_name, args.evaluation_episodes, color_mode='gray', repeat_prob=0.0,
+        test_env = AtariEnv(args.env_name, args.evaluation_episodes, color_mode='gray',
                             device='cpu', rescale=True, episodic_life=False, frameskip=4)
 
     return train_env, test_env, observation

@@ -1,20 +1,41 @@
-"""CuLE (CUda Learning Environment module)
+"""CuLE (CUda Learning Environment module).
 
 This module provides access to several RL environments that generate data
 on the CPU or GPU.
 """
 
-import atari_py
 import math
+import re
 import numpy as np
-import os
-import sys
 import torch
 
-from gym import spaces
+try:
+    from gymnasium import spaces
+except ImportError:  # pragma: no cover - compatibility fallback
+    from gym import spaces  # type: ignore[no-redef]
 
 from torchcule.atari.rom import Rom
 import torchcule_atari
+
+
+def _is_ale_v5_env(env_name):
+    return re.match(r"^ALE\/[A-Za-z0-9]+-v5$", env_name) is not None
+
+
+def _default_semantics(env_name, frameskip, repeat_prob):
+    if _is_ale_v5_env(env_name):
+        if frameskip is None:
+            frameskip = 4
+        if repeat_prob is None:
+            repeat_prob = 0.25
+    else:
+        if frameskip is None:
+            frameskip = 1
+        if repeat_prob is None:
+            repeat_prob = 0.0
+
+    return frameskip, repeat_prob
+
 
 class Env(torchcule_atari.AtariEnv):
     """
@@ -53,7 +74,7 @@ class Env(torchcule_atari.AtariEnv):
     """
 
     def __init__(self, env_name, num_envs, color_mode='rgb', device='cpu', rescale=False,
-                 frameskip=1, repeat_prob=0.25, episodic_life=False, max_noop_steps=30,
+                 frameskip=None, repeat_prob=None, episodic_life=False, max_noop_steps=30,
                  max_episode_length=10000):
         """Initialize the ALE class with a given environment
 
@@ -73,6 +94,8 @@ class Env(torchcule_atari.AtariEnv):
         if color_mode == 'rgb' and rescale:
             raise ValueError('Rescaling is only valid in grayscale color mode')
 
+        frameskip, repeat_prob = _default_semantics(env_name, frameskip, repeat_prob)
+
         self.cart = Rom(env_name)
         super(Env, self).__init__(self.cart, num_envs, max_noop_steps)
 
@@ -89,6 +112,10 @@ class Env(torchcule_atari.AtariEnv):
         self.num_channels = 3 if color_mode == 'rgb' else 1
 
         self.action_set = torch.Tensor([int(s) for s in self.cart.minimal_actions()]).to(self.device).byte()
+        noop_matches = torch.nonzero(self.action_set == int(torchcule_atari.NOOP), as_tuple=False)
+        if noop_matches.numel() == 0:
+            raise ValueError("The minimal action set must contain NOOP for ALE-compatible semantics")
+        self.noop_action_index = int(noop_matches[0].item())
 
         # check if FIRE is in the action set
         self.fire_reset = int(torchcule_atari.FIRE) in self.action_set
@@ -100,7 +127,8 @@ class Env(torchcule_atari.AtariEnv):
         self.observations2 = torch.zeros((num_envs, self.height, self.width, self.num_channels), device=self.device, dtype=torch.uint8)
         self.done = torch.zeros(num_envs, device=self.device, dtype=torch.bool)
         self.actions = torch.zeros(num_envs, device=self.device, dtype=torch.uint8)
-        self.last_actions = torch.zeros(num_envs, device=self.device, dtype=torch.uint8)
+        self.last_actions = torch.full((num_envs,), self.noop_action_index, device=self.device, dtype=torch.uint8)
+        self.last_player_b_actions = torch.full((num_envs,), self.noop_action_index, device=self.device, dtype=torch.uint8)
         self.lives = torch.zeros(num_envs, device=self.device, dtype=torch.int32)
         self.rewards = torch.zeros(num_envs, device=self.device, dtype=torch.float32)
 
@@ -147,6 +175,7 @@ class Env(torchcule_atari.AtariEnv):
         self.done = self.done.to(self.device)
         self.actions = self.actions.to(self.device)
         self.last_actions = self.last_actions.to(self.device)
+        self.last_player_b_actions = self.last_player_b_actions.to(self.device)
         self.lives = self.lives.to(self.device)
         self.rewards = self.rewards.to(self.device)
         self.action_set = self.action_set.to(self.device)
@@ -234,6 +263,8 @@ class Env(torchcule_atari.AtariEnv):
             stream = torch.cuda.current_stream()
 
         super(Env, self).reset(seeds.data_ptr())
+        self.last_actions.fill_(self.noop_action_index)
+        self.last_player_b_actions.fill_(self.noop_action_index)
 
         if self.is_training:
             iterator = range(math.ceil(initial_steps / self.frameskip))
@@ -252,6 +283,17 @@ class Env(torchcule_atari.AtariEnv):
                 stream.synchronize()
 
         return self.observations1
+
+    def _apply_sticky_actions(self, requested_actions, previous_actions):
+        requested_actions = requested_actions.to(self.device, dtype=torch.uint8)
+
+        if self.repeat_prob <= 0.0:
+            return requested_actions
+
+        # Sample stickiness directly on the target device to avoid
+        # extra host/device transfers in the action-selection path.
+        sticky_mask = torch.rand(self.num_envs, device=self.device) < self.repeat_prob
+        return torch.where(sticky_mask, previous_actions, requested_actions)
 
     def step(self, player_a_actions, player_b_actions=None, asyn=False):
         """Take a step in the environment by apply a set of actions
@@ -274,12 +316,16 @@ class Env(torchcule_atari.AtariEnv):
         self.observations2.zero_()
         self.done.zero_()
 
-        self.player_a_actions = self.action_set[player_a_actions.long()]
+        self.actions = self._apply_sticky_actions(player_a_actions, self.last_actions)
+        self.player_a_actions = self.action_set[self.actions.long()]
         player_a_actions_ptr = self.player_a_actions.data_ptr()
+        self.last_actions.copy_(self.actions)
 
         if player_b_actions is not None:
-            self.player_b_actions = self.action_set[player_b_actions.long()]
+            self.player_b_action_indices = self._apply_sticky_actions(player_b_actions, self.last_player_b_actions)
+            self.player_b_actions = self.action_set[self.player_b_action_indices.long()]
             player_b_actions_ptr = self.player_b_actions.data_ptr()
+            self.last_player_b_actions.copy_(self.player_b_action_indices)
         else:
             player_b_actions_ptr = 0
 

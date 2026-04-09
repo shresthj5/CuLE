@@ -1,0 +1,367 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "Logo" [ref=e6] [cursor=pointer]:
+            - /url: contents.html
+            - img "Logo" [ref=e7]
+          - search [ref=e8]:
+            - textbox "Search docs" [ref=e10]
+        - navigation "Navigation menu" [ref=e11]:
+          - list [ref=e12]:
+            - listitem [ref=e13]:
+              - link " 1. NVIDIA Ampere GPU Architecture Compatibility" [expanded] [ref=e14] [cursor=pointer]:
+                - /url: "#"
+                - button "" [ref=e15]
+                - text: 1. NVIDIA Ampere GPU Architecture Compatibility
+              - list [ref=e16]:
+                - listitem [ref=e17]:
+                  - link "1.1. About this Document" [ref=e18] [cursor=pointer]:
+                    - /url: "#about-this-document"
+                - listitem [ref=e19]:
+                  - link "1.2. Application Compatibility on the NVIDIA Ampere GPU Architecture" [ref=e20] [cursor=pointer]:
+                    - /url: "#application-compatibility-on-the-nvidia-ampere-gpu-architecture"
+                - listitem [ref=e21]:
+                  - link " 1.3. Verifying Ampere Compatibility for Existing Applications" [ref=e22] [cursor=pointer]:
+                    - /url: "#verifying-ampere-compatibility-for-existing-applications"
+                    - button "" [ref=e23]
+                    - text: 1.3. Verifying Ampere Compatibility for Existing Applications
+                - listitem [ref=e24]:
+                  - link " 1.4. Building Applications with the NVIDIA Ampere GPU Architecture Support" [ref=e25] [cursor=pointer]:
+                    - /url: "#building-applications-with-the-nvidia-ampere-gpu-architecture-support"
+                    - button "" [ref=e26]
+                    - text: 1.4. Building Applications with the NVIDIA Ampere GPU Architecture Support
+            - listitem [ref=e27]:
+              - link "2. Revision History" [ref=e28] [cursor=pointer]:
+                - /url: "#revision-history"
+            - listitem [ref=e29]:
+              - link " 3. Notices" [ref=e30] [cursor=pointer]:
+                - /url: "#notices"
+                - button "" [ref=e31]
+                - text: 3. Notices
+    - generic [ref=e32]:
+      - text: 
+      - generic [ref=e34]:
+        - navigation "Page navigation" [ref=e35]:
+          - list [ref=e36]:
+            - listitem [ref=e37]:
+              - link "" [ref=e38] [cursor=pointer]:
+                - /url: ../index.html
+              - text: »
+            - listitem [ref=e39]: 1. NVIDIA Ampere GPU Architecture Compatibility
+            - listitem
+            - listitem [ref=e40]:
+              - text: v12.2 |
+              - link "PDF" [ref=e41] [cursor=pointer]:
+                - /url: ../pdf/NVIDIA_Ampere_Compatibility_Guide.pdf
+              - text: "|"
+              - link "Archive" [ref=e42] [cursor=pointer]:
+                - /url: https://developer.nvidia.com/cuda-toolkit-archive
+          - separator [ref=e43]
+        - main [ref=e44]:
+          - generic [ref=e45]:
+            - paragraph [ref=e46]: NVIDIA Ampere GPU Architecture Compatibility Guide for CUDA Applications
+            - paragraph [ref=e47]: The guide to building CUDA applications for GPUs based on the NVIDIA Ampere GPU Architecture.
+            - generic [ref=e48]:
+              - heading "1. NVIDIA Ampere GPU Architecture Compatibility " [level=1] [ref=e49]:
+                - text: 1. NVIDIA Ampere GPU Architecture Compatibility
+                - link "" [ref=e50] [cursor=pointer]:
+                  - /url: "#nvidia-ampere-gpu-architecture-compatibility"
+              - generic [ref=e51]:
+                - heading "1.1. About this Document " [level=2] [ref=e52]:
+                  - text: 1.1. About this Document
+                  - link "" [ref=e53] [cursor=pointer]:
+                    - /url: "#about-this-document"
+                - paragraph [ref=e54]:
+                  - text: This application note, NVIDIA Ampere GPU Architecture Compatibility Guide for CUDA Applications, is intended to help developers ensure that their NVIDIA
+                  - superscript [ref=e55]: ®
+                  - text: CUDA
+                  - superscript [ref=e56]: ®
+                  - text: applications will run on the NVIDIA
+                  - superscript [ref=e57]: ®
+                  - text: Ampere Architecture based GPUs. This document provides guidance to developers who are familiar with programming in CUDA C++ and want to make sure that their software applications are compatible with the NVIDIA Ampere GPU architecture.
+              - generic [ref=e58]:
+                - heading "1.2. Application Compatibility on the NVIDIA Ampere GPU Architecture " [level=2] [ref=e59]:
+                  - text: 1.2. Application Compatibility on the NVIDIA Ampere GPU Architecture
+                  - link "" [ref=e60] [cursor=pointer]:
+                    - /url: "#application-compatibility-on-the-nvidia-ampere-gpu-architecture"
+                - paragraph [ref=e61]:
+                  - text: A CUDA application binary (with one or more GPU kernels) can contain the compiled GPU code in two forms, binary
+                  - emphasis [ref=e62]: cubin
+                  - text: objects and forward-compatible
+                  - emphasis [ref=e63]: PTX
+                  - text: assembly for each kernel. Both cubin and PTX are generated for a certain target compute capability. A cubin generated for a certain compute capability is supported to run on any GPU with the same major revision and same or higher minor revision of compute capability. For example, a cubin generated for compute capability 7.0 is supported to run on a GPU with compute capability 7.5, however a cubin generated for compute capability 7.5 is
+                  - emphasis [ref=e64]: not
+                  - text: supported to run on a GPU with compute capability 7.0, and a cubin generated with compute capability 7.x is
+                  - emphasis [ref=e65]: not
+                  - text: supported to run on a GPU with compute capability 8.x.
+                - paragraph [ref=e66]:
+                  - text: Kernel can also be compiled to a PTX form. At the application load time, PTX is compiled to cubin and the cubin is used for kernel execution. Unlike cubin, PTX is forward-compatible. Meaning PTX is supported to run on any GPU with compute capability higher than the compute capability assumed for generation of that PTX. For example, PTX code generated for compute capability 7.x is supported to run on compute capability 7.x or any higher revision (major or minor), including compute capability 8.x. Therefore although it is optional,
+                  - strong [ref=e67]: it is recommended that all applications should include PTX of the kernels to ensure forward-compatibility.
+                  - text: To read more about cubin and PTX compatibilities see Compilation with NVCC from the Programming Guide.
+                - paragraph [ref=e68]:
+                  - text: When a CUDA application launches a kernel on a GPU, the CUDA Runtime determines the compute capability of the GPU in the system and uses this information to find the best matching cubin or PTX version of the kernel. If a cubin compatible with that GPU is present in the binary, the cubin is used as-is for execution. Otherwise, the CUDA Runtime first generates compatible cubin by JIT-compiling
+                  - link "1" [ref=e69] [cursor=pointer]:
+                    - /url: "#fn1"
+                  - text: the PTX and then the cubin is used for the execution. If neither compatible cubin nor PTX is available, kernel launch results in a failure.
+                - paragraph [ref=e70]:
+                  - text: Application binaries that include PTX version of kernels, should work as-is on the NVIDIA Ampere architecture based GPUs. In such cases, rebuilding the application is not required. However application binaries which do not include PTX (only include cubins), need to be rebuilt to run on the NVIDIA Ampere architecture based GPUs. To know more about building compatible applications read
+                  - link "Building Applications with the NVIDIA Ampere GPU Architecture Support" [ref=e71] [cursor=pointer]:
+                    - /url: index.html#building-applications-with-ampere-support
+                  - text: .
+              - generic [ref=e72]:
+                - heading "1.3. Verifying Ampere Compatibility for Existing Applications " [level=2] [ref=e73]:
+                  - text: 1.3. Verifying Ampere Compatibility for Existing Applications
+                  - link "" [ref=e74] [cursor=pointer]:
+                    - /url: "#verifying-ampere-compatibility-for-existing-applications"
+                - paragraph [ref=e75]: The first step towards making a CUDA application compatible with the NVIDIA Ampere GPU architecture is to check if the application binary already contains compatible GPU code (at least the PTX). The following sections explain how to accomplish this for an already built CUDA application.
+                - generic [ref=e76]:
+                  - heading "1.3.1. Applications Built Using CUDA Toolkit 10.2 or Earlier " [level=3] [ref=e77]:
+                    - text: 1.3.1. Applications Built Using CUDA Toolkit 10.2 or Earlier
+                    - link "" [ref=e78] [cursor=pointer]:
+                      - /url: "#applications-built-using-cuda-toolkit-10-2-or-earlier"
+                  - paragraph [ref=e79]: "CUDA applications built using CUDA Toolkit versions 2.1 through 10.2 are compatible with NVIDIA Ampere architecture based GPUs as long as they are built to include PTX versions of their kernels. This can be tested by forcing the PTX to JIT-compile at application load time with following the steps:"
+                  - list [ref=e80]:
+                    - listitem [ref=e81]:
+                      - paragraph [ref=e82]:
+                        - text: Download and install the latest driver from
+                        - link "https://www.nvidia.com/drivers" [ref=e83] [cursor=pointer]:
+                          - /url: https://www.nvidia.com/drivers
+                        - text: .
+                    - listitem [ref=e84]:
+                      - paragraph [ref=e85]:
+                        - text: Set the environment variable
+                        - code [ref=e86]: CUDA_FORCE_PTX_JIT=1
+                        - text: .
+                    - listitem [ref=e87]:
+                      - paragraph [ref=e88]: Launch the application.
+                  - paragraph [ref=e89]:
+                    - text: With
+                    - code [ref=e90]: CUDA_FORCE_PTX_JIT=1
+                    - text: ", GPU binary code embedded in an application binary is ignored. Instead PTX code for each kernel is JIT-compiled to produce GPU binary code. An application fails to execute if it does not include PTX. This means the application is not compatible with the NVIDIA Ampere GPU architecture and needs to be rebuilt for compatibility. On the other hand, if the application works properly with this environment variable set, then the application is compatible with the NVIDIA Ampere GPU architecture."
+                  - generic [ref=e91]:
+                    - paragraph [ref=e92]:  Note
+                    - paragraph [ref=e93]:
+                      - text: Be sure to unset the
+                      - code [ref=e94]: CUDA_FORCE_PTX_JIT
+                      - text: environment variable after testing is done.
+                - generic [ref=e95]:
+                  - heading "1.3.2. Applications Built Using CUDA Toolkit 11.0 " [level=3] [ref=e96]:
+                    - text: 1.3.2. Applications Built Using CUDA Toolkit 11.0
+                    - link "" [ref=e97] [cursor=pointer]:
+                      - /url: "#applications-built-using-cuda-toolkit-11-0"
+                  - paragraph [ref=e98]: CUDA applications built using CUDA Toolkit 11.0 are compatible with the NVIDIA Ampere GPU architecture as long as they are built to include kernels in native cubin (compute capability 8.0) or PTX form or both.
+              - generic [ref=e99]:
+                - heading "1.4. Building Applications with the NVIDIA Ampere GPU Architecture Support " [level=2] [ref=e100]:
+                  - text: 1.4. Building Applications with the NVIDIA Ampere GPU Architecture Support
+                  - link "" [ref=e101] [cursor=pointer]:
+                    - /url: "#building-applications-with-the-nvidia-ampere-gpu-architecture-support"
+                - paragraph [ref=e102]: "Depending on the version of the CUDA Toolkit used for building the application, it can be built to include PTX and/or native cubin for the NVIDIA Ampere GPU architecture. Although it is enough to just include PTX, including native cubin also has the following advantages:"
+                - list [ref=e103]:
+                  - listitem [ref=e104]:
+                    - paragraph [ref=e105]: It saves the end user the time it takes to JIT-compile kernels that are available only as PTX. All kernels which do not have native cubins are JIT-compiled from PTX, including kernels from all the libraries linked to the application, even if those kernels are never launched by the application. Especially when using large libraries, this JIT compilation can take a significant amount of time. The CUDA driver caches the cubins generated as a result of the PTX JIT, so this is mostly a one-time cost for a user, but it is time best avoided whenever possible.
+                  - listitem [ref=e106]:
+                    - paragraph [ref=e107]: PTX JIT-compiled kernels often cannot take advantage of architectural features of newer GPUs, meaning that native-compiled cubins may be faster or of greater accuracy.
+                - generic [ref=e108]:
+                  - heading "1.4.1. Building Applications Using CUDA Toolkit 10.x or Earlier " [level=3] [ref=e109]:
+                    - text: 1.4.1. Building Applications Using CUDA Toolkit 10.x or Earlier
+                    - link "" [ref=e110] [cursor=pointer]:
+                      - /url: "#building-applications-using-cuda-toolkit-10-x-or-earlier"
+                  - paragraph [ref=e111]:
+                    - text: The
+                    - code [ref=e112]: nvcc
+                    - text: compiler included with versions 10.x (10.0, 10.1 and 10.2) of the CUDA Toolkit can generate cubins native to the Volta and Turing architectures (compute capability 7.x). When using CUDA Toolkit 10.x, to ensure that
+                    - code [ref=e113]: nvcc
+                    - text: will generate cubin files for all recent GPU architectures as well as a PTX version for forward compatibility with future GPU architectures, specify the appropriate
+                    - code [ref=e114]: "-gencode="
+                    - text: parameters on the
+                    - code [ref=e115]: nvcc
+                    - text: command line as shown in the examples below.
+                  - paragraph [ref=e116]:
+                    - strong [ref=e117]: Windows
+                  - generic [ref=e120]: nvcc.exe -ccbin "C:\vs2010\VC\bin" -Xcompiler "/EHsc /W3 /nologo /O2 /Zi /MT" -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_60,code=sm_60 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_70,code=sm_70 -gencode=arch=compute_75,code=sm_75 -gencode=arch=compute_75,code=compute_75 --compile -o "Release\mykernel.cu.obj" "mykernel.cu"
+                  - paragraph [ref=e121]:
+                    - strong [ref=e122]: Mac/Linux
+                  - generic [ref=e125]: /usr/local/cuda/bin/nvcc -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_60,code=sm_60 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_70,code=sm_70 -gencode=arch=compute_75,code=sm_75 -gencode=arch=compute_75,code=compute_75 -O2 -o mykernel.o -c mykernel.cu
+                  - paragraph [ref=e126]:
+                    - text: Alternatively, the simplified
+                    - code [ref=e127]: nvcc
+                    - text: command-line option
+                    - code [ref=e128]: "-arch=sm_XX"
+                    - text: can be used. It is a shorthand equivalent to the following more explicit
+                    - code [ref=e129]: "-gencode="
+                    - text: command-line options used above.
+                    - code [ref=e130]: "-arch=sm_XX"
+                    - text: "expands to the following:"
+                  - generic [ref=e133]: "-gencode=arch=compute_XX,code=sm_XX -gencode=arch=compute_XX,code=compute_XX"
+                  - paragraph [ref=e134]:
+                    - text: However, while the
+                    - code [ref=e135]: "-arch=sm_XX"
+                    - text: command-line option does result in inclusion of a PTX back-end target binary by default, it can only specify a single target cubin architecture at a time, and it is not possible to use multiple
+                    - code [ref=e136]: "-arch="
+                    - text: options on the same
+                    - code [ref=e137]: nvcc
+                    - text: command line, which is why the examples above use
+                    - code [ref=e138]: "-gencode="
+                    - text: explicitly.
+                  - paragraph [ref=e139]:
+                    - text: For CUDA toolkits prior to 10.0, one or more of the
+                    - code [ref=e140]: "-gencode"
+                    - text: options will need to be removed according to the architectures supported by the specific toolkit version (for example, CUDA toolkit 9.x supports architectures up to _60 and _61). The final
+                    - code [ref=e141]: "-gencode"
+                    - text: to generate PTX would also need to be update – for further information and examples see the documentation for the specific CUDA toolkit version.
+                  - generic [ref=e142]:
+                    - paragraph [ref=e143]:  Note
+                    - paragraph [ref=e144]:
+                      - code [ref=e145]: compute_XX
+                      - text: refers to a PTX version and
+                      - code [ref=e146]: sm_XX
+                      - text: refers to a cubin version. The
+                      - code [ref=e147]: arch=
+                      - text: clause of the
+                      - code [ref=e148]: "-gencode="
+                      - text: command-line option to
+                      - code [ref=e149]: nvcc
+                      - text: specifies the front-end compilation target and must always be a PTX version. The
+                      - code [ref=e150]: code=
+                      - text: clause specifies the back-end compilation target and can either be cubin or PTX or both. Only the back-end target version(s) specified by the
+                      - code [ref=e151]: code=
+                      - text: clause will be retained in the resulting binary; at least one should be PTX to provide compatibility with future architectures.
+                - generic [ref=e152]:
+                  - heading "1.4.2. Building Applications Using CUDA Toolkit 11.0 " [level=3] [ref=e153]:
+                    - text: 1.4.2. Building Applications Using CUDA Toolkit 11.0
+                    - link "" [ref=e154] [cursor=pointer]:
+                      - /url: "#building-applications-using-cuda-toolkit-11-0"
+                  - paragraph [ref=e155]:
+                    - text: With versions 11.0 of the CUDA Toolkit,
+                    - code [ref=e156]: nvcc
+                    - text: can generate cubin native to the NVIDIA Ampere GPU architecture (compute capability 8.0). When using CUDA Toolkit 11.0, to ensure that
+                    - code [ref=e157]: nvcc
+                    - text: will generate cubin files for all recent GPU architectures as well as a PTX version for forward compatibility with future GPU architectures, specify the appropriate
+                    - code [ref=e158]: "-gencode="
+                    - text: parameters on the
+                    - code [ref=e159]: nvcc
+                    - text: command line as shown in the examples below.
+                  - paragraph [ref=e160]:
+                    - strong [ref=e161]: Windows
+                  - generic [ref=e164]: nvcc.exe -ccbin "C:\vs2010\VC\bin" -Xcompiler "/EHsc /W3 /nologo /O2 /Zi /MT" -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_60,code=sm_60 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_70,code=sm_70 -gencode=arch=compute_75,code=sm_75 -gencode=arch=compute_80,code=sm_80 -gencode=arch=compute_80,code=compute_80 --compile -o "Release\mykernel.cu.obj" "mykernel.cu"
+                  - paragraph [ref=e165]:
+                    - strong [ref=e166]: Mac/Linux
+                  - generic [ref=e169]: /usr/local/cuda/bin/nvcc -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_60,code=sm_60 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_70,code=sm_70 -gencode=arch=compute_75,code=sm_75 -gencode=arch=compute_80,code=sm_80 -gencode=arch=compute_80,code=compute_80 -O2 -o mykernel.o -c mykernel.cu
+                  - generic [ref=e170]:
+                    - paragraph [ref=e171]:  Note
+                    - paragraph [ref=e172]:
+                      - code [ref=e173]: compute_XX
+                      - text: refers to a PTX version and
+                      - code [ref=e174]: sm_XX
+                      - text: refers to a cubin version. The
+                      - code [ref=e175]: arch=
+                      - text: clause of the
+                      - code [ref=e176]: "-gencode="
+                      - text: command-line option to
+                      - code [ref=e177]: nvcc
+                      - text: specifies the front-end compilation target and must always be a PTX version. The
+                      - code [ref=e178]: code=
+                      - text: clause specifies the back-end compilation target and can either be cubin or PTX or both. Only the back-end target version(s) specified by the
+                      - code [ref=e179]: code=
+                      - text: clause will be retained in the resulting binary; at least one should be PTX to provide compatibility with future architectures.
+                - generic [ref=e180]:
+                  - heading "1.4.3. Independent Thread Scheduling Compatibility " [level=3] [ref=e181]:
+                    - text: 1.4.3. Independent Thread Scheduling Compatibility
+                    - link "" [ref=e182] [cursor=pointer]:
+                      - /url: "#independent-thread-scheduling-compatibility"
+                  - paragraph [ref=e183]:
+                    - text: NVIDIA GPUs since Volta architecture have
+                    - emphasis [ref=e184]: Independent Thread Scheduling
+                    - text: among threads in a warp. If the developer made assumptions about warp-synchronicity
+                    - link "2" [ref=e185] [cursor=pointer]:
+                      - /url: "#fn2"
+                    - text: ", this feature can alter the set of threads participating in the executed code compared to previous architectures. Please see Compute Capability 7.0 in the Programming Guide for details and corrective actions. To aid migration to the NVIDIA Ampere GPU architecture, developers can opt-in to the Pascal scheduling model with the following combination of compiler options."
+                  - generic [ref=e188]: nvcc -gencode=arch=compute_60,code=sm_80 ...
+            - generic [ref=e189]:
+              - heading "2. Revision History " [level=1] [ref=e190]:
+                - text: 2. Revision History
+                - link "" [ref=e191] [cursor=pointer]:
+                  - /url: "#revision-history"
+              - paragraph [ref=e192]:
+                - strong [ref=e193]: Version 1.0
+              - list [ref=e194]:
+                - listitem [ref=e195]:
+                  - paragraph [ref=e196]: Initial public release.
+            - generic [ref=e197]:
+              - heading "3. Notices " [level=1] [ref=e198]:
+                - text: 3. Notices
+                - link "" [ref=e199] [cursor=pointer]:
+                  - /url: "#notices"
+              - generic [ref=e200]:
+                - heading "3.1. Notice " [level=2] [ref=e201]:
+                  - text: 3.1. Notice
+                  - link "" [ref=e202] [cursor=pointer]:
+                    - /url: "#notice"
+                - paragraph [ref=e203]: This document is provided for information purposes only and shall not be regarded as a warranty of a certain functionality, condition, or quality of a product. NVIDIA Corporation (“NVIDIA”) makes no representations or warranties, expressed or implied, as to the accuracy or completeness of the information contained in this document and assumes no responsibility for any errors contained herein. NVIDIA shall have no liability for the consequences or use of such information or for any infringement of patents or other rights of third parties that may result from its use. This document is not a commitment to develop, release, or deliver any Material (defined below), code, or functionality.
+                - paragraph [ref=e204]: NVIDIA reserves the right to make corrections, modifications, enhancements, improvements, and any other changes to this document, at any time without notice.
+                - paragraph [ref=e205]: Customer should obtain the latest relevant information before placing orders and should verify that such information is current and complete.
+                - paragraph [ref=e206]: NVIDIA products are sold subject to the NVIDIA standard terms and conditions of sale supplied at the time of order acknowledgement, unless otherwise agreed in an individual sales agreement signed by authorized representatives of NVIDIA and customer (“Terms of Sale”). NVIDIA hereby expressly objects to applying any customer general terms and conditions with regards to the purchase of the NVIDIA product referenced in this document. No contractual obligations are formed either directly or indirectly by this document.
+                - paragraph [ref=e207]: NVIDIA products are not designed, authorized, or warranted to be suitable for use in medical, military, aircraft, space, or life support equipment, nor in applications where failure or malfunction of the NVIDIA product can reasonably be expected to result in personal injury, death, or property or environmental damage. NVIDIA accepts no liability for inclusion and/or use of NVIDIA products in such equipment or applications and therefore such inclusion and/or use is at customer’s own risk.
+                - paragraph [ref=e208]: "NVIDIA makes no representation or warranty that products based on this document will be suitable for any specified use. Testing of all parameters of each product is not necessarily performed by NVIDIA. It is customer’s sole responsibility to evaluate and determine the applicability of any information contained in this document, ensure the product is suitable and fit for the application planned by customer, and perform the necessary testing for the application in order to avoid a default of the application or the product. Weaknesses in customer’s product designs may affect the quality and reliability of the NVIDIA product and may result in additional or different conditions and/or requirements beyond those contained in this document. NVIDIA accepts no liability related to any default, damage, costs, or problem which may be based on or attributable to: (i) the use of the NVIDIA product in any manner that is contrary to this document or (ii) customer product designs."
+                - paragraph [ref=e209]: No license, either expressed or implied, is granted under any NVIDIA patent right, copyright, or other NVIDIA intellectual property right under this document. Information published by NVIDIA regarding third-party products or services does not constitute a license from NVIDIA to use such products or services or a warranty or endorsement thereof. Use of such information may require a license from a third party under the patents or other intellectual property rights of the third party, or a license from NVIDIA under the patents or other intellectual property rights of NVIDIA.
+                - paragraph [ref=e210]: Reproduction of information in this document is permissible only if approved in advance by NVIDIA in writing, reproduced without alteration and in full compliance with all applicable export laws and regulations, and accompanied by all associated conditions, limitations, and notices.
+                - paragraph [ref=e211]: THIS DOCUMENT AND ALL NVIDIA DESIGN SPECIFICATIONS, REFERENCE BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER DOCUMENTS (TOGETHER AND SEPARATELY, “MATERIALS”) ARE BEING PROVIDED “AS IS.” NVIDIA MAKES NO WARRANTIES, EXPRESSED, IMPLIED, STATUTORY, OR OTHERWISE WITH RESPECT TO THE MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF NONINFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE. TO THE EXTENT NOT PROHIBITED BY LAW, IN NO EVENT WILL NVIDIA BE LIABLE FOR ANY DAMAGES, INCLUDING WITHOUT LIMITATION ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT OF ANY USE OF THIS DOCUMENT, EVEN IF NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Notwithstanding any damages that customer might incur for any reason whatsoever, NVIDIA’s aggregate and cumulative liability towards customer for the products described herein shall be limited in accordance with the Terms of Sale for the product.
+              - generic [ref=e212]:
+                - heading "3.2. OpenCL " [level=2] [ref=e213]:
+                  - text: 3.2. OpenCL
+                  - link "" [ref=e214] [cursor=pointer]:
+                    - /url: "#opencl"
+                - paragraph [ref=e215]: OpenCL is a trademark of Apple Inc. used under license to the Khronos Group Inc.
+              - generic [ref=e216]:
+                - heading "3.3. Trademarks " [level=2] [ref=e217]:
+                  - text: 3.3. Trademarks
+                  - link "" [ref=e218] [cursor=pointer]:
+                    - /url: "#trademarks"
+                - paragraph [ref=e219]: NVIDIA and the NVIDIA logo are trademarks or registered trademarks of NVIDIA Corporation in the U.S. and other countries. Other company and product names may be trademarks of the respective companies with which they are associated.
+                - generic [ref=e220]:
+                  - term [ref=e221]:
+                    - generic [ref=e222]:
+                      - text: "["
+                      - link "1" [ref=e223] [cursor=pointer]:
+                        - /url: "#id1"
+                      - text: "]"
+                    - text: ":"
+                  - definition [ref=e224]:
+                    - paragraph [ref=e225]: Just-in-time compilation
+                  - term [ref=e226]:
+                    - generic [ref=e227]:
+                      - text: "["
+                      - link "2" [ref=e228] [cursor=pointer]:
+                        - /url: "#id2"
+                      - text: "]"
+                    - text: ":"
+                  - definition [ref=e229]:
+                    - paragraph [ref=e230]: Warp-synchronous refers to an assumption that threads in the same warp are synchronized at every instruction and can, for example, communicate values without explicit synchronization.
+        - generic [ref=e231]:
+          - separator [ref=e232]
+          - contentinfo [ref=e233]:
+            - paragraph [ref=e234]: © Copyright 2020-2023, NVIDIA Corporation & affiliates. All rights reserved. Last updated on Jul 25, 2023.
+  - region "Cookie banner" [ref=e236]:
+    - dialog "Privacy" [ref=e237]:
+      - generic [ref=e238]:
+        - paragraph [ref=e241]:
+          - text: NVIDIA uses cookies to improve your experience on our web site. We and our third-party partners also use cookies and other tools to collect and record information you provide as well as information about your interactions with our websites for performance improvement, analytics, and to assist in marketing efforts. By continuing to use this site or by clicking one of the buttons below, you agree to the use of cookies and other tools as described in our
+          - link "Privacy Policy" [ref=e242] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/privacy-policy/
+          - text: and
+          - link "Cookie Policy" [ref=e243] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/cookie-policy/
+          - text: (subject to your settings) and accept our
+          - link "Terms of Service" [ref=e244] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/terms-of-service/
+          - text: (which contains important waivers). Please see our
+          - link "Privacy Policy" [ref=e245] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/privacy-policy/
+          - text: for more information on our privacy practices.
+        - generic [ref=e247]:
+          - button "Manage Settings, Opens the preference center dialog" [ref=e248] [cursor=pointer]: Manage Settings
+          - generic [ref=e249]:
+            - button "Turn Off Optional Cookies" [ref=e250] [cursor=pointer]
+            - button "Agree" [ref=e251] [cursor=pointer]

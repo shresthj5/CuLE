@@ -1,0 +1,1815 @@
+- generic [ref=e1]:
+  - dialog "Cookie Consent Banner" [ref=e2]:
+    - button "Close this dialog" [active] [ref=e3] [cursor=pointer]:
+      - img "Close this dialog" [ref=e4]
+    - generic [ref=e5]:
+      - generic [ref=e6]: "This website utilizes technologies such as cookies to enable essential site functionality, as well as for analytics, personalization, and targeted advertising. To learn more, view the following link:"
+      - link "Privacy Policy" [ref=e7] [cursor=pointer]:
+        - /url: https://lfprojects.org/policies/privacy-policy/
+    - button "Manage Preferences" [ref=e9] [cursor=pointer]
+  - link "Skip to main content" [ref=e11] [cursor=pointer]:
+    - /url: "#main-content"
+  - text: 
+  - generic: 
+  - generic [ref=e12]:
+    - paragraph [ref=e13]:
+      - text: Help us understand how you use PyTorch! Take our quick survey.
+      - link "Take Survey" [ref=e14] [cursor=pointer]:
+        - /url: https://forms.gle/Wm63Nff19mBd6orz7
+    - button "Close" [ref=e15] [cursor=pointer]: ×
+  - banner [ref=e16]:
+    - generic [ref=e17]:
+      - text: 
+      - generic [ref=e18]:
+        - link "PyTorch - Home" [ref=e20] [cursor=pointer]:
+          - /url: index.html
+          - img "PyTorch - Home" [ref=e21]
+        - button "Version switcher list" [ref=e24] [cursor=pointer]: v2.11.0 (stable)
+      - generic [ref=e25]:
+        - navigation [ref=e28]:
+          - list [ref=e29]:
+            - listitem [ref=e30]:
+              - link "Install PyTorch" [ref=e31] [cursor=pointer]:
+                - /url: https://pytorch.org/get-started/locally/
+                - text: Install PyTorch
+                - img [ref=e32]: 
+            - listitem [ref=e34]:
+              - link "User Guide" [ref=e36] [cursor=pointer]:
+                - /url: user_guide/index.html
+            - listitem [ref=e37]:
+              - link "Reference API" [ref=e39] [cursor=pointer]:
+                - /url: pytorch-api.html
+            - listitem [ref=e40]:
+              - link "Developer Notes" [ref=e42] [cursor=pointer]:
+                - /url: notes.html
+            - listitem [ref=e43]:
+              - link "Community" [ref=e45] [cursor=pointer]:
+                - /url: community/index.html
+            - listitem [ref=e46]:
+              - link "Tutorials" [ref=e47] [cursor=pointer]:
+                - /url: https://docs.pytorch.org/tutorials/
+                - text: Tutorials
+                - img [ref=e48]: 
+        - generic [ref=e50]:
+          - link "Go to pytorch.org" [ref=e52] [cursor=pointer]:
+            - /url: https://pytorch.org
+            - generic [ref=e53]:
+              - generic [ref=e54]: Go to
+              - generic [ref=e55]:
+                - text: pytorch.org
+                - img [ref=e56]: 
+          - generic [ref=e59]:
+            - generic [ref=e61]:
+              - img [ref=e62]: 
+              - searchbox "Search the docs ..." [ref=e64]
+            - text: 
+            - generic [ref=e67]:
+              - checkbox
+          - button "light/dark" [ref=e70] [cursor=pointer]:
+            - text:  
+            - img [ref=e71]: 
+          - list "Icon Links" [ref=e74]:
+            - listitem [ref=e75]:
+              - link "X" [ref=e76] [cursor=pointer]:
+                - /url: https://x.com/PyTorch
+                - img [ref=e77]: 
+                - generic [ref=e79]: X
+            - listitem [ref=e80]:
+              - link "GitHub" [ref=e81] [cursor=pointer]:
+                - /url: https://github.com/pytorch/pytorch
+                - img [ref=e82]: 
+                - generic [ref=e84]: GitHub
+            - listitem [ref=e85]:
+              - link "PyTorch Forum" [ref=e86] [cursor=pointer]:
+                - /url: https://discuss.pytorch.org/
+                - img [ref=e87]: 
+                - generic [ref=e89]: PyTorch Forum
+            - listitem [ref=e90]:
+              - link "PyPi" [ref=e91] [cursor=pointer]:
+                - /url: https://pypi.org/project/torch/
+                - img [ref=e92]: 
+                - generic [ref=e94]: PyPi
+      - text: 
+  - generic [ref=e96]:
+    - generic [ref=e97]:
+      - text:            
+      - navigation "Section Navigation" [ref=e100]:
+        - heading "Section Navigation" [level=1] [ref=e101]
+        - generic [ref=e102]:
+          - list [ref=e103]:
+            - listitem [ref=e104]:
+              - link "C++" [ref=e105] [cursor=pointer]:
+                - /url: https://docs.pytorch.org/cppdocs/
+          - heading "Python API" [level=2] [ref=e106]
+          - list [ref=e107]:
+            - listitem [ref=e108]:
+              - link "torch" [ref=e109] [cursor=pointer]:
+                - /url: torch.html
+              - group:
+                - img [ref=e110] [cursor=pointer]: 
+                - text: 
+            - listitem [ref=e112]:
+              - link "Aliases in torch.nn" [ref=e113] [cursor=pointer]:
+                - /url: nn.aliases.html
+              - group:
+                - img [ref=e114] [cursor=pointer]: 
+            - listitem [ref=e116]:
+              - link "torch.nn" [ref=e117] [cursor=pointer]:
+                - /url: nn.html
+              - group:
+                - img [ref=e118] [cursor=pointer]: 
+            - listitem [ref=e120]:
+              - link "torch.nn.functional" [ref=e121] [cursor=pointer]:
+                - /url: nn.functional.html
+              - group:
+                - img [ref=e122] [cursor=pointer]: 
+            - listitem [ref=e124]:
+              - link "torch.Tensor" [ref=e125] [cursor=pointer]:
+                - /url: tensors.html
+              - group:
+                - img [ref=e126] [cursor=pointer]: 
+            - listitem [ref=e128]:
+              - link "Tensor Attributes" [ref=e129] [cursor=pointer]:
+                - /url: tensor_attributes.html
+            - listitem [ref=e130]:
+              - link "Tensor Views" [ref=e131] [cursor=pointer]:
+                - /url: tensor_view.html
+            - listitem [ref=e132]:
+              - link "torch.amp" [ref=e133] [cursor=pointer]:
+                - /url: amp.html
+            - listitem [ref=e134]:
+              - link "torch.autograd" [ref=e135] [cursor=pointer]:
+                - /url: autograd.html
+              - group:
+                - img [ref=e136] [cursor=pointer]: 
+            - listitem [ref=e138]:
+              - link "torch.library" [ref=e139] [cursor=pointer]:
+                - /url: library.html
+            - listitem [ref=e140]:
+              - link "torch.accelerator" [ref=e141] [cursor=pointer]:
+                - /url: accelerator.html
+              - group:
+                - img [ref=e142] [cursor=pointer]: 
+            - listitem [ref=e144]:
+              - link "torch.cpu" [ref=e145] [cursor=pointer]:
+                - /url: cpu.html
+              - group:
+                - img [ref=e146] [cursor=pointer]: 
+            - listitem [ref=e148]:
+              - link "torch.cuda" [ref=e149] [cursor=pointer]:
+                - /url: cuda.html
+              - group:
+                - img [ref=e150] [cursor=pointer]: 
+                - text: 
+            - listitem [ref=e152]:
+              - link "torch.cuda.memory" [ref=e153] [cursor=pointer]:
+                - /url: torch_cuda_memory.html
+            - listitem [ref=e154]:
+              - link "torch.mps" [ref=e155] [cursor=pointer]:
+                - /url: mps.html
+              - group:
+                - img [ref=e156] [cursor=pointer]: 
+            - listitem [ref=e158]:
+              - link "torch.xpu" [ref=e159] [cursor=pointer]:
+                - /url: xpu.html
+              - group:
+                - img [ref=e160] [cursor=pointer]: 
+                - text: 
+            - listitem [ref=e162]:
+              - link "torch.mtia" [ref=e163] [cursor=pointer]:
+                - /url: mtia.html
+              - group:
+                - img [ref=e164] [cursor=pointer]: 
+            - listitem [ref=e166]:
+              - link "torch.mtia.memory" [ref=e167] [cursor=pointer]:
+                - /url: mtia.memory.html
+              - group:
+                - img [ref=e168] [cursor=pointer]: 
+            - listitem [ref=e170]:
+              - link "torch.mtia.mtia_graph" [ref=e171] [cursor=pointer]:
+                - /url: mtia.mtia_graph.html
+            - listitem [ref=e172]:
+              - link "Meta device" [ref=e173] [cursor=pointer]:
+                - /url: meta.html
+            - listitem [ref=e174]:
+              - link "torch.backends" [ref=e175] [cursor=pointer]:
+                - /url: backends.html
+            - listitem [ref=e176]:
+              - link "torch.export" [ref=e177] [cursor=pointer]:
+                - /url: user_guide/torch_compiler/export.html
+              - group:
+                - img [ref=e178] [cursor=pointer]: 
+                - text:       
+            - listitem [ref=e180]:
+              - link "torch.distributed" [ref=e181] [cursor=pointer]:
+                - /url: distributed.html
+              - group:
+                - img [ref=e182] [cursor=pointer]: 
+            - listitem [ref=e184]:
+              - link "torch.distributed.tensor" [ref=e185] [cursor=pointer]:
+                - /url: distributed.tensor.html
+            - listitem [ref=e186]:
+              - link "torch.distributed.algorithms.join" [ref=e187] [cursor=pointer]:
+                - /url: distributed.algorithms.join.html
+            - listitem [ref=e188]:
+              - link "torch.distributed.elastic" [ref=e189] [cursor=pointer]:
+                - /url: distributed.elastic.html
+              - group:
+                - img [ref=e190] [cursor=pointer]: 
+            - listitem [ref=e192]:
+              - link "torch.distributed.fsdp" [ref=e193] [cursor=pointer]:
+                - /url: fsdp.html
+            - listitem [ref=e194]:
+              - link "torch.distributed.fsdp.fully_shard" [ref=e195] [cursor=pointer]:
+                - /url: distributed.fsdp.fully_shard.html
+            - listitem [ref=e196]:
+              - link "torch.distributed.tensor.parallel" [ref=e197] [cursor=pointer]:
+                - /url: distributed.tensor.parallel.html
+            - listitem [ref=e198]:
+              - link "torch.distributed.optim" [ref=e199] [cursor=pointer]:
+                - /url: distributed.optim.html
+            - listitem [ref=e200]:
+              - link "torch.distributed.pipelining" [ref=e201] [cursor=pointer]:
+                - /url: distributed.pipelining.html
+            - listitem [ref=e202]:
+              - link "torch.distributed._symmetric_memory" [ref=e203] [cursor=pointer]:
+                - /url: symmetric_memory.html
+            - listitem [ref=e204]:
+              - link "torch.distributed.checkpoint" [ref=e205] [cursor=pointer]:
+                - /url: distributed.checkpoint.html
+            - listitem [ref=e206]:
+              - link "torch.distributions" [ref=e207] [cursor=pointer]:
+                - /url: distributions.html
+            - listitem [ref=e208]:
+              - link "torch.compiler" [ref=e209] [cursor=pointer]:
+                - /url: torch.compiler_api.html
+              - group:
+                - img [ref=e210] [cursor=pointer]: 
+            - listitem [ref=e212]:
+              - link "torch.fft" [ref=e213] [cursor=pointer]:
+                - /url: fft.html
+              - group:
+                - img [ref=e214] [cursor=pointer]: 
+            - listitem [ref=e216]:
+              - link "torch.func" [ref=e217] [cursor=pointer]:
+                - /url: func.html
+              - group:
+                - img [ref=e218] [cursor=pointer]: 
+                - text: 
+            - listitem [ref=e220]:
+              - link "torch.futures" [ref=e221] [cursor=pointer]:
+                - /url: futures.html
+            - listitem [ref=e222]:
+              - link "torch.fx" [ref=e223] [cursor=pointer]:
+                - /url: fx.html
+            - listitem [ref=e224]:
+              - link "torch.fx.experimental" [ref=e225] [cursor=pointer]:
+                - /url: fx.experimental.html
+              - group:
+                - img [ref=e226] [cursor=pointer]: 
+            - listitem [ref=e228]:
+              - link "torch.hub" [ref=e229] [cursor=pointer]:
+                - /url: hub.html
+            - listitem [ref=e230]:
+              - link "torch.linalg" [ref=e231] [cursor=pointer]:
+                - /url: linalg.html
+              - group:
+                - img [ref=e232] [cursor=pointer]: 
+            - listitem [ref=e234]:
+              - link "torch.monitor" [ref=e235] [cursor=pointer]:
+                - /url: monitor.html
+            - listitem [ref=e236]:
+              - link "torch.signal" [ref=e237] [cursor=pointer]:
+                - /url: signal.html
+              - group:
+                - img [ref=e238] [cursor=pointer]: 
+            - listitem [ref=e240]:
+              - link "torch.special" [ref=e241] [cursor=pointer]:
+                - /url: special.html
+            - listitem [ref=e242]:
+              - link "torch.overrides" [ref=e243] [cursor=pointer]:
+                - /url: torch.overrides.html
+            - listitem [ref=e244]:
+              - link "torch.nativert" [ref=e245] [cursor=pointer]:
+                - /url: nativert.html
+            - listitem [ref=e246]:
+              - link "torch.package" [ref=e247] [cursor=pointer]:
+                - /url: package.html
+            - listitem [ref=e248]:
+              - link "torch.profiler" [ref=e249] [cursor=pointer]:
+                - /url: profiler.html
+            - listitem [ref=e250]:
+              - link "torch.nn.init" [ref=e251] [cursor=pointer]:
+                - /url: nn.init.html
+            - listitem [ref=e252]:
+              - link "torch.nn.attention" [ref=e253] [cursor=pointer]:
+                - /url: nn.attention.html
+              - group:
+                - img [ref=e254] [cursor=pointer]: 
+                - text: 
+            - listitem [ref=e256]:
+              - link "torch.onnx" [ref=e257] [cursor=pointer]:
+                - /url: onnx.html
+              - group:
+                - img [ref=e258] [cursor=pointer]: 
+            - listitem [ref=e260]:
+              - link "torch.optim" [ref=e261] [cursor=pointer]:
+                - /url: optim.html
+              - group:
+                - img [ref=e262] [cursor=pointer]: 
+                - text: 
+            - listitem [ref=e264]:
+              - link "Complex Numbers" [ref=e265] [cursor=pointer]:
+                - /url: complex_numbers.html
+            - listitem [ref=e266]:
+              - link "DDP Communication Hooks" [ref=e267] [cursor=pointer]:
+                - /url: ddp_comm_hooks.html
+            - listitem [ref=e268]:
+              - link "Quantization" [ref=e269] [cursor=pointer]:
+                - /url: quantization.html
+              - group:
+                - img [ref=e270] [cursor=pointer]: 
+                - text:  
+            - listitem [ref=e272]:
+              - link "Distributed RPC Framework" [ref=e273] [cursor=pointer]:
+                - /url: rpc.html
+              - group:
+                - img [ref=e274] [cursor=pointer]: 
+            - listitem [ref=e276]:
+              - link "torch.random" [ref=e277] [cursor=pointer]:
+                - /url: random.html
+            - listitem [ref=e278]:
+              - link "torch.masked" [ref=e279] [cursor=pointer]:
+                - /url: masked.html
+              - group:
+                - img [ref=e280] [cursor=pointer]: 
+            - listitem [ref=e282]:
+              - link "torch.nested" [ref=e283] [cursor=pointer]:
+                - /url: nested.html
+            - listitem [ref=e284]:
+              - link "torch.Size" [ref=e285] [cursor=pointer]:
+                - /url: size.html
+            - listitem [ref=e286]:
+              - link "torch.sparse" [ref=e287] [cursor=pointer]:
+                - /url: sparse.html
+              - group:
+                - img [ref=e288] [cursor=pointer]: 
+            - listitem [ref=e290]:
+              - link "torch.Storage" [ref=e291] [cursor=pointer]:
+                - /url: storage.html
+            - listitem [ref=e292]:
+              - link "torch.testing" [ref=e293] [cursor=pointer]:
+                - /url: testing.html
+            - listitem [ref=e294]:
+              - link "torch.utils" [ref=e295] [cursor=pointer]:
+                - /url: utils.html
+              - group:
+                - img [ref=e296] [cursor=pointer]: 
+            - listitem [ref=e298]:
+              - link "torch.utils.benchmark" [ref=e299] [cursor=pointer]:
+                - /url: benchmark_utils.html
+            - listitem [ref=e300]:
+              - link "torch.utils.checkpoint" [ref=e301] [cursor=pointer]:
+                - /url: checkpoint.html
+            - listitem [ref=e302]:
+              - link "torch.utils.cpp_extension" [ref=e303] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e304]:
+              - link "torch.utils.data" [ref=e305] [cursor=pointer]:
+                - /url: data.html
+            - listitem [ref=e306]:
+              - link "torch.utils.deterministic" [ref=e307] [cursor=pointer]:
+                - /url: deterministic.html
+            - listitem [ref=e308]:
+              - link "torch.utils.jit" [ref=e309] [cursor=pointer]:
+                - /url: jit_utils.html
+            - listitem [ref=e310]:
+              - link "torch.utils.dlpack" [ref=e311] [cursor=pointer]:
+                - /url: dlpack.html
+            - listitem [ref=e312]:
+              - link "torch.utils.mobile_optimizer" [ref=e313] [cursor=pointer]:
+                - /url: mobile_optimizer.html
+            - listitem [ref=e314]:
+              - link "torch.utils.model_zoo" [ref=e315] [cursor=pointer]:
+                - /url: model_zoo.html
+            - listitem [ref=e316]:
+              - link "torch.utils.tensorboard" [ref=e317] [cursor=pointer]:
+                - /url: tensorboard.html
+            - listitem [ref=e318]:
+              - link "torch.utils.module_tracker" [ref=e319] [cursor=pointer]:
+                - /url: module_tracker.html
+            - listitem [ref=e320]:
+              - link "Type Info" [ref=e321] [cursor=pointer]:
+                - /url: type_info.html
+            - listitem [ref=e322]:
+              - link "Named Tensors" [ref=e323] [cursor=pointer]:
+                - /url: named_tensor.html
+            - listitem [ref=e324]:
+              - link "Named Tensors operator coverage" [ref=e325] [cursor=pointer]:
+                - /url: name_inference.html
+            - listitem [ref=e326]:
+              - link "torch.__config__" [ref=e327] [cursor=pointer]:
+                - /url: config_mod.html
+            - listitem [ref=e328]:
+              - link "torch.__future__" [ref=e329] [cursor=pointer]:
+                - /url: future_mod.html
+            - listitem [ref=e330]:
+              - link "torch._logging" [ref=e331] [cursor=pointer]:
+                - /url: logging.html
+              - group:
+                - img [ref=e332] [cursor=pointer]: 
+            - listitem [ref=e334]:
+              - link "Torch Environment Variables" [ref=e335] [cursor=pointer]:
+                - /url: torch_environment_variables.html
+              - group:
+                - img [ref=e336] [cursor=pointer]: 
+                - text: 
+    - main [ref=e338]:
+      - generic [ref=e339]:
+        - generic [ref=e340]:
+          - generic [ref=e342]:
+            - navigation "Breadcrumb" [ref=e345]:
+              - list [ref=e346]:
+                - listitem [ref=e347]:
+                  - link "Home" [ref=e348] [cursor=pointer]:
+                    - /url: index.html
+                    - img [ref=e349]: 
+                - listitem [ref=e351]:
+                  - text: 
+                  - link "Reference API" [ref=e352] [cursor=pointer]:
+                    - /url: pytorch-api.html
+                - listitem [ref=e353]:  torch.utils....
+            - generic [ref=e356]:
+              - text: Rate this Page
+              - generic [ref=e357]:
+                - generic [ref=e358] [cursor=pointer]: ★
+                - generic [ref=e359] [cursor=pointer]: ★
+                - generic [ref=e360] [cursor=pointer]: ★
+                - generic [ref=e361] [cursor=pointer]: ★
+                - generic [ref=e362] [cursor=pointer]: ★
+          - article [ref=e364]:
+            - generic [ref=e365]:
+              - heading "torch.utils.cpp_extension" [level=1] [ref=e366]
+              - paragraph [ref=e367]: "Created On: Mar 07, 2018 | Last Updated On: Feb 16, 2025"
+              - generic [ref=e368]:
+                - term [ref=e369]:
+                  - generic [ref=e370]: torch.utils.cpp_extension.
+                  - generic [ref=e371]: CppExtension
+                  - text: (
+                  - emphasis [ref=e372]:
+                    - generic [ref=e373]: name
+                  - text: ","
+                  - emphasis [ref=e374]:
+                    - generic [ref=e375]: sources
+                  - text: ","
+                  - emphasis [ref=e376]:
+                    - generic [ref=e377]: "*"
+                    - generic [ref=e378]: args
+                  - text: ","
+                  - emphasis [ref=e379]:
+                    - generic [ref=e380]: "**"
+                    - generic [ref=e381]: kwargs
+                  - text: )
+                  - link "[source]" [ref=e382] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L1269
+                    - generic [ref=e383]: "[source]"
+                - definition [ref=e384]:
+                  - paragraph [ref=e385]:
+                    - text: Create a
+                    - code [ref=e386]: setuptools.Extension
+                    - text: for C++.
+                  - paragraph [ref=e387]:
+                    - text: Convenience method that creates a
+                    - code [ref=e388]: setuptools.Extension
+                    - text: with the bare minimum (but often sufficient) arguments to build a C++ extension.
+                  - paragraph [ref=e389]:
+                    - text: All arguments are forwarded to the
+                    - code [ref=e390]: setuptools.Extension
+                    - text: constructor. Full list arguments can be found at
+                    - link "https://setuptools.pypa.io/en/latest/userguide/ext_modules.html#extension-api-reference" [ref=e391] [cursor=pointer]:
+                      - /url: https://setuptools.pypa.io/en/latest/userguide/ext_modules.html#extension-api-reference
+                  - generic [ref=e392]:
+                    - paragraph [ref=e393]: Warning 
+                    - paragraph [ref=e394]:
+                      - text: The PyTorch python API (as provided in libtorch_python) cannot be built with the flag
+                      - code [ref=e395]: py_limited_api=True
+                      - text: . When this flag is passed, it is the user’s responsibility in their library to not use APIs from libtorch_python (in particular pytorch/python bindings) and to only use APIs from libtorch (aten objects, operators and the dispatcher). For example, to give access to custom ops from python, the library should register the ops through the dispatcher.
+                    - paragraph [ref=e396]:
+                      - text: Contrary to CPython setuptools, who does not define -DPy_LIMITED_API as a compile flag when py_limited_api is specified as an option for the “bdist_wheel” command in
+                      - code [ref=e397]: setup
+                      - text: ", PyTorch does! We will specify -DPy_LIMITED_API=min_supported_cpython to best enforce consistency, safety, and sanity in order to encourage best practices. To target a different version, set min_supported_cpython to the hexcode of the CPython version of choice."
+                  - paragraph [ref=e398]: Example
+                  - generic [ref=e400]:
+                    - generic [ref=e401]: ">>> from setuptools import setup >>> from torch.utils.cpp_extension import BuildExtension, CppExtension >>> setup( ... name='extension', ... ext_modules=[ ... CppExtension( ... name='extension', ... sources=['extension.cpp'], ... extra_compile_args=['-g'], ... extra_link_args=['-Wl,--no-as-needed', '-lm']) ... ], ... cmdclass={ ... 'build_ext': BuildExtension ... })"
+                    - button "Copy to clipboard" [ref=e402] [cursor=pointer]:
+                      - img "Copy to clipboard" [ref=e403]
+              - generic [ref=e407]:
+                - term [ref=e408]:
+                  - generic [ref=e409]: torch.utils.cpp_extension.
+                  - generic [ref=e410]: CUDAExtension
+                  - text: (
+                  - emphasis [ref=e411]:
+                    - generic [ref=e412]: name
+                  - text: ","
+                  - emphasis [ref=e413]:
+                    - generic [ref=e414]: sources
+                  - text: ","
+                  - emphasis [ref=e415]:
+                    - generic [ref=e416]: "*"
+                    - generic [ref=e417]: args
+                  - text: ","
+                  - emphasis [ref=e418]:
+                    - generic [ref=e419]: "**"
+                    - generic [ref=e420]: kwargs
+                  - text: )
+                  - link "[source]" [ref=e421] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L1339
+                    - generic [ref=e422]: "[source]"
+                - definition [ref=e423]:
+                  - paragraph [ref=e424]:
+                    - text: Create a
+                    - code [ref=e425]: setuptools.Extension
+                    - text: for CUDA/C++.
+                  - paragraph [ref=e426]:
+                    - text: Convenience method that creates a
+                    - code [ref=e427]: setuptools.Extension
+                    - text: with the bare minimum (but often sufficient) arguments to build a CUDA/C++ extension. This includes the CUDA include path, library path and runtime library.
+                  - paragraph [ref=e428]:
+                    - text: All arguments are forwarded to the
+                    - code [ref=e429]: setuptools.Extension
+                    - text: constructor. Full list arguments can be found at
+                    - link "https://setuptools.pypa.io/en/latest/userguide/ext_modules.html#extension-api-reference" [ref=e430] [cursor=pointer]:
+                      - /url: https://setuptools.pypa.io/en/latest/userguide/ext_modules.html#extension-api-reference
+                  - generic [ref=e431]:
+                    - paragraph [ref=e432]: Warning 
+                    - paragraph [ref=e433]:
+                      - text: The PyTorch python API (as provided in libtorch_python) cannot be built with the flag
+                      - code [ref=e434]: py_limited_api=True
+                      - text: . When this flag is passed, it is the user’s responsibility in their library to not use APIs from libtorch_python (in particular pytorch/python bindings) and to only use APIs from libtorch (aten objects, operators and the dispatcher). For example, to give access to custom ops from python, the library should register the ops through the dispatcher.
+                    - paragraph [ref=e435]:
+                      - text: Contrary to CPython setuptools, who does not define -DPy_LIMITED_API as a compile flag when py_limited_api is specified as an option for the “bdist_wheel” command in
+                      - code [ref=e436]: setup
+                      - text: ", PyTorch does! We will specify -DPy_LIMITED_API=min_supported_cpython to best enforce consistency, safety, and sanity in order to encourage best practices. To target a different version, set min_supported_cpython to the hexcode of the CPython version of choice."
+                  - paragraph [ref=e437]: Example
+                  - generic [ref=e439]:
+                    - generic [ref=e440]: ">>> from setuptools import setup >>> from torch.utils.cpp_extension import BuildExtension, CUDAExtension >>> setup( ... name='cuda_extension', ... ext_modules=[ ... CUDAExtension( ... name='cuda_extension', ... sources=['extension.cpp', 'extension_kernel.cu'], ... extra_compile_args={'cxx': ['-g'], ... 'nvcc': ['-O2']}, ... extra_link_args=['-Wl,--no-as-needed', '-lcuda']) ... ], ... cmdclass={ ... 'build_ext': BuildExtension ... })"
+                    - button "Copy to clipboard" [ref=e441] [cursor=pointer]:
+                      - img "Copy to clipboard" [ref=e442]
+                  - paragraph [ref=e446]: "Compute capabilities:"
+                  - paragraph [ref=e447]: By default the extension will be compiled to run on all archs of the cards visible during the building process of the extension, plus PTX. If down the road a new card is installed the extension may need to be recompiled. If a visible card has a compute capability (CC) that’s newer than the newest version for which your nvcc can build fully-compiled binaries, PyTorch will make nvcc fall back to building kernels with the newest version of PTX your nvcc does support (see below for details on PTX).
+                  - paragraph [ref=e448]: "You can override the default behavior using TORCH_CUDA_ARCH_LIST to explicitly specify which CCs you want the extension to support:"
+                  - paragraph [ref=e449]:
+                    - code [ref=e450]: TORCH_CUDA_ARCH_LIST="6.1 8.6" python build_my_extension.py
+                    - code [ref=e451]: TORCH_CUDA_ARCH_LIST="5.2 6.0 6.1 7.0 7.5 8.0 8.6+PTX" python build_my_extension.py
+                  - paragraph [ref=e452]: The +PTX option causes extension kernel binaries to include PTX instructions for the specified CC. PTX is an intermediate representation that allows kernels to runtime-compile for any CC >= the specified CC (for example, 8.6+PTX generates PTX that can runtime-compile for any GPU with CC >= 8.6). This improves your binary’s forward compatibility. However, relying on older PTX to provide forward compat by runtime-compiling for newer CCs can modestly reduce performance on those newer CCs. If you know exact CC(s) of the GPUs you want to target, you’re always better off specifying them individually. For example, if you want your extension to run on 8.0 and 8.6, “8.0+PTX” would work functionally because it includes PTX that can runtime-compile for 8.6, but “8.0 8.6” would be better.
+                  - paragraph [ref=e453]: Note that while it’s possible to include all supported archs, the more archs get included the slower the building process will be, as it will build a separate kernel image for each arch.
+                  - paragraph [ref=e454]: Note that CUDA-11.5 nvcc will hit internal compiler error while parsing torch/extension.h on Windows. To workaround the issue, move python binding logic to pure C++ file.
+                  - generic [ref=e455]:
+                    - term [ref=e456]: "Example use:"
+                    - definition [ref=e457]:
+                      - paragraph [ref=e458]: "#include <ATen/ATen.h> at::Tensor SigmoidAlphaBlendForwardCuda(….)"
+                    - term [ref=e459]: "Instead of:"
+                    - definition [ref=e460]:
+                      - paragraph [ref=e461]: "#include <torch/extension.h> torch::Tensor SigmoidAlphaBlendForwardCuda(…)"
+                  - paragraph [ref=e462]:
+                    - text: "Currently open issue for nvcc bug:"
+                    - link "pytorch/pytorch#69460" [ref=e463] [cursor=pointer]:
+                      - /url: https://github.com/pytorch/pytorch/issues/69460
+                    - text: "Complete workaround code example:"
+                    - link "facebookresearch/pytorch3d" [ref=e464] [cursor=pointer]:
+                      - /url: https://github.com/facebookresearch/pytorch3d/commit/cb170ac024a949f1f9614ffe6af1c38d972f7d48
+                  - paragraph [ref=e465]: "Relocatable device code linking:"
+                  - paragraph [ref=e466]: If you want to reference device symbols across compilation units (across object files), the object files need to be built with relocatable device code (-rdc=true or -dc). An exception to this rule is “dynamic parallelism” (nested kernel launches) which is not used a lot anymore. Relocatable device code is less optimized so it needs to be used only on object files that need it. Using -dlto (Device Link Time Optimization) at the device code compilation step and dlink step helps reduce the protentional perf degradation of -rdc. Note that it needs to be used at both steps to be useful.
+                  - paragraph [ref=e467]:
+                    - text: "If you have rdc objects you need to have an extra -dlink (device linking) step before the CPU symbol linking step. There is also a case where -dlink is used without -rdc: when an extension is linked against a static lib containing rdc-compiled objects like the [NVSHMEM library]("
+                    - link "https://developer.nvidia.com/nvshmem" [ref=e468] [cursor=pointer]:
+                      - /url: https://developer.nvidia.com/nvshmem
+                    - text: ).
+                  - paragraph [ref=e469]: "Note: Ninja is required to build a CUDA Extension with RDC linking."
+                  - paragraph [ref=e470]: Example
+                  - generic [ref=e472]:
+                    - generic [ref=e473]: ">>> CUDAExtension( ... name='cuda_extension', ... sources=['extension.cpp', 'extension_kernel.cu'], ... dlink=True, ... dlink_libraries=[\"dlink_lib\"], ... extra_compile_args={'cxx': ['-g'], ... 'nvcc': ['-O2', '-rdc=true']})"
+                    - button "Copy to clipboard" [ref=e474] [cursor=pointer]:
+                      - img "Copy to clipboard" [ref=e475]
+              - generic [ref=e479]:
+                - term [ref=e480]:
+                  - generic [ref=e481]: torch.utils.cpp_extension.
+                  - generic [ref=e482]: SyclExtension
+                  - text: (
+                  - emphasis [ref=e483]:
+                    - generic [ref=e484]: name
+                  - text: ","
+                  - emphasis [ref=e485]:
+                    - generic [ref=e486]: sources
+                  - text: ","
+                  - emphasis [ref=e487]:
+                    - generic [ref=e488]: "*"
+                    - generic [ref=e489]: args
+                  - text: ","
+                  - emphasis [ref=e490]:
+                    - generic [ref=e491]: "**"
+                    - generic [ref=e492]: kwargs
+                  - text: )
+                  - link "[source]" [ref=e493] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L1531
+                    - generic [ref=e494]: "[source]"
+                - definition [ref=e495]:
+                  - paragraph [ref=e496]:
+                    - text: Creates a
+                    - code [ref=e497]: setuptools.Extension
+                    - text: for SYCL/C++.
+                  - paragraph [ref=e498]:
+                    - text: Convenience method that creates a
+                    - code [ref=e499]: setuptools.Extension
+                    - text: with the bare minimum (but often sufficient) arguments to build a SYCL/C++ extension.
+                  - paragraph [ref=e500]:
+                    - text: All arguments are forwarded to the
+                    - code [ref=e501]: setuptools.Extension
+                    - text: constructor.
+                  - generic [ref=e502]:
+                    - paragraph [ref=e503]: Warning 
+                    - paragraph [ref=e504]:
+                      - text: The PyTorch python API (as provided in libtorch_python) cannot be built with the flag
+                      - code [ref=e505]: py_limited_api=True
+                      - text: . When this flag is passed, it is the user’s responsibility in their library to not use APIs from libtorch_python (in particular pytorch/python bindings) and to only use APIs from libtorch (aten objects, operators and the dispatcher). For example, to give access to custom ops from python, the library should register the ops through the dispatcher.
+                    - paragraph [ref=e506]:
+                      - text: Contrary to CPython setuptools, who does not define -DPy_LIMITED_API as a compile flag when py_limited_api is specified as an option for the “bdist_wheel” command in
+                      - code [ref=e507]: setup
+                      - text: ", PyTorch does! We will specify -DPy_LIMITED_API=min_supported_cpython to best enforce consistency, safety, and sanity in order to encourage best practices. To target a different version, set min_supported_cpython to the hexcode of the CPython version of choice."
+                  - paragraph [ref=e508]: Example
+                  - generic [ref=e510]:
+                    - generic [ref=e511]: ">>> from torch.utils.cpp_extension import BuildExtension, SyclExtension >>> setup( ... name='xpu_extension', ... ext_modules=[ ... SyclExtension( ... name='xpu_extension', ... sources=['extension.cpp', 'extension_kernel.cpp'], ... extra_compile_args={'cxx': ['-g', '-std=c++20', '-fPIC']}) ... ], ... cmdclass={ ... 'build_ext': BuildExtension ... })"
+                    - button "Copy to clipboard" [ref=e512] [cursor=pointer]:
+                      - img "Copy to clipboard" [ref=e513]
+                  - paragraph [ref=e517]: "By default the extension will be compiled to run on all archs of the cards visible during the building process of the extension. If down the road a new card is installed the extension may need to be recompiled. You can override the default behavior using TORCH_XPU_ARCH_LIST to explicitly specify which device architectures you want the extension to support:"
+                  - paragraph [ref=e518]:
+                    - code [ref=e519]: TORCH_XPU_ARCH_LIST="pvc,xe-lpg" python build_my_extension.py
+                  - paragraph [ref=e520]: Note that while it’s possible to include all supported archs, the more archs get included the slower the building process will be, as it will build a separate kernel image for each arch.
+                  - paragraph [ref=e521]: "Note: Ninja is required to build SyclExtension."
+              - generic [ref=e522]:
+                - term [ref=e523]:
+                  - generic [ref=e524]: torch.utils.cpp_extension.
+                  - generic [ref=e525]: BuildExtension
+                  - text: (
+                  - emphasis [ref=e526]:
+                    - generic [ref=e527]: "*"
+                    - generic [ref=e528]: args
+                  - text: ","
+                  - emphasis [ref=e529]:
+                    - generic [ref=e530]: "**"
+                    - generic [ref=e531]: kwargs
+                  - text: )
+                  - link "[source]" [ref=e532] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L633
+                    - generic [ref=e533]: "[source]"
+                - definition [ref=e534]:
+                  - paragraph [ref=e535]:
+                    - text: A custom
+                    - code [ref=e536]: setuptools
+                    - text: build extension .
+                  - paragraph [ref=e537]:
+                    - text: This
+                    - code [ref=e538]: setuptools.build_ext
+                    - text: subclass takes care of passing the minimum required compiler flags (e.g.
+                    - code [ref=e539]: "-std=c++17"
+                    - text: ) as well as mixed C++/CUDA/SYCL compilation (and support for CUDA/SYCL files in general).
+                  - paragraph [ref=e540]:
+                    - text: When using
+                    - link "BuildExtension" [ref=e541] [cursor=pointer]:
+                      - /url: "#torch.utils.cpp_extension.BuildExtension"
+                      - code [ref=e542]: BuildExtension
+                    - text: ", it is allowed to supply a dictionary for"
+                    - code [ref=e543]: extra_compile_args
+                    - text: (rather than the usual list) that maps from languages/compilers (the only expected values are
+                    - code [ref=e544]: cxx
+                    - text: ","
+                    - code [ref=e545]: nvcc
+                    - text: or
+                    - code [ref=e546]: sycl
+                    - text: ) to a list of additional compiler flags to supply to the compiler. This makes it possible to supply different flags to the C++, CUDA and SYCL compiler during mixed compilation.
+                  - paragraph [ref=e547]:
+                    - code [ref=e548]: use_ninja
+                    - text: "(bool): If"
+                    - code [ref=e549]: use_ninja
+                    - text: is
+                    - code [ref=e550]: "True"
+                    - text: (default), then we attempt to build using the Ninja backend. Ninja greatly speeds up compilation compared to the standard
+                    - code [ref=e551]: setuptools.build_ext
+                    - text: . Fallbacks to the standard distutils backend if Ninja is not available.
+                  - generic [ref=e552]:
+                    - paragraph [ref=e553]: Note 
+                    - paragraph [ref=e554]: "By default, the Ninja backend uses #CPUS + 2 workers to build the extension. This may use up too many resources on some systems. One can control the number of workers by setting the MAX_JOBS environment variable to a non-negative number."
+              - generic [ref=e555]:
+                - term [ref=e556]:
+                  - generic [ref=e557]: torch.utils.cpp_extension.
+                  - generic [ref=e558]: load
+                  - text: (
+                  - emphasis [ref=e559]:
+                    - generic [ref=e560]: name
+                  - text: ","
+                  - emphasis [ref=e561]:
+                    - generic [ref=e562]: sources
+                  - text: ","
+                  - emphasis [ref=e563]:
+                    - generic [ref=e564]: extra_cflags
+                    - generic [ref=e565]: =
+                    - generic [ref=e566]: None
+                  - text: ","
+                  - emphasis [ref=e567]:
+                    - generic [ref=e568]: extra_cuda_cflags
+                    - generic [ref=e569]: =
+                    - generic [ref=e570]: None
+                  - text: ","
+                  - emphasis [ref=e571]:
+                    - generic [ref=e572]: extra_sycl_cflags
+                    - generic [ref=e573]: =
+                    - generic [ref=e574]: None
+                  - text: ","
+                  - emphasis [ref=e575]:
+                    - generic [ref=e576]: extra_ldflags
+                    - generic [ref=e577]: =
+                    - generic [ref=e578]: None
+                  - text: ","
+                  - emphasis [ref=e579]:
+                    - generic [ref=e580]: extra_include_paths
+                    - generic [ref=e581]: =
+                    - generic [ref=e582]: None
+                  - text: ","
+                  - emphasis [ref=e583]:
+                    - generic [ref=e584]: build_directory
+                    - generic [ref=e585]: =
+                    - generic [ref=e586]: None
+                  - text: ","
+                  - emphasis [ref=e587]:
+                    - generic [ref=e588]: verbose
+                    - generic [ref=e589]: =
+                    - generic [ref=e590]: "False"
+                  - text: ","
+                  - emphasis [ref=e591]:
+                    - generic [ref=e592]: with_cuda
+                    - generic [ref=e593]: =
+                    - generic [ref=e594]: None
+                  - text: ","
+                  - emphasis [ref=e595]:
+                    - generic [ref=e596]: with_sycl
+                    - generic [ref=e597]: =
+                    - generic [ref=e598]: None
+                  - text: ","
+                  - emphasis [ref=e599]:
+                    - generic [ref=e600]: is_python_module
+                    - generic [ref=e601]: =
+                    - generic [ref=e602]: "True"
+                  - text: ","
+                  - emphasis [ref=e603]:
+                    - generic [ref=e604]: is_standalone
+                    - generic [ref=e605]: =
+                    - generic [ref=e606]: "False"
+                  - text: ","
+                  - emphasis [ref=e607]:
+                    - generic [ref=e608]: keep_intermediates
+                    - generic [ref=e609]: =
+                    - generic [ref=e610]: "True"
+                  - text: )
+                  - link "[source]" [ref=e611] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L1709
+                    - generic [ref=e612]: "[source]"
+                - definition [ref=e613]:
+                  - paragraph [ref=e614]: Load a PyTorch C++ extension just-in-time (JIT).
+                  - paragraph [ref=e615]: To load an extension, a Ninja build file is emitted, which is used to compile the given sources into a dynamic library. This library is subsequently loaded into the current Python process as a module and returned from this function, ready for use.
+                  - paragraph [ref=e616]:
+                    - text: By default, the directory to which the build file is emitted and the resulting library compiled to is
+                    - code [ref=e617]: <tmp>/torch_extensions/<name>
+                    - text: ", where"
+                    - code [ref=e618]: <tmp>
+                    - text: is the temporary folder on the current platform and
+                    - code [ref=e619]: <name>
+                    - text: the name of the extension. This location can be overridden in two ways. First, if the
+                    - code [ref=e620]: TORCH_EXTENSIONS_DIR
+                    - text: environment variable is set, it replaces
+                    - code [ref=e621]: <tmp>/torch_extensions
+                    - text: and all extensions will be compiled into subfolders of this directory. Second, if the
+                    - code [ref=e622]: build_directory
+                    - text: argument to this function is supplied, it overrides the entire path, i.e. the library will be compiled into that folder directly.
+                  - paragraph [ref=e623]:
+                    - text: To compile the sources, the default system compiler (
+                    - code [ref=e624]: c++
+                    - text: ) is used, which can be overridden by setting the
+                    - code [ref=e625]: CXX
+                    - text: environment variable. To pass additional arguments to the compilation process,
+                    - code [ref=e626]: extra_cflags
+                    - text: or
+                    - code [ref=e627]: extra_ldflags
+                    - text: can be provided. For example, to compile your extension with optimizations, pass
+                    - code [ref=e628]: extra_cflags=['-O3']
+                    - text: . You can also use
+                    - code [ref=e629]: extra_cflags
+                    - text: to pass further include directories.
+                  - paragraph [ref=e630]:
+                    - text: CUDA support with mixed compilation is provided. Simply pass CUDA source files (
+                    - code [ref=e631]: .cu
+                    - text: or
+                    - code [ref=e632]: .cuh
+                    - text: ) along with other sources. Such files will be detected and compiled with nvcc rather than the C++ compiler. This includes passing the CUDA lib64 directory as a library directory, and linking
+                    - code [ref=e633]: cudart
+                    - text: . You can pass additional flags to nvcc via
+                    - code [ref=e634]: extra_cuda_cflags
+                    - text: ", just like with"
+                    - code [ref=e635]: extra_cflags
+                    - text: for C++. Various heuristics for finding the CUDA install directory are used, which usually work fine. If not, setting the
+                    - code [ref=e636]: CUDA_HOME
+                    - text: environment variable is the safest option.
+                  - paragraph [ref=e637]:
+                    - text: SYCL support with mixed compilation is provided. Simply pass SYCL source files (
+                    - code [ref=e638]: .sycl
+                    - text: ) along with other sources. Such files will be detected and compiled with SYCL compiler (such as Intel DPC++ Compiler) rather than the C++ compiler. You can pass additional flags to SYCL compiler via
+                    - code [ref=e639]: extra_sycl_cflags
+                    - text: ", just like with"
+                    - code [ref=e640]: extra_cflags
+                    - text: for C++. SYCL compiler is expected to be found via system PATH environment variable.
+                  - generic [ref=e641]:
+                    - term [ref=e642]:
+                      - text: Parameters
+                      - generic [ref=e643]: ":"
+                    - definition [ref=e644]:
+                      - list [ref=e645]:
+                        - listitem [ref=e646]:
+                          - paragraph [ref=e647]:
+                            - strong [ref=e648]: name
+                            - text: – The name of the extension to build. This MUST be the same as the name of the pybind11 module!
+                        - listitem [ref=e649]:
+                          - paragraph [ref=e650]:
+                            - strong [ref=e651]: sources
+                            - text: (
+                            - link "str" [ref=e652] [cursor=pointer]:
+                              - /url: https://docs.python.org/3/library/stdtypes.html#str
+                              - emphasis [ref=e653]: str
+                            - emphasis [ref=e654]: "|"
+                            - link "list" [ref=e655] [cursor=pointer]:
+                              - /url: https://docs.python.org/3/library/stdtypes.html#list
+                              - emphasis [ref=e656]: list
+                            - emphasis [ref=e657]: "["
+                            - link "str" [ref=e658] [cursor=pointer]:
+                              - /url: https://docs.python.org/3/library/stdtypes.html#str
+                              - emphasis [ref=e659]: str
+                            - emphasis [ref=e660]: "]"
+                            - text: ) – A list of relative or absolute paths to C++ source files.
+                        - listitem [ref=e661]:
+                          - paragraph [ref=e662]:
+                            - strong [ref=e663]: extra_cflags
+                            - text: – optional list of compiler flags to forward to the build.
+                        - listitem [ref=e664]:
+                          - paragraph [ref=e665]:
+                            - strong [ref=e666]: extra_cuda_cflags
+                            - text: – optional list of compiler flags to forward to nvcc when building CUDA sources.
+                        - listitem [ref=e667]:
+                          - paragraph [ref=e668]:
+                            - strong [ref=e669]: extra_sycl_cflags
+                            - text: – optional list of compiler flags to forward to SYCL compiler when building SYCL sources.
+                        - listitem [ref=e670]:
+                          - paragraph [ref=e671]:
+                            - strong [ref=e672]: extra_ldflags
+                            - text: – optional list of linker flags to forward to the build.
+                        - listitem [ref=e673]:
+                          - paragraph [ref=e674]:
+                            - strong [ref=e675]: extra_include_paths
+                            - text: – optional list of include directories to forward to the build.
+                        - listitem [ref=e676]:
+                          - paragraph [ref=e677]:
+                            - strong [ref=e678]: build_directory
+                            - text: – optional path to use as build workspace.
+                        - listitem [ref=e679]:
+                          - paragraph [ref=e680]:
+                            - strong [ref=e681]: verbose
+                            - text: – If
+                            - code [ref=e682]: "True"
+                            - text: ", turns on verbose logging of load steps."
+                        - listitem [ref=e683]:
+                          - paragraph [ref=e684]:
+                            - strong [ref=e685]: with_cuda
+                            - text: (
+                            - link "bool" [ref=e686] [cursor=pointer]:
+                              - /url: https://docs.python.org/3/library/functions.html#bool
+                              - emphasis [ref=e687]: bool
+                            - emphasis [ref=e688]: "|"
+                            - emphasis [ref=e689]: None
+                            - text: ) – Determines whether CUDA headers and libraries are added to the build. If set to
+                            - code [ref=e690]: None
+                            - text: (default), this value is automatically determined based on the existence of
+                            - code [ref=e691]: .cu
+                            - text: or
+                            - code [ref=e692]: .cuh
+                            - text: in
+                            - code [ref=e693]: sources
+                            - text: ". Set it to True` to force CUDA headers and libraries to be included."
+                        - listitem [ref=e694]:
+                          - paragraph [ref=e695]:
+                            - strong [ref=e696]: with_sycl
+                            - text: (
+                            - link "bool" [ref=e697] [cursor=pointer]:
+                              - /url: https://docs.python.org/3/library/functions.html#bool
+                              - emphasis [ref=e698]: bool
+                            - emphasis [ref=e699]: "|"
+                            - emphasis [ref=e700]: None
+                            - text: ) – Determines whether SYCL headers and libraries are added to the build. If set to
+                            - code [ref=e701]: None
+                            - text: (default), this value is automatically determined based on the existence of
+                            - code [ref=e702]: .sycl
+                            - text: in
+                            - code [ref=e703]: sources
+                            - text: ". Set it to True` to force SYCL headers and libraries to be included."
+                        - listitem [ref=e704]:
+                          - paragraph [ref=e705]:
+                            - strong [ref=e706]: is_python_module
+                            - text: – If
+                            - code [ref=e707]: "True"
+                            - text: (default), imports the produced shared library as a Python module. If
+                            - code [ref=e708]: "False"
+                            - text: ", behavior depends on"
+                            - code [ref=e709]: is_standalone
+                            - text: .
+                        - listitem [ref=e710]:
+                          - paragraph [ref=e711]:
+                            - strong [ref=e712]: is_standalone
+                            - text: – If
+                            - code [ref=e713]: "False"
+                            - text: (default) loads the constructed extension into the process as a plain dynamic library. If
+                            - code [ref=e714]: "True"
+                            - text: ", build a standalone executable."
+                    - term [ref=e715]:
+                      - text: Returns
+                      - generic [ref=e716]: ":"
+                    - definition [ref=e717]:
+                      - paragraph
+                      - paragraph [ref=e718]: Returns the loaded PyTorch extension as a Python module.
+                      - generic [ref=e719]:
+                        - term [ref=e720]:
+                          - text: If
+                          - code [ref=e721]: is_python_module
+                          - text: is
+                          - code [ref=e722]: "False"
+                          - text: and
+                          - code [ref=e723]: is_standalone
+                          - text: is
+                          - code [ref=e724]: "False"
+                          - text: ":"
+                        - definition [ref=e725]:
+                          - paragraph [ref=e726]: Returns nothing. (The shared library is loaded into the process as a side effect.)
+                        - term [ref=e727]:
+                          - text: If
+                          - code [ref=e728]: is_standalone
+                          - text: is
+                          - code [ref=e729]: "True"
+                          - text: .
+                        - definition [ref=e730]:
+                          - paragraph [ref=e731]: Return the path to the executable. (On Windows, TORCH_LIB_PATH is added to the PATH environment variable as a side effect.)
+                      - paragraph
+                    - term [ref=e732]:
+                      - text: Return type
+                      - generic [ref=e733]: ":"
+                    - definition [ref=e734]:
+                      - paragraph [ref=e735]:
+                        - text: If
+                        - code [ref=e736]: is_python_module
+                        - text: is
+                        - code [ref=e737]: "True"
+                  - paragraph [ref=e738]: Example
+                  - generic [ref=e740]:
+                    - generic [ref=e741]: ">>> from torch.utils.cpp_extension import load >>> module = load( ... name='extension', ... sources=['extension.cpp', 'extension_kernel.cu'], ... extra_cflags=['-O2'], ... verbose=True)"
+                    - button "Copy to clipboard" [ref=e742] [cursor=pointer]:
+                      - img "Copy to clipboard" [ref=e743]
+              - generic [ref=e747]:
+                - term [ref=e748]:
+                  - generic [ref=e749]: torch.utils.cpp_extension.
+                  - generic [ref=e750]: load_inline
+                  - text: (
+                  - emphasis [ref=e751]:
+                    - generic [ref=e752]: name
+                  - text: ","
+                  - emphasis [ref=e753]:
+                    - generic [ref=e754]: cpp_sources
+                  - text: ","
+                  - emphasis [ref=e755]:
+                    - generic [ref=e756]: cuda_sources
+                    - generic [ref=e757]: =
+                    - generic [ref=e758]: None
+                  - text: ","
+                  - emphasis [ref=e759]:
+                    - generic [ref=e760]: sycl_sources
+                    - generic [ref=e761]: =
+                    - generic [ref=e762]: None
+                  - text: ","
+                  - emphasis [ref=e763]:
+                    - generic [ref=e764]: functions
+                    - generic [ref=e765]: =
+                    - generic [ref=e766]: None
+                  - text: ","
+                  - emphasis [ref=e767]:
+                    - generic [ref=e768]: extra_cflags
+                    - generic [ref=e769]: =
+                    - generic [ref=e770]: None
+                  - text: ","
+                  - emphasis [ref=e771]:
+                    - generic [ref=e772]: extra_cuda_cflags
+                    - generic [ref=e773]: =
+                    - generic [ref=e774]: None
+                  - text: ","
+                  - emphasis [ref=e775]:
+                    - generic [ref=e776]: extra_sycl_cflags
+                    - generic [ref=e777]: =
+                    - generic [ref=e778]: None
+                  - text: ","
+                  - emphasis [ref=e779]:
+                    - generic [ref=e780]: extra_ldflags
+                    - generic [ref=e781]: =
+                    - generic [ref=e782]: None
+                  - text: ","
+                  - emphasis [ref=e783]:
+                    - generic [ref=e784]: extra_include_paths
+                    - generic [ref=e785]: =
+                    - generic [ref=e786]: None
+                  - text: ","
+                  - emphasis [ref=e787]:
+                    - generic [ref=e788]: build_directory
+                    - generic [ref=e789]: =
+                    - generic [ref=e790]: None
+                  - text: ","
+                  - emphasis [ref=e791]:
+                    - generic [ref=e792]: verbose
+                    - generic [ref=e793]: =
+                    - generic [ref=e794]: "False"
+                  - text: ","
+                  - emphasis [ref=e795]:
+                    - generic [ref=e796]: with_cuda
+                    - generic [ref=e797]: =
+                    - generic [ref=e798]: None
+                  - text: ","
+                  - emphasis [ref=e799]:
+                    - generic [ref=e800]: with_sycl
+                    - generic [ref=e801]: =
+                    - generic [ref=e802]: None
+                  - text: ","
+                  - emphasis [ref=e803]:
+                    - generic [ref=e804]: is_python_module
+                    - generic [ref=e805]: =
+                    - generic [ref=e806]: "True"
+                  - text: ","
+                  - emphasis [ref=e807]:
+                    - generic [ref=e808]: with_pytorch_error_handling
+                    - generic [ref=e809]: =
+                    - generic [ref=e810]: "True"
+                  - text: ","
+                  - emphasis [ref=e811]:
+                    - generic [ref=e812]: keep_intermediates
+                    - generic [ref=e813]: =
+                    - generic [ref=e814]: "True"
+                  - text: ","
+                  - emphasis [ref=e815]:
+                    - generic [ref=e816]: use_pch
+                    - generic [ref=e817]: =
+                    - generic [ref=e818]: "False"
+                  - text: ","
+                  - emphasis [ref=e819]:
+                    - generic [ref=e820]: no_implicit_headers
+                    - generic [ref=e821]: =
+                    - generic [ref=e822]: "False"
+                  - text: )
+                  - link "[source]" [ref=e823] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L1989
+                    - generic [ref=e824]: "[source]"
+                - definition [ref=e825]:
+                  - paragraph [ref=e826]: Load a PyTorch C++ extension just-in-time (JIT) from string sources.
+                  - paragraph [ref=e827]:
+                    - text: This function behaves exactly like
+                    - link "load()" [ref=e828] [cursor=pointer]:
+                      - /url: "#torch.utils.cpp_extension.load"
+                      - code [ref=e829]: load()
+                    - text: ", but takes its sources as strings rather than filenames. These strings are stored to files in the build directory, after which the behavior of"
+                    - link "load_inline()" [ref=e830] [cursor=pointer]:
+                      - /url: "#torch.utils.cpp_extension.load_inline"
+                      - code [ref=e831]: load_inline()
+                    - text: is identical to
+                    - link "load()" [ref=e832] [cursor=pointer]:
+                      - /url: "#torch.utils.cpp_extension.load"
+                      - code [ref=e833]: load()
+                    - text: .
+                  - paragraph [ref=e834]:
+                    - text: See
+                    - link "the tests" [ref=e835] [cursor=pointer]:
+                      - /url: https://github.com/pytorch/pytorch/blob/master/test/test_cpp_extensions_jit.py
+                    - text: for good examples of using this function.
+                  - paragraph [ref=e836]:
+                    - text: "Sources may omit two required parts of a typical non-inline C++ extension: the necessary header includes, as well as the (pybind11) binding code. More precisely, strings passed to"
+                    - code [ref=e837]: cpp_sources
+                    - text: are first concatenated into a single
+                    - code [ref=e838]: .cpp
+                    - text: file. This file is then prepended with
+                    - code [ref=e839]: "#include <torch/extension.h>"
+                  - paragraph [ref=e840]:
+                    - text: Furthermore, if the
+                    - code [ref=e841]: functions
+                    - text: argument is supplied, bindings will be automatically generated for each function specified.
+                    - code [ref=e842]: functions
+                    - text: can either be a list of function names, or a dictionary mapping from function names to docstrings. If a list is given, the name of each function is used as its docstring.
+                  - paragraph [ref=e843]:
+                    - text: The sources in
+                    - code [ref=e844]: cuda_sources
+                    - text: are concatenated into a separate
+                    - code [ref=e845]: .cu
+                    - text: file and prepended with
+                    - code [ref=e846]: torch/types.h
+                    - text: ","
+                    - code [ref=e847]: cuda.h
+                    - text: and
+                    - code [ref=e848]: cuda_runtime.h
+                    - text: includes. The
+                    - code [ref=e849]: .cpp
+                    - text: and
+                    - code [ref=e850]: .cu
+                    - text: files are compiled separately, but ultimately linked into a single library. Note that no bindings are generated for functions in
+                    - code [ref=e851]: cuda_sources
+                    - text: per se. To bind to a CUDA kernel, you must create a C++ function that calls it, and either declare or define this C++ function in one of the
+                    - code [ref=e852]: cpp_sources
+                    - text: (and include its name in
+                    - code [ref=e853]: functions
+                    - text: ).
+                  - paragraph [ref=e854]:
+                    - text: The sources in
+                    - code [ref=e855]: sycl_sources
+                    - text: are concatenated into a separate
+                    - code [ref=e856]: .sycl
+                    - text: file and prepended with
+                    - code [ref=e857]: torch/types.h
+                    - text: ","
+                    - code [ref=e858]: sycl/sycl.hpp
+                    - text: includes. The
+                    - code [ref=e859]: .cpp
+                    - text: and
+                    - code [ref=e860]: .sycl
+                    - text: files are compiled separately, but ultimately linked into a single library. Note that no bindings are generated for functions in
+                    - code [ref=e861]: sycl_sources
+                    - text: per se. To bind to a SYCL kernel, you must create a C++ function that calls it, and either declare or define this C++ function in one of the
+                    - code [ref=e862]: cpp_sources
+                    - text: (and include its name in
+                    - code [ref=e863]: functions
+                    - text: ).
+                  - paragraph [ref=e864]:
+                    - text: See
+                    - link "load()" [ref=e865] [cursor=pointer]:
+                      - /url: "#torch.utils.cpp_extension.load"
+                      - code [ref=e866]: load()
+                    - text: for a description of arguments omitted below.
+                  - generic [ref=e867]:
+                    - term [ref=e868]:
+                      - text: Parameters
+                      - generic [ref=e869]: ":"
+                    - definition [ref=e870]:
+                      - list [ref=e871]:
+                        - listitem [ref=e872]:
+                          - paragraph [ref=e873]:
+                            - strong [ref=e874]: cpp_sources
+                            - text: – A string, or list of strings, containing C++ source code.
+                        - listitem [ref=e875]:
+                          - paragraph [ref=e876]:
+                            - strong [ref=e877]: cuda_sources
+                            - text: – A string, or list of strings, containing CUDA source code.
+                        - listitem [ref=e878]:
+                          - paragraph [ref=e879]:
+                            - strong [ref=e880]: sycl_sources
+                            - text: – A string, or list of strings, containing SYCL source code.
+                        - listitem [ref=e881]:
+                          - paragraph [ref=e882]:
+                            - strong [ref=e883]: functions
+                            - text: – A list of function names for which to generate function bindings. If a dictionary is given, it should map function names to docstrings (which are otherwise just the function names).
+                        - listitem [ref=e884]:
+                          - paragraph [ref=e885]:
+                            - strong [ref=e886]: with_cuda
+                            - text: – Determines whether CUDA headers and libraries are added to the build. If set to
+                            - code [ref=e887]: None
+                            - text: (default), this value is automatically determined based on whether
+                            - code [ref=e888]: cuda_sources
+                            - text: is provided. Set it to
+                            - code [ref=e889]: "True"
+                            - text: to force CUDA headers and libraries to be included.
+                        - listitem [ref=e890]:
+                          - paragraph [ref=e891]:
+                            - strong [ref=e892]: with_sycl
+                            - text: – Determines whether SYCL headers and libraries are added to the build. If set to
+                            - code [ref=e893]: None
+                            - text: (default), this value is automatically determined based on whether
+                            - code [ref=e894]: sycl_sources
+                            - text: is provided. Set it to
+                            - code [ref=e895]: "True"
+                            - text: to force SYCL headers and libraries to be included.
+                        - listitem [ref=e896]:
+                          - paragraph [ref=e897]:
+                            - strong [ref=e898]: with_pytorch_error_handling
+                            - text: – Determines whether pytorch error and warning macros are handled by pytorch instead of pybind. To do this, each function
+                            - code [ref=e899]: foo
+                            - text: is called via an intermediary
+                            - code [ref=e900]: _safe_foo
+                            - text: function. This redirection might cause issues in obscure cases of cpp. This flag should be set to
+                            - code [ref=e901]: "False"
+                            - text: when this redirect causes issues.
+                        - listitem [ref=e902]:
+                          - paragraph [ref=e903]:
+                            - strong [ref=e904]: no_implicit_headers
+                            - text: – If
+                            - code [ref=e905]: "True"
+                            - text: ", skips automatically adding headers, most notably"
+                            - code [ref=e906]: "#include <torch/extension.h>"
+                            - text: and
+                            - code [ref=e907]: "#include <torch/types.h>"
+                            - text: "lines. Use this option to improve cold start times when you already include the necessary headers in your source code. Default:"
+                            - code [ref=e908]: "False"
+                            - text: .
+                  - paragraph [ref=e909]: Example
+                  - generic [ref=e911]:
+                    - generic [ref=e912]: ">>> from torch.utils.cpp_extension import load_inline >>> source = \"\"\" at::Tensor sin_add(at::Tensor x, at::Tensor y) { return x.sin() + y.sin(); } \"\"\" >>> module = load_inline(name='inline_extension', ... cpp_sources=[source], ... functions=['sin_add'])"
+                    - button "Copy to clipboard" [ref=e913] [cursor=pointer]:
+                      - img "Copy to clipboard" [ref=e914]
+                  - generic [ref=e918]:
+                    - paragraph [ref=e919]: Note 
+                    - paragraph [ref=e920]: Since load_inline will just-in-time compile the source code, please ensure that you have the right toolchains installed in the runtime. For example, when loading C++, make sure a C++ compiler is available. If you’re loading a CUDA extension, you will need to additionally install the corresponding CUDA toolkit (nvcc and any other dependencies your code has). Compiling toolchains are not included when you install torch and must be additionally installed.
+                    - paragraph [ref=e921]: "During compiling, by default, the Ninja backend uses #CPUS + 2 workers to build the extension. This may use up too many resources on some systems. One can control the number of workers by setting the MAX_JOBS environment variable to a non-negative number."
+              - generic [ref=e922]:
+                - term [ref=e923]:
+                  - generic [ref=e924]: torch.utils.cpp_extension.
+                  - generic [ref=e925]: include_paths
+                  - text: (
+                  - emphasis [ref=e926]:
+                    - generic [ref=e927]: device_type
+                    - generic [ref=e928]: =
+                    - generic [ref=e929]: "'cpu'"
+                  - text: ","
+                  - emphasis [ref=e930]:
+                    - generic [ref=e931]: torch_include_dirs
+                    - generic [ref=e932]: =
+                    - generic [ref=e933]: "True"
+                  - text: )
+                  - link "[source]" [ref=e934] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L1612
+                    - generic [ref=e935]: "[source]"
+                - definition [ref=e936]:
+                  - paragraph [ref=e937]: Get the include paths required to build a C++ or CUDA or SYCL extension.
+                  - generic [ref=e938]:
+                    - term [ref=e939]:
+                      - text: Parameters
+                      - generic [ref=e940]: ":"
+                    - definition [ref=e941]:
+                      - paragraph [ref=e942]:
+                        - strong [ref=e943]: device_type
+                        - text: (
+                        - link "str" [ref=e944] [cursor=pointer]:
+                          - /url: https://docs.python.org/3/library/stdtypes.html#str
+                          - emphasis [ref=e945]: str
+                        - text: ) – Defaults to “cpu”.
+                    - term [ref=e946]:
+                      - text: Returns
+                      - generic [ref=e947]: ":"
+                    - definition [ref=e948]:
+                      - paragraph [ref=e949]: A list of include path strings.
+                    - term [ref=e950]:
+                      - text: Return type
+                      - generic [ref=e951]: ":"
+                    - definition [ref=e952]:
+                      - paragraph [ref=e953]:
+                        - link "list" [ref=e954] [cursor=pointer]:
+                          - /url: https://docs.python.org/3/library/stdtypes.html#list
+                        - text: "["
+                        - link "str" [ref=e955] [cursor=pointer]:
+                          - /url: https://docs.python.org/3/library/stdtypes.html#str
+                        - text: "]"
+              - generic [ref=e956]:
+                - term [ref=e957]:
+                  - generic [ref=e958]: torch.utils.cpp_extension.
+                  - generic [ref=e959]: get_compiler_abi_compatibility_and_version
+                  - text: (
+                  - emphasis [ref=e960]:
+                    - generic [ref=e961]: compiler
+                  - text: )
+                  - link "[source]" [ref=e962] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L470
+                    - generic [ref=e963]: "[source]"
+                - definition [ref=e964]:
+                  - paragraph [ref=e965]: Determine if the given compiler is ABI-compatible with PyTorch alongside its version.
+                  - generic [ref=e966]:
+                    - term [ref=e967]:
+                      - text: Parameters
+                      - generic [ref=e968]: ":"
+                    - definition [ref=e969]:
+                      - paragraph [ref=e970]:
+                        - strong [ref=e971]: compiler
+                        - text: (
+                        - link "str" [ref=e972] [cursor=pointer]:
+                          - /url: https://docs.python.org/3/library/stdtypes.html#str
+                          - emphasis [ref=e973]: str
+                        - text: ) – The compiler executable name to check (e.g.
+                        - code [ref=e974]: g++
+                        - text: ). Must be executable in a shell process.
+                    - term [ref=e975]:
+                      - text: Returns
+                      - generic [ref=e976]: ":"
+                    - definition [ref=e977]:
+                      - paragraph [ref=e978]: A tuple that contains a boolean that defines if the compiler is (likely) ABI-incompatible with PyTorch, followed by a TorchVersion string that contains the compiler version separated by dots.
+                    - term [ref=e979]:
+                      - text: Return type
+                      - generic [ref=e980]: ":"
+                    - definition [ref=e981]:
+                      - paragraph [ref=e982]:
+                        - link "tuple" [ref=e983] [cursor=pointer]:
+                          - /url: https://docs.python.org/3/library/stdtypes.html#tuple
+                        - text: "["
+                        - link "bool" [ref=e984] [cursor=pointer]:
+                          - /url: https://docs.python.org/3/library/functions.html#bool
+                        - text: ","
+                        - emphasis [ref=e985]: TorchVersion
+                        - text: "]"
+              - generic [ref=e986]:
+                - term [ref=e987]:
+                  - generic [ref=e988]: torch.utils.cpp_extension.
+                  - generic [ref=e989]: verify_ninja_availability
+                  - text: ()
+                  - link "[source]" [ref=e990] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L2445
+                    - generic [ref=e991]: "[source]"
+                - definition [ref=e992]:
+                  - paragraph [ref=e993]:
+                    - text: Raise
+                    - code [ref=e994]: RuntimeError
+                    - text: if
+                    - link "ninja" [ref=e995] [cursor=pointer]:
+                      - /url: https://ninja-build.org/
+                    - text: build system is not available on the system, does nothing otherwise.
+              - generic [ref=e996]:
+                - term [ref=e997]:
+                  - generic [ref=e998]: torch.utils.cpp_extension.
+                  - generic [ref=e999]: is_ninja_available
+                  - text: ()
+                  - link "[source]" [ref=e1000] [cursor=pointer]:
+                    - /url: https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L2435
+                    - generic [ref=e1001]: "[source]"
+                - definition [ref=e1002]:
+                  - paragraph [ref=e1003]:
+                    - text: Return
+                    - code [ref=e1004]: "True"
+                    - text: if the
+                    - link "ninja" [ref=e1005] [cursor=pointer]:
+                      - /url: https://ninja-build.org/
+                    - text: build system is available on the system,
+                    - code [ref=e1006]: "False"
+                    - text: otherwise.
+                  - generic [ref=e1007]:
+                    - term [ref=e1008]:
+                      - text: Return type
+                      - generic [ref=e1009]: ":"
+                    - definition [ref=e1010]:
+                      - paragraph [ref=e1011]:
+                        - link "bool" [ref=e1012] [cursor=pointer]:
+                          - /url: https://docs.python.org/3/library/functions.html#bool
+          - generic [ref=e1015]:
+            - generic [ref=e1016]:
+              - generic [ref=e1017]:
+                - text: Rate this Page
+                - generic [ref=e1018]:
+                  - generic [ref=e1019] [cursor=pointer]: ★
+                  - generic [ref=e1020] [cursor=pointer]: ★
+                  - generic [ref=e1021] [cursor=pointer]: ★
+                  - generic [ref=e1022] [cursor=pointer]: ★
+                  - generic [ref=e1023] [cursor=pointer]: ★
+              - button "Send Feedback" [ref=e1025] [cursor=pointer]
+            - generic:
+              - link "previous torch.utils.checkpoint" [ref=e1026] [cursor=pointer]:
+                - /url: checkpoint.html
+                - img [ref=e1027]: 
+                - generic [ref=e1029]:
+                  - paragraph [ref=e1030]: previous
+                  - paragraph [ref=e1031]: torch.utils.checkpoint
+              - link "next torch.utils.data" [ref=e1032] [cursor=pointer]:
+                - /url: data.html
+                - generic [ref=e1033]:
+                  - paragraph [ref=e1034]: next
+                  - paragraph [ref=e1035]: torch.utils.data
+                - img [ref=e1036]: 
+            - generic [ref=e1038]:
+              - paragraph
+              - paragraph [ref=e1039]:
+                - text: Built with the
+                - link "PyData Sphinx Theme" [ref=e1040] [cursor=pointer]:
+                  - /url: https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html
+                - text: 0.15.4.
+          - text:  
+        - generic [ref=e1042]:
+          - generic [ref=e1043]:
+            - generic [ref=e1044]:
+              - img [ref=e1045]: 
+              - text: On this page
+            - navigation "On this page" [ref=e1047]:
+              - list [ref=e1048]:
+                - listitem [ref=e1049]:
+                  - link "CppExtension()" [ref=e1050] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.CppExtension"
+                    - code [ref=e1051]: CppExtension()
+                - listitem [ref=e1052]:
+                  - link "CUDAExtension()" [ref=e1053] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.CUDAExtension"
+                    - code [ref=e1054]: CUDAExtension()
+                - listitem [ref=e1055]:
+                  - link "SyclExtension()" [ref=e1056] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.SyclExtension"
+                    - code [ref=e1057]: SyclExtension()
+                - listitem [ref=e1058]:
+                  - link "BuildExtension()" [ref=e1059] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.BuildExtension"
+                    - code [ref=e1060]: BuildExtension()
+                - listitem [ref=e1061]:
+                  - link "load()" [ref=e1062] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.load"
+                    - code [ref=e1063]: load()
+                - listitem [ref=e1064]:
+                  - link "load_inline()" [ref=e1065] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.load_inline"
+                    - code [ref=e1066]: load_inline()
+                - listitem [ref=e1067]:
+                  - link "include_paths()" [ref=e1068] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.include_paths"
+                    - code [ref=e1069]: include_paths()
+                - listitem [ref=e1070]:
+                  - link "get_compiler_abi_compatibility_and_version()" [ref=e1071] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.get_compiler_abi_compatibility_and_version"
+                    - code [ref=e1072]: get_compiler_abi_compatibility_and_version()
+                - listitem [ref=e1073]:
+                  - link "verify_ninja_availability()" [ref=e1074] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.verify_ninja_availability"
+                    - code [ref=e1075]: verify_ninja_availability()
+                - listitem [ref=e1076]:
+                  - link "is_ninja_available()" [ref=e1077] [cursor=pointer]:
+                    - /url: "#torch.utils.cpp_extension.is_ninja_available"
+                    - code [ref=e1078]: is_ninja_available()
+          - link "Edit on GitHub" [ref=e1081] [cursor=pointer]:
+            - /url: https://github.com/pytorch/pytorch/edit/main/docs/source/cpp_extension.rst
+            - img [ref=e1082]: 
+            - text: Edit on GitHub
+          - link "Show Source" [ref=e1086] [cursor=pointer]:
+            - /url: _sources/cpp_extension.rst.txt
+            - img [ref=e1087]: 
+            - text: Show Source
+          - generic [ref=e1089]:
+            - generic [ref=e1090]: PyTorch Libraries
+            - list [ref=e1091]:
+              - listitem [ref=e1092]:
+                - link "ExecuTorch" [ref=e1093] [cursor=pointer]:
+                  - /url: https://docs.pytorch.org/executorch
+              - listitem [ref=e1094]:
+                - link "Helion" [ref=e1095] [cursor=pointer]:
+                  - /url: https://docs.pytorch.org/helion
+              - listitem [ref=e1096]:
+                - link "torchao" [ref=e1097] [cursor=pointer]:
+                  - /url: https://docs.pytorch.org/ao
+              - listitem [ref=e1098]:
+                - link "kineto" [ref=e1099] [cursor=pointer]:
+                  - /url: https://github.com/pytorch/kineto
+              - listitem [ref=e1100]:
+                - link "torchtitan" [ref=e1101] [cursor=pointer]:
+                  - /url: https://github.com/pytorch/torchtitan
+              - listitem [ref=e1102]:
+                - link "TorchRL" [ref=e1103] [cursor=pointer]:
+                  - /url: https://docs.pytorch.org/rl
+              - listitem [ref=e1104]:
+                - link "torchvision" [ref=e1105] [cursor=pointer]:
+                  - /url: https://docs.pytorch.org/vision
+              - listitem [ref=e1106]:
+                - link "torchaudio" [ref=e1107] [cursor=pointer]:
+                  - /url: https://docs.pytorch.org/audio
+              - listitem [ref=e1108]:
+                - link "tensordict" [ref=e1109] [cursor=pointer]:
+                  - /url: https://docs.pytorch.org/tensordict
+              - listitem [ref=e1110]:
+                - link "PyTorch on XLA Devices" [ref=e1111] [cursor=pointer]:
+                  - /url: https://docs.pytorch.org/xla
+  - generic [ref=e1114]:
+    - generic [ref=e1115]:
+      - heading "Docs" [level=2] [ref=e1116]
+      - paragraph [ref=e1117]: Access comprehensive developer documentation for PyTorch
+      - link "View Docs" [ref=e1118] [cursor=pointer]:
+        - /url: https://docs.pytorch.org/docs/stable/index.html
+    - generic [ref=e1119]:
+      - heading "Tutorials" [level=2] [ref=e1120]
+      - paragraph [ref=e1121]: Get in-depth tutorials for beginners and advanced developers
+      - link "View Tutorials" [ref=e1122] [cursor=pointer]:
+        - /url: https://docs.pytorch.org/tutorials
+    - generic [ref=e1123]:
+      - heading "Resources" [level=2] [ref=e1124]
+      - paragraph [ref=e1125]: Find development resources and get your questions answered
+      - link "View Resources" [ref=e1126] [cursor=pointer]:
+        - /url: https://pytorch.org/resources
+  - contentinfo [ref=e1127]:
+    - generic [ref=e1128]:
+      - generic [ref=e1129]:
+        - paragraph [ref=e1130]:
+          - strong [ref=e1131]: Stay in touch
+          - text: for updates, event info, and the latest news
+        - generic [ref=e1133]:
+          - textbox [ref=e1136]:
+            - /placeholder: First Name*
+          - textbox [ref=e1139]:
+            - /placeholder: Last Name*
+          - textbox [ref=e1142]:
+            - /placeholder: Email*
+          - combobox [ref=e1145]:
+            - option "Select Country*" [disabled] [selected]
+            - option "Afghanistan"
+            - option "Åland Islands"
+            - option "Albania"
+            - option "Algeria"
+            - option "American Samoa"
+            - option "Andorra"
+            - option "Angola"
+            - option "Anguilla"
+            - option "Antarctica"
+            - option "Antigua and Barbuda"
+            - option "Argentina"
+            - option "Armenia"
+            - option "Aruba"
+            - option "Asia/Pacific Region"
+            - option "Australia"
+            - option "Austria"
+            - option "Azerbaijan"
+            - option "Bahamas"
+            - option "Bahrain"
+            - option "Bangladesh"
+            - option "Barbados"
+            - option "Belarus"
+            - option "Belgium"
+            - option "Belize"
+            - option "Benin"
+            - option "Bermuda"
+            - option "Bhutan"
+            - option "Bolivia"
+            - option "Bosnia and Herzegovina"
+            - option "Botswana"
+            - option "Bouvet Island"
+            - option "Brazil"
+            - option "British Indian Ocean Territory"
+            - option "British Virgin Islands"
+            - option "Brunei"
+            - option "Bulgaria"
+            - option "Burkina Faso"
+            - option "Burundi"
+            - option "Cambodia"
+            - option "Cameroon"
+            - option "Canada"
+            - option "Canary Islands"
+            - option "Cape Verde"
+            - option "Caribbean Netherlands"
+            - option "Cayman Islands"
+            - option "Central African Republic"
+            - option "Chad"
+            - option "Chile"
+            - option "China"
+            - option "Christmas Island"
+            - option "Cocos (Keeling) Islands"
+            - option "Colombia"
+            - option "Comoros"
+            - option "Congo"
+            - option "Cook Islands"
+            - option "Costa Rica"
+            - option "Cote d'Ivoire"
+            - option "Croatia"
+            - option "Cuba"
+            - option "Curaçao"
+            - option "Cyprus"
+            - option "Czech Republic"
+            - option "Democratic Republic of the Congo"
+            - option "Denmark"
+            - option "Djibouti"
+            - option "Dominica"
+            - option "Dominican Republic"
+            - option "East Timor"
+            - option "Ecuador"
+            - option "Egypt"
+            - option "El Salvador"
+            - option "Equatorial Guinea"
+            - option "Eritrea"
+            - option "Estonia"
+            - option "Ethiopia"
+            - option "Europe"
+            - option "Falkland Islands"
+            - option "Faroe Islands"
+            - option "Fiji"
+            - option "Finland"
+            - option "France"
+            - option "French Guiana"
+            - option "French Polynesia"
+            - option "French Southern and Antarctic Lands"
+            - option "Gabon"
+            - option "Gambia"
+            - option "Georgia"
+            - option "Germany"
+            - option "Ghana"
+            - option "Gibraltar"
+            - option "Greece"
+            - option "Greenland"
+            - option "Grenada"
+            - option "Guadeloupe"
+            - option "Guam"
+            - option "Guatemala"
+            - option "Guernsey"
+            - option "Guinea"
+            - option "Guinea-Bissau"
+            - option "Guyana"
+            - option "Haiti"
+            - option "Heard Island and McDonald Islands"
+            - option "Honduras"
+            - option "Hong Kong"
+            - option "Hungary"
+            - option "Iceland"
+            - option "India"
+            - option "Indonesia"
+            - option "Iran"
+            - option "Iraq"
+            - option "Ireland"
+            - option "Isle of Man"
+            - option "Israel"
+            - option "Italy"
+            - option "Jamaica"
+            - option "Japan"
+            - option "Jersey"
+            - option "Jordan"
+            - option "Kazakhstan"
+            - option "Kenya"
+            - option "Kiribati"
+            - option "Kosovo"
+            - option "Kuwait"
+            - option "Kyrgyzstan"
+            - option "Laos"
+            - option "Latvia"
+            - option "Lebanon"
+            - option "Lesotho"
+            - option "Liberia"
+            - option "Libya"
+            - option "Liechtenstein"
+            - option "Lithuania"
+            - option "Luxembourg"
+            - option "Macau"
+            - option "Macedonia (FYROM)"
+            - option "Madagascar"
+            - option "Malawi"
+            - option "Malaysia"
+            - option "Maldives"
+            - option "Mali"
+            - option "Malta"
+            - option "Marshall Islands"
+            - option "Martinique"
+            - option "Mauritania"
+            - option "Mauritius"
+            - option "Mayotte"
+            - option "Mexico"
+            - option "Micronesia"
+            - option "Moldova"
+            - option "Monaco"
+            - option "Mongolia"
+            - option "Montenegro"
+            - option "Montserrat"
+            - option "Morocco"
+            - option "Mozambique"
+            - option "Myanmar (Burma)"
+            - option "Namibia"
+            - option "Nauru"
+            - option "Nepal"
+            - option "Netherlands"
+            - option "Netherlands Antilles"
+            - option "New Caledonia"
+            - option "New Zealand"
+            - option "Nicaragua"
+            - option "Niger"
+            - option "Nigeria"
+            - option "Niue"
+            - option "Norfolk Island"
+            - option "North Korea"
+            - option "Northern Mariana Islands"
+            - option "Norway"
+            - option "Oman"
+            - option "Pakistan"
+            - option "Palau"
+            - option "Palestine"
+            - option "Panama"
+            - option "Papua New Guinea"
+            - option "Paraguay"
+            - option "Peru"
+            - option "Philippines"
+            - option "Pitcairn Islands"
+            - option "Poland"
+            - option "Portugal"
+            - option "Puerto Rico"
+            - option "Qatar"
+            - option "Réunion"
+            - option "Romania"
+            - option "Russia"
+            - option "Rwanda"
+            - option "Saint Barthélemy"
+            - option "Saint Helena"
+            - option "Saint Kitts and Nevis"
+            - option "Saint Lucia"
+            - option "Saint Martin"
+            - option "Saint Pierre and Miquelon"
+            - option "Saint Vincent and the Grenadines"
+            - option "Samoa"
+            - option "San Marino"
+            - option "Sao Tome and Principe"
+            - option "Saudi Arabia"
+            - option "Senegal"
+            - option "Serbia"
+            - option "Seychelles"
+            - option "Sierra Leone"
+            - option "Singapore"
+            - option "Sint Maarten"
+            - option "Slovakia"
+            - option "Slovenia"
+            - option "Solomon Islands"
+            - option "Somalia"
+            - option "South Africa"
+            - option "South Georgia and the South Sandwich Islands"
+            - option "South Korea"
+            - option "South Sudan"
+            - option "Spain"
+            - option "Sri Lanka"
+            - option "Sudan"
+            - option "Suriname"
+            - option "Svalbard and Jan Mayen"
+            - option "Swaziland"
+            - option "Sweden"
+            - option "Switzerland"
+            - option "Syria"
+            - option "Taiwan"
+            - option "Tajikistan"
+            - option "Tanzania"
+            - option "Thailand"
+            - option "Togo"
+            - option "Tokelau"
+            - option "Tonga"
+            - option "Trinidad and Tobago"
+            - option "Tunisia"
+            - option "Türkiye"
+            - option "Turkmenistan"
+            - option "Turks and Caicos Islands"
+            - option "Tuvalu"
+            - option "U.S. Virgin Islands"
+            - option "Uganda"
+            - option "Ukraine"
+            - option "United Arab Emirates"
+            - option "United Kingdom"
+            - option "United States"
+            - option "United States Minor Outlying Islands"
+            - option "Uruguay"
+            - option "Uzbekistan"
+            - option "Vanuatu"
+            - option "Vatican City"
+            - option "Venezuela"
+            - option "Vietnam"
+            - option "Wallis and Futuna"
+            - option "Western Sahara"
+            - option "Yemen"
+            - option "Zambia"
+            - option "Zimbabwe"
+          - button "SUBMIT" [ref=e1148] [cursor=pointer]
+        - paragraph [ref=e1149]:
+          - text: By submitting this form, I consent to receive marketing emails from the LF and its projects regarding their events, training, research, developments, and related announcements. I understand that I can unsubscribe at any time using the links in the footers of the emails I receive.
+          - link "Privacy Policy" [ref=e1150] [cursor=pointer]:
+            - /url: https://www.linuxfoundation.org/privacy/
+          - text: .
+      - list [ref=e1152]:
+        - listitem [ref=e1153]:
+          - link "Facebook" [ref=e1154] [cursor=pointer]:
+            - /url: https://www.facebook.com/pytorch
+            - img "Facebook" [ref=e1155]
+        - listitem [ref=e1157]:
+          - link "X" [ref=e1158] [cursor=pointer]:
+            - /url: https://twitter.com/pytorch
+            - img "X" [ref=e1159]
+        - listitem [ref=e1161]:
+          - link "YouTube" [ref=e1162] [cursor=pointer]:
+            - /url: https://www.youtube.com/pytorch
+            - img "YouTube" [ref=e1163]
+        - listitem [ref=e1165]:
+          - link "LinkedIn" [ref=e1166] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/pytorch
+            - img "LinkedIn" [ref=e1167]
+        - listitem [ref=e1172]:
+          - link "Slack" [ref=e1173] [cursor=pointer]:
+            - /url: https://pytorch.slack.com
+            - img "Slack" [ref=e1174]
+        - listitem [ref=e1175]:
+          - link "WeChat" [ref=e1176] [cursor=pointer]:
+            - /url: https://pytorch.org/wechat
+            - img "WeChat" [ref=e1177]
+      - paragraph [ref=e1180]:
+        - text: © PyTorch. Copyright © The Linux Foundation®. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For more information, including terms of use, privacy policy, and trademark usage, please see our
+        - link "Policies" [ref=e1181] [cursor=pointer]:
+          - /url: https://www.linuxfoundation.org/legal/policies
+        - text: page.
+        - link "Trademark Usage" [ref=e1182] [cursor=pointer]:
+          - /url: https://www.linuxfoundation.org/trademark-usage
+        - text: .
+        - link "Privacy Policy" [ref=e1183] [cursor=pointer]:
+          - /url: http://www.linuxfoundation.org/privacy
+        - text: .

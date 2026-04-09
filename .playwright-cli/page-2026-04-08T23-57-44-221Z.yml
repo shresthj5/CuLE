@@ -1,0 +1,565 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "Logo" [ref=e6] [cursor=pointer]:
+            - /url: contents.html
+            - img "Logo" [ref=e7]
+          - search [ref=e8]:
+            - textbox "Search docs" [ref=e10]
+        - navigation "Navigation menu" [ref=e11]:
+          - list [ref=e12]:
+            - listitem [ref=e13]:
+              - link " 1. NVIDIA Ampere GPU Architecture Tuning Guide" [expanded] [ref=e14] [cursor=pointer]:
+                - /url: "#"
+                - button "" [ref=e15]
+                - text: 1. NVIDIA Ampere GPU Architecture Tuning Guide
+              - list [ref=e16]:
+                - listitem [ref=e17]:
+                  - link "1.1. NVIDIA Ampere GPU Architecture" [ref=e18] [cursor=pointer]:
+                    - /url: "#nvidia-ampere-gpu-architecture"
+                - listitem [ref=e19]:
+                  - link "1.2. CUDA Best Practices" [ref=e20] [cursor=pointer]:
+                    - /url: "#cuda-best-practices"
+                - listitem [ref=e21]:
+                  - link "1.3. Application Compatibility" [ref=e22] [cursor=pointer]:
+                    - /url: "#application-compatibility"
+                - listitem [ref=e23]:
+                  - link " 1.4. NVIDIA Ampere GPU Architecture Tuning" [ref=e24] [cursor=pointer]:
+                    - /url: "#nvidia-ampere-gpu-architecture-tuning"
+                    - button "" [ref=e25]
+                    - text: 1.4. NVIDIA Ampere GPU Architecture Tuning
+                  - text:  
+            - listitem [ref=e26]:
+              - link "2. Revision History" [ref=e27] [cursor=pointer]:
+                - /url: "#revision-history"
+            - listitem [ref=e28]:
+              - link " 3. Notices" [ref=e29] [cursor=pointer]:
+                - /url: "#notices"
+                - button "" [ref=e30]
+                - text: 3. Notices
+    - generic [ref=e31]:
+      - text: 
+      - generic [ref=e33]:
+        - navigation "Page navigation" [ref=e34]:
+          - list [ref=e35]:
+            - listitem [ref=e36]:
+              - link "" [ref=e37] [cursor=pointer]:
+                - /url: ../index.html
+              - text: »
+            - listitem [ref=e38]: 1. NVIDIA Ampere GPU Architecture Tuning Guide
+            - listitem
+            - listitem [ref=e39]:
+              - text: v12.3 |
+              - link "PDF" [ref=e40] [cursor=pointer]:
+                - /url: ../pdf/Ampere_Tuning_Guide.pdf
+              - text: "|"
+              - link "Archive" [ref=e41] [cursor=pointer]:
+                - /url: https://developer.nvidia.com/cuda-toolkit-archive
+          - separator [ref=e42]
+        - main [ref=e43]:
+          - generic [ref=e44]:
+            - paragraph [ref=e45]: Tuning CUDA Applications for NVIDIA Ampere GPU Architecture
+            - paragraph [ref=e46]: The programming guide for tuning CUDA Applications for GPUs based on the NVIDIA Ampere GPU Architecture.
+            - generic [ref=e47]:
+              - heading "1. NVIDIA Ampere GPU Architecture Tuning Guide " [level=1] [ref=e48]:
+                - text: 1. NVIDIA Ampere GPU Architecture Tuning Guide
+                - link "" [ref=e49] [cursor=pointer]:
+                  - /url: "#nvidia-ampere-gpu-architecture-tuning-guide"
+              - generic [ref=e50]:
+                - heading "1.1. NVIDIA Ampere GPU Architecture " [level=2] [ref=e51]:
+                  - text: 1.1. NVIDIA Ampere GPU Architecture
+                  - link "" [ref=e52] [cursor=pointer]:
+                    - /url: "#nvidia-ampere-gpu-architecture"
+                - paragraph [ref=e53]:
+                  - text: The NVIDIA Ampere GPU architecture is NVIDIA’s latest architecture for CUDA compute applications. The NVIDIA Ampere GPU architecture retains and extends the same CUDA programming model provided by previous NVIDIA GPU architectures such as Turing and Volta, and applications that follow the best practices for those architectures should typically see speedups on the NVIDIA A100 GPU without any code changes. This guide summarizes the ways that an application can be fine-tuned to gain additional speedups by leveraging the NVIDIA Ampere GPU architecture’s features.
+                  - link "1" [ref=e54] [cursor=pointer]:
+                    - /url: "#fn1"
+                - paragraph [ref=e55]:
+                  - text: For further details on the programming features discussed in this guide, please refer to the
+                  - link "CUDA C++ Programming Guide" [ref=e56] [cursor=pointer]:
+                    - /url: https://docs.nvidia.com/cuda/cuda-c-programming-guide/
+                  - text: .
+              - generic [ref=e57]:
+                - heading "1.2. CUDA Best Practices " [level=2] [ref=e58]:
+                  - text: 1.2. CUDA Best Practices
+                  - link "" [ref=e59] [cursor=pointer]:
+                    - /url: "#cuda-best-practices"
+                - paragraph [ref=e60]:
+                  - text: The performance guidelines and best practices described in the
+                  - link "CUDA C++ Programming Guide" [ref=e61] [cursor=pointer]:
+                    - /url: https://docs.nvidia.com/cuda/cuda-c-programming-guide/
+                  - text: and the
+                  - link "CUDA C++ Best Practices Guide" [ref=e62] [cursor=pointer]:
+                    - /url: https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/
+                  - text: apply to all CUDA-capable GPU architectures. Programmers must primarily focus on following those recommendations to achieve the best performance.
+                - paragraph [ref=e63]: "The high-priority recommendations from those guides are as follows:"
+                - list [ref=e64]:
+                  - listitem [ref=e65]:
+                    - paragraph [ref=e66]: Find ways to parallelize sequential code.
+                  - listitem [ref=e67]:
+                    - paragraph [ref=e68]: Minimize data transfers between the host and the device.
+                  - listitem [ref=e69]:
+                    - paragraph [ref=e70]: Adjust kernel launch configuration to maximize device utilization.
+                  - listitem [ref=e71]:
+                    - paragraph [ref=e72]: Ensure global memory accesses are coalesced.
+                  - listitem [ref=e73]:
+                    - paragraph [ref=e74]: Minimize redundant accesses to global memory whenever possible.
+                  - listitem [ref=e75]:
+                    - paragraph [ref=e76]: Avoid long sequences of diverged execution by threads within the same warp.
+              - generic [ref=e77]:
+                - heading "1.3. Application Compatibility " [level=2] [ref=e78]:
+                  - text: 1.3. Application Compatibility
+                  - link "" [ref=e79] [cursor=pointer]:
+                    - /url: "#application-compatibility"
+                - paragraph [ref=e80]:
+                  - text: Before addressing specific performance tuning issues covered in this guide, refer to the
+                  - link "NVIDIA Ampere GPU Architecture Compatibility Guide for CUDA Applications" [ref=e81] [cursor=pointer]:
+                    - /url: https://docs.nvidia.com/cuda/ampere-compatibility-guide/
+                  - text: to ensure that your application is compiled in a way that is compatible with the NVIDIA Ampere GPU Architecture.
+              - generic [ref=e82]:
+                - heading "1.4. NVIDIA Ampere GPU Architecture Tuning " [level=2] [ref=e83]:
+                  - text: 1.4. NVIDIA Ampere GPU Architecture Tuning
+                  - link "" [ref=e84] [cursor=pointer]:
+                    - /url: "#nvidia-ampere-gpu-architecture-tuning"
+                - generic [ref=e85]:
+                  - heading "1.4.1. Streaming Multiprocessor " [level=3] [ref=e86]:
+                    - text: 1.4.1. Streaming Multiprocessor
+                    - link "" [ref=e87] [cursor=pointer]:
+                      - /url: "#streaming-multiprocessor"
+                  - paragraph [ref=e88]: The NVIDIA Ampere GPU architecture’s Streaming Multiprocessor (SM) provides the following improvements over Volta and Turing.
+                  - generic [ref=e89]:
+                    - heading "1.4.1.1. Occupancy " [level=4] [ref=e90]:
+                      - text: 1.4.1.1. Occupancy
+                      - link "" [ref=e91] [cursor=pointer]:
+                        - /url: "#occupancy"
+                    - paragraph [ref=e92]:
+                      - text: The maximum number of concurrent warps per SM remains the same as in Volta (i.e., 64) for compute capability 8.0, while for compute capability 8.6 it is 48. Other
+                      - link "factors influencing warp occupancy" [ref=e93] [cursor=pointer]:
+                        - /url: https://docs.nvidia.com/nsight-compute/NsightCompute/index.html#occupancy-calculator
+                      - text: "are:"
+                    - list [ref=e94]:
+                      - listitem [ref=e95]:
+                        - paragraph [ref=e96]: The register file size is 64K 32-bit registers per SM.
+                      - listitem [ref=e97]:
+                        - paragraph [ref=e98]: The maximum number of registers per thread is 255.
+                      - listitem [ref=e99]:
+                        - paragraph [ref=e100]: The maximum number of thread blocks per SM is 32 for devices of compute capability 8.0 (i.e., A100 GPUs) and 16 for GPUs with compute capability 8.6.
+                      - listitem [ref=e101]:
+                        - paragraph [ref=e102]: For devices of compute capability 8.0 (i.e., A100 GPUs) shared memory capacity per SM is 164 KB, a 71% increase compared to V100’s capacity of 96 KB. For GPUs with compute capability 8.6, shared memory capacity per SM is 100 KB.
+                      - listitem [ref=e103]:
+                        - paragraph [ref=e104]: For devices of compute capability 8.0 (i.e., A100 GPUs) the maximum shared memory per thread block is 163 KB. For GPUs with compute capability 8.6 maximum shared memory per thread block is 99 KB.
+                    - paragraph [ref=e105]: Overall, developers can expect similar occupancy as on Volta without changes to their application.
+                  - generic [ref=e106]:
+                    - heading "1.4.1.2. Asynchronous Data Copy from Global Memory to Shared Memory " [level=4] [ref=e107]:
+                      - text: 1.4.1.2. Asynchronous Data Copy from Global Memory to Shared Memory
+                      - link "" [ref=e108] [cursor=pointer]:
+                        - /url: "#asynchronous-data-copy-from-global-memory-to-shared-memory"
+                    - paragraph [ref=e109]:
+                      - text: The NVIDIA Ampere GPU architecture adds hardware acceleration for copying data from global memory to shared memory. These copy instructions are asynchronous, with respect to computation and allow users to explicitly control overlap of compute with data movement from global memory into the SM. These instructions also avoid using extra registers for memory copies and can also bypass the L1 cache. This new feature is exposed via the
+                      - code [ref=e110]: pipeline
+                      - text: API in CUDA. For more information please refer to the section on Async Copy in the
+                      - link "CUDA C++ Programming Guide" [ref=e111] [cursor=pointer]:
+                        - /url: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#async-copy
+                      - text: .
+                  - generic [ref=e112]:
+                    - heading "1.4.1.3. Hardware Acceleration for Split Arrive/Wait Barrier " [level=4] [ref=e113]:
+                      - text: 1.4.1.3. Hardware Acceleration for Split Arrive/Wait Barrier
+                      - link "" [ref=e114] [cursor=pointer]:
+                        - /url: "#hardware-acceleration-for-split-arrive-wait-barrier"
+                    - paragraph [ref=e115]:
+                      - text: The NVIDIA Ampere GPU architecture adds hardware acceleration for a split arrive/wait barrier in shared memory. These barriers can be used to implement fine grained thread controls, producer-consumer computation pipeline and divergence code patterns in CUDA. These barriers can also be used alongside the asynchronous copy. For more information on the Arrive/Wait Barriers refer to the Arrive/Wait Barrier section in the
+                      - link "CUDA C++ Programming Guide" [ref=e116] [cursor=pointer]:
+                        - /url: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#aw-barrier
+                      - text: .
+                  - generic [ref=e117]:
+                    - heading "1.4.1.4. Warp level support for Reduction Operations " [level=4] [ref=e118]:
+                      - text: 1.4.1.4. Warp level support for Reduction Operations
+                      - link "" [ref=e119] [cursor=pointer]:
+                        - /url: "#warp-level-support-for-reduction-operations"
+                    - paragraph [ref=e120]:
+                      - text: The NVIDIA Ampere GPU architecture adds native support for warp wide reduction operations for 32-bit signed and unsigned integer operands. The warp wide reduction operations support arithmetic
+                      - code [ref=e121]: add
+                      - text: ","
+                      - code [ref=e122]: min
+                      - text: ", and"
+                      - code [ref=e123]: max
+                      - text: operations on 32-bit signed and unsigned integers and bitwise
+                      - code [ref=e124]: and
+                      - text: ","
+                      - code [ref=e125]: or
+                      - text: and
+                      - code [ref=e126]: xor
+                      - text: operations on 32-bit unsigned integers.
+                    - paragraph [ref=e127]:
+                      - text: For more details on the new warp wide reduction operations refer to Warp Reduce Functions in the
+                      - link "CUDA C++ Programming Guide" [ref=e128] [cursor=pointer]:
+                        - /url: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#warp-reduce-functions
+                      - text: .
+                  - generic [ref=e129]:
+                    - heading "1.4.1.5. Improved Tensor Core Operations " [level=4] [ref=e130]:
+                      - text: 1.4.1.5. Improved Tensor Core Operations
+                      - link "" [ref=e131] [cursor=pointer]:
+                        - /url: "#improved-tensor-core-operations"
+                    - paragraph [ref=e132]: "The NVIDIA Ampere GPU architecture includes new Third Generation Tensor Cores that are more powerful than the Tensor Cores used in Volta and Turing SMs. The new Tensor Cores use a larger base matrix size and add powerful new math modes including:"
+                    - list [ref=e133]:
+                      - listitem [ref=e134]:
+                        - paragraph [ref=e135]: Support for FP64 Tensor Core, using new DMMA instructions.
+                      - listitem [ref=e136]:
+                        - paragraph [ref=e137]: Support for Bfloat16 Tensor Core, through HMMA instructions. BFloat16 format is especially effective for DL training scenarios. Bfloat16 provides 8-bit exponent i.e., same range as FP32, 7-bit mantissa and 1 sign-bit.
+                      - listitem [ref=e138]:
+                        - paragraph [ref=e139]: Support for TF32 Tensor Core, through HMMA instructions. TF32 is a new 19-bit Tensor Core format that can be easily integrated into programs for more accurate DL training than 16-bit HMMA formats. TF32 provides 8-bit exponent, 10-bit mantissa and 1 sign-bit.
+                      - listitem [ref=e140]:
+                        - paragraph [ref=e141]:
+                          - text: Support for bitwise
+                          - code [ref=e142]: AND
+                          - text: along with bitwise
+                          - code [ref=e143]: XOR
+                          - text: which was introduced in Turing, through BMMA instructions.
+                    - paragraph [ref=e144]: The following table presents the evolution of matrix instruction sizes and supported data types for Tensor Cores across different GPU architecture generations.
+                    - table [ref=e146]:
+                      - rowgroup [ref=e153]:
+                        - row "Instruction GPU Architecture Input Matrix format Output Accumulator format Matrix Instruction Size (MxNxK)" [ref=e154]:
+                          - columnheader "Instruction" [ref=e155]:
+                            - paragraph [ref=e156]: Instruction
+                          - columnheader "GPU Architecture" [ref=e157]:
+                            - paragraph [ref=e158]: GPU Architecture
+                          - columnheader "Input Matrix format" [ref=e159]:
+                            - paragraph [ref=e160]: Input Matrix format
+                          - columnheader "Output Accumulator format" [ref=e161]:
+                            - paragraph [ref=e162]: Output Accumulator format
+                          - columnheader "Matrix Instruction Size (MxNxK)" [ref=e163]:
+                            - paragraph [ref=e164]: Matrix Instruction Size (MxNxK)
+                      - rowgroup [ref=e165]:
+                        - row "HMMA (16-bit precision) NVIDIA Volta Architecture FP16 FP16 / FP32 8x8x4" [ref=e166]:
+                          - cell "HMMA (16-bit precision)" [ref=e167]:
+                            - paragraph [ref=e168]: HMMA (16-bit precision)
+                          - cell "NVIDIA Volta Architecture" [ref=e169]:
+                            - paragraph [ref=e170]: NVIDIA Volta Architecture
+                          - cell "FP16" [ref=e171]:
+                            - paragraph [ref=e172]: FP16
+                          - cell "FP16 / FP32" [ref=e173]:
+                            - paragraph [ref=e174]: FP16 / FP32
+                          - cell "8x8x4" [ref=e175]:
+                            - paragraph [ref=e176]: 8x8x4
+                        - row "NVIDIA Turing Architecture FP16 FP16 / FP32 8x8x4 / 16x8x8 / 16x8x16" [ref=e177]:
+                          - cell "NVIDIA Turing Architecture" [ref=e178]:
+                            - paragraph [ref=e179]: NVIDIA Turing Architecture
+                          - cell "FP16" [ref=e180]:
+                            - paragraph [ref=e181]: FP16
+                          - cell "FP16 / FP32" [ref=e182]:
+                            - paragraph [ref=e183]: FP16 / FP32
+                          - cell "8x8x4 / 16x8x8 / 16x8x16" [ref=e184]:
+                            - paragraph [ref=e185]: 8x8x4 / 16x8x8 / 16x8x16
+                        - row "NVIDIA Ampere Architecture FP16 / BFloat16 FP16 / FP32 (BFloat16 only supports FP32 as accumulator) 16x8x8 / 16x8x16" [ref=e186]:
+                          - cell "NVIDIA Ampere Architecture" [ref=e187]:
+                            - paragraph [ref=e188]: NVIDIA Ampere Architecture
+                          - cell "FP16 / BFloat16" [ref=e189]:
+                            - paragraph [ref=e190]: FP16 / BFloat16
+                          - cell "FP16 / FP32 (BFloat16 only supports FP32 as accumulator)" [ref=e191]:
+                            - paragraph [ref=e192]: FP16 / FP32 (BFloat16 only supports FP32 as accumulator)
+                          - cell "16x8x8 / 16x8x16" [ref=e193]:
+                            - paragraph [ref=e194]: 16x8x8 / 16x8x16
+                        - row "HMMA (19-bit precision) NVIDIA Volta Architecture N/A N/A N/A" [ref=e195]:
+                          - cell "HMMA (19-bit precision)" [ref=e196]:
+                            - paragraph [ref=e197]: HMMA (19-bit precision)
+                          - cell "NVIDIA Volta Architecture" [ref=e198]:
+                            - paragraph [ref=e199]: NVIDIA Volta Architecture
+                          - cell "N/A" [ref=e200]:
+                            - paragraph [ref=e201]: N/A
+                          - cell "N/A" [ref=e202]:
+                            - paragraph [ref=e203]: N/A
+                          - cell "N/A" [ref=e204]:
+                            - paragraph [ref=e205]: N/A
+                        - row "NVIDIA Turing Architecture N/A N/A N/A" [ref=e206]:
+                          - cell "NVIDIA Turing Architecture" [ref=e207]:
+                            - paragraph [ref=e208]: NVIDIA Turing Architecture
+                          - cell "N/A" [ref=e209]:
+                            - paragraph [ref=e210]: N/A
+                          - cell "N/A" [ref=e211]:
+                            - paragraph [ref=e212]: N/A
+                          - cell "N/A" [ref=e213]:
+                            - paragraph [ref=e214]: N/A
+                        - row "NVIDIA Ampere Architecture TF32 (19-bits) FP32 16x8x4" [ref=e215]:
+                          - cell "NVIDIA Ampere Architecture" [ref=e216]:
+                            - paragraph [ref=e217]: NVIDIA Ampere Architecture
+                          - cell "TF32 (19-bits)" [ref=e218]:
+                            - paragraph [ref=e219]: TF32 (19-bits)
+                          - cell "FP32" [ref=e220]:
+                            - paragraph [ref=e221]: FP32
+                          - cell "16x8x4" [ref=e222]:
+                            - paragraph [ref=e223]: 16x8x4
+                        - row "IMMA (Integer MMA) NVIDIA Volta Architecture N/A N/A N/A" [ref=e224]:
+                          - cell "IMMA (Integer MMA)" [ref=e225]:
+                            - paragraph [ref=e226]: IMMA (Integer MMA)
+                          - cell "NVIDIA Volta Architecture" [ref=e227]:
+                            - paragraph [ref=e228]: NVIDIA Volta Architecture
+                          - cell "N/A" [ref=e229]:
+                            - paragraph [ref=e230]: N/A
+                          - cell "N/A" [ref=e231]:
+                            - paragraph [ref=e232]: N/A
+                          - cell "N/A" [ref=e233]:
+                            - paragraph [ref=e234]: N/A
+                        - row "NVIDIA Turing Architecture unsigned char/signed char (8-bit precision) int32 8x8x16" [ref=e235]:
+                          - cell "NVIDIA Turing Architecture" [ref=e236]:
+                            - paragraph [ref=e237]: NVIDIA Turing Architecture
+                          - cell "unsigned char/signed char (8-bit precision)" [ref=e238]:
+                            - paragraph [ref=e239]: unsigned char/signed char (8-bit precision)
+                          - cell "int32" [ref=e240]:
+                            - paragraph [ref=e241]: int32
+                          - cell "8x8x16" [ref=e242]:
+                            - paragraph [ref=e243]: 8x8x16
+                        - row "NVIDIA Ampere Architecture unsigned char/signed char (8-bit precision) int32 8x8x16 / 16x8x16 / 16x8x32" [ref=e244]:
+                          - cell "NVIDIA Ampere Architecture" [ref=e245]:
+                            - paragraph [ref=e246]: NVIDIA Ampere Architecture
+                          - cell "unsigned char/signed char (8-bit precision)" [ref=e247]:
+                            - paragraph [ref=e248]: unsigned char/signed char (8-bit precision)
+                          - cell "int32" [ref=e249]:
+                            - paragraph [ref=e250]: int32
+                          - cell "8x8x16 / 16x8x16 / 16x8x32" [ref=e251]:
+                            - paragraph [ref=e252]: 8x8x16 / 16x8x16 / 16x8x32
+                        - row "IMMA (Integer sub-byte MMA) NVIDIA Volta Architecture N/A N/A N/A" [ref=e253]:
+                          - cell "IMMA (Integer sub-byte MMA)" [ref=e254]:
+                            - paragraph [ref=e255]: IMMA (Integer sub-byte MMA)
+                          - cell "NVIDIA Volta Architecture" [ref=e256]:
+                            - paragraph [ref=e257]: NVIDIA Volta Architecture
+                          - cell "N/A" [ref=e258]:
+                            - paragraph [ref=e259]: N/A
+                          - cell "N/A" [ref=e260]:
+                            - paragraph [ref=e261]: N/A
+                          - cell "N/A" [ref=e262]:
+                            - paragraph [ref=e263]: N/A
+                        - row "NVIDIA Turing Architecture unsigned u4/signed u4 (4-bit precision) int32 8x8x32" [ref=e264]:
+                          - cell "NVIDIA Turing Architecture" [ref=e265]:
+                            - paragraph [ref=e266]: NVIDIA Turing Architecture
+                          - cell "unsigned u4/signed u4 (4-bit precision)" [ref=e267]:
+                            - paragraph [ref=e268]: unsigned u4/signed u4 (4-bit precision)
+                          - cell "int32" [ref=e269]:
+                            - paragraph [ref=e270]: int32
+                          - cell "8x8x32" [ref=e271]:
+                            - paragraph [ref=e272]: 8x8x32
+                        - row "NVIDIA Ampere Architecture unsigned u4/signed u4 (4-bit precision) int32 8x8x32 / 16x8x32 / 16x8x64" [ref=e273]:
+                          - cell "NVIDIA Ampere Architecture" [ref=e274]:
+                            - paragraph [ref=e275]: NVIDIA Ampere Architecture
+                          - cell "unsigned u4/signed u4 (4-bit precision)" [ref=e276]:
+                            - paragraph [ref=e277]: unsigned u4/signed u4 (4-bit precision)
+                          - cell "int32" [ref=e278]:
+                            - paragraph [ref=e279]: int32
+                          - cell "8x8x32 / 16x8x32 / 16x8x64" [ref=e280]:
+                            - paragraph [ref=e281]: 8x8x32 / 16x8x32 / 16x8x64
+                        - row "BMMA (Binary MMA) NVIDIA Volta Architecture N/A N/A N/A" [ref=e282]:
+                          - cell "BMMA (Binary MMA)" [ref=e283]:
+                            - paragraph [ref=e284]: BMMA (Binary MMA)
+                          - cell "NVIDIA Volta Architecture" [ref=e285]:
+                            - paragraph [ref=e286]: NVIDIA Volta Architecture
+                          - cell "N/A" [ref=e287]:
+                            - paragraph [ref=e288]: N/A
+                          - cell "N/A" [ref=e289]:
+                            - paragraph [ref=e290]: N/A
+                          - cell "N/A" [ref=e291]:
+                            - paragraph [ref=e292]: N/A
+                        - row "NVIDIA Turing Architecture single bit int32 8x8x128" [ref=e293]:
+                          - cell "NVIDIA Turing Architecture" [ref=e294]:
+                            - paragraph [ref=e295]: NVIDIA Turing Architecture
+                          - cell "single bit" [ref=e296]:
+                            - paragraph [ref=e297]: single bit
+                          - cell "int32" [ref=e298]:
+                            - paragraph [ref=e299]: int32
+                          - cell "8x8x128" [ref=e300]:
+                            - paragraph [ref=e301]: 8x8x128
+                        - row "NVIDIA Ampere Architecture single bit int32 8x8x128 / 16x8x128 / 16x8x256" [ref=e302]:
+                          - cell "NVIDIA Ampere Architecture" [ref=e303]:
+                            - paragraph [ref=e304]: NVIDIA Ampere Architecture
+                          - cell "single bit" [ref=e305]:
+                            - paragraph [ref=e306]: single bit
+                          - cell "int32" [ref=e307]:
+                            - paragraph [ref=e308]: int32
+                          - cell "8x8x128 / 16x8x128 / 16x8x256" [ref=e309]:
+                            - paragraph [ref=e310]: 8x8x128 / 16x8x128 / 16x8x256
+                        - row "DMMA (64-bit precision) NVIDIA Volta Architecture N/A N/A N/A" [ref=e311]:
+                          - cell "DMMA (64-bit precision)" [ref=e312]:
+                            - paragraph [ref=e313]: DMMA (64-bit precision)
+                          - cell "NVIDIA Volta Architecture" [ref=e314]:
+                            - paragraph [ref=e315]: NVIDIA Volta Architecture
+                          - cell "N/A" [ref=e316]:
+                            - paragraph [ref=e317]: N/A
+                          - cell "N/A" [ref=e318]:
+                            - paragraph [ref=e319]: N/A
+                          - cell "N/A" [ref=e320]:
+                            - paragraph [ref=e321]: N/A
+                        - row "NVIDIA Turing Architecture N/A N/A N/A" [ref=e322]:
+                          - cell "NVIDIA Turing Architecture" [ref=e323]:
+                            - paragraph [ref=e324]: NVIDIA Turing Architecture
+                          - cell "N/A" [ref=e325]:
+                            - paragraph [ref=e326]: N/A
+                          - cell "N/A" [ref=e327]:
+                            - paragraph [ref=e328]: N/A
+                          - cell "N/A" [ref=e329]:
+                            - paragraph [ref=e330]: N/A
+                        - row "NVIDIA Ampere Architecture FP64 FP64 8x8x4" [ref=e331]:
+                          - cell "NVIDIA Ampere Architecture" [ref=e332]:
+                            - paragraph [ref=e333]: NVIDIA Ampere Architecture
+                          - cell "FP64" [ref=e334]:
+                            - paragraph [ref=e335]: FP64
+                          - cell "FP64" [ref=e336]:
+                            - paragraph [ref=e337]: FP64
+                          - cell "8x8x4" [ref=e338]:
+                            - paragraph [ref=e339]: 8x8x4
+                    - paragraph [ref=e340]:
+                      - text: For more details on the new Tensor Core operations refer to the Warp Matrix Multiply section in the
+                      - link "CUDA C++ Programming Guide" [ref=e341] [cursor=pointer]:
+                        - /url: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#wmma
+                      - text: .
+                  - generic [ref=e342]:
+                    - heading "1.4.1.6. Improved FP32 throughput " [level=4] [ref=e343]:
+                      - text: 1.4.1.6. Improved FP32 throughput
+                      - link "" [ref=e344] [cursor=pointer]:
+                        - /url: "#improved-fp32-throughput"
+                    - paragraph [ref=e345]: Devices of compute capability 8.6 have 2x more FP32 operations per cycle per SM than devices of compute capability 8.0. While a binary compiled for 8.0 will run as is on 8.6, it is recommended to compile explicitly for 8.6 to benefit from the increased FP32 throughput.
+                - generic [ref=e346]:
+                  - heading "1.4.2. Memory System " [level=3] [ref=e347]:
+                    - text: 1.4.2. Memory System
+                    - link "" [ref=e348] [cursor=pointer]:
+                      - /url: "#memory-system"
+                  - generic [ref=e349]:
+                    - heading "1.4.2.1. Increased Memory Capacity and High Bandwidth Memory " [level=4] [ref=e350]:
+                      - text: 1.4.2.1. Increased Memory Capacity and High Bandwidth Memory
+                      - link "" [ref=e351] [cursor=pointer]:
+                        - /url: "#increased-memory-capacity-and-high-bandwidth-memory"
+                    - paragraph [ref=e352]: The NVIDIA A100 GPU increases the HBM2 memory capacity from 32 GB in V100 GPU to 40 GB in A100 GPU. Along with the increased memory capacity, the bandwidth is increased by 72%, from 900 GB/s on Volta V100 to 1550 GB/s on A100.
+                  - generic [ref=e353]:
+                    - heading "1.4.2.2. Increased L2 capacity and L2 Residency Controls " [level=4] [ref=e354]:
+                      - text: 1.4.2.2. Increased L2 capacity and L2 Residency Controls
+                      - link "" [ref=e355] [cursor=pointer]:
+                        - /url: "#increased-l2-capacity-and-l2-residency-controls"
+                    - paragraph [ref=e356]:
+                      - text: The NVIDIA Ampere GPU architecture increases the capacity of the L2 cache to 40 MB in Tesla A100, which is 7x larger than Tesla V100. Along with the increased capacity, the bandwidth of the L2 cache to the SMs is also increased. The NVIDIA Ampere GPU architecture allows CUDA users to control the persistence of data in L2 cache. For more information on the persistence of data in L2 cache, refer to the section on managing L2 cache in the
+                      - link "CUDA C++ Programming Guide" [ref=e357] [cursor=pointer]:
+                        - /url: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#L2_access_intro
+                      - text: .
+                  - generic [ref=e358]:
+                    - heading "1.4.2.3. Unified Shared Memory/L1/Texture Cache " [level=4] [ref=e359]:
+                      - text: 1.4.2.3. Unified Shared Memory/L1/Texture Cache
+                      - link "" [ref=e360] [cursor=pointer]:
+                        - /url: "#unified-shared-memory-l1-texture-cache"
+                    - paragraph [ref=e361]: The NVIDIA A100 GPU based on compute capability 8.0 increases the maximum capacity of the combined L1 cache, texture cache and shared memory to 192 KB, 50% larger than the L1 cache in NVIDIA V100 GPU. The combined L1 cache capacity for GPUs with compute capability 8.6 is 128 KB.
+                    - paragraph [ref=e362]:
+                      - text: In the NVIDIA Ampere GPU architecture, the portion of the L1 cache dedicated to shared memory (known as the
+                      - emphasis [ref=e363]: carveout
+                      - text: ) can be selected at runtime as in previous architectures such as Volta, using
+                      - code [ref=e364]: cudaFuncSetAttribute()
+                      - text: with the attribute
+                      - code [ref=e365]: cudaFuncAttributePreferredSharedMemoryCarveout
+                      - text: . The NVIDIA A100 GPU supports shared memory capacity of 0, 8, 16, 32, 64, 100, 132 or 164 KB per SM. GPUs with compute capability 8.6 support shared memory capacity of 0, 8, 16, 32, 64 or 100 KB per SM.
+                    - paragraph [ref=e366]:
+                      - text: CUDA reserves 1 KB of shared memory per thread block. Hence, the A100 GPU enables a single thread block to address up to 163 KB of shared memory and GPUs with compute capability 8.6 can address up to 99 KB of shared memory in a single thread block. To maintain architectural compatibility, static shared memory allocations remain limited to 48 KB, and an explicit opt-in is also required to enable dynamic allocations above this limit. See the
+                      - link "CUDA C++ Programming Guide" [ref=e367] [cursor=pointer]:
+                        - /url: https://docs.nvidia.com/cuda/cuda-c-programming-guide/
+                      - text: for details.
+                    - paragraph [ref=e368]: Like Volta, the NVIDIA Ampere GPU architecture combines the functionality of the L1 and texture caches into a unified L1/Texture cache which acts as a coalescing buffer for memory accesses, gathering up the data requested by the threads of a warp prior to delivery of that data to the warp. Another benefit of its union with shared memory, similar to Volta L1 is improvement in terms of both latency and bandwidth.
+                - generic [ref=e369]:
+                  - heading "1.4.3. Third Generation NVLink " [level=3] [ref=e370]:
+                    - text: 1.4.3. Third Generation NVLink
+                    - link "" [ref=e371] [cursor=pointer]:
+                      - /url: "#third-generation-nvlink"
+                  - paragraph [ref=e372]: The third generation of NVIDIA’s high-speed NVLink interconnect is implemented in A100 GPUs, which significantly enhances multi-GPU scalability, performance, and reliability with more links per GPU, much faster communication bandwidth, and improved error-detection and recovery features. The third generation NVLink has the same bi-directional data rate of 50 GB/s per link, but uses half the number of signal pairs to achieve this bandwidth. Therefore, the total number of links available is increased to twelve in A100, versus six in V100, yielding 600 GB/s bidirectional bandwidth versus 300 GB/s for V100.
+                  - paragraph [ref=e373]:
+                    - text: NVLink operates transparently within the existing CUDA model. Transfers between NVLink-connected endpoints are automatically routed through NVLink, rather than PCIe. The
+                    - code [ref=e374]: cudaDeviceEnablePeerAccess()
+                    - text: API call remains necessary to enable direct transfers (over either PCIe or NVLink) between GPUs. The
+                    - code [ref=e375]: cudaDeviceCanAccessPeer()
+                    - text: can be used to determine if peer access is possible between any pair of GPUs.
+                  - paragraph [ref=e376]: In the NVIDIA Ampere GPU architecture remote NVLINK accesses go through a Link TLB on the remote GPU. This Link TLB has a reach of 64 GB to the remote GPU’s memory. Applications with remote random accesses may want to constrain the remotely accessed region to 64 GB for each peer GPU.
+            - generic [ref=e377]:
+              - heading "2. Revision History " [level=1] [ref=e378]:
+                - text: 2. Revision History
+                - link "" [ref=e379] [cursor=pointer]:
+                  - /url: "#revision-history"
+              - paragraph [ref=e380]:
+                - strong [ref=e381]: Version 1.1
+              - list [ref=e382]:
+                - listitem [ref=e383]:
+                  - paragraph [ref=e384]: Initial Public Release
+                - listitem [ref=e385]:
+                  - paragraph [ref=e386]: Added support for compute capability 8.6
+            - generic [ref=e387]:
+              - heading "3. Notices " [level=1] [ref=e388]:
+                - text: 3. Notices
+                - link "" [ref=e389] [cursor=pointer]:
+                  - /url: "#notices"
+              - generic [ref=e390]:
+                - heading "3.1. Notice " [level=2] [ref=e391]:
+                  - text: 3.1. Notice
+                  - link "" [ref=e392] [cursor=pointer]:
+                    - /url: "#notice"
+                - paragraph [ref=e393]: This document is provided for information purposes only and shall not be regarded as a warranty of a certain functionality, condition, or quality of a product. NVIDIA Corporation (“NVIDIA”) makes no representations or warranties, expressed or implied, as to the accuracy or completeness of the information contained in this document and assumes no responsibility for any errors contained herein. NVIDIA shall have no liability for the consequences or use of such information or for any infringement of patents or other rights of third parties that may result from its use. This document is not a commitment to develop, release, or deliver any Material (defined below), code, or functionality.
+                - paragraph [ref=e394]: NVIDIA reserves the right to make corrections, modifications, enhancements, improvements, and any other changes to this document, at any time without notice.
+                - paragraph [ref=e395]: Customer should obtain the latest relevant information before placing orders and should verify that such information is current and complete.
+                - paragraph [ref=e396]: NVIDIA products are sold subject to the NVIDIA standard terms and conditions of sale supplied at the time of order acknowledgement, unless otherwise agreed in an individual sales agreement signed by authorized representatives of NVIDIA and customer (“Terms of Sale”). NVIDIA hereby expressly objects to applying any customer general terms and conditions with regards to the purchase of the NVIDIA product referenced in this document. No contractual obligations are formed either directly or indirectly by this document.
+                - paragraph [ref=e397]: NVIDIA products are not designed, authorized, or warranted to be suitable for use in medical, military, aircraft, space, or life support equipment, nor in applications where failure or malfunction of the NVIDIA product can reasonably be expected to result in personal injury, death, or property or environmental damage. NVIDIA accepts no liability for inclusion and/or use of NVIDIA products in such equipment or applications and therefore such inclusion and/or use is at customer’s own risk.
+                - paragraph [ref=e398]: "NVIDIA makes no representation or warranty that products based on this document will be suitable for any specified use. Testing of all parameters of each product is not necessarily performed by NVIDIA. It is customer’s sole responsibility to evaluate and determine the applicability of any information contained in this document, ensure the product is suitable and fit for the application planned by customer, and perform the necessary testing for the application in order to avoid a default of the application or the product. Weaknesses in customer’s product designs may affect the quality and reliability of the NVIDIA product and may result in additional or different conditions and/or requirements beyond those contained in this document. NVIDIA accepts no liability related to any default, damage, costs, or problem which may be based on or attributable to: (i) the use of the NVIDIA product in any manner that is contrary to this document or (ii) customer product designs."
+                - paragraph [ref=e399]: No license, either expressed or implied, is granted under any NVIDIA patent right, copyright, or other NVIDIA intellectual property right under this document. Information published by NVIDIA regarding third-party products or services does not constitute a license from NVIDIA to use such products or services or a warranty or endorsement thereof. Use of such information may require a license from a third party under the patents or other intellectual property rights of the third party, or a license from NVIDIA under the patents or other intellectual property rights of NVIDIA.
+                - paragraph [ref=e400]: Reproduction of information in this document is permissible only if approved in advance by NVIDIA in writing, reproduced without alteration and in full compliance with all applicable export laws and regulations, and accompanied by all associated conditions, limitations, and notices.
+                - paragraph [ref=e401]: THIS DOCUMENT AND ALL NVIDIA DESIGN SPECIFICATIONS, REFERENCE BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER DOCUMENTS (TOGETHER AND SEPARATELY, “MATERIALS”) ARE BEING PROVIDED “AS IS.” NVIDIA MAKES NO WARRANTIES, EXPRESSED, IMPLIED, STATUTORY, OR OTHERWISE WITH RESPECT TO THE MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF NONINFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE. TO THE EXTENT NOT PROHIBITED BY LAW, IN NO EVENT WILL NVIDIA BE LIABLE FOR ANY DAMAGES, INCLUDING WITHOUT LIMITATION ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT OF ANY USE OF THIS DOCUMENT, EVEN IF NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Notwithstanding any damages that customer might incur for any reason whatsoever, NVIDIA’s aggregate and cumulative liability towards customer for the products described herein shall be limited in accordance with the Terms of Sale for the product.
+              - generic [ref=e402]:
+                - heading "3.2. OpenCL " [level=2] [ref=e403]:
+                  - text: 3.2. OpenCL
+                  - link "" [ref=e404] [cursor=pointer]:
+                    - /url: "#opencl"
+                - paragraph [ref=e405]: OpenCL is a trademark of Apple Inc. used under license to the Khronos Group Inc.
+              - generic [ref=e406]:
+                - heading "3.3. Trademarks " [level=2] [ref=e407]:
+                  - text: 3.3. Trademarks
+                  - link "" [ref=e408] [cursor=pointer]:
+                    - /url: "#trademarks"
+                - paragraph [ref=e409]: NVIDIA and the NVIDIA logo are trademarks or registered trademarks of NVIDIA Corporation in the U.S. and other countries. Other company and product names may be trademarks of the respective companies with which they are associated.
+                - generic [ref=e410]:
+                  - term [ref=e411]:
+                    - generic [ref=e412]:
+                      - text: "["
+                      - link "1" [ref=e413] [cursor=pointer]:
+                        - /url: "#id1"
+                      - text: "]"
+                    - text: ":"
+                  - definition [ref=e414]:
+                    - paragraph [ref=e415]:
+                      - text: Throughout this guide,
+                      - emphasis [ref=e416]: Kepler
+                      - text: refers to devices of compute capability 3.x,
+                      - emphasis [ref=e417]: Maxwell
+                      - text: refers to devices of compute capability 5.x,
+                      - emphasis [ref=e418]: Pascal
+                      - text: refers to device of compute capability 6.x,
+                      - emphasis [ref=e419]: Volta
+                      - text: refers to devices of compute capability 7.0,
+                      - emphasis [ref=e420]: Turing
+                      - text: refers to devices of compute capability 7.5, and
+                      - emphasis [ref=e421]: NVIDIA Ampere GPU Architecture
+                      - text: refers to devices of compute capability 8.x
+        - generic [ref=e422]:
+          - separator [ref=e423]
+          - contentinfo [ref=e424]:
+            - paragraph [ref=e425]: © Copyright 2020-2023, NVIDIA Corporation & affiliates. All rights reserved. Last updated on Nov 14, 2023.
+  - region "Cookie banner" [ref=e427]:
+    - dialog "Privacy" [ref=e428]:
+      - generic [ref=e429]:
+        - paragraph [ref=e432]:
+          - text: NVIDIA uses cookies to improve your experience on our web site. We and our third-party partners also use cookies and other tools to collect and record information you provide as well as information about your interactions with our websites for performance improvement, analytics, and to assist in marketing efforts. By continuing to use this site or by clicking one of the buttons below, you agree to the use of cookies and other tools as described in our
+          - link "Privacy Policy" [ref=e433] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/privacy-policy/
+          - text: and
+          - link "Cookie Policy" [ref=e434] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/cookie-policy/
+          - text: (subject to your settings) and accept our
+          - link "Terms of Service" [ref=e435] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/terms-of-service/
+          - text: (which contains important waivers). Please see our
+          - link "Privacy Policy" [ref=e436] [cursor=pointer]:
+            - /url: https://www.nvidia.com/en-us/about-nvidia/privacy-policy/
+          - text: for more information on our privacy practices.
+        - generic [ref=e438]:
+          - button "Manage Settings, Opens the preference center dialog" [ref=e439] [cursor=pointer]: Manage Settings
+          - generic [ref=e440]:
+            - button "Turn Off Optional Cookies" [ref=e441] [cursor=pointer]
+            - button "Agree" [ref=e442] [cursor=pointer]

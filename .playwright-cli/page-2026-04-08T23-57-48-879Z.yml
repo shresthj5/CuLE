@@ -1,0 +1,2371 @@
+- generic [ref=e1]:
+  - dialog "Cookie Consent Banner" [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: This website utilizes technologies such as cookies to enable essential site functionality, as well as for analytics, personalization, and targeted advertising.
+      - link "Privacy Policy" [active] [ref=e5] [cursor=pointer]:
+        - /url: https://lfprojects.org/policies/privacy-policy/
+    - generic [ref=e6]:
+      - button "Accept" [ref=e7] [cursor=pointer]
+      - button "Deny Non-Essential" [ref=e8] [cursor=pointer]
+      - button "Manage Preferences" [ref=e9] [cursor=pointer]
+  - navigation "Skip links":
+    - link "Skip to main content" [ref=e10] [cursor=pointer]:
+      - /url: "#ajax-content-wrap"
+  - generic [ref=e12]:
+    - navigation "Secondary Navigation" [ref=e15]:
+      - link "Register for PyTorch Conference Europe 2026, April 7–8, Paris" [ref=e17] [cursor=pointer]:
+        - /url: https://events.linuxfoundation.org/pytorch-conference-europe/register/
+    - text: 
+    - banner "Main Menu" [ref=e18]:
+      - generic [ref=e20]:
+        - link "PyTorch Logo" [ref=e22] [cursor=pointer]:
+          - /url: https://pytorch.org
+          - img "PyTorch Logo" [ref=e23]
+        - generic [ref=e24]:
+          - text: 
+          - navigation "Main Menu" [ref=e25]:
+            - list [ref=e26]:
+              - listitem [ref=e27]:
+                - link "Learn" [ref=e28] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Learn
+                  - generic [ref=e30]: 
+                - list:
+                  - listitem:
+                    - link "Get Started":
+                      - /url: https://pytorch.org/get-started/locally/
+                  - listitem:
+                    - link "Tutorials":
+                      - /url: https://pytorch.org/tutorials/
+                  - listitem:
+                    - link "Learn the Basics":
+                      - /url: https://pytorch.org/tutorials/beginner/basics/intro.html
+                  - listitem:
+                    - link "PyTorch Recipes ":
+                      - /url: https://docs.pytorch.org/tutorials/recipes_index.html
+                  - listitem:
+                    - link "Intro to PyTorch – YouTube Series":
+                      - /url: https://pytorch.org/tutorials/beginner/introyt.html
+                  - listitem:
+                    - link "Webinars":
+                      - /url: https://pytorch.org/webinars/
+              - listitem [ref=e31]:
+                - link "Community" [ref=e32] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Community
+                  - generic [ref=e34]: 
+                - list:
+                  - listitem:
+                    - link "Landscape ":
+                      - /url: https://landscape.pytorch.org/
+                  - listitem:
+                    - link "Join the Ecosystem":
+                      - /url: /join-ecosystem
+                  - listitem:
+                    - link "Community Hub":
+                      - /url: https://pytorch.org/community-hub/
+                  - listitem:
+                    - link "Forums ":
+                      - /url: https://discuss.pytorch.org/
+                  - listitem:
+                    - link "Developer Resources":
+                      - /url: https://pytorch.org/resources/
+                  - listitem:
+                    - link "Events":
+                      - /url: https://pytorch.org/events/
+                  - listitem:
+                    - link "Meeting Calendar":
+                      - /url: https://pytorch.org/meeting-calendar/
+                  - listitem:
+                    - link "PyTorch Contributor Awards":
+                      - /url: https://pytorch.org/contributor-awards/
+                  - listitem:
+                    - link "PyTorch Ambassadors":
+                      - /url: https://pytorch.org/programs/ambassadors/
+              - listitem [ref=e35]:
+                - link "Projects" [ref=e36] [cursor=pointer]:
+                  - /url: https://pytorch.org/projects/
+                  - text: Projects
+                  - generic [ref=e38]: 
+                - list:
+                  - listitem:
+                    - link "PyTorch":
+                      - /url: https://pytorch.org/projects/pytorch/
+                  - listitem:
+                    - link "vLLM":
+                      - /url: https://pytorch.org/projects/vllm/
+                  - listitem:
+                    - link "DeepSpeed":
+                      - /url: https://pytorch.org/projects/deepspeed/
+                  - listitem:
+                    - link "Ray":
+                      - /url: https://pytorch.org/projects/ray/
+                  - listitem:
+                    - link "Helion":
+                      - /url: https://pytorch.org/projects/helion/
+                  - listitem:
+                    - link "Safetensors":
+                      - /url: https://pytorch.org/projects/safetensors/
+                  - listitem:
+                    - link "Host Your Project":
+                      - /url: https://pytorch.org/projects/host-your-project/
+              - listitem [ref=e39]:
+                - link "Docs" [ref=e40] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Docs
+                  - generic [ref=e42]: 
+                - list:
+                  - listitem:
+                    - link "PyTorch":
+                      - /url: https://pytorch.org/docs/stable/index.html
+                  - listitem:
+                    - link "Domains":
+                      - /url: https://pytorch.org/domains/
+              - listitem [ref=e43]:
+                - link "Blog & News" [ref=e44] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Blog & News
+                  - generic [ref=e46]: 
+                - list:
+                  - listitem:
+                    - link "Blog":
+                      - /url: https://pytorch.org/blog/
+                  - listitem:
+                    - link "Announcements":
+                      - /url: /announcements
+                  - listitem:
+                    - link "Case Studies":
+                      - /url: https://pytorch.org/case-studies/
+                  - listitem:
+                    - link "Newsletter":
+                      - /url: https://pytorch.org/newsletter/
+              - listitem [ref=e47]:
+                - link "About" [ref=e48] [cursor=pointer]:
+                  - /url: "#"
+                  - text: About
+                  - generic [ref=e50]: 
+                - list:
+                  - listitem:
+                    - link "PyTorch Foundation":
+                      - /url: https://pytorch.org/foundation/
+                  - listitem:
+                    - link "Members":
+                      - /url: /members
+                  - listitem:
+                    - link "Governing Board":
+                      - /url: https://pytorch.org/governing-board/
+                  - listitem:
+                    - link "Technical Advisory Council":
+                      - /url: https://pytorch.org/tac/
+                  - listitem:
+                    - link "Cloud Credit Program":
+                      - /url: https://pytorch.org/credits/
+                  - listitem:
+                    - link "Staff":
+                      - /url: https://pytorch.org/staff/
+                  - listitem:
+                    - link "Contact":
+                      - /url: https://pytorch.org/contact/
+                  - listitem:
+                    - link "Brand Guidelines":
+                      - /url: https://pytorch.org/wp-content/uploads/2025/09/pytorch_brand_guide_091925a.pdf
+              - listitem [ref=e51]:
+                - link "JOIN" [ref=e52] [cursor=pointer]:
+                  - /url: https://pytorch.org/join/
+            - list [ref=e53]:
+              - listitem [ref=e54]:
+                - link "search" [ref=e56] [cursor=pointer]:
+                  - /url: "#search-box"
+                  - generic [ref=e57]: 
+                  - generic [ref=e58]: search
+  - generic [ref=e59]:
+    - generic [ref=e60]:
+      - main [ref=e61]:
+        - generic [ref=e62]:
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - img [ref=e76]
+              - generic [ref=e84]:
+                - heading "Get Started" [level=1] [ref=e85]
+                - paragraph [ref=e86]: Select preferences and run the command to install PyTorch locally, or get started quickly with one of the supported cloud platforms.
+            - generic [ref=e97]:
+              - text: 
+              - list [ref=e98]:
+                - listitem [ref=e99]:
+                  - link "Start Locally" [ref=e100] [cursor=pointer]:
+                    - /url: /get-started/locally/
+                - listitem [ref=e101]:
+                  - link "PyTorch 2.x" [ref=e102] [cursor=pointer]:
+                    - /url: /get-started/pytorch-2-x/
+                - listitem [ref=e103]:
+                  - link "Start via Cloud Partners" [ref=e104] [cursor=pointer]:
+                    - /url: /get-started/cloud-partners/
+                - listitem [ref=e105]:
+                  - link "Previous PyTorch Versions" [ref=e106] [cursor=pointer]:
+                    - /url: /get-started/previous-versions/
+                - listitem [ref=e107]:
+                  - link "PyTorch for Edge" [ref=e108] [cursor=pointer]:
+                    - /url: /get-started/executorch/
+          - article [ref=e119]:
+            - heading "Installing previous versions of PyTorchAnchor" [level=2] [ref=e120]:
+              - text: Installing previous versions of PyTorch
+              - link "Anchor" [ref=e121] [cursor=pointer]:
+                - /url: "#installing-previous-versions-of-pytorch"
+            - paragraph [ref=e122]:
+              - text: We’d prefer you install the
+              - link "latest version" [ref=e123] [cursor=pointer]:
+                - /url: https://pytorch.org/get-started/locally?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - text: ", but old binaries and installation instructions are provided below for your convenience."
+            - heading "Commands for Versions >= 1.0.0Anchor" [level=2] [ref=e124]:
+              - text: Commands for Versions >= 1.0.0
+              - link "Anchor" [ref=e125] [cursor=pointer]:
+                - /url: "#commands-for-versions--100"
+            - heading "v2.10.0Anchor" [level=3] [ref=e126]:
+              - text: v2.10.0
+              - link "Anchor" [ref=e127] [cursor=pointer]:
+                - /url: "#v260"
+            - heading "WheelAnchor" [level=4] [ref=e128]:
+              - text: Wheel
+              - link "Anchor" [ref=e129] [cursor=pointer]:
+                - /url: "#wheel"
+            - heading "OSXAnchor" [level=5] [ref=e130]:
+              - text: OSX
+              - link "Anchor" [ref=e131] [cursor=pointer]:
+                - /url: "#osx"
+            - code [ref=e135]: pip install torch==2.10.0 torchvision==0.25.0 torchaudio==2.10.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e136]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e137] [cursor=pointer]:
+                - /url: "#linux-and-windows"
+            - code [ref=e141]: "# ROCM 7.1 (Linux only) pip install torch==2.10.0 torchvision==0.25.0 torchaudio==2.10.0 --index-url https://download.pytorch.org/whl/rocm7.1 # CUDA 12.6 pip install torch==2.10.0 torchvision==0.25.0 torchaudio==2.10.0 --index-url https://download.pytorch.org/whl/cu126 # CUDA 12.8 pip install torch==2.10.0 torchvision==0.25.0 torchaudio==2.10.0 --index-url https://download.pytorch.org/whl/cu128 # CUDA 13.0 pip install torch==2.10.0 torchvision==0.25.0 torchaudio==2.10.0 --index-url https://download.pytorch.org/whl/cu130 # CPU only pip install torch==2.10.0 torchvision==0.25.0 torchaudio==2.10.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.9.1Anchor" [level=3] [ref=e142]:
+              - text: v2.9.1
+              - link "Anchor" [ref=e143] [cursor=pointer]:
+                - /url: "#v260"
+            - heading "WheelAnchor" [level=4] [ref=e144]:
+              - text: Wheel
+              - link "Anchor" [ref=e145] [cursor=pointer]:
+                - /url: "#wheel"
+            - heading "OSXAnchor" [level=5] [ref=e146]:
+              - text: OSX
+              - link "Anchor" [ref=e147] [cursor=pointer]:
+                - /url: "#osx"
+            - code [ref=e151]: pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e152]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e153] [cursor=pointer]:
+                - /url: "#linux-and-windows"
+            - code [ref=e157]: "# ROCM 6.4 (Linux only) pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/rocm6.4 # CUDA 12.6 pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu126 # CUDA 12.8 pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu128 # CUDA 13.0 pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu130 # CPU only pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.9.0Anchor" [level=3] [ref=e158]:
+              - text: v2.9.0
+              - link "Anchor" [ref=e159] [cursor=pointer]:
+                - /url: "#v260"
+            - heading "WheelAnchor" [level=4] [ref=e160]:
+              - text: Wheel
+              - link "Anchor" [ref=e161] [cursor=pointer]:
+                - /url: "#wheel"
+            - heading "OSXAnchor" [level=5] [ref=e162]:
+              - text: OSX
+              - link "Anchor" [ref=e163] [cursor=pointer]:
+                - /url: "#osx"
+            - code [ref=e167]: pip install torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e168]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e169] [cursor=pointer]:
+                - /url: "#linux-and-windows"
+            - code [ref=e173]: "# ROCM 6.4 (Linux only) pip install torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/rocm6.4 # CUDA 12.6 pip install torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/cu126 # CUDA 12.8 pip install torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/cu128 # CUDA 13.0 pip install torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/cu130 # CPU only pip install torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.8.0Anchor" [level=3] [ref=e174]:
+              - text: v2.8.0
+              - link "Anchor" [ref=e175] [cursor=pointer]:
+                - /url: "#v260"
+            - heading "WheelAnchor" [level=4] [ref=e176]:
+              - text: Wheel
+              - link "Anchor" [ref=e177] [cursor=pointer]:
+                - /url: "#wheel"
+            - heading "OSXAnchor" [level=5] [ref=e178]:
+              - text: OSX
+              - link "Anchor" [ref=e179] [cursor=pointer]:
+                - /url: "#osx"
+            - code [ref=e183]: pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e184]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e185] [cursor=pointer]:
+                - /url: "#linux-and-windows"
+            - code [ref=e189]: "# ROCM 6.4 (Linux only) pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/rocm6.4 # CUDA 12.6 pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu126 # CUDA 12.8 pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128 # CUDA 12.9 pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129 # CPU only pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.7.1Anchor" [level=3] [ref=e190]:
+              - text: v2.7.1
+              - link "Anchor" [ref=e191] [cursor=pointer]:
+                - /url: "#v260"
+            - heading "WheelAnchor" [level=4] [ref=e192]:
+              - text: Wheel
+              - link "Anchor" [ref=e193] [cursor=pointer]:
+                - /url: "#wheel"
+            - heading "OSXAnchor" [level=5] [ref=e194]:
+              - text: OSX
+              - link "Anchor" [ref=e195] [cursor=pointer]:
+                - /url: "#osx"
+            - code [ref=e199]: pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e200]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e201] [cursor=pointer]:
+                - /url: "#linux-and-windows"
+            - code [ref=e205]: "# ROCM 6.3 (Linux only) pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/rocm6.3 # CUDA 11.8 pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.6 pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu126 # CUDA 12.8 pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu128 # CPU only pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.7.0Anchor" [level=3] [ref=e206]:
+              - text: v2.7.0
+              - link "Anchor" [ref=e207] [cursor=pointer]:
+                - /url: "#v260"
+            - heading "WheelAnchor" [level=4] [ref=e208]:
+              - text: Wheel
+              - link "Anchor" [ref=e209] [cursor=pointer]:
+                - /url: "#wheel"
+            - heading "OSXAnchor" [level=5] [ref=e210]:
+              - text: OSX
+              - link "Anchor" [ref=e211] [cursor=pointer]:
+                - /url: "#osx"
+            - code [ref=e215]: pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e216]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e217] [cursor=pointer]:
+                - /url: "#linux-and-windows"
+            - code [ref=e221]: "# ROCM 6.3 (Linux only) pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 --index-url https://download.pytorch.org/whl/rocm6.3 # CUDA 11.8 pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.6 pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 --index-url https://download.pytorch.org/whl/cu126 # CUDA 12.8 pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 --index-url https://download.pytorch.org/whl/cu128 # CPU only pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.6.0Anchor" [level=3] [ref=e222]:
+              - text: v2.6.0
+              - link "Anchor" [ref=e223] [cursor=pointer]:
+                - /url: "#v260"
+            - heading "WheelAnchor" [level=4] [ref=e224]:
+              - text: Wheel
+              - link "Anchor" [ref=e225] [cursor=pointer]:
+                - /url: "#wheel"
+            - heading "OSXAnchor" [level=5] [ref=e226]:
+              - text: OSX
+              - link "Anchor" [ref=e227] [cursor=pointer]:
+                - /url: "#osx"
+            - code [ref=e231]: pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e232]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e233] [cursor=pointer]:
+                - /url: "#linux-and-windows"
+            - code [ref=e237]: "# ROCM 6.1 (Linux only) pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/rocm6.1 # ROCM 6.2.4 (Linux only) pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/rocm6.2.4 # CUDA 11.8 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.4 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124 # CUDA 12.6 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu126 # CPU only pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.5.1Anchor" [level=3] [ref=e238]:
+              - text: v2.5.1
+              - link "Anchor" [ref=e239] [cursor=pointer]:
+                - /url: "#v251"
+            - heading "CondaAnchor" [level=4] [ref=e240]:
+              - text: Conda
+              - link "Anchor" [ref=e241] [cursor=pointer]:
+                - /url: "#conda"
+            - heading "OSXAnchor" [level=5] [ref=e242]:
+              - text: OSX
+              - link "Anchor" [ref=e243] [cursor=pointer]:
+                - /url: "#osx-1"
+            - code [ref=e247]: "# conda conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e248]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e249] [cursor=pointer]:
+                - /url: "#linux-and-windows-1"
+            - code [ref=e253]: "# CUDA 11.8 conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=12.1 -c pytorch -c nvidia # CUDA 12.4 conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=12.4 -c pytorch -c nvidia # CPU Only conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e254]:
+              - text: Wheel
+              - link "Anchor" [ref=e255] [cursor=pointer]:
+                - /url: "#wheel-1"
+            - heading "OSXAnchor" [level=5] [ref=e256]:
+              - text: OSX
+              - link "Anchor" [ref=e257] [cursor=pointer]:
+                - /url: "#osx-2"
+            - code [ref=e261]: pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e262]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e263] [cursor=pointer]:
+                - /url: "#linux-and-windows-2"
+            - code [ref=e267]: "# ROCM 6.1 (Linux only) pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/rocm6.1 # ROCM 6.2 (Linux only) pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/rocm6.2 # CUDA 11.8 pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu121 # CUDA 12.4 pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu124 # CPU only pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.5.0Anchor" [level=3] [ref=e268]:
+              - text: v2.5.0
+              - link "Anchor" [ref=e269] [cursor=pointer]:
+                - /url: "#v250"
+            - heading "CondaAnchor" [level=4] [ref=e270]:
+              - text: Conda
+              - link "Anchor" [ref=e271] [cursor=pointer]:
+                - /url: "#conda-1"
+            - heading "OSXAnchor" [level=5] [ref=e272]:
+              - text: OSX
+              - link "Anchor" [ref=e273] [cursor=pointer]:
+                - /url: "#osx-3"
+            - code [ref=e277]: "# conda conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e278]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e279] [cursor=pointer]:
+                - /url: "#linux-and-windows-3"
+            - code [ref=e283]: "# CUDA 11.8 conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 pytorch-cuda=12.1 -c pytorch -c nvidia # CUDA 12.4 conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 pytorch-cuda=12.4 -c pytorch -c nvidia # CPU Only conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e284]:
+              - text: Wheel
+              - link "Anchor" [ref=e285] [cursor=pointer]:
+                - /url: "#wheel-2"
+            - heading "OSXAnchor" [level=5] [ref=e286]:
+              - text: OSX
+              - link "Anchor" [ref=e287] [cursor=pointer]:
+                - /url: "#osx-4"
+            - code [ref=e291]: pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e292]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e293] [cursor=pointer]:
+                - /url: "#linux-and-windows-4"
+            - code [ref=e297]: "# ROCM 6.1 (Linux only) pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/rocm6.1 # ROCM 6.2 (Linux only) pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/rocm6.2 # CUDA 11.8 pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cu121 # CUDA 12.4 pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cu124 # CPU only pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.4.1Anchor" [level=3] [ref=e298]:
+              - text: v2.4.1
+              - link "Anchor" [ref=e299] [cursor=pointer]:
+                - /url: "#v241"
+            - heading "CondaAnchor" [level=4] [ref=e300]:
+              - text: Conda
+              - link "Anchor" [ref=e301] [cursor=pointer]:
+                - /url: "#conda-2"
+            - heading "OSXAnchor" [level=5] [ref=e302]:
+              - text: OSX
+              - link "Anchor" [ref=e303] [cursor=pointer]:
+                - /url: "#osx-5"
+            - code [ref=e307]: "# conda conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e308]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e309] [cursor=pointer]:
+                - /url: "#linux-and-windows-5"
+            - code [ref=e313]: "# CUDA 11.8 conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.1 -c pytorch -c nvidia # CUDA 12.4 conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.4 -c pytorch -c nvidia # CPU Only conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e314]:
+              - text: Wheel
+              - link "Anchor" [ref=e315] [cursor=pointer]:
+                - /url: "#wheel-3"
+            - heading "OSXAnchor" [level=5] [ref=e316]:
+              - text: OSX
+              - link "Anchor" [ref=e317] [cursor=pointer]:
+                - /url: "#osx-6"
+            - code [ref=e321]: pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e322]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e323] [cursor=pointer]:
+                - /url: "#linux-and-windows-6"
+            - code [ref=e327]: "# ROCM 6.1 (Linux only) pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url https://download.pytorch.org/whl/rocm6.1 # CUDA 11.8 pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url https://download.pytorch.org/whl/cu121 # CUDA 12.4 pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url https://download.pytorch.org/whl/cu124 # CPU only pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.4.0Anchor" [level=3] [ref=e328]:
+              - text: v2.4.0
+              - link "Anchor" [ref=e329] [cursor=pointer]:
+                - /url: "#v240"
+            - heading "CondaAnchor" [level=4] [ref=e330]:
+              - text: Conda
+              - link "Anchor" [ref=e331] [cursor=pointer]:
+                - /url: "#conda-3"
+            - heading "OSXAnchor" [level=5] [ref=e332]:
+              - text: OSX
+              - link "Anchor" [ref=e333] [cursor=pointer]:
+                - /url: "#osx-7"
+            - code [ref=e337]: "# conda conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e338]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e339] [cursor=pointer]:
+                - /url: "#linux-and-windows-7"
+            - code [ref=e343]: "# CUDA 11.8 conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda=12.1 -c pytorch -c nvidia # CUDA 12.4 conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda=12.4 -c pytorch -c nvidia # CPU Only conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e344]:
+              - text: Wheel
+              - link "Anchor" [ref=e345] [cursor=pointer]:
+                - /url: "#wheel-4"
+            - heading "OSXAnchor" [level=5] [ref=e346]:
+              - text: OSX
+              - link "Anchor" [ref=e347] [cursor=pointer]:
+                - /url: "#osx-8"
+            - code [ref=e351]: pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e352]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e353] [cursor=pointer]:
+                - /url: "#linux-and-windows-8"
+            - code [ref=e357]: "# ROCM 6.1 (Linux only) pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/rocm6.1 # CUDA 11.8 pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121 # CUDA 12.4 pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu124 # CPU only pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.3.1Anchor" [level=3] [ref=e358]:
+              - text: v2.3.1
+              - link "Anchor" [ref=e359] [cursor=pointer]:
+                - /url: "#v231"
+            - heading "CondaAnchor" [level=4] [ref=e360]:
+              - text: Conda
+              - link "Anchor" [ref=e361] [cursor=pointer]:
+                - /url: "#conda-4"
+            - heading "OSXAnchor" [level=5] [ref=e362]:
+              - text: OSX
+              - link "Anchor" [ref=e363] [cursor=pointer]:
+                - /url: "#osx-9"
+            - code [ref=e367]: "# conda conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e368]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e369] [cursor=pointer]:
+                - /url: "#linux-and-windows-9"
+            - code [ref=e373]: "# CUDA 11.8 conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=12.1 -c pytorch -c nvidia # CPU Only conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e374]:
+              - text: Wheel
+              - link "Anchor" [ref=e375] [cursor=pointer]:
+                - /url: "#wheel-5"
+            - heading "OSXAnchor" [level=5] [ref=e376]:
+              - text: OSX
+              - link "Anchor" [ref=e377] [cursor=pointer]:
+                - /url: "#osx-10"
+            - code [ref=e381]: pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e382]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e383] [cursor=pointer]:
+                - /url: "#linux-and-windows-10"
+            - code [ref=e387]: "# ROCM 6.0 (Linux only) pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/rocm6.0 # CUDA 11.8 pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu121 # CPU only pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.3.0Anchor" [level=3] [ref=e388]:
+              - text: v2.3.0
+              - link "Anchor" [ref=e389] [cursor=pointer]:
+                - /url: "#v230"
+            - heading "CondaAnchor" [level=4] [ref=e390]:
+              - text: Conda
+              - link "Anchor" [ref=e391] [cursor=pointer]:
+                - /url: "#conda-5"
+            - heading "OSXAnchor" [level=5] [ref=e392]:
+              - text: OSX
+              - link "Anchor" [ref=e393] [cursor=pointer]:
+                - /url: "#osx-11"
+            - code [ref=e397]: "# conda conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e398]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e399] [cursor=pointer]:
+                - /url: "#linux-and-windows-11"
+            - code [ref=e403]: "# CUDA 11.8 conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 pytorch-cuda=12.1 -c pytorch -c nvidia # CPU Only conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e404]:
+              - text: Wheel
+              - link "Anchor" [ref=e405] [cursor=pointer]:
+                - /url: "#wheel-6"
+            - heading "OSXAnchor" [level=5] [ref=e406]:
+              - text: OSX
+              - link "Anchor" [ref=e407] [cursor=pointer]:
+                - /url: "#osx-12"
+            - code [ref=e411]: pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e412]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e413] [cursor=pointer]:
+                - /url: "#linux-and-windows-12"
+            - code [ref=e417]: "# ROCM 6.0 (Linux only) pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/rocm6.0 # CUDA 11.8 pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cu121 # CPU only pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.2.2Anchor" [level=3] [ref=e418]:
+              - text: v2.2.2
+              - link "Anchor" [ref=e419] [cursor=pointer]:
+                - /url: "#v222"
+            - heading "CondaAnchor" [level=4] [ref=e420]:
+              - text: Conda
+              - link "Anchor" [ref=e421] [cursor=pointer]:
+                - /url: "#conda-6"
+            - heading "OSXAnchor" [level=5] [ref=e422]:
+              - text: OSX
+              - link "Anchor" [ref=e423] [cursor=pointer]:
+                - /url: "#osx-13"
+            - code [ref=e427]: "# conda conda install pytorch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e428]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e429] [cursor=pointer]:
+                - /url: "#linux-and-windows-13"
+            - code [ref=e433]: "# CUDA 11.8 conda install pytorch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 pytorch-cuda=12.1 -c pytorch -c nvidia # CPU Only conda install pytorch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e434]:
+              - text: Wheel
+              - link "Anchor" [ref=e435] [cursor=pointer]:
+                - /url: "#wheel-7"
+            - heading "OSXAnchor" [level=5] [ref=e436]:
+              - text: OSX
+              - link "Anchor" [ref=e437] [cursor=pointer]:
+                - /url: "#osx-14"
+            - code [ref=e441]: pip install torch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e442]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e443] [cursor=pointer]:
+                - /url: "#linux-and-windows-14"
+            - code [ref=e447]: "# ROCM 5.7 (Linux only) pip install torch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 --index-url https://download.pytorch.org/whl/rocm5.7 # CUDA 11.8 pip install torch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 --index-url https://download.pytorch.org/whl/cu121 # CPU only pip install torch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.2.1Anchor" [level=3] [ref=e448]:
+              - text: v2.2.1
+              - link "Anchor" [ref=e449] [cursor=pointer]:
+                - /url: "#v221"
+            - heading "CondaAnchor" [level=4] [ref=e450]:
+              - text: Conda
+              - link "Anchor" [ref=e451] [cursor=pointer]:
+                - /url: "#conda-7"
+            - heading "OSXAnchor" [level=5] [ref=e452]:
+              - text: OSX
+              - link "Anchor" [ref=e453] [cursor=pointer]:
+                - /url: "#osx-15"
+            - code [ref=e457]: "# conda conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e458]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e459] [cursor=pointer]:
+                - /url: "#linux-and-windows-15"
+            - code [ref=e463]: "# CUDA 11.8 conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=12.1 -c pytorch -c nvidia # CPU Only conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e464]:
+              - text: Wheel
+              - link "Anchor" [ref=e465] [cursor=pointer]:
+                - /url: "#wheel-8"
+            - heading "OSXAnchor" [level=5] [ref=e466]:
+              - text: OSX
+              - link "Anchor" [ref=e467] [cursor=pointer]:
+                - /url: "#osx-16"
+            - code [ref=e471]: pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e472]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e473] [cursor=pointer]:
+                - /url: "#linux-and-windows-16"
+            - code [ref=e477]: "# ROCM 5.7 (Linux only) pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/rocm5.7 # CUDA 11.8 pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cu121 # CPU only pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.2.0Anchor" [level=3] [ref=e478]:
+              - text: v2.2.0
+              - link "Anchor" [ref=e479] [cursor=pointer]:
+                - /url: "#v220"
+            - heading "CondaAnchor" [level=4] [ref=e480]:
+              - text: Conda
+              - link "Anchor" [ref=e481] [cursor=pointer]:
+                - /url: "#conda-8"
+            - heading "OSXAnchor" [level=5] [ref=e482]:
+              - text: OSX
+              - link "Anchor" [ref=e483] [cursor=pointer]:
+                - /url: "#osx-17"
+            - code [ref=e487]: "# conda conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e488]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e489] [cursor=pointer]:
+                - /url: "#linux-and-windows-17"
+            - code [ref=e493]: "# CUDA 11.8 conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=12.1 -c pytorch -c nvidia # CPU Only conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e494]:
+              - text: Wheel
+              - link "Anchor" [ref=e495] [cursor=pointer]:
+                - /url: "#wheel-9"
+            - heading "OSXAnchor" [level=5] [ref=e496]:
+              - text: OSX
+              - link "Anchor" [ref=e497] [cursor=pointer]:
+                - /url: "#osx-18"
+            - code [ref=e501]: pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e502]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e503] [cursor=pointer]:
+                - /url: "#linux-and-windows-18"
+            - code [ref=e507]: "# ROCM 5.6 (Linux only) pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/rocm5.6 # CUDA 11.8 pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121 # CPU only pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.1.2Anchor" [level=3] [ref=e508]:
+              - text: v2.1.2
+              - link "Anchor" [ref=e509] [cursor=pointer]:
+                - /url: "#v212"
+            - heading "CondaAnchor" [level=4] [ref=e510]:
+              - text: Conda
+              - link "Anchor" [ref=e511] [cursor=pointer]:
+                - /url: "#conda-9"
+            - heading "OSXAnchor" [level=5] [ref=e512]:
+              - text: OSX
+              - link "Anchor" [ref=e513] [cursor=pointer]:
+                - /url: "#osx-19"
+            - code [ref=e517]: "# conda conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e518]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e519] [cursor=pointer]:
+                - /url: "#linux-and-windows-19"
+            - code [ref=e523]: "# CUDA 11.8 conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 pytorch-cuda=12.1 -c pytorch -c nvidia # CPU Only conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e524]:
+              - text: Wheel
+              - link "Anchor" [ref=e525] [cursor=pointer]:
+                - /url: "#wheel-10"
+            - heading "OSXAnchor" [level=5] [ref=e526]:
+              - text: OSX
+              - link "Anchor" [ref=e527] [cursor=pointer]:
+                - /url: "#osx-20"
+            - code [ref=e531]: pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e532]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e533] [cursor=pointer]:
+                - /url: "#linux-and-windows-20"
+            - code [ref=e537]: "# ROCM 5.6 (Linux only) pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/rocm5.6 # CUDA 11.8 pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu121 # CPU only pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.1.1Anchor" [level=3] [ref=e538]:
+              - text: v2.1.1
+              - link "Anchor" [ref=e539] [cursor=pointer]:
+                - /url: "#v211"
+            - heading "CondaAnchor" [level=4] [ref=e540]:
+              - text: Conda
+              - link "Anchor" [ref=e541] [cursor=pointer]:
+                - /url: "#conda-10"
+            - heading "OSXAnchor" [level=5] [ref=e542]:
+              - text: OSX
+              - link "Anchor" [ref=e543] [cursor=pointer]:
+                - /url: "#osx-21"
+            - code [ref=e547]: "# conda conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e548]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e549] [cursor=pointer]:
+                - /url: "#linux-and-windows-21"
+            - code [ref=e553]: "# CUDA 11.8 conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch-cuda=12.1 -c pytorch -c nvidia # CPU Only conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e554]:
+              - text: Wheel
+              - link "Anchor" [ref=e555] [cursor=pointer]:
+                - /url: "#wheel-11"
+            - heading "OSXAnchor" [level=5] [ref=e556]:
+              - text: OSX
+              - link "Anchor" [ref=e557] [cursor=pointer]:
+                - /url: "#osx-22"
+            - code [ref=e561]: pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e562]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e563] [cursor=pointer]:
+                - /url: "#linux-and-windows-22"
+            - code [ref=e567]: "# ROCM 5.6 (Linux only) pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 --index-url https://download.pytorch.org/whl/rocm5.6 # CUDA 11.8 pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 --index-url https://download.pytorch.org/whl/cu121 # CPU only pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.1.0Anchor" [level=3] [ref=e568]:
+              - text: v2.1.0
+              - link "Anchor" [ref=e569] [cursor=pointer]:
+                - /url: "#v210"
+            - heading "CondaAnchor" [level=4] [ref=e570]:
+              - text: Conda
+              - link "Anchor" [ref=e571] [cursor=pointer]:
+                - /url: "#conda-11"
+            - heading "OSXAnchor" [level=5] [ref=e572]:
+              - text: OSX
+              - link "Anchor" [ref=e573] [cursor=pointer]:
+                - /url: "#osx-23"
+            - code [ref=e577]: "# conda conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e578]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e579] [cursor=pointer]:
+                - /url: "#linux-and-windows-23"
+            - code [ref=e583]: "# CUDA 11.8 conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=11.8 -c pytorch -c nvidia # CUDA 12.1 conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=12.1 -c pytorch -c nvidia # CPU Only conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e584]:
+              - text: Wheel
+              - link "Anchor" [ref=e585] [cursor=pointer]:
+                - /url: "#wheel-12"
+            - heading "OSXAnchor" [level=5] [ref=e586]:
+              - text: OSX
+              - link "Anchor" [ref=e587] [cursor=pointer]:
+                - /url: "#osx-24"
+            - code [ref=e591]: pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e592]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e593] [cursor=pointer]:
+                - /url: "#linux-and-windows-24"
+            - code [ref=e597]: "# ROCM 5.6 (Linux only) pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/rocm5.6 # CUDA 11.8 pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu118 # CUDA 12.1 pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121 # CPU only pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.0.1Anchor" [level=3] [ref=e598]:
+              - text: v2.0.1
+              - link "Anchor" [ref=e599] [cursor=pointer]:
+                - /url: "#v201"
+            - heading "CondaAnchor" [level=4] [ref=e600]:
+              - text: Conda
+              - link "Anchor" [ref=e601] [cursor=pointer]:
+                - /url: "#conda-12"
+            - heading "OSXAnchor" [level=5] [ref=e602]:
+              - text: OSX
+              - link "Anchor" [ref=e603] [cursor=pointer]:
+                - /url: "#osx-25"
+            - code [ref=e607]: "# conda conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e608]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e609] [cursor=pointer]:
+                - /url: "#linux-and-windows-25"
+            - code [ref=e613]: "# CUDA 11.7 conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia # CUDA 11.8 conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.8 -c pytorch -c nvidia # CPU Only conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e614]:
+              - text: Wheel
+              - link "Anchor" [ref=e615] [cursor=pointer]:
+                - /url: "#wheel-13"
+            - heading "OSXAnchor" [level=5] [ref=e616]:
+              - text: OSX
+              - link "Anchor" [ref=e617] [cursor=pointer]:
+                - /url: "#osx-26"
+            - code [ref=e621]: pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e622]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e623] [cursor=pointer]:
+                - /url: "#linux-and-windows-26"
+            - code [ref=e627]: "# ROCM 5.4.2 (Linux only) pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/rocm5.4.2 # CUDA 11.7 pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 # CUDA 11.8 pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118 # CPU only pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v2.0.0Anchor" [level=3] [ref=e628]:
+              - text: v2.0.0
+              - link "Anchor" [ref=e629] [cursor=pointer]:
+                - /url: "#v200"
+            - heading "CondaAnchor" [level=4] [ref=e630]:
+              - text: Conda
+              - link "Anchor" [ref=e631] [cursor=pointer]:
+                - /url: "#conda-13"
+            - heading "OSXAnchor" [level=5] [ref=e632]:
+              - text: OSX
+              - link "Anchor" [ref=e633] [cursor=pointer]:
+                - /url: "#osx-27"
+            - code [ref=e637]: "# conda conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e638]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e639] [cursor=pointer]:
+                - /url: "#linux-and-windows-27"
+            - code [ref=e643]: "# CUDA 11.7 conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.7 -c pytorch -c nvidia # CUDA 11.8 conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.8 -c pytorch -c nvidia # CPU Only conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e644]:
+              - text: Wheel
+              - link "Anchor" [ref=e645] [cursor=pointer]:
+                - /url: "#wheel-14"
+            - heading "OSXAnchor" [level=5] [ref=e646]:
+              - text: OSX
+              - link "Anchor" [ref=e647] [cursor=pointer]:
+                - /url: "#osx-28"
+            - code [ref=e651]: pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e652]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e653] [cursor=pointer]:
+                - /url: "#linux-and-windows-28"
+            - code [ref=e657]: "# ROCM 5.4.2 (Linux only) pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/rocm5.4.2 # CUDA 11.7 pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1 # CUDA 11.8 pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118 # CPU only pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cpu"
+            - heading "v1.13.1Anchor" [level=3] [ref=e658]:
+              - text: v1.13.1
+              - link "Anchor" [ref=e659] [cursor=pointer]:
+                - /url: "#v1131"
+            - heading "CondaAnchor" [level=4] [ref=e660]:
+              - text: Conda
+              - link "Anchor" [ref=e661] [cursor=pointer]:
+                - /url: "#conda-14"
+            - heading "OSXAnchor" [level=5] [ref=e662]:
+              - text: OSX
+              - link "Anchor" [ref=e663] [cursor=pointer]:
+                - /url: "#osx-29"
+            - code [ref=e667]: "# conda conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e668]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e669] [cursor=pointer]:
+                - /url: "#linux-and-windows-29"
+            - code [ref=e673]: "# CUDA 11.6 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia # CUDA 11.7 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia # CPU Only conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e674]:
+              - text: Wheel
+              - link "Anchor" [ref=e675] [cursor=pointer]:
+                - /url: "#wheel-15"
+            - heading "OSXAnchor" [level=5] [ref=e676]:
+              - text: OSX
+              - link "Anchor" [ref=e677] [cursor=pointer]:
+                - /url: "#osx-30"
+            - code [ref=e681]: pip install torch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e682]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e683] [cursor=pointer]:
+                - /url: "#linux-and-windows-30"
+            - code [ref=e687]: "# ROCM 5.2 (Linux only) pip install torch==1.13.1+rocm5.2 torchvision==0.14.1+rocm5.2 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/rocm5.2 # CUDA 11.6 pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu116 # CUDA 11.7 pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu117 # CPU only pip install torch==1.13.1+cpu torchvision==0.14.1+cpu torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cpu"
+            - heading "v1.13.0Anchor" [level=3] [ref=e688]:
+              - text: v1.13.0
+              - link "Anchor" [ref=e689] [cursor=pointer]:
+                - /url: "#v1130"
+            - heading "CondaAnchor" [level=4] [ref=e690]:
+              - text: Conda
+              - link "Anchor" [ref=e691] [cursor=pointer]:
+                - /url: "#conda-15"
+            - heading "OSXAnchor" [level=5] [ref=e692]:
+              - text: OSX
+              - link "Anchor" [ref=e693] [cursor=pointer]:
+                - /url: "#osx-31"
+            - code [ref=e697]: "# conda conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e698]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e699] [cursor=pointer]:
+                - /url: "#linux-and-windows-31"
+            - code [ref=e703]: "# CUDA 11.6 conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 pytorch-cuda=11.6 -c pytorch -c nvidia # CUDA 11.7 conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 pytorch-cuda=11.7 -c pytorch -c nvidia # CPU Only conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e704]:
+              - text: Wheel
+              - link "Anchor" [ref=e705] [cursor=pointer]:
+                - /url: "#wheel-16"
+            - heading "OSXAnchor" [level=5] [ref=e706]:
+              - text: OSX
+              - link "Anchor" [ref=e707] [cursor=pointer]:
+                - /url: "#osx-32"
+            - code [ref=e711]: pip install torch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e712]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e713] [cursor=pointer]:
+                - /url: "#linux-and-windows-32"
+            - code [ref=e717]: "# ROCM 5.2 (Linux only) pip install torch==1.13.0+rocm5.2 torchvision==0.14.0+rocm5.2 torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/rocm5.2 # CUDA 11.6 pip install torch==1.13.0+cu116 torchvision==0.14.0+cu116 torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu116 # CUDA 11.7 pip install torch==1.13.0+cu117 torchvision==0.14.0+cu117 torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu117 # CPU only pip install torch==1.13.0+cpu torchvision==0.14.0+cpu torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/cpu"
+            - heading "v1.12.1Anchor" [level=3] [ref=e718]:
+              - text: v1.12.1
+              - link "Anchor" [ref=e719] [cursor=pointer]:
+                - /url: "#v1121"
+            - heading "CondaAnchor" [level=4] [ref=e720]:
+              - text: Conda
+              - link "Anchor" [ref=e721] [cursor=pointer]:
+                - /url: "#conda-16"
+            - heading "OSXAnchor" [level=5] [ref=e722]:
+              - text: OSX
+              - link "Anchor" [ref=e723] [cursor=pointer]:
+                - /url: "#osx-33"
+            - code [ref=e727]: "# conda conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e728]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e729] [cursor=pointer]:
+                - /url: "#linux-and-windows-33"
+            - code [ref=e733]: "# CUDA 10.2 conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=10.2 -c pytorch # CUDA 11.3 conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch # CUDA 11.6 conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.6 -c pytorch -c conda-forge # CPU Only conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e734]:
+              - text: Wheel
+              - link "Anchor" [ref=e735] [cursor=pointer]:
+                - /url: "#wheel-17"
+            - heading "OSXAnchor" [level=5] [ref=e736]:
+              - text: OSX
+              - link "Anchor" [ref=e737] [cursor=pointer]:
+                - /url: "#osx-34"
+            - code [ref=e741]: pip install torch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e742]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e743] [cursor=pointer]:
+                - /url: "#linux-and-windows-34"
+            - code [ref=e747]: "# ROCM 5.1.1 (Linux only) pip install torch==1.12.1+rocm5.1.1 torchvision==0.13.1+rocm5.1.1 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/rocm5.1.1 # CUDA 11.6 pip install torch==1.12.1+cu116 torchvision==0.13.1+cu116 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu116 # CUDA 11.3 pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113 # CUDA 10.2 pip install torch==1.12.1+cu102 torchvision==0.13.1+cu102 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu102 # CPU only pip install torch==1.12.1+cpu torchvision==0.13.1+cpu torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cpu"
+            - heading "v1.12.0Anchor" [level=3] [ref=e748]:
+              - text: v1.12.0
+              - link "Anchor" [ref=e749] [cursor=pointer]:
+                - /url: "#v1120"
+            - heading "CondaAnchor" [level=4] [ref=e750]:
+              - text: Conda
+              - link "Anchor" [ref=e751] [cursor=pointer]:
+                - /url: "#conda-17"
+            - heading "OSXAnchor" [level=5] [ref=e752]:
+              - text: OSX
+              - link "Anchor" [ref=e753] [cursor=pointer]:
+                - /url: "#osx-35"
+            - code [ref=e757]: "# conda conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e758]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e759] [cursor=pointer]:
+                - /url: "#linux-and-windows-35"
+            - code [ref=e763]: "# CUDA 10.2 conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=10.2 -c pytorch # CUDA 11.3 conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=11.3 -c pytorch # CUDA 11.6 conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=11.6 -c pytorch -c conda-forge # CPU Only conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e764]:
+              - text: Wheel
+              - link "Anchor" [ref=e765] [cursor=pointer]:
+                - /url: "#wheel-18"
+            - heading "OSXAnchor" [level=5] [ref=e766]:
+              - text: OSX
+              - link "Anchor" [ref=e767] [cursor=pointer]:
+                - /url: "#osx-36"
+            - code [ref=e771]: pip install torch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e772]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e773] [cursor=pointer]:
+                - /url: "#linux-and-windows-36"
+            - code [ref=e777]: "# ROCM 5.1.1 (Linux only) pip install torch==1.12.0+rocm5.1.1 torchvision==0.13.0+rocm5.1.1 torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/rocm5.1.1 # CUDA 11.6 pip install torch==1.12.0+cu116 torchvision==0.13.0+cu116 torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cu116 # CUDA 11.3 pip install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cu113 # CUDA 10.2 pip install torch==1.12.0+cu102 torchvision==0.13.0+cu102 torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cu102 # CPU only pip install torch==1.12.0+cpu torchvision==0.13.0+cpu torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cpu"
+            - heading "v1.11.0Anchor" [level=3] [ref=e778]:
+              - text: v1.11.0
+              - link "Anchor" [ref=e779] [cursor=pointer]:
+                - /url: "#v1110"
+            - heading "CondaAnchor" [level=4] [ref=e780]:
+              - text: Conda
+              - link "Anchor" [ref=e781] [cursor=pointer]:
+                - /url: "#conda-18"
+            - heading "OSXAnchor" [level=5] [ref=e782]:
+              - text: OSX
+              - link "Anchor" [ref=e783] [cursor=pointer]:
+                - /url: "#osx-37"
+            - code [ref=e787]: "# conda conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e788]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e789] [cursor=pointer]:
+                - /url: "#linux-and-windows-37"
+            - code [ref=e793]: "# CUDA 10.2 conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=10.2 -c pytorch # CUDA 11.3 conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch # CPU Only conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e794]:
+              - text: Wheel
+              - link "Anchor" [ref=e795] [cursor=pointer]:
+                - /url: "#wheel-19"
+            - heading "OSXAnchor" [level=5] [ref=e796]:
+              - text: OSX
+              - link "Anchor" [ref=e797] [cursor=pointer]:
+                - /url: "#osx-38"
+            - code [ref=e801]: pip install torch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e802]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e803] [cursor=pointer]:
+                - /url: "#linux-and-windows-38"
+            - code [ref=e807]: "# ROCM 4.5.2 (Linux only) pip install torch==1.11.0+rocm4.5.2 torchvision==0.12.0+rocm4.5.2 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/rocm4.5.2 # CUDA 11.3 pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113 # CUDA 10.2 pip install torch==1.11.0+cu102 torchvision==0.12.0+cu102 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu102 # CPU only pip install torch==1.11.0+cpu torchvision==0.12.0+cpu torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cpu"
+            - heading "v1.10.1Anchor" [level=3] [ref=e808]:
+              - text: v1.10.1
+              - link "Anchor" [ref=e809] [cursor=pointer]:
+                - /url: "#v1101"
+            - heading "CondaAnchor" [level=4] [ref=e810]:
+              - text: Conda
+              - link "Anchor" [ref=e811] [cursor=pointer]:
+                - /url: "#conda-19"
+            - heading "OSXAnchor" [level=5] [ref=e812]:
+              - text: OSX
+              - link "Anchor" [ref=e813] [cursor=pointer]:
+                - /url: "#osx-39"
+            - code [ref=e817]: "# conda conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e818]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e819] [cursor=pointer]:
+                - /url: "#linux-and-windows-39"
+            - code [ref=e823]: "# CUDA 10.2 conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=10.2 -c pytorch # CUDA 11.3 conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 -c pytorch -c conda-forge # CPU Only conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e824]:
+              - text: Wheel
+              - link "Anchor" [ref=e825] [cursor=pointer]:
+                - /url: "#wheel-20"
+            - heading "OSXAnchor" [level=5] [ref=e826]:
+              - text: OSX
+              - link "Anchor" [ref=e827] [cursor=pointer]:
+                - /url: "#osx-40"
+            - code [ref=e831]: pip install torch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e832]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e833] [cursor=pointer]:
+                - /url: "#linux-and-windows-40"
+            - code [ref=e837]: "# ROCM 4.2 (Linux only) pip install torch==1.10.1+rocm4.2 torchvision==0.11.2+rocm4.2 torchaudio==0.10.1 -f https://download.pytorch.org/whl/rocm4.2/torch_stable.html # ROCM 4.1 (Linux only) pip install torch==1.10.1+rocm4.1 torchvision==0.11.2+rocm4.1 torchaudio==0.10.1 -f https://download.pytorch.org/whl/torch_stable.html # ROCM 4.0.1 (Linux only) pip install torch==1.10.1+rocm4.0.1 torchvision==0.10.2+rocm4.0.1 torchaudio==0.10.1 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 11.1 pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 torchaudio==0.10.1 -f https://download.pytorch.org/whl/cu111/torch_stable.html # CUDA 10.2 pip install torch==1.10.1+cu102 torchvision==0.11.2+cu102 torchaudio==0.10.1 -f https://download.pytorch.org/whl/cu102/torch_stable.html # CPU only pip install torch==1.10.1+cpu torchvision==0.11.2+cpu torchaudio==0.10.1 -f https://download.pytorch.org/whl/cpu/torch_stable.html"
+            - heading "v1.10.0Anchor" [level=3] [ref=e838]:
+              - text: v1.10.0
+              - link "Anchor" [ref=e839] [cursor=pointer]:
+                - /url: "#v1100"
+            - heading "CondaAnchor" [level=4] [ref=e840]:
+              - text: Conda
+              - link "Anchor" [ref=e841] [cursor=pointer]:
+                - /url: "#conda-20"
+            - heading "OSXAnchor" [level=5] [ref=e842]:
+              - text: OSX
+              - link "Anchor" [ref=e843] [cursor=pointer]:
+                - /url: "#osx-41"
+            - code [ref=e847]: "# conda conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e848]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e849] [cursor=pointer]:
+                - /url: "#linux-and-windows-41"
+            - code [ref=e853]: "# CUDA 10.2 conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 cudatoolkit=10.2 -c pytorch # CUDA 11.3 conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 cudatoolkit=11.3 -c pytorch -c conda-forge # CPU Only conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e854]:
+              - text: Wheel
+              - link "Anchor" [ref=e855] [cursor=pointer]:
+                - /url: "#wheel-21"
+            - heading "OSXAnchor" [level=5] [ref=e856]:
+              - text: OSX
+              - link "Anchor" [ref=e857] [cursor=pointer]:
+                - /url: "#osx-42"
+            - code [ref=e861]: pip install torch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e862]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e863] [cursor=pointer]:
+                - /url: "#linux-and-windows-42"
+            - code [ref=e867]: "# ROCM 4.2 (Linux only) pip install torch==1.10.0+rocm4.2 torchvision==0.11.0+rocm4.2 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html # ROCM 4.1 (Linux only) pip install torch==1.10.0+rocm4.1 torchvision==0.11.0+rocm4.1 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html # ROCM 4.0.1 (Linux only) pip install torch==1.10.0+rocm4.0.1 torchvision==0.10.1+rocm4.0.1 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 11.1 pip install torch==1.10.0+cu111 torchvision==0.11.0+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 10.2 pip install torch==1.10.0+cu102 torchvision==0.11.0+cu102 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.10.0+cpu torchvision==0.11.0+cpu torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.9.1Anchor" [level=3] [ref=e868]:
+              - text: v1.9.1
+              - link "Anchor" [ref=e869] [cursor=pointer]:
+                - /url: "#v191"
+            - heading "CondaAnchor" [level=4] [ref=e870]:
+              - text: Conda
+              - link "Anchor" [ref=e871] [cursor=pointer]:
+                - /url: "#conda-21"
+            - heading "OSXAnchor" [level=5] [ref=e872]:
+              - text: OSX
+              - link "Anchor" [ref=e873] [cursor=pointer]:
+                - /url: "#osx-43"
+            - code [ref=e877]: "# conda conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e878]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e879] [cursor=pointer]:
+                - /url: "#linux-and-windows-43"
+            - code [ref=e883]: "# CUDA 10.2 conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 cudatoolkit=10.2 -c pytorch # CUDA 11.3 conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 cudatoolkit=11.3 -c pytorch -c conda-forge # CPU Only conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e884]:
+              - text: Wheel
+              - link "Anchor" [ref=e885] [cursor=pointer]:
+                - /url: "#wheel-22"
+            - heading "OSXAnchor" [level=5] [ref=e886]:
+              - text: OSX
+              - link "Anchor" [ref=e887] [cursor=pointer]:
+                - /url: "#osx-44"
+            - code [ref=e891]: pip install torch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e892]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e893] [cursor=pointer]:
+                - /url: "#linux-and-windows-44"
+            - code [ref=e897]: "# ROCM 4.2 (Linux only) pip install torch==1.9.1+rocm4.2 torchvision==0.10.1+rocm4.2 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html # ROCM 4.1 (Linux only) pip install torch==1.9.1+rocm4.1 torchvision==0.10.1+rocm4.1 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html # ROCM 4.0.1 (Linux only) pip install torch==1.9.1+rocm4.0.1 torchvision==0.10.1+rocm4.0.1 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 11.1 pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 10.2 pip install torch==1.9.1+cu102 torchvision==0.10.1+cu102 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.9.1+cpu torchvision==0.10.1+cpu torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.9.0Anchor" [level=3] [ref=e898]:
+              - text: v1.9.0
+              - link "Anchor" [ref=e899] [cursor=pointer]:
+                - /url: "#v190"
+            - heading "CondaAnchor" [level=4] [ref=e900]:
+              - text: Conda
+              - link "Anchor" [ref=e901] [cursor=pointer]:
+                - /url: "#conda-22"
+            - heading "OSXAnchor" [level=5] [ref=e902]:
+              - text: OSX
+              - link "Anchor" [ref=e903] [cursor=pointer]:
+                - /url: "#osx-45"
+            - code [ref=e907]: "# conda conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e908]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e909] [cursor=pointer]:
+                - /url: "#linux-and-windows-45"
+            - code [ref=e913]: "# CUDA 10.2 conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=10.2 -c pytorch # CUDA 11.3 conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=11.3 -c pytorch -c conda-forge # CPU Only conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e914]:
+              - text: Wheel
+              - link "Anchor" [ref=e915] [cursor=pointer]:
+                - /url: "#wheel-23"
+            - heading "OSXAnchor" [level=5] [ref=e916]:
+              - text: OSX
+              - link "Anchor" [ref=e917] [cursor=pointer]:
+                - /url: "#osx-46"
+            - code [ref=e921]: pip install torch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e922]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e923] [cursor=pointer]:
+                - /url: "#linux-and-windows-46"
+            - code [ref=e927]: "# ROCM 4.2 (Linux only) pip install torch==1.9.0+rocm4.2 torchvision==0.10.0+rocm4.2 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html # ROCM 4.1 (Linux only) pip install torch==1.9.0+rocm4.1 torchvision==0.10.0+rocm4.1 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html # ROCM 4.0.1 (Linux only) pip install torch==1.9.0+rocm4.0.1 torchvision==0.10.0+rocm4.0.1 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 11.1 pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 10.2 pip install torch==1.9.0+cu102 torchvision==0.10.0+cu102 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.9.0+cpu torchvision==0.10.0+cpu torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.8.2 with LTS supportAnchor" [level=3] [ref=e928]:
+              - text: v1.8.2 with LTS support
+              - link "Anchor" [ref=e929] [cursor=pointer]:
+                - /url: "#v182-with-lts-support"
+            - heading "CondaAnchor" [level=4] [ref=e930]:
+              - text: Conda
+              - link "Anchor" [ref=e931] [cursor=pointer]:
+                - /url: "#conda-23"
+            - heading "OSXAnchor" [level=5] [ref=e932]:
+              - text: OSX
+              - link "Anchor" [ref=e933] [cursor=pointer]:
+                - /url: "#osx-47"
+            - paragraph [ref=e934]: macOS is currently not supported for LTS.
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e935]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e936] [cursor=pointer]:
+                - /url: "#linux-and-windows-47"
+            - code [ref=e940]: "# CUDA 10.2 # NOTE: PyTorch LTS version 1.8.2 is only supported for Python <= 3.8. conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch-lts # CUDA 11.1 (Linux) # NOTE: 'nvidia' channel is required for cudatoolkit 11.1 <br> <b>NOTE:</b> Pytorch LTS version 1.8.2 is only supported for Python <= 3.8. conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c nvidia # CUDA 11.1 (Windows) # 'conda-forge' channel is required for cudatoolkit 11.1 <br> <b>NOTE:</b> Pytorch LTS version 1.8.2 is only supported for Python <= 3.8. conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c conda-forge # CPU Only # Pytorch LTS version 1.8.2 is only supported for Python <= 3.8. conda install pytorch torchvision torchaudio cpuonly -c pytorch-lts # ROCM5.x Not supported in LTS."
+            - heading "WheelAnchor" [level=4] [ref=e941]:
+              - text: Wheel
+              - link "Anchor" [ref=e942] [cursor=pointer]:
+                - /url: "#wheel-24"
+            - heading "OSXAnchor" [level=5] [ref=e943]:
+              - text: OSX
+              - link "Anchor" [ref=e944] [cursor=pointer]:
+                - /url: "#osx-48"
+            - paragraph [ref=e945]: macOS is currently not supported in LTS.
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e946]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e947] [cursor=pointer]:
+                - /url: "#linux-and-windows-48"
+            - code [ref=e951]: "# CUDA 10.2 pip3 install torch==1.8.2 torchvision==0.9.2 torchaudio==0.8.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cu102 # CUDA 11.1 pip3 install torch==1.8.2 torchvision==0.9.2 torchaudio==0.8.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cu111 # CPU Only pip3 install torch==1.8.2 torchvision==0.9.2 torchaudio==0.8.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cpu # ROCM5.x Not supported in LTS."
+            - heading "v1.8.1Anchor" [level=3] [ref=e952]:
+              - text: v1.8.1
+              - link "Anchor" [ref=e953] [cursor=pointer]:
+                - /url: "#v181"
+            - heading "CondaAnchor" [level=4] [ref=e954]:
+              - text: Conda
+              - link "Anchor" [ref=e955] [cursor=pointer]:
+                - /url: "#conda-24"
+            - heading "OSXAnchor" [level=5] [ref=e956]:
+              - text: OSX
+              - link "Anchor" [ref=e957] [cursor=pointer]:
+                - /url: "#osx-49"
+            - code [ref=e961]: "# conda conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e962]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e963] [cursor=pointer]:
+                - /url: "#linux-and-windows-49"
+            - code [ref=e967]: "# CUDA 10.2 conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cudatoolkit=10.2 -c pytorch # CUDA 11.3 conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cudatoolkit=11.3 -c pytorch -c conda-forge # CPU Only conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e968]:
+              - text: Wheel
+              - link "Anchor" [ref=e969] [cursor=pointer]:
+                - /url: "#wheel-25"
+            - heading "OSXAnchor" [level=5] [ref=e970]:
+              - text: OSX
+              - link "Anchor" [ref=e971] [cursor=pointer]:
+                - /url: "#osx-50"
+            - code [ref=e975]: pip install torch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e976]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e977] [cursor=pointer]:
+                - /url: "#linux-and-windows-50"
+            - code [ref=e981]: "# ROCM 4.0.1 (Linux only) pip install torch==1.8.1+rocm4.0.1 torchvision==0.9.1+rocm4.0.1 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html # ROCM 3.10 (Linux only) pip install torch==1.8.1+rocm3.10 torchvision==0.9.1+rocm3.10 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 11.1 pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 10.2 pip install torch==1.8.1+cu102 torchvision==0.9.1+cu102 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 10.1 pip install torch==1.8.1+cu101 torchvision==0.9.1+cu101 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.8.1+cpu torchvision==0.9.1+cpu torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.8.0Anchor" [level=3] [ref=e982]:
+              - text: v1.8.0
+              - link "Anchor" [ref=e983] [cursor=pointer]:
+                - /url: "#v180"
+            - heading "CondaAnchor" [level=4] [ref=e984]:
+              - text: Conda
+              - link "Anchor" [ref=e985] [cursor=pointer]:
+                - /url: "#conda-25"
+            - heading "OSXAnchor" [level=5] [ref=e986]:
+              - text: OSX
+              - link "Anchor" [ref=e987] [cursor=pointer]:
+                - /url: "#osx-51"
+            - code [ref=e991]: "# conda conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e992]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e993] [cursor=pointer]:
+                - /url: "#linux-and-windows-51"
+            - code [ref=e997]: "# CUDA 10.2 conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=10.2 -c pytorch # CUDA 11.1 conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge # CPU Only conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e998]:
+              - text: Wheel
+              - link "Anchor" [ref=e999] [cursor=pointer]:
+                - /url: "#wheel-26"
+            - heading "OSXAnchor" [level=5] [ref=e1000]:
+              - text: OSX
+              - link "Anchor" [ref=e1001] [cursor=pointer]:
+                - /url: "#osx-52"
+            - code [ref=e1005]: pip install torch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1006]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1007] [cursor=pointer]:
+                - /url: "#linux-and-windows-52"
+            - code [ref=e1011]: "# RocM 4.0.1 (Linux only) pip install torch -f https://download.pytorch.org/whl/rocm4.0.1/torch_stable.html pip install ninja pip install 'git+https://github.com/pytorch/vision.git@v0.9.0' # CUDA 11.1 pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 10.2 pip install torch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 # CPU only pip install torch==1.8.0+cpu torchvision==0.9.0+cpu torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.7.1Anchor" [level=3] [ref=e1012]:
+              - text: v1.7.1
+              - link "Anchor" [ref=e1013] [cursor=pointer]:
+                - /url: "#v171"
+            - heading "CondaAnchor" [level=4] [ref=e1014]:
+              - text: Conda
+              - link "Anchor" [ref=e1015] [cursor=pointer]:
+                - /url: "#conda-26"
+            - heading "OSXAnchor" [level=5] [ref=e1016]:
+              - text: OSX
+              - link "Anchor" [ref=e1017] [cursor=pointer]:
+                - /url: "#osx-53"
+            - code [ref=e1021]: "# conda conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1022]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1023] [cursor=pointer]:
+                - /url: "#linux-and-windows-53"
+            - code [ref=e1027]: "# CUDA 9.2 conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=9.2 -c pytorch # CUDA 10.1 conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.1 -c pytorch # CUDA 10.2 conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.2 -c pytorch # CUDA 11.0 conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=11.0 -c pytorch # CPU Only conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1028]:
+              - text: Wheel
+              - link "Anchor" [ref=e1029] [cursor=pointer]:
+                - /url: "#wheel-27"
+            - heading "OSXAnchor" [level=5] [ref=e1030]:
+              - text: OSX
+              - link "Anchor" [ref=e1031] [cursor=pointer]:
+                - /url: "#osx-54"
+            - code [ref=e1035]: pip install torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1036]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1037] [cursor=pointer]:
+                - /url: "#linux-and-windows-54"
+            - code [ref=e1041]: "# CUDA 11.0 pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 10.2 pip install torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 # CUDA 10.1 pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 9.2 pip install torch==1.7.1+cu92 torchvision==0.8.2+cu92 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.7.0Anchor" [level=3] [ref=e1042]:
+              - text: v1.7.0
+              - link "Anchor" [ref=e1043] [cursor=pointer]:
+                - /url: "#v170"
+            - heading "CondaAnchor" [level=4] [ref=e1044]:
+              - text: Conda
+              - link "Anchor" [ref=e1045] [cursor=pointer]:
+                - /url: "#conda-27"
+            - heading "OSXAnchor" [level=5] [ref=e1046]:
+              - text: OSX
+              - link "Anchor" [ref=e1047] [cursor=pointer]:
+                - /url: "#osx-55"
+            - code [ref=e1051]: "# conda conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1052]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1053] [cursor=pointer]:
+                - /url: "#linux-and-windows-55"
+            - code [ref=e1057]: "# CUDA 9.2 conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=9.2 -c pytorch # CUDA 10.1 conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=10.1 -c pytorch # CUDA 10.2 conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=10.2 -c pytorch # CUDA 11.0 conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=11.0 -c pytorch # CPU Only conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1058]:
+              - text: Wheel
+              - link "Anchor" [ref=e1059] [cursor=pointer]:
+                - /url: "#wheel-28"
+            - heading "OSXAnchor" [level=5] [ref=e1060]:
+              - text: OSX
+              - link "Anchor" [ref=e1061] [cursor=pointer]:
+                - /url: "#osx-56"
+            - code [ref=e1065]: pip install torch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1066]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1067] [cursor=pointer]:
+                - /url: "#linux-and-windows-56"
+            - code [ref=e1071]: "# CUDA 11.0 pip install torch==1.7.0+cu110 torchvision==0.8.0+cu110 torchaudio==0.7.0 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 10.2 pip install torch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 # CUDA 10.1 pip install torch==1.7.0+cu101 torchvision==0.8.0+cu101 torchaudio==0.7.0 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 9.2 pip install torch==1.7.0+cu92 torchvision==0.8.0+cu92 torchaudio==0.7.0 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.7.0+cpu torchvision==0.8.0+cpu torchaudio==0.7.0 -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.6.0Anchor" [level=3] [ref=e1072]:
+              - text: v1.6.0
+              - link "Anchor" [ref=e1073] [cursor=pointer]:
+                - /url: "#v160"
+            - heading "CondaAnchor" [level=4] [ref=e1074]:
+              - text: Conda
+              - link "Anchor" [ref=e1075] [cursor=pointer]:
+                - /url: "#conda-28"
+            - heading "OSXAnchor" [level=5] [ref=e1076]:
+              - text: OSX
+              - link "Anchor" [ref=e1077] [cursor=pointer]:
+                - /url: "#osx-57"
+            - code [ref=e1081]: "# conda conda install pytorch==1.6.0 torchvision==0.7.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1082]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1083] [cursor=pointer]:
+                - /url: "#linux-and-windows-57"
+            - code [ref=e1087]: "# CUDA 9.2 conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=9.2 -c pytorch # CUDA 10.1 conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.1 -c pytorch # CUDA 10.2 conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.2 -c pytorch # CPU Only conda install pytorch==1.6.0 torchvision==0.7.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1088]:
+              - text: Wheel
+              - link "Anchor" [ref=e1089] [cursor=pointer]:
+                - /url: "#wheel-29"
+            - heading "OSXAnchor" [level=5] [ref=e1090]:
+              - text: OSX
+              - link "Anchor" [ref=e1091] [cursor=pointer]:
+                - /url: "#osx-58"
+            - code [ref=e1095]: pip install torch==1.6.0 torchvision==0.7.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1096]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1097] [cursor=pointer]:
+                - /url: "#linux-and-windows-58"
+            - code [ref=e1101]: "# CUDA 10.2 pip install torch==1.6.0 torchvision==0.7.0 # CUDA 10.1 pip install torch==1.6.0+cu101 torchvision==0.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 9.2 pip install torch==1.6.0+cu92 torchvision==0.7.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.5.1Anchor" [level=3] [ref=e1102]:
+              - text: v1.5.1
+              - link "Anchor" [ref=e1103] [cursor=pointer]:
+                - /url: "#v151"
+            - heading "CondaAnchor" [level=4] [ref=e1104]:
+              - text: Conda
+              - link "Anchor" [ref=e1105] [cursor=pointer]:
+                - /url: "#conda-29"
+            - heading "OSXAnchor" [level=5] [ref=e1106]:
+              - text: OSX
+              - link "Anchor" [ref=e1107] [cursor=pointer]:
+                - /url: "#osx-59"
+            - code [ref=e1111]: "# conda conda install pytorch==1.5.1 torchvision==0.6.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1112]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1113] [cursor=pointer]:
+                - /url: "#linux-and-windows-59"
+            - code [ref=e1117]: "# CUDA 9.2 conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=9.2 -c pytorch # CUDA 10.1 conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.1 -c pytorch # CUDA 10.2 conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch # CPU Only conda install pytorch==1.5.1 torchvision==0.6.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1118]:
+              - text: Wheel
+              - link "Anchor" [ref=e1119] [cursor=pointer]:
+                - /url: "#wheel-30"
+            - heading "OSXAnchor" [level=5] [ref=e1120]:
+              - text: OSX
+              - link "Anchor" [ref=e1121] [cursor=pointer]:
+                - /url: "#osx-60"
+            - code [ref=e1125]: pip install torch==1.5.1 torchvision==0.6.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1126]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1127] [cursor=pointer]:
+                - /url: "#linux-and-windows-60"
+            - code [ref=e1131]: "# CUDA 10.2 pip install torch==1.5.1 torchvision==0.6.1 # CUDA 10.1 pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 9.2 pip install torch==1.5.1+cu92 torchvision==0.6.1+cu92 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.5.1+cpu torchvision==0.6.1+cpu -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.5.0Anchor" [level=3] [ref=e1132]:
+              - text: v1.5.0
+              - link "Anchor" [ref=e1133] [cursor=pointer]:
+                - /url: "#v150"
+            - heading "CondaAnchor" [level=4] [ref=e1134]:
+              - text: Conda
+              - link "Anchor" [ref=e1135] [cursor=pointer]:
+                - /url: "#conda-30"
+            - heading "OSXAnchor" [level=5] [ref=e1136]:
+              - text: OSX
+              - link "Anchor" [ref=e1137] [cursor=pointer]:
+                - /url: "#osx-61"
+            - code [ref=e1141]: "# conda conda install pytorch==1.5.0 torchvision==0.6.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1142]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1143] [cursor=pointer]:
+                - /url: "#linux-and-windows-61"
+            - code [ref=e1147]: "# CUDA 9.2 conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=9.2 -c pytorch # CUDA 10.1 conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=10.1 -c pytorch # CUDA 10.2 conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=10.2 -c pytorch # CPU Only conda install pytorch==1.5.0 torchvision==0.6.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1148]:
+              - text: Wheel
+              - link "Anchor" [ref=e1149] [cursor=pointer]:
+                - /url: "#wheel-31"
+            - heading "OSXAnchor" [level=5] [ref=e1150]:
+              - text: OSX
+              - link "Anchor" [ref=e1151] [cursor=pointer]:
+                - /url: "#osx-62"
+            - code [ref=e1155]: pip install torch==1.5.0 torchvision==0.6.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1156]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1157] [cursor=pointer]:
+                - /url: "#linux-and-windows-62"
+            - code [ref=e1161]: "# CUDA 10.2 pip install torch==1.5.0 torchvision==0.6.0 # CUDA 10.1 pip install torch==1.5.0+cu101 torchvision==0.6.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html # CUDA 9.2 pip install torch==1.5.0+cu92 torchvision==0.6.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.5.0+cpu torchvision==0.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.4.0Anchor" [level=3] [ref=e1162]:
+              - text: v1.4.0
+              - link "Anchor" [ref=e1163] [cursor=pointer]:
+                - /url: "#v140"
+            - heading "CondaAnchor" [level=4] [ref=e1164]:
+              - text: Conda
+              - link "Anchor" [ref=e1165] [cursor=pointer]:
+                - /url: "#conda-31"
+            - heading "OSXAnchor" [level=5] [ref=e1166]:
+              - text: OSX
+              - link "Anchor" [ref=e1167] [cursor=pointer]:
+                - /url: "#osx-63"
+            - code [ref=e1171]: "# conda conda install pytorch==1.4.0 torchvision==0.5.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1172]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1173] [cursor=pointer]:
+                - /url: "#linux-and-windows-63"
+            - code [ref=e1177]: "# CUDA 9.2 conda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=9.2 -c pytorch # CUDA 10.1 conda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=10.1 -c pytorch # CPU Only conda install pytorch==1.4.0 torchvision==0.5.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1178]:
+              - text: Wheel
+              - link "Anchor" [ref=e1179] [cursor=pointer]:
+                - /url: "#wheel-32"
+            - heading "OSXAnchor" [level=5] [ref=e1180]:
+              - text: OSX
+              - link "Anchor" [ref=e1181] [cursor=pointer]:
+                - /url: "#osx-64"
+            - code [ref=e1185]: pip install torch==1.4.0 torchvision==0.5.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1186]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1187] [cursor=pointer]:
+                - /url: "#linux-and-windows-64"
+            - code [ref=e1191]: "# CUDA 10.1 pip install torch==1.4.0 torchvision==0.5.0 # CUDA 9.2 pip install torch==1.4.0+cu92 torchvision==0.5.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.2.0Anchor" [level=3] [ref=e1192]:
+              - text: v1.2.0
+              - link "Anchor" [ref=e1193] [cursor=pointer]:
+                - /url: "#v120"
+            - heading "CondaAnchor" [level=4] [ref=e1194]:
+              - text: Conda
+              - link "Anchor" [ref=e1195] [cursor=pointer]:
+                - /url: "#conda-32"
+            - heading "OSXAnchor" [level=5] [ref=e1196]:
+              - text: OSX
+              - link "Anchor" [ref=e1197] [cursor=pointer]:
+                - /url: "#osx-65"
+            - code [ref=e1201]: "# conda conda install pytorch==1.2.0 torchvision==0.4.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1202]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1203] [cursor=pointer]:
+                - /url: "#linux-and-windows-65"
+            - code [ref=e1207]: "# CUDA 9.2 conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=9.2 -c pytorch # CUDA 10.0 conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch # CPU Only conda install pytorch==1.2.0 torchvision==0.4.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1208]:
+              - text: Wheel
+              - link "Anchor" [ref=e1209] [cursor=pointer]:
+                - /url: "#wheel-33"
+            - heading "OSXAnchor" [level=5] [ref=e1210]:
+              - text: OSX
+              - link "Anchor" [ref=e1211] [cursor=pointer]:
+                - /url: "#osx-66"
+            - code [ref=e1215]: pip install torch==1.2.0 torchvision==0.4.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1216]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1217] [cursor=pointer]:
+                - /url: "#linux-and-windows-66"
+            - code [ref=e1221]: "# CUDA 10.0 pip install torch==1.2.0 torchvision==0.4.0 # CUDA 9.2 pip install torch==1.2.0+cu92 torchvision==0.4.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html # CPU only pip install torch==1.2.0+cpu torchvision==0.4.0+cpu -f https://download.pytorch.org/whl/torch_stable.html"
+            - heading "v1.1.0Anchor" [level=3] [ref=e1222]:
+              - text: v1.1.0
+              - link "Anchor" [ref=e1223] [cursor=pointer]:
+                - /url: "#v110"
+            - heading "CondaAnchor" [level=4] [ref=e1224]:
+              - text: Conda
+              - link "Anchor" [ref=e1225] [cursor=pointer]:
+                - /url: "#conda-33"
+            - heading "OSXAnchor" [level=5] [ref=e1226]:
+              - text: OSX
+              - link "Anchor" [ref=e1227] [cursor=pointer]:
+                - /url: "#osx-67"
+            - code [ref=e1231]: "# conda conda install pytorch==1.1.0 torchvision==0.3.0 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1232]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1233] [cursor=pointer]:
+                - /url: "#linux-and-windows-67"
+            - code [ref=e1237]: "# CUDA 9.0 conda install pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=9.0 -c pytorch # CUDA 10.0 conda install pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=10.0 -c pytorch # CPU Only conda install pytorch-cpu==1.1.0 torchvision-cpu==0.3.0 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1238]:
+              - text: Wheel
+              - link "Anchor" [ref=e1239] [cursor=pointer]:
+                - /url: "#wheel-34"
+            - heading "OSXAnchor" [level=5] [ref=e1240]:
+              - text: OSX
+              - link "Anchor" [ref=e1241] [cursor=pointer]:
+                - /url: "#osx-68"
+            - code [ref=e1245]: pip install torch==1.1.0 torchvision==0.3.0
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1246]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1247] [cursor=pointer]:
+                - /url: "#linux-and-windows-68"
+            - code [ref=e1251]: "# CUDA 10.0 Download and install wheel from https://download.pytorch.org/whl/cu100/torch_stable.html # CUDA 9.0 Download and install wheel from https://download.pytorch.org/whl/cu90/torch_stable.html # CPU only Download and install wheel from https://download.pytorch.org/whl/cpu/torch_stable.html"
+            - heading "v1.0.1Anchor" [level=3] [ref=e1252]:
+              - text: v1.0.1
+              - link "Anchor" [ref=e1253] [cursor=pointer]:
+                - /url: "#v101"
+            - heading "CondaAnchor" [level=4] [ref=e1254]:
+              - text: Conda
+              - link "Anchor" [ref=e1255] [cursor=pointer]:
+                - /url: "#conda-34"
+            - heading "OSXAnchor" [level=5] [ref=e1256]:
+              - text: OSX
+              - link "Anchor" [ref=e1257] [cursor=pointer]:
+                - /url: "#osx-69"
+            - code [ref=e1261]: "# conda conda install pytorch==1.0.1 torchvision==0.2.2 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1262]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1263] [cursor=pointer]:
+                - /url: "#linux-and-windows-69"
+            - code [ref=e1267]: "# CUDA 9.0 conda install pytorch==1.0.1 torchvision==0.2.2 cudatoolkit=9.0 -c pytorch # CUDA 10.0 conda install pytorch==1.0.1 torchvision==0.2.2 cudatoolkit=10.0 -c pytorch # CPU Only conda install pytorch-cpu==1.0.1 torchvision-cpu==0.2.2 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1268]:
+              - text: Wheel
+              - link "Anchor" [ref=e1269] [cursor=pointer]:
+                - /url: "#wheel-35"
+            - heading "OSXAnchor" [level=5] [ref=e1270]:
+              - text: OSX
+              - link "Anchor" [ref=e1271] [cursor=pointer]:
+                - /url: "#osx-70"
+            - code [ref=e1275]: pip install torch==1.0.1 torchvision==0.2.2
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1276]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1277] [cursor=pointer]:
+                - /url: "#linux-and-windows-70"
+            - code [ref=e1281]: "# CUDA 10.0 Download and install wheel from https://download.pytorch.org/whl/cu100/torch_stable.html # CUDA 9.0 Download and install wheel from https://download.pytorch.org/whl/cu90/torch_stable.html # CPU only Download and install wheel from https://download.pytorch.org/whl/cpu/torch_stable.html"
+            - heading "v1.0.0Anchor" [level=3] [ref=e1282]:
+              - text: v1.0.0
+              - link "Anchor" [ref=e1283] [cursor=pointer]:
+                - /url: "#v100"
+            - heading "CondaAnchor" [level=4] [ref=e1284]:
+              - text: Conda
+              - link "Anchor" [ref=e1285] [cursor=pointer]:
+                - /url: "#conda-35"
+            - heading "OSXAnchor" [level=5] [ref=e1286]:
+              - text: OSX
+              - link "Anchor" [ref=e1287] [cursor=pointer]:
+                - /url: "#osx-71"
+            - code [ref=e1291]: "# conda conda install pytorch==1.0.0 torchvision==0.2.1 -c pytorch"
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1292]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1293] [cursor=pointer]:
+                - /url: "#linux-and-windows-71"
+            - code [ref=e1297]: "# CUDA 10.0 conda install pytorch==1.0.0 torchvision==0.2.1 cuda100 -c pytorch # CUDA 9.0 conda install pytorch==1.0.0 torchvision==0.2.1 cuda90 -c pytorch # CUDA 8.0 conda install pytorch==1.0.0 torchvision==0.2.1 cuda80 -c pytorch # CPU Only conda install pytorch-cpu==1.0.0 torchvision-cpu==0.2.1 cpuonly -c pytorch"
+            - heading "WheelAnchor" [level=4] [ref=e1298]:
+              - text: Wheel
+              - link "Anchor" [ref=e1299] [cursor=pointer]:
+                - /url: "#wheel-36"
+            - heading "OSXAnchor" [level=5] [ref=e1300]:
+              - text: OSX
+              - link "Anchor" [ref=e1301] [cursor=pointer]:
+                - /url: "#osx-72"
+            - code [ref=e1305]: pip install torch==1.0.0 torchvision==0.2.1
+            - heading "Linux and WindowsAnchor" [level=5] [ref=e1306]:
+              - text: Linux and Windows
+              - link "Anchor" [ref=e1307] [cursor=pointer]:
+                - /url: "#linux-and-windows-72"
+            - code [ref=e1311]: "# CUDA 10.0 Download and install wheel from https://download.pytorch.org/whl/cu100/torch_stable.html # CUDA 9.0 Download and install wheel from https://download.pytorch.org/whl/cu90/torch_stable.html # CUDA 8.0 Download and install wheel from https://download.pytorch.org/whl/cu80/torch_stable.html # CPU only Download and install wheel from https://download.pytorch.org/whl/cpu/torch_stable.html"
+            - heading "Commands for Versions < 1.0.0Anchor" [level=2] [ref=e1312]:
+              - text: Commands for Versions < 1.0.0
+              - link "Anchor" [ref=e1313] [cursor=pointer]:
+                - /url: "#commands-for-versions--100-1"
+            - heading "Via condaAnchor" [level=3] [ref=e1314]:
+              - text: Via conda
+              - link "Anchor" [ref=e1315] [cursor=pointer]:
+                - /url: "#via-conda"
+            - blockquote [ref=e1316]:
+              - paragraph [ref=e1317]: This should be used for most previous macOS version installs.
+            - paragraph [ref=e1318]: To install a previous version of PyTorch via Anaconda or Miniconda, replace “0.4.1” in the following commands with the desired version (i.e., “0.2.0”).
+            - paragraph [ref=e1319]: Installing with CUDA 9
+            - paragraph [ref=e1320]:
+              - code [ref=e1321]: conda install pytorch=0.4.1 cuda90 -c pytorch
+            - paragraph [ref=e1322]: or
+            - paragraph [ref=e1323]:
+              - code [ref=e1324]: conda install pytorch=0.4.1 cuda92 -c pytorch
+            - paragraph [ref=e1325]: Installing with CUDA 8
+            - paragraph [ref=e1326]:
+              - code [ref=e1327]: conda install pytorch=0.4.1 cuda80 -c pytorch
+            - paragraph [ref=e1328]: Installing with CUDA 7.5
+            - paragraph [ref=e1329]:
+              - code [ref=e1330]: conda install pytorch=0.4.1 cuda75 -c pytorch
+            - paragraph [ref=e1331]: Installing without CUDA
+            - paragraph [ref=e1332]:
+              - code [ref=e1333]: conda install pytorch=0.4.1 -c pytorch
+            - heading "From sourceAnchor" [level=3] [ref=e1334]:
+              - text: From source
+              - link "Anchor" [ref=e1335] [cursor=pointer]:
+                - /url: "#from-source"
+            - paragraph [ref=e1336]:
+              - text: It is possible to checkout an older version of
+              - link "PyTorch" [ref=e1337] [cursor=pointer]:
+                - /url: https://github.com/pytorch/pytorch
+              - text: and build it. You can list tags in PyTorch git repository with
+              - code [ref=e1338]: git tag
+              - text: and checkout a particular one (replace ‘0.1.9’ with the desired version) with
+            - paragraph [ref=e1339]:
+              - code [ref=e1340]: git checkout v0.1.9
+            - paragraph [ref=e1341]: Follow the install from source instructions in the README.md of the PyTorch checkout.
+            - heading "Via pipAnchor" [level=3] [ref=e1342]:
+              - text: Via pip
+              - link "Anchor" [ref=e1343] [cursor=pointer]:
+                - /url: "#via-pip"
+            - paragraph [ref=e1344]:
+              - text: Download the
+              - code [ref=e1345]: whl
+              - text: "file with the desired version from the following html pages:"
+            - list [ref=e1346]:
+              - listitem [ref=e1347]:
+                - link "https://download.pytorch.org/whl/cpu/torch_stable.html" [ref=e1348] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch_stable.html?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+                - text: "# CPU-only build"
+              - listitem [ref=e1349]:
+                - link "https://download.pytorch.org/whl/cu80/torch_stable.html" [ref=e1350] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu80/torch_stable.html?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+                - text: "# CUDA 8.0 build"
+              - listitem [ref=e1351]:
+                - link "https://download.pytorch.org/whl/cu90/torch_stable.html" [ref=e1352] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu90/torch_stable.html?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+                - text: "# CUDA 9.0 build"
+              - listitem [ref=e1353]:
+                - link "https://download.pytorch.org/whl/cu92/torch_stable.html" [ref=e1354] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu92/torch_stable.html?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+                - text: "# CUDA 9.2 build"
+              - listitem [ref=e1355]:
+                - link "https://download.pytorch.org/whl/cu100/torch_stable.html" [ref=e1356] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu100/torch_stable.html?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+                - text: "# CUDA 10.0 build"
+            - paragraph [ref=e1357]:
+              - text: Then, install the file with
+              - code [ref=e1358]: pip install [downloaded file]
+            - paragraph [ref=e1359]: "Note: most pytorch versions are available only for specific CUDA versions. For example pytorch=1.0.1 is not available for CUDA 9.2"
+            - heading "(Old) PyTorch Linux binaries compiled with CUDA 7.5Anchor" [level=3] [ref=e1360]:
+              - text: (Old) PyTorch Linux binaries compiled with CUDA 7.5
+              - link "Anchor" [ref=e1361] [cursor=pointer]:
+                - /url: "#old-pytorch-linux-binaries-compiled-with-cuda-75"
+            - paragraph [ref=e1362]:
+              - text: These predate the html page above and have to be manually installed by downloading the wheel file and
+              - code [ref=e1363]: pip install downloaded_file
+            - list [ref=e1364]:
+              - listitem [ref=e1365]:
+                - link "cu75/torch-0.3.0.post4-cp36-cp36m-linux_x86_64.whl" [ref=e1366] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1367]:
+                - link "cu75/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl" [ref=e1368] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1369]:
+                - link "cu75/torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl" [ref=e1370] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1371]:
+                - link "cu75/torch-0.3.0.post4-cp27-cp27m-linux_x86_64.whl" [ref=e1372] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp27-cp27m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1373]:
+                - link "cu75/torch-0.2.0.post3-cp36-cp36m-manylinux1_x86_64.whl" [ref=e1374] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp36-cp36m-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1375]:
+                - link "cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl" [ref=e1376] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1377]:
+                - link "cu75/torch-0.2.0.post3-cp27-cp27mu-manylinux1_x86_64.whl" [ref=e1378] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp27-cp27mu-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1379]:
+                - link "cu75/torch-0.2.0.post3-cp27-cp27m-manylinux1_x86_64.whl" [ref=e1380] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp27-cp27m-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1381]:
+                - link "cu75/torch-0.2.0.post2-cp36-cp36m-manylinux1_x86_64.whl" [ref=e1382] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp36-cp36m-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1383]:
+                - link "cu75/torch-0.2.0.post2-cp35-cp35m-manylinux1_x86_64.whl" [ref=e1384] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp35-cp35m-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1385]:
+                - link "cu75/torch-0.2.0.post2-cp27-cp27mu-manylinux1_x86_64.whl" [ref=e1386] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp27-cp27mu-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1387]:
+                - link "cu75/torch-0.2.0.post2-cp27-cp27m-manylinux1_x86_64.whl" [ref=e1388] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp27-cp27m-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1389]:
+                - link "cu75/torch-0.2.0.post1-cp36-cp36m-manylinux1_x86_64.whl" [ref=e1390] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp36-cp36m-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1391]:
+                - link "cu75/torch-0.2.0.post1-cp35-cp35m-manylinux1_x86_64.whl" [ref=e1392] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp35-cp35m-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1393]:
+                - link "cu75/torch-0.2.0.post1-cp27-cp27mu-manylinux1_x86_64.whl" [ref=e1394] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp27-cp27mu-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1395]:
+                - link "cu75/torch-0.2.0.post1-cp27-cp27m-manylinux1_x86_64.whl" [ref=e1396] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp27-cp27m-manylinux1_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1397]:
+                - link "cu75/torch-0.1.12.post2-cp36-cp36m-linux_x86_64.whl" [ref=e1398] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1399]:
+                - link "cu75/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl" [ref=e1400] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1401]:
+                - link "cu75/torch-0.1.12.post2-cp27-none-linux_x86_64.whl" [ref=e1402] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1403]:
+                - link "cu75/torch-0.1.12.post1-cp36-cp36m-linux_x86_64.whl" [ref=e1404] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.12.post1-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1405]:
+                - link "cu75/torch-0.1.12.post1-cp35-cp35m-linux_x86_64.whl" [ref=e1406] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.12.post1-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1407]:
+                - link "cu75/torch-0.1.12.post1-cp27-none-linux_x86_64.whl" [ref=e1408] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.12.post1-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1409]:
+                - link "cu75/torch-0.1.11.post5-cp36-cp36m-linux_x86_64.whl" [ref=e1410] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.11.post5-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1411]:
+                - link "cu75/torch-0.1.11.post5-cp35-cp35m-linux_x86_64.whl" [ref=e1412] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.11.post5-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1413]:
+                - link "cu75/torch-0.1.11.post5-cp27-none-linux_x86_64.whl" [ref=e1414] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.11.post5-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1415]:
+                - link "cu75/torch-0.1.11.post4-cp36-cp36m-linux_x86_64.whl" [ref=e1416] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.11.post4-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1417]:
+                - link "cu75/torch-0.1.11.post4-cp35-cp35m-linux_x86_64.whl" [ref=e1418] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.11.post4-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1419]:
+                - link "cu75/torch-0.1.11.post4-cp27-none-linux_x86_64.whl" [ref=e1420] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.11.post4-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1421]:
+                - link "cu75/torch-0.1.10.post2-cp36-cp36m-linux_x86_64.whl" [ref=e1422] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.10.post2-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1423]:
+                - link "cu75/torch-0.1.10.post2-cp35-cp35m-linux_x86_64.whl" [ref=e1424] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.10.post2-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1425]:
+                - link "cu75/torch-0.1.10.post2-cp27-none-linux_x86_64.whl" [ref=e1426] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.10.post2-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1427]:
+                - link "cu75/torch-0.1.10.post1-cp36-cp36m-linux_x86_64.whl" [ref=e1428] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.10.post1-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1429]:
+                - link "cu75/torch-0.1.10.post1-cp35-cp35m-linux_x86_64.whl" [ref=e1430] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.10.post1-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1431]:
+                - link "cu75/torch-0.1.10.post1-cp27-none-linux_x86_64.whl" [ref=e1432] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.10.post1-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1433]:
+                - link "cu75/torch-0.1.9.post2-cp36-cp36m-linux_x86_64.whl" [ref=e1434] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.9.post2-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1435]:
+                - link "cu75/torch-0.1.9.post2-cp35-cp35m-linux_x86_64.whl" [ref=e1436] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.9.post2-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1437]:
+                - link "cu75/torch-0.1.9.post2-cp27-none-linux_x86_64.whl" [ref=e1438] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.9.post2-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1439]:
+                - link "cu75/torch-0.1.9.post1-cp36-cp36m-linux_x86_64.whl" [ref=e1440] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.9.post1-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1441]:
+                - link "cu75/torch-0.1.9.post1-cp35-cp35m-linux_x86_64.whl" [ref=e1442] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.9.post1-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1443]:
+                - link "cu75/torch-0.1.9.post1-cp27-none-linux_x86_64.whl" [ref=e1444] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.9.post1-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1445]:
+                - link "cu75/torch-0.1.8.post1-cp36-cp36m-linux_x86_64.whl" [ref=e1446] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.8.post1-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1447]:
+                - link "cu75/torch-0.1.8.post1-cp35-cp35m-linux_x86_64.whl" [ref=e1448] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.8.post1-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1449]:
+                - link "cu75/torch-0.1.8.post1-cp27-none-linux_x86_64.whl" [ref=e1450] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.8.post1-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1451]:
+                - link "cu75/torch-0.1.7.post2-cp36-cp36m-linux_x86_64.whl" [ref=e1452] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.7.post2-cp36-cp36m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1453]:
+                - link "cu75/torch-0.1.7.post2-cp35-cp35m-linux_x86_64.whl" [ref=e1454] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.7.post2-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1455]:
+                - link "cu75/torch-0.1.7.post2-cp27-none-linux_x86_64.whl" [ref=e1456] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.7.post2-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1457]:
+                - link "cu75/torch-0.1.6.post22-cp35-cp35m-linux_x86_64.whl" [ref=e1458] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.6.post22-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1459]:
+                - link "cu75/torch-0.1.6.post22-cp27-none-linux_x86_64.whl" [ref=e1460] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.6.post22-cp27-none-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1461]:
+                - link "cu75/torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl" [ref=e1462] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1463]:
+                - link "cu75/torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl" [ref=e1464] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu75/torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+            - heading "Windows binariesAnchor" [level=3] [ref=e1465]:
+              - text: Windows binaries
+              - link "Anchor" [ref=e1466] [cursor=pointer]:
+                - /url: "#windows-binaries"
+            - list [ref=e1467]:
+              - listitem [ref=e1468]:
+                - link "cpu/torch-1.0.0-cp35-cp35m-win_amd64.whl" [ref=e1469] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-1.0.0-cp35-cp35m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1470]:
+                - link "cu80/torch-1.0.0-cp35-cp35m-win_amd64.whl" [ref=e1471] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu80/torch-1.0.0-cp35-cp35m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1472]:
+                - link "cu90/torch-1.0.0-cp35-cp35m-win_amd64.whl" [ref=e1473] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu90/torch-1.0.0-cp35-cp35m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1474]:
+                - link "cu100/torch-1.0.0-cp35-cp35m-win_amd64.whl" [ref=e1475] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu100/torch-1.0.0-cp35-cp35m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1476]:
+                - link "cpu/torch-1.0.0-cp36-cp36m-win_amd64.whl" [ref=e1477] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-cp36m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1478]:
+                - link "cu80/torch-1.0.0-cp36-cp36m-win_amd64.whl" [ref=e1479] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu80/torch-1.0.0-cp36-cp36m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1480]:
+                - link "cu90/torch-1.0.0-cp36-cp36m-win_amd64.whl" [ref=e1481] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu90/torch-1.0.0-cp36-cp36m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1482]:
+                - link "cu100/torch-1.0.0-cp36-cp36m-win_amd64.whl" [ref=e1483] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1484]:
+                - link "cpu/torch-1.0.0-cp37-cp37m-win_amd64.whl" [ref=e1485] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-1.0.0-cp37-cp37m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1486]:
+                - link "cu80/torch-1.0.0-cp37-cp37m-win_amd64.whl" [ref=e1487] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu80/torch-1.0.0-cp37-cp37m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1488]:
+                - link "cu90/torch-1.0.0-cp37-cp37m-win_amd64.whl" [ref=e1489] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu90/torch-1.0.0-cp37-cp37m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1490]:
+                - link "cu100/torch-1.0.0-cp37-cp37m-win_amd64.whl" [ref=e1491] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu100/torch-1.0.0-cp37-cp37m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1492]:
+                - link "cpu/torch-0.4.1-cp35-cp35m-win_amd64.whl" [ref=e1493] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-0.4.1-cp35-cp35m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1494]:
+                - link "cu80/torch-0.4.1-cp35-cp35m-win_amd64.whl" [ref=e1495] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu80/torch-0.4.1-cp35-cp35m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1496]:
+                - link "cu90/torch-0.4.1-cp35-cp35m-win_amd64.whl" [ref=e1497] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu90/torch-0.4.1-cp35-cp35m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1498]:
+                - link "cu92/torch-0.4.1-cp35-cp35m-win_amd64.whl" [ref=e1499] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu92/torch-0.4.1-cp35-cp35m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1500]:
+                - link "cpu/torch-0.4.1-cp36-cp36m-win_amd64.whl" [ref=e1501] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-0.4.1-cp36-cp36m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1502]:
+                - link "cu80/torch-0.4.1-cp36-cp36m-win_amd64.whl" [ref=e1503] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu80/torch-0.4.1-cp36-cp36m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1504]:
+                - link "cu90/torch-0.4.1-cp36-cp36m-win_amd64.whl" [ref=e1505] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu90/torch-0.4.1-cp36-cp36m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1506]:
+                - link "cu92/torch-0.4.1-cp36-cp36m-win_amd64.whl" [ref=e1507] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu92/torch-0.4.1-cp36-cp36m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1508]:
+                - link "cpu/torch-0.4.1-cp37-cp37m-win_amd64.whl" [ref=e1509] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-0.4.1-cp37-cp37m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1510]:
+                - link "cu80/torch-0.4.1-cp37-cp37m-win_amd64.whl" [ref=e1511] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu80/torch-0.4.1-cp37-cp37m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1512]:
+                - link "cu90/torch-0.4.1-cp37-cp37m-win_amd64.whl" [ref=e1513] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu90/torch-0.4.1-cp37-cp37m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1514]:
+                - link "cu92/torch-0.4.1-cp37-cp37m-win_amd64.whl" [ref=e1515] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cu92/torch-0.4.1-cp37-cp37m-win_amd64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+            - heading "Mac and misc. binariesAnchor" [level=3] [ref=e1516]:
+              - text: Mac and misc. binaries
+              - link "Anchor" [ref=e1517] [cursor=pointer]:
+                - /url: "#mac-and-misc-binaries"
+            - paragraph [ref=e1518]:
+              - text: For recent macOS binaries, use
+              - code [ref=e1519]: conda
+              - text: ":"
+            - paragraph [ref=e1520]: e.g.,
+            - paragraph [ref=e1521]:
+              - code [ref=e1522]: conda install pytorch=0.4.1 cuda90 -c pytorch
+              - code [ref=e1523]: conda install pytorch=0.4.1 cuda92 -c pytorch
+              - code [ref=e1524]: conda install pytorch=0.4.1 cuda80 -c pytorch
+              - code [ref=e1525]: conda install pytorch=0.4.1 -c pytorch
+              - text: "# No CUDA"
+            - list [ref=e1526]:
+              - listitem [ref=e1527]:
+                - link "torchvision-0.1.6-py3-none-any.whl" [ref=e1528] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torchvision-0.1.6-py3-none-any.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1529]:
+                - link "torchvision-0.1.6-py2-none-any.whl" [ref=e1530] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torchvision-0.1.6-py2-none-any.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1531]:
+                - link "torch-1.0.0-cp37-none-macosx_10_7_x86_64.whl" [ref=e1532] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-1.0.0-cp37-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1533]:
+                - link "torch-1.0.0-cp36-none-macosx_10_7_x86_64.whl" [ref=e1534] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1535]:
+                - link "torch-1.0.0-cp35-none-macosx_10_6_x86_64.whl" [ref=e1536] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-1.0.0-cp35-none-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1537]:
+                - link "torch-1.0.0-cp27-none-macosx_10_6_x86_64.whl" [ref=e1538] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/cpu/torch-1.0.0-cp27-none-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1539]:
+                - link "torch-0.4.0-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1540] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.4.0-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1541]:
+                - link "torch-0.4.0-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1542] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.4.0-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1543]:
+                - link "torch-0.4.0-cp27-none-macosx_10_7_x86_64.whl" [ref=e1544] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.4.0-cp27-none-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1545]:
+                - link "torch-0.3.1-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1546] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.3.1-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1547]:
+                - link "torch-0.3.1-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1548] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.3.1-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1549]:
+                - link "torch-0.3.1-cp27-none-macosx_10_7_x86_64.whl" [ref=e1550] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.3.1-cp27-none-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1551]:
+                - link "torch-0.3.0.post4-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1552] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.3.0.post4-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1553]:
+                - link "torch-0.3.0.post4-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1554] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.3.0.post4-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1555]:
+                - link "torch-0.3.0.post4-cp27-none-macosx_10_7_x86_64.whl" [ref=e1556] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.3.0.post4-cp27-none-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1557]:
+                - link "torch-0.2.0.post3-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1558] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.2.0.post3-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1559]:
+                - link "torch-0.2.0.post3-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1560] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.2.0.post3-cp35-cp35m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1561]:
+                - link "torch-0.2.0.post3-cp27-none-macosx_10_7_x86_64.whl" [ref=e1562] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.2.0.post3-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1563]:
+                - link "torch-0.2.0.post2-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1564] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.2.0.post2-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1565]:
+                - link "torch-0.2.0.post2-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1566] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.2.0.post2-cp35-cp35m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1567]:
+                - link "torch-0.2.0.post2-cp27-none-macosx_10_7_x86_64.whl" [ref=e1568] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.2.0.post2-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1569]:
+                - link "torch-0.2.0.post1-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1570] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.2.0.post1-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1571]:
+                - link "torch-0.2.0.post1-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1572] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.2.0.post1-cp35-cp35m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1573]:
+                - link "torch-0.2.0.post1-cp27-none-macosx_10_7_x86_64.whl" [ref=e1574] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.2.0.post1-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1575]:
+                - link "torch-0.1.12.post2-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1576] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.12.post2-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1577]:
+                - link "torch-0.1.12.post2-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1578] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.12.post2-cp35-cp35m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1579]:
+                - link "torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl" [ref=e1580] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1581]:
+                - link "torch-0.1.12.post1-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1582] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.12.post1-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1583]:
+                - link "torch-0.1.12.post1-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1584] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.12.post1-cp35-cp35m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1585]:
+                - link "torch-0.1.12.post1-cp27-none-macosx_10_7_x86_64.whl" [ref=e1586] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.12.post1-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1587]:
+                - link "torch-0.1.11.post5-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1588] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.11.post5-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1589]:
+                - link "torch-0.1.11.post5-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1590] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.11.post5-cp35-cp35m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1591]:
+                - link "torch-0.1.11.post5-cp27-none-macosx_10_7_x86_64.whl" [ref=e1592] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.11.post5-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1593]:
+                - link "torch-0.1.11.post4-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1594] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.11.post4-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1595]:
+                - link "torch-0.1.11.post4-cp35-cp35m-macosx_10_7_x86_64.whl" [ref=e1596] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.11.post4-cp35-cp35m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1597]:
+                - link "torch-0.1.11.post4-cp27-none-macosx_10_7_x86_64.whl" [ref=e1598] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.11.post4-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1599]:
+                - link "torch-0.1.10.post1-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1600] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.10.post1-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1601]:
+                - link "torch-0.1.10.post1-cp35-cp35m-macosx_10_6_x86_64.whl" [ref=e1602] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.10.post1-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1603]:
+                - link "torch-0.1.10.post1-cp27-none-macosx_10_7_x86_64.whl" [ref=e1604] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.10.post1-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1605]:
+                - link "torch-0.1.9.post2-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1606] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.9.post2-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1607]:
+                - link "torch-0.1.9.post2-cp35-cp35m-macosx_10_6_x86_64.whl" [ref=e1608] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.9.post2-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1609]:
+                - link "torch-0.1.9.post2-cp27-none-macosx_10_7_x86_64.whl" [ref=e1610] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.9.post2-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1611]:
+                - link "torch-0.1.9.post1-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1612] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.9.post1-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1613]:
+                - link "torch-0.1.9.post1-cp35-cp35m-macosx_10_6_x86_64.whl" [ref=e1614] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.9.post1-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1615]:
+                - link "torch-0.1.9.post1-cp27-none-macosx_10_7_x86_64.whl" [ref=e1616] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.9.post1-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1617]:
+                - link "torch-0.1.8.post1-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1618] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.8.post1-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1619]:
+                - link "torch-0.1.8.post1-cp35-cp35m-macosx_10_6_x86_64.whl" [ref=e1620] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.8.post1-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1621]:
+                - link "torch-0.1.8.post1-cp27-none-macosx_10_7_x86_64.whl" [ref=e1622] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.8.post1-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1623]:
+                - link "torch-0.1.7.post2-cp36-cp36m-macosx_10_7_x86_64.whl" [ref=e1624] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.7.post2-cp36-cp36m-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1625]:
+                - link "torch-0.1.7.post2-cp35-cp35m-macosx_10_6_x86_64.whl" [ref=e1626] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.7.post2-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1627]:
+                - link "torch-0.1.7.post2-cp27-none-macosx_10_7_x86_64.whl" [ref=e1628] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.7.post2-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1629]:
+                - link "torch-0.1.6.post22-cp35-cp35m-macosx_10_6_x86_64.whl" [ref=e1630] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.6.post22-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1631]:
+                - link "torch-0.1.6.post22-cp27-none-macosx_10_7_x86_64.whl" [ref=e1632] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.6.post22-cp27-none-macosx_10_7_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1633]:
+                - link "torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl" [ref=e1634] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1635]:
+                - link "torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl" [ref=e1636] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1637]:
+                - link "torch-0.1.6.post17-cp35-cp35m-linux_x86_64.whl" [ref=e1638] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.6.post17-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1639]:
+                - link "torch-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl" [ref=e1640] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1641]:
+                - link "torch-0.1-cp35-cp35m-macosx_10_6_x86_64.whl" [ref=e1642] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1-cp35-cp35m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1643]:
+                - link "torch-0.1-cp27-cp27m-macosx_10_6_x86_64.whl" [ref=e1644] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch-0.1-cp27-cp27m-macosx_10_6_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1645]:
+                - link "torch_cuda80-0.1.6.post20-cp35-cp35m-linux_x86_64.whl" [ref=e1646] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch_cuda80-0.1.6.post20-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1647]:
+                - link "torch_cuda80-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl" [ref=e1648] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch_cuda80-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1649]:
+                - link "torch_cuda80-0.1.6.post17-cp35-cp35m-linux_x86_64.whl" [ref=e1650] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch_cuda80-0.1.6.post17-cp35-cp35m-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+              - listitem [ref=e1651]:
+                - link "torch_cuda80-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl" [ref=e1652] [cursor=pointer]:
+                  - /url: https://download.pytorch.org/whl/torch_cuda80-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl?__hstc=76629258.724dacd2270c1ae797f3a62ecd655d50.1746547368336.1746547368336.1746547368336.1&__hssc=76629258.9.1746547368336&__hsfp=2230748894
+      - contentinfo [ref=e1653]:
+        - generic [ref=e1654]:
+          - generic [ref=e1659]:
+            - generic [ref=e1663]:
+              - heading "Docs" [level=3] [ref=e1664]
+              - paragraph [ref=e1665]: Access comprehensive developer documentation for PyTorch
+              - paragraph [ref=e1666]:
+                - link "View Docs ›" [ref=e1668] [cursor=pointer]:
+                  - /url: /docs
+            - generic [ref=e1672]:
+              - heading "Tutorials" [level=3] [ref=e1673]
+              - paragraph [ref=e1674]: Get in-depth tutorials for beginners and advanced developers
+              - paragraph [ref=e1675]:
+                - link "View Tutorials ›" [ref=e1677] [cursor=pointer]:
+                  - /url: /tutorials
+            - generic [ref=e1681]:
+              - heading "Resources" [level=3] [ref=e1682]
+              - paragraph [ref=e1683]: Find development resources and get your questions answered
+              - paragraph [ref=e1684]:
+                - link "View Resources ›" [ref=e1686] [cursor=pointer]:
+                  - /url: /resources
+          - generic [ref=e1694]:
+            - heading "Stay in touch for updates, event info, and the latest news" [level=2] [ref=e1696]:
+              - strong [ref=e1697]: Stay in touch
+              - text: for updates, event info, and the latest news
+            - generic [ref=e1701]:
+              - textbox [ref=e1704]:
+                - /placeholder: First Name*
+              - textbox [ref=e1707]:
+                - /placeholder: Last Name*
+              - textbox [ref=e1710]:
+                - /placeholder: Email*
+              - combobox [ref=e1713]:
+                - option "Select Country*" [disabled] [selected]
+                - option "Afghanistan"
+                - option "Åland Islands"
+                - option "Albania"
+                - option "Algeria"
+                - option "American Samoa"
+                - option "Andorra"
+                - option "Angola"
+                - option "Anguilla"
+                - option "Antarctica"
+                - option "Antigua and Barbuda"
+                - option "Argentina"
+                - option "Armenia"
+                - option "Aruba"
+                - option "Asia/Pacific Region"
+                - option "Australia"
+                - option "Austria"
+                - option "Azerbaijan"
+                - option "Bahamas"
+                - option "Bahrain"
+                - option "Bangladesh"
+                - option "Barbados"
+                - option "Belarus"
+                - option "Belgium"
+                - option "Belize"
+                - option "Benin"
+                - option "Bermuda"
+                - option "Bhutan"
+                - option "Bolivia"
+                - option "Bosnia and Herzegovina"
+                - option "Botswana"
+                - option "Bouvet Island"
+                - option "Brazil"
+                - option "British Indian Ocean Territory"
+                - option "British Virgin Islands"
+                - option "Brunei"
+                - option "Bulgaria"
+                - option "Burkina Faso"
+                - option "Burundi"
+                - option "Cambodia"
+                - option "Cameroon"
+                - option "Canada"
+                - option "Canary Islands"
+                - option "Cape Verde"
+                - option "Caribbean Netherlands"
+                - option "Cayman Islands"
+                - option "Central African Republic"
+                - option "Chad"
+                - option "Chile"
+                - option "China"
+                - option "Christmas Island"
+                - option "Cocos (Keeling) Islands"
+                - option "Colombia"
+                - option "Comoros"
+                - option "Congo"
+                - option "Cook Islands"
+                - option "Costa Rica"
+                - option "Cote d'Ivoire"
+                - option "Croatia"
+                - option "Cuba"
+                - option "Curaçao"
+                - option "Cyprus"
+                - option "Czech Republic"
+                - option "Democratic Republic of the Congo"
+                - option "Denmark"
+                - option "Djibouti"
+                - option "Dominica"
+                - option "Dominican Republic"
+                - option "East Timor"
+                - option "Ecuador"
+                - option "Egypt"
+                - option "El Salvador"
+                - option "Equatorial Guinea"
+                - option "Eritrea"
+                - option "Estonia"
+                - option "Ethiopia"
+                - option "Europe"
+                - option "Falkland Islands"
+                - option "Faroe Islands"
+                - option "Fiji"
+                - option "Finland"
+                - option "France"
+                - option "French Guiana"
+                - option "French Polynesia"
+                - option "French Southern and Antarctic Lands"
+                - option "Gabon"
+                - option "Gambia"
+                - option "Georgia"
+                - option "Germany"
+                - option "Ghana"
+                - option "Gibraltar"
+                - option "Greece"
+                - option "Greenland"
+                - option "Grenada"
+                - option "Guadeloupe"
+                - option "Guam"
+                - option "Guatemala"
+                - option "Guernsey"
+                - option "Guinea"
+                - option "Guinea-Bissau"
+                - option "Guyana"
+                - option "Haiti"
+                - option "Heard Island and McDonald Islands"
+                - option "Honduras"
+                - option "Hong Kong"
+                - option "Hungary"
+                - option "Iceland"
+                - option "India"
+                - option "Indonesia"
+                - option "Iran"
+                - option "Iraq"
+                - option "Ireland"
+                - option "Isle of Man"
+                - option "Israel"
+                - option "Italy"
+                - option "Jamaica"
+                - option "Japan"
+                - option "Jersey"
+                - option "Jordan"
+                - option "Kazakhstan"
+                - option "Kenya"
+                - option "Kiribati"
+                - option "Kosovo"
+                - option "Kuwait"
+                - option "Kyrgyzstan"
+                - option "Laos"
+                - option "Latvia"
+                - option "Lebanon"
+                - option "Lesotho"
+                - option "Liberia"
+                - option "Libya"
+                - option "Liechtenstein"
+                - option "Lithuania"
+                - option "Luxembourg"
+                - option "Macau"
+                - option "Macedonia (FYROM)"
+                - option "Madagascar"
+                - option "Malawi"
+                - option "Malaysia"
+                - option "Maldives"
+                - option "Mali"
+                - option "Malta"
+                - option "Marshall Islands"
+                - option "Martinique"
+                - option "Mauritania"
+                - option "Mauritius"
+                - option "Mayotte"
+                - option "Mexico"
+                - option "Micronesia"
+                - option "Moldova"
+                - option "Monaco"
+                - option "Mongolia"
+                - option "Montenegro"
+                - option "Montserrat"
+                - option "Morocco"
+                - option "Mozambique"
+                - option "Myanmar (Burma)"
+                - option "Namibia"
+                - option "Nauru"
+                - option "Nepal"
+                - option "Netherlands"
+                - option "Netherlands Antilles"
+                - option "New Caledonia"
+                - option "New Zealand"
+                - option "Nicaragua"
+                - option "Niger"
+                - option "Nigeria"
+                - option "Niue"
+                - option "Norfolk Island"
+                - option "North Korea"
+                - option "Northern Mariana Islands"
+                - option "Norway"
+                - option "Oman"
+                - option "Pakistan"
+                - option "Palau"
+                - option "Palestine"
+                - option "Panama"
+                - option "Papua New Guinea"
+                - option "Paraguay"
+                - option "Peru"
+                - option "Philippines"
+                - option "Pitcairn Islands"
+                - option "Poland"
+                - option "Portugal"
+                - option "Puerto Rico"
+                - option "Qatar"
+                - option "Réunion"
+                - option "Romania"
+                - option "Russia"
+                - option "Rwanda"
+                - option "Saint Barthélemy"
+                - option "Saint Helena"
+                - option "Saint Kitts and Nevis"
+                - option "Saint Lucia"
+                - option "Saint Martin"
+                - option "Saint Pierre and Miquelon"
+                - option "Saint Vincent and the Grenadines"
+                - option "Samoa"
+                - option "San Marino"
+                - option "Sao Tome and Principe"
+                - option "Saudi Arabia"
+                - option "Senegal"
+                - option "Serbia"
+                - option "Seychelles"
+                - option "Sierra Leone"
+                - option "Singapore"
+                - option "Sint Maarten"
+                - option "Slovakia"
+                - option "Slovenia"
+                - option "Solomon Islands"
+                - option "Somalia"
+                - option "South Africa"
+                - option "South Georgia and the South Sandwich Islands"
+                - option "South Korea"
+                - option "South Sudan"
+                - option "Spain"
+                - option "Sri Lanka"
+                - option "Sudan"
+                - option "Suriname"
+                - option "Svalbard and Jan Mayen"
+                - option "Swaziland"
+                - option "Sweden"
+                - option "Switzerland"
+                - option "Syria"
+                - option "Taiwan"
+                - option "Tajikistan"
+                - option "Tanzania"
+                - option "Thailand"
+                - option "Togo"
+                - option "Tokelau"
+                - option "Tonga"
+                - option "Trinidad and Tobago"
+                - option "Tunisia"
+                - option "Türkiye"
+                - option "Turkmenistan"
+                - option "Turks and Caicos Islands"
+                - option "Tuvalu"
+                - option "U.S. Virgin Islands"
+                - option "Uganda"
+                - option "Ukraine"
+                - option "United Arab Emirates"
+                - option "United Kingdom"
+                - option "United States"
+                - option "United States Minor Outlying Islands"
+                - option "Uruguay"
+                - option "Uzbekistan"
+                - option "Vanuatu"
+                - option "Vatican City"
+                - option "Venezuela"
+                - option "Vietnam"
+                - option "Wallis and Futuna"
+                - option "Western Sahara"
+                - option "Yemen"
+                - option "Zambia"
+                - option "Zimbabwe"
+              - button "SUBMIT" [ref=e1716] [cursor=pointer]
+            - paragraph [ref=e1718]:
+              - generic [ref=e1719]:
+                - text: By submitting this form, I consent to receive marketing emails from the LF and its projects regarding their events, training, research, developments, and related announcements. I understand that I can unsubscribe at any time using the links in the footers of the emails I receive.
+                - link "Privacy Policy" [ref=e1720] [cursor=pointer]:
+                  - /url: https://www.linuxfoundation.org/privacy/
+                - text: .
+    - contentinfo [ref=e1721]:
+      - generic [ref=e1727]:
+        - list [ref=e1729]:
+          - listitem [ref=e1730]:
+            - link "x-twitter" [ref=e1731] [cursor=pointer]:
+              - /url: https://twitter.com/pytorch
+              - generic [ref=e1732]: x-twitter
+              - generic [ref=e1733]: 
+          - listitem [ref=e1734]:
+            - link "facebook" [ref=e1735] [cursor=pointer]:
+              - /url: https://www.facebook.com/pytorch
+              - generic [ref=e1736]: facebook
+              - generic [ref=e1737]: 
+          - listitem [ref=e1738]:
+            - link "linkedin" [ref=e1739] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/pytorch
+              - generic [ref=e1740]: linkedin
+              - generic [ref=e1741]: 
+          - listitem [ref=e1742]:
+            - link "youtube" [ref=e1743] [cursor=pointer]:
+              - /url: https://www.youtube.com/pytorch
+              - generic [ref=e1744]: youtube
+              - generic [ref=e1745]: 
+          - listitem [ref=e1746]:
+            - link "github" [ref=e1747] [cursor=pointer]:
+              - /url: https://github.com/pytorch/pytorch
+              - generic [ref=e1748]: github
+              - generic [ref=e1749]: 
+          - listitem [ref=e1750]:
+            - link "slack" [ref=e1751] [cursor=pointer]:
+              - /url: https://join.slack.com/t/pytorch/shared_invite/zt-2j2la612p-miUinTTaxXczKOJw48poHA
+              - generic [ref=e1752]: slack
+              - generic [ref=e1753]: 
+          - listitem [ref=e1754]:
+            - link "discord" [ref=e1755] [cursor=pointer]:
+              - /url: https://discord.com/invite/eNSRmh92XT
+              - generic [ref=e1756]: discord
+              - generic [ref=e1757]: 
+        - paragraph [ref=e1759]:
+          - text: © 2026 PyTorch. Copyright © The Linux Foundation®. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For more information, including terms of use, privacy policy, and trademark usage, please see our
+          - link "Policies" [ref=e1760] [cursor=pointer]:
+            - /url: https://www.linuxfoundation.org/legal/policies
+          - text: page.
+          - link "Trademark Usage" [ref=e1761] [cursor=pointer]:
+            - /url: https://www.linuxfoundation.org/trademark-usage
+          - text: .
+          - link "Privacy Policy" [ref=e1762] [cursor=pointer]:
+            - /url: http://www.linuxfoundation.org/privacy
+          - text: .
+    - dialog "Off Canvas Menu" [ref=e1764]:
+      - generic:
+        - generic:
+          - link "Close Menu " [ref=e1765] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e1766]: Close Menu
+            - generic [ref=e1767]: 
+          - text:      
+    - generic:
+      - generic:
+        - button "Menu":
+          - generic:
+            - generic: Menu
+  - button "Back to top" [ref=e1768] [cursor=pointer]:  

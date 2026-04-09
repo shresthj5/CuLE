@@ -12,12 +12,54 @@
 
 #include <agency/agency.hpp>
 
+#ifndef CULE_ATARI_ENV_BLOCK_SIZE
+#define CULE_ATARI_ENV_BLOCK_SIZE 1
+#endif
+
+#ifndef CULE_ATARI_PROCESS_BLOCK_SIZE
+#define CULE_ATARI_PROCESS_BLOCK_SIZE 64
+#endif
+
 namespace cule
 {
 namespace atari
 {
 namespace dispatch
 {
+
+namespace detail
+{
+
+constexpr size_t ENV_BLOCK_SIZE = CULE_ATARI_ENV_BLOCK_SIZE;
+constexpr size_t PROCESS_BLOCK_SIZE = CULE_ATARI_PROCESS_BLOCK_SIZE;
+
+constexpr bool valid_env_block_size()
+{
+    return ENV_BLOCK_SIZE == 1 ||
+           (ENV_BLOCK_SIZE >= 32 &&
+            ENV_BLOCK_SIZE <= 256 &&
+            (ENV_BLOCK_SIZE & (ENV_BLOCK_SIZE - 1)) == 0);
+}
+
+constexpr bool valid_process_block_size()
+{
+    return PROCESS_BLOCK_SIZE == 1 ||
+           (PROCESS_BLOCK_SIZE >= 32 &&
+            PROCESS_BLOCK_SIZE <= 256 &&
+            (PROCESS_BLOCK_SIZE & (PROCESS_BLOCK_SIZE - 1)) == 0);
+}
+
+static_assert(valid_env_block_size(),
+              "CULE_ATARI_ENV_BLOCK_SIZE must be 1 or a power of two in [32, 256]");
+static_assert(valid_process_block_size(),
+              "CULE_ATARI_PROCESS_BLOCK_SIZE must be 1 or a power of two in [32, 256]");
+
+constexpr size_t num_blocks(const size_t num_items, const size_t block_size)
+{
+    return (num_items + block_size - 1) / block_size;
+}
+
+} // namespace detail
 
 template<typename Environment,
          typename Wrapper>
@@ -26,8 +68,8 @@ reset(cule::cuda::parallel_execution_policy& policy,
       Wrapper& wrap,
       uint32_t*)
 {
-    const size_t BLOCK_SIZE = 1UL;
-    const size_t NUM_BLOCKS = std::ceil(float(wrap.size()) / BLOCK_SIZE);
+    constexpr size_t BLOCK_SIZE = detail::ENV_BLOCK_SIZE;
+    const size_t NUM_BLOCKS = detail::num_blocks(wrap.size(), BLOCK_SIZE);
 
     using State_t = typename Wrapper::State_t;
 
@@ -105,8 +147,8 @@ reset_states(cule::cuda::parallel_execution_policy& policy,
 {
     using State_t = typename Wrapper::State_t;
 
-    const size_t BLOCK_SIZE = 1UL;
-    const size_t NUM_BLOCKS = std::ceil(float(wrap.size()) / BLOCK_SIZE);
+    constexpr size_t BLOCK_SIZE = detail::ENV_BLOCK_SIZE;
+    const size_t NUM_BLOCKS = detail::num_blocks(wrap.size(), BLOCK_SIZE);
 
     cule::atari::cuda::reset_kernel<State_t, BLOCK_SIZE>
     <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
@@ -135,8 +177,8 @@ step(cule::cuda::parallel_execution_policy& policy,
 {
     using State_t = typename Wrapper::State_t;
 
-    const size_t BLOCK_SIZE = 1UL;
-    const size_t NUM_BLOCKS = std::ceil(float(wrap.size()) / BLOCK_SIZE);
+    constexpr size_t BLOCK_SIZE = detail::ENV_BLOCK_SIZE;
+    const size_t NUM_BLOCKS = detail::num_blocks(wrap.size(), BLOCK_SIZE);
 
     cule::atari::cuda::step_kernel<State_t, Environment, BLOCK_SIZE>
     <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
@@ -190,8 +232,8 @@ preprocess(cule::cuda::parallel_execution_policy& policy,
 {
     using State_t = typename Wrapper::State_t;
 
-    const size_t BLOCK_SIZE = 1UL;
-    const size_t NUM_BLOCKS = std::ceil(float(wrap.size()) / BLOCK_SIZE);
+    constexpr size_t BLOCK_SIZE = detail::PROCESS_BLOCK_SIZE;
+    const size_t NUM_BLOCKS = detail::num_blocks(wrap.size(), BLOCK_SIZE);
 
     cule::atari::cuda::process_kernel<State_t, BLOCK_SIZE>
     <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
@@ -323,4 +365,3 @@ set_states(cule::cuda::parallel_execution_policy& policy,
 } // end namespace dispatch
 } // end namespace atari
 } // end namespace cule
-

@@ -2,6 +2,7 @@
 
 #include <cule/config.hpp>
 
+#include <cstdint>
 #include <cstdlib>
 
 namespace cule
@@ -423,4 +424,3 @@ enum : uint32_t
 
 } // end namespace atari
 } // end namespace cule
-

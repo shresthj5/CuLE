@@ -3,7 +3,7 @@ import subprocess
 import os
 
 parser = argparse.ArgumentParser(description='Test A2C+V-trace, multiple configurations')
-parser.add_argument('--game-name', default='PongNoFrameskip-v4', help='name of the game (default = PongNoFrameskip-v4)')
+parser.add_argument('--game-name', default='ALE/Pong-v5', help='name of the game (default = ALE/Pong-v5)')
 parser.add_argument('--t-max', default=20, type=int, help='number of training frames (default=20M)')
 args = parser.parse_args()
 

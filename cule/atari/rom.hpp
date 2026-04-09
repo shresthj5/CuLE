@@ -24,11 +24,11 @@ public:
 
     static const char* names[_ROM_MAX];
 
-    rom(const std::string& filename = "");
+    rom(const std::string& filename = "", const std::string& game_name = "");
 
     rom(const rom& other);
 
-    void reset(const std::string& filename);
+    void reset(const std::string& filename, const std::string& game_name = "");
 
     std::vector<Action> const& minimal_actions() const;
 
@@ -103,4 +103,3 @@ private:
 
 } // end namespace atari
 } // end namespace cule
-

@@ -202,13 +202,13 @@ ROM_FORMAT detect_type(const int32_t size, const uint8_t* data)
 }
 } // end namespace detail
 
-rom::rom(const std::string& filename)
+rom::rom(const std::string& filename, const std::string& game_name)
     : _ram_size(0),
       _rom_size(0)
 {
     if(filename.size())
     {
-        reset(filename);
+        reset(filename, game_name);
     }
 }
 
@@ -223,7 +223,7 @@ rom::rom(const rom& other)
       _minimal_actions(other._minimal_actions)
 {}
 
-void rom::reset(const std::string& filename)
+void rom::reset(const std::string& filename, const std::string& game_name)
 {
     _filename = filename;
 
@@ -235,7 +235,17 @@ void rom::reset(const std::string& filename)
     gzclose(f);
 
     compute_md5();
-    set_game_id();
+    if(game_name.empty())
+    {
+        set_game_id();
+    }
+    else
+    {
+        auto game_it = games::canonical_game_map.find(game_name);
+        CULE_ASSERT(game_it != games::canonical_game_map.end(), "Unsupported game name " << game_name);
+        _gameId = game_it->second;
+        _minimal_actions = getMinimalActionSet(_gameId);
+    }
 
     _type = detail::detect_type(rom_size(), data());
 
@@ -402,7 +412,9 @@ bool rom::has_banks() const
 
 void rom::set_game_id()
 {
-    _gameId = games::rom_game_map[md5()];
+    auto game_it = games::rom_game_map.find(md5());
+    CULE_ASSERT(game_it != games::rom_game_map.end(), "Unsupported ROM md5 " << md5() << " for " << file_name());
+    _gameId = game_it->second;
     _minimal_actions = getMinimalActionSet(_gameId);
 }
 
@@ -453,4 +465,3 @@ rom_initialize startup;
 
 } // end namespace atari
 } // end namespace cule
-

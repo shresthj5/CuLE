@@ -1,11 +1,54 @@
 #include <cule/cule.hpp>
 #include <cule/cuda.hpp>
 
+#include <cuda_runtime.h>
+
 #include <torchcule/atari_env.hpp>
 #include <torchcule/atari_state.hpp>
 #include <torchcule/atari_state.cpp>
 
 using cule_policy = cule::cuda::parallel_execution_policy;
+
+namespace
+{
+template<typename T>
+class device_buffer
+{
+public:
+    explicit device_buffer(const size_t count)
+        : ptr_(nullptr)
+    {
+        if(count != 0)
+        {
+            CULE_ERRCHK(cudaMalloc(&ptr_, sizeof(T) * count));
+        }
+    }
+
+    ~device_buffer()
+    {
+        if(ptr_ != nullptr)
+        {
+            CULE_ERRCHK(cudaFree(ptr_));
+        }
+    }
+
+    device_buffer(const device_buffer&) = delete;
+    device_buffer& operator=(const device_buffer&) = delete;
+
+    T* data()
+    {
+        return static_cast<T*>(ptr_);
+    }
+
+    const T* data() const
+    {
+        return static_cast<const T*>(ptr_);
+    }
+
+private:
+    void* ptr_;
+};
+} // namespace
 
 AtariEnv::
 AtariEnv(const cule::atari::rom& cart,
@@ -71,25 +114,42 @@ get_states(const size_t num_states,
 
     if(use_cuda)
     {
-        agency::vector<cule::atari::state, agency::cuda::allocator<cule::atari::state>> output_states_gpu(num_states);
-        agency::vector<cule::atari::frame_state, agency::cuda::allocator<cule::atari::frame_state>> output_frame_states_gpu(num_states);
-        agency::vector<uint8_t, agency::cuda::allocator<uint8_t>> output_states_ram_gpu(256 * num_states);
-        agency::vector<int32_t, agency::cuda::allocator<int32_t>> indices_gpu(indices_ptr, indices_ptr + num_states);
+        auto& policy = get_policy<cule_policy>();
+        device_buffer<cule::atari::state> output_states_gpu(num_states);
+        device_buffer<cule::atari::frame_state> output_frame_states_gpu(num_states);
+        device_buffer<uint8_t> output_states_ram_gpu(256 * num_states);
+        device_buffer<int32_t> indices_gpu(num_states);
 
-        super_t::get_states(get_policy<cule_policy>(), num_states, indices_gpu.data(), output_states_gpu.data(), output_frame_states_gpu.data(), output_states_ram_gpu.data());
-        get_policy<cule_policy>().sync();
+        CULE_ERRCHK(cudaMemcpyAsync(indices_gpu.data(),
+                                    indices_ptr,
+                                    sizeof(int32_t) * num_states,
+                                    cudaMemcpyHostToDevice,
+                                    policy.getStream()));
 
-        agency::detail::copy(get_policy<agency::parallel_execution_policy>(), output_states_gpu.begin(), output_states_gpu.end(), output_states.begin());
-        agency::detail::copy(get_policy<agency::parallel_execution_policy>(), output_frame_states_gpu.begin(), output_frame_states_gpu.end(), output_frame_states.begin());
-        agency::detail::copy(get_policy<agency::parallel_execution_policy>(), output_states_ram_gpu.begin(), output_states_ram_gpu.end(), output_states_ram.begin());
-        get_policy<cule_policy>().sync();
+        super_t::get_states(policy, num_states, indices_gpu.data(), output_states_gpu.data(), output_frame_states_gpu.data(), output_states_ram_gpu.data());
+        policy.sync();
+
+        CULE_ERRCHK(cudaMemcpy(output_states.data(),
+                               output_states_gpu.data(),
+                               sizeof(cule::atari::state) * num_states,
+                               cudaMemcpyDeviceToHost));
+        CULE_ERRCHK(cudaMemcpy(output_frame_states.data(),
+                               output_frame_states_gpu.data(),
+                               sizeof(cule::atari::frame_state) * num_states,
+                               cudaMemcpyDeviceToHost));
+        CULE_ERRCHK(cudaMemcpy(output_states_ram.data(),
+                               output_states_ram_gpu.data(),
+                               sizeof(uint8_t) * 256 * num_states,
+                               cudaMemcpyDeviceToHost));
     }
     else
     {
         super_t::get_states(get_policy<agency::parallel_execution_policy>(), num_states, indices_ptr, output_states.data(), output_frame_states.data(), nullptr);
     }
 
-    agency::bulk_invoke(get_policy<agency::parallel_execution_policy>()(num_states),
+    // Keep state decoding sequential. This bridge touches non-trivial host-side
+    // Python-facing structures and is not on the emulator hot path.
+    agency::bulk_invoke(agency::seq(num_states),
                         decode_states_functor{},
                         use_cuda,
                         this->cart,
@@ -119,14 +179,36 @@ set_states(const size_t num_states,
 
     if(use_cuda)
     {
-        agency::vector<cule::atari::state, agency::cuda::allocator<cule::atari::state>> input_states_gpu(input_states.begin(), input_states.end());
-        agency::vector<cule::atari::frame_state, agency::cuda::allocator<cule::atari::frame_state>> input_frame_states_gpu(input_frame_states.begin(), input_frame_states.end());
-        agency::vector<uint8_t, agency::cuda::allocator<uint8_t>> input_states_ram_gpu(input_states_ram.begin(), input_states_ram.end());
-        agency::vector<int32_t, agency::cuda::allocator<int32_t>> indices_gpu(indices_ptr, indices_ptr + num_states);
+        auto& policy = get_policy<cule_policy>();
+        device_buffer<cule::atari::state> input_states_gpu(num_states);
+        device_buffer<cule::atari::frame_state> input_frame_states_gpu(num_states);
+        device_buffer<uint8_t> input_states_ram_gpu(256 * num_states);
+        device_buffer<int32_t> indices_gpu(num_states);
 
-        super_t::set_states(get_policy<cule_policy>(), num_states, indices_gpu.data(), input_states_gpu.data(),
+        CULE_ERRCHK(cudaMemcpyAsync(input_states_gpu.data(),
+                                    input_states.data(),
+                                    sizeof(cule::atari::state) * num_states,
+                                    cudaMemcpyHostToDevice,
+                                    policy.getStream()));
+        CULE_ERRCHK(cudaMemcpyAsync(input_frame_states_gpu.data(),
+                                    input_frame_states.data(),
+                                    sizeof(cule::atari::frame_state) * num_states,
+                                    cudaMemcpyHostToDevice,
+                                    policy.getStream()));
+        CULE_ERRCHK(cudaMemcpyAsync(input_states_ram_gpu.data(),
+                                    input_states_ram.data(),
+                                    sizeof(uint8_t) * 256 * num_states,
+                                    cudaMemcpyHostToDevice,
+                                    policy.getStream()));
+        CULE_ERRCHK(cudaMemcpyAsync(indices_gpu.data(),
+                                    indices_ptr,
+                                    sizeof(int32_t) * num_states,
+                                    cudaMemcpyHostToDevice,
+                                    policy.getStream()));
+
+        super_t::set_states(policy, num_states, indices_gpu.data(), input_states_gpu.data(),
                             input_frame_states_gpu.data(), input_states_ram_gpu.data());
-        get_policy<cule_policy>().sync();
+        policy.sync();
     }
     else
     {
@@ -281,4 +363,3 @@ tia_update_size()
 
 #include <cule/atari/rom.cpp>
 #include <cule/atari/wrapper.cpp>
-

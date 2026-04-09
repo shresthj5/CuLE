@@ -1,0 +1,706 @@
+- generic [active] [ref=e1]:
+  - banner "Farama header" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Light Logo ALE Documentation" [ref=e5] [cursor=pointer]:
+        - /url: ../../
+        - img "Light Logo" [ref=e6]
+        - generic [ref=e7]: ALE Documentation
+      - button "Open Farama Menu" [ref=e10] [cursor=pointer]:
+        - img [ref=e11]
+        - img [ref=e12]
+  - generic [ref=e14]: Hide navigation sidebar
+  - generic [ref=e15]: Hide table of contents sidebar
+  - generic [ref=e16]:
+    - complementary [ref=e17]:
+      - generic [ref=e19]:
+        - link "Light Logo ALE Documentation" [ref=e20] [cursor=pointer]:
+          - /url: ../../
+          - img "Light Logo" [ref=e21]
+          - generic [ref=e22]: ALE Documentation
+        - search [ref=e23]:
+          - textbox "Search" [ref=e24]
+        - generic [ref=e26]:
+          - heading "Introduction" [ref=e27]
+          - list [ref=e28]:
+            - listitem [ref=e29]:
+              - link "Installation" [ref=e30] [cursor=pointer]:
+                - /url: ../../getting-started/
+            - listitem [ref=e31]:
+              - link "Environment Specifications" [ref=e32] [cursor=pointer]:
+                - /url: ../../env-spec/
+            - listitem [ref=e33]:
+              - link "Environments" [ref=e34] [cursor=pointer]:
+                - /url: ../
+              - generic [ref=e35] [cursor=pointer]:
+                - generic [ref=e36]: Toggle navigation of Environments
+                - img [ref=e38]
+              - list [ref=e40]:
+                - listitem [ref=e41]:
+                  - link "Adventure" [ref=e42] [cursor=pointer]:
+                    - /url: ../adventure/
+                - listitem [ref=e43]:
+                  - link "AirRaid" [ref=e44] [cursor=pointer]:
+                    - /url: ../air_raid/
+                - listitem [ref=e45]:
+                  - link "Alien" [ref=e46] [cursor=pointer]:
+                    - /url: ../alien/
+                - listitem [ref=e47]:
+                  - link "Amidar" [ref=e48] [cursor=pointer]:
+                    - /url: ../amidar/
+                - listitem [ref=e49]:
+                  - link "Assault" [ref=e50] [cursor=pointer]:
+                    - /url: ../assault/
+                - listitem [ref=e51]:
+                  - link "Asterix" [ref=e52] [cursor=pointer]:
+                    - /url: ../asterix/
+                - listitem [ref=e53]:
+                  - link "Asteroids" [ref=e54] [cursor=pointer]:
+                    - /url: ../asteroids/
+                - listitem [ref=e55]:
+                  - link "Atlantis" [ref=e56] [cursor=pointer]:
+                    - /url: ../atlantis/
+                - listitem [ref=e57]:
+                  - link "Atlantis2" [ref=e58] [cursor=pointer]:
+                    - /url: ../atlantis2/
+                - listitem [ref=e59]:
+                  - link "Backgammon" [ref=e60] [cursor=pointer]:
+                    - /url: ../backgammon/
+                - listitem [ref=e61]:
+                  - link "BankHeist" [ref=e62] [cursor=pointer]:
+                    - /url: ../bank_heist/
+                - listitem [ref=e63]:
+                  - link "BasicMath" [ref=e64] [cursor=pointer]:
+                    - /url: ../basic_math/
+                - listitem [ref=e65]:
+                  - link "BattleZone" [ref=e66] [cursor=pointer]:
+                    - /url: ../battle_zone/
+                - listitem [ref=e67]:
+                  - link "BeamRider" [ref=e68] [cursor=pointer]:
+                    - /url: ../beam_rider/
+                - listitem [ref=e69]:
+                  - link "Berzerk" [ref=e70] [cursor=pointer]:
+                    - /url: ../berzerk/
+                - listitem [ref=e71]:
+                  - link "Blackjack" [ref=e72] [cursor=pointer]:
+                    - /url: ../blackjack/
+                - listitem [ref=e73]:
+                  - link "Bowling" [ref=e74] [cursor=pointer]:
+                    - /url: ../bowling/
+                - listitem [ref=e75]:
+                  - link "Boxing" [ref=e76] [cursor=pointer]:
+                    - /url: ../boxing/
+                - listitem [ref=e77]:
+                  - link "Breakout" [ref=e78] [cursor=pointer]:
+                    - /url: ../breakout/
+                - listitem [ref=e79]:
+                  - link "Carnival" [ref=e80] [cursor=pointer]:
+                    - /url: ../carnival/
+                - listitem [ref=e81]:
+                  - link "Casino" [ref=e82] [cursor=pointer]:
+                    - /url: ../casino/
+                - listitem [ref=e83]:
+                  - link "Centipede" [ref=e84] [cursor=pointer]:
+                    - /url: ../centipede/
+                - listitem [ref=e85]:
+                  - link "ChopperCommand" [ref=e86] [cursor=pointer]:
+                    - /url: ../chopper_command/
+                - listitem [ref=e87]:
+                  - link "CrazyClimber" [ref=e88] [cursor=pointer]:
+                    - /url: ../crazy_climber/
+                - listitem [ref=e89]:
+                  - link "Crossbow" [ref=e90] [cursor=pointer]:
+                    - /url: ../crossbow/
+                - listitem [ref=e91]:
+                  - link "Darkchambers" [ref=e92] [cursor=pointer]:
+                    - /url: ../darkchambers/
+                - listitem [ref=e93]:
+                  - link "Defender" [ref=e94] [cursor=pointer]:
+                    - /url: ../defender/
+                - listitem [ref=e95]:
+                  - link "DemonAttack" [ref=e96] [cursor=pointer]:
+                    - /url: ../demon_attack/
+                - listitem [ref=e97]:
+                  - link "DonkeyKong" [ref=e98] [cursor=pointer]:
+                    - /url: ../donkey_kong/
+                - listitem [ref=e99]:
+                  - link "DoubleDunk" [ref=e100] [cursor=pointer]:
+                    - /url: ../double_dunk/
+                - listitem [ref=e101]:
+                  - link "Earthworld" [ref=e102] [cursor=pointer]:
+                    - /url: ../earthworld/
+                - listitem [ref=e103]:
+                  - link "ElevatorAction" [ref=e104] [cursor=pointer]:
+                    - /url: ../elevator_action/
+                - listitem [ref=e105]:
+                  - link "Enduro" [ref=e106] [cursor=pointer]:
+                    - /url: ../enduro/
+                - listitem [ref=e107]:
+                  - link "Entombed" [ref=e108] [cursor=pointer]:
+                    - /url: ../entombed/
+                - listitem [ref=e109]:
+                  - link "Et" [ref=e110] [cursor=pointer]:
+                    - /url: ../et/
+                - listitem [ref=e111]:
+                  - link "FishingDerby" [ref=e112] [cursor=pointer]:
+                    - /url: ../fishing_derby/
+                - listitem [ref=e113]:
+                  - link "FlagCapture" [ref=e114] [cursor=pointer]:
+                    - /url: ../flag_capture/
+                - listitem [ref=e115]:
+                  - link "Freeway" [ref=e116] [cursor=pointer]:
+                    - /url: ../freeway/
+                - listitem [ref=e117]:
+                  - link "Frogger" [ref=e118] [cursor=pointer]:
+                    - /url: ../frogger/
+                - listitem [ref=e119]:
+                  - link "Frostbite" [ref=e120] [cursor=pointer]:
+                    - /url: ../frostbite/
+                - listitem [ref=e121]:
+                  - link "Galaxian" [ref=e122] [cursor=pointer]:
+                    - /url: ../galaxian/
+                - listitem [ref=e123]:
+                  - link "Gopher" [ref=e124] [cursor=pointer]:
+                    - /url: ../gopher/
+                - listitem [ref=e125]:
+                  - link "Gravitar" [ref=e126] [cursor=pointer]:
+                    - /url: ../gravitar/
+                - listitem [ref=e127]:
+                  - link "Hangman" [ref=e128] [cursor=pointer]:
+                    - /url: ../hangman/
+                - listitem [ref=e129]:
+                  - link "HauntedHouse" [ref=e130] [cursor=pointer]:
+                    - /url: ../haunted_house/
+                - listitem [ref=e131]:
+                  - link "Hero" [ref=e132] [cursor=pointer]:
+                    - /url: ../hero/
+                - listitem [ref=e133]:
+                  - link "HumanCannonball" [ref=e134] [cursor=pointer]:
+                    - /url: ../human_cannonball/
+                - listitem [ref=e135]:
+                  - link "IceHockey" [ref=e136] [cursor=pointer]:
+                    - /url: ../ice_hockey/
+                - listitem [ref=e137]:
+                  - link "Jamesbond" [ref=e138] [cursor=pointer]:
+                    - /url: ../jamesbond/
+                - listitem [ref=e139]:
+                  - link "JourneyEscape" [ref=e140] [cursor=pointer]:
+                    - /url: ../journey_escape/
+                - listitem [ref=e141]:
+                  - link "Kaboom" [ref=e142] [cursor=pointer]:
+                    - /url: ../kaboom/
+                - listitem [ref=e143]:
+                  - link "Kangaroo" [ref=e144] [cursor=pointer]:
+                    - /url: ../kangaroo/
+                - listitem [ref=e145]:
+                  - link "KeystoneKapers" [ref=e146] [cursor=pointer]:
+                    - /url: ../keystone_kapers/
+                - listitem [ref=e147]:
+                  - link "KingKong" [ref=e148] [cursor=pointer]:
+                    - /url: ../king_kong/
+                - listitem [ref=e149]:
+                  - link "Klax" [ref=e150] [cursor=pointer]:
+                    - /url: ../klax/
+                - listitem [ref=e151]:
+                  - link "Koolaid" [ref=e152] [cursor=pointer]:
+                    - /url: ../koolaid/
+                - listitem [ref=e153]:
+                  - link "Krull" [ref=e154] [cursor=pointer]:
+                    - /url: ../krull/
+                - listitem [ref=e155]:
+                  - link "KungFuMaster" [ref=e156] [cursor=pointer]:
+                    - /url: ../kung_fu_master/
+                - listitem [ref=e157]:
+                  - link "LaserGates" [ref=e158] [cursor=pointer]:
+                    - /url: ../laser_gates/
+                - listitem [ref=e159]:
+                  - link "LostLuggage" [ref=e160] [cursor=pointer]:
+                    - /url: ../lost_luggage/
+                - listitem [ref=e161]:
+                  - link "MarioBros" [ref=e162] [cursor=pointer]:
+                    - /url: ../mario_bros/
+                - listitem [ref=e163]:
+                  - link "MiniatureGolf" [ref=e164] [cursor=pointer]:
+                    - /url: ../miniature_golf/
+                - listitem [ref=e165]:
+                  - link "MontezumaRevenge" [ref=e166] [cursor=pointer]:
+                    - /url: ../montezuma_revenge/
+                - listitem [ref=e167]:
+                  - link "MrDo" [ref=e168] [cursor=pointer]:
+                    - /url: ../mr_do/
+                - listitem [ref=e169]:
+                  - link "MsPacman" [ref=e170] [cursor=pointer]:
+                    - /url: ../ms_pacman/
+                - listitem [ref=e171]:
+                  - link "NameThisGame" [ref=e172] [cursor=pointer]:
+                    - /url: ../name_this_game/
+                - listitem [ref=e173]:
+                  - link "Othello" [ref=e174] [cursor=pointer]:
+                    - /url: ../othello/
+                - listitem [ref=e175]:
+                  - link "Pacman" [ref=e176] [cursor=pointer]:
+                    - /url: ../pacman/
+                - listitem [ref=e177]:
+                  - link "Phoenix" [ref=e178] [cursor=pointer]:
+                    - /url: ../phoenix/
+                - listitem [ref=e179]:
+                  - link "Pitfall" [ref=e180] [cursor=pointer]:
+                    - /url: ../pitfall/
+                - listitem [ref=e181]:
+                  - link "Pitfall2" [ref=e182] [cursor=pointer]:
+                    - /url: ../pitfall2/
+                - listitem [ref=e183]:
+                  - link "Pong" [ref=e184] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e185]:
+                  - link "Pooyan" [ref=e186] [cursor=pointer]:
+                    - /url: ../pooyan/
+                - listitem [ref=e187]:
+                  - link "PrivateEye" [ref=e188] [cursor=pointer]:
+                    - /url: ../private_eye/
+                - listitem [ref=e189]:
+                  - link "Qbert" [ref=e190] [cursor=pointer]:
+                    - /url: ../qbert/
+                - listitem [ref=e191]:
+                  - link "Riverraid" [ref=e192] [cursor=pointer]:
+                    - /url: ../riverraid/
+                - listitem [ref=e193]:
+                  - link "RoadRunner" [ref=e194] [cursor=pointer]:
+                    - /url: ../road_runner/
+                - listitem [ref=e195]:
+                  - link "Robotank" [ref=e196] [cursor=pointer]:
+                    - /url: ../robotank/
+                - listitem [ref=e197]:
+                  - link "Seaquest" [ref=e198] [cursor=pointer]:
+                    - /url: ../seaquest/
+                - listitem [ref=e199]:
+                  - link "SirLancelot" [ref=e200] [cursor=pointer]:
+                    - /url: ../sir_lancelot/
+                - listitem [ref=e201]:
+                  - link "Skiing" [ref=e202] [cursor=pointer]:
+                    - /url: ../skiing/
+                - listitem [ref=e203]:
+                  - link "Solaris" [ref=e204] [cursor=pointer]:
+                    - /url: ../solaris/
+                - listitem [ref=e205]:
+                  - link "SpaceInvaders" [ref=e206] [cursor=pointer]:
+                    - /url: ../space_invaders/
+                - listitem [ref=e207]:
+                  - link "SpaceWar" [ref=e208] [cursor=pointer]:
+                    - /url: ../space_war/
+                - listitem [ref=e209]:
+                  - link "StarGunner" [ref=e210] [cursor=pointer]:
+                    - /url: ../star_gunner/
+                - listitem [ref=e211]:
+                  - link "Superman" [ref=e212] [cursor=pointer]:
+                    - /url: ../superman/
+                - listitem [ref=e213]:
+                  - link "Surround" [ref=e214] [cursor=pointer]:
+                    - /url: ../surround/
+                - listitem [ref=e215]:
+                  - link "Tennis" [ref=e216] [cursor=pointer]:
+                    - /url: ../tennis/
+                - listitem [ref=e217]:
+                  - link "Tetris" [ref=e218] [cursor=pointer]:
+                    - /url: ../tetris/
+                - listitem [ref=e219]:
+                  - link "TicTacToe3D" [ref=e220] [cursor=pointer]:
+                    - /url: ../tic_tac_toe_3d/
+                - listitem [ref=e221]:
+                  - link "TimePilot" [ref=e222] [cursor=pointer]:
+                    - /url: ../time_pilot/
+                - listitem [ref=e223]:
+                  - link "Trondead" [ref=e224] [cursor=pointer]:
+                    - /url: ../trondead/
+                - listitem [ref=e225]:
+                  - link "Turmoil" [ref=e226] [cursor=pointer]:
+                    - /url: ../turmoil/
+                - listitem [ref=e227]:
+                  - link "Tutankham" [ref=e228] [cursor=pointer]:
+                    - /url: ../tutankham/
+                - listitem [ref=e229]:
+                  - link "UpNDown" [ref=e230] [cursor=pointer]:
+                    - /url: ../up_n_down/
+                - listitem [ref=e231]:
+                  - link "Venture" [ref=e232] [cursor=pointer]:
+                    - /url: ../venture/
+                - listitem [ref=e233]:
+                  - link "VideoCheckers" [ref=e234] [cursor=pointer]:
+                    - /url: ../video_checkers/
+                - listitem [ref=e235]:
+                  - link "VideoChess" [ref=e236] [cursor=pointer]:
+                    - /url: ../video_chess/
+                - listitem [ref=e237]:
+                  - link "VideoCube" [ref=e238] [cursor=pointer]:
+                    - /url: ../video_cube/
+                - listitem [ref=e239]:
+                  - link "VideoPinball" [ref=e240] [cursor=pointer]:
+                    - /url: ../video_pinball/
+                - listitem [ref=e241]:
+                  - link "WizardOfWor" [ref=e242] [cursor=pointer]:
+                    - /url: ../wizard_of_wor/
+                - listitem [ref=e243]:
+                  - link "WordZapper" [ref=e244] [cursor=pointer]:
+                    - /url: ../word_zapper/
+                - listitem [ref=e245]:
+                  - link "YarsRevenge" [ref=e246] [cursor=pointer]:
+                    - /url: ../yars_revenge/
+                - listitem [ref=e247]:
+                  - link "Zaxxon" [ref=e248] [cursor=pointer]:
+                    - /url: ../zaxxon/
+            - listitem [ref=e249]:
+              - link "ALE Vector Environment Guide" [ref=e250] [cursor=pointer]:
+                - /url: ../../vector-environment/
+            - listitem [ref=e251]:
+              - link "Multi-agent environments" [ref=e252] [cursor=pointer]:
+                - /url: ../../multi-agent-environments/
+              - generic [ref=e253] [cursor=pointer]:
+                - generic [ref=e254]: Toggle navigation of Multi-agent environments
+                - img [ref=e256]
+            - listitem [ref=e258]:
+              - link "FAQ" [ref=e259] [cursor=pointer]:
+                - /url: ../../faq/
+            - listitem [ref=e260]:
+              - link "Cite ALE" [ref=e261] [cursor=pointer]:
+                - /url: ../../citing/
+          - heading "API" [ref=e262]
+          - list [ref=e263]:
+            - listitem [ref=e264]:
+              - link "Gymnasium Interface" [ref=e265] [cursor=pointer]:
+                - /url: ../../gymnasium-interface/
+            - listitem [ref=e266]:
+              - link "C++ Interface" [ref=e267] [cursor=pointer]:
+                - /url: ../../cpp-interface/
+            - listitem [ref=e268]:
+              - link "Python Interface" [ref=e269] [cursor=pointer]:
+                - /url: ../../python-interface/
+            - listitem [ref=e270]:
+              - link "Visualization" [ref=e271] [cursor=pointer]:
+                - /url: ../../visualization/
+          - heading "Development" [ref=e272]
+          - list [ref=e273]:
+            - listitem [ref=e274]:
+              - link "Github" [ref=e275] [cursor=pointer]:
+                - /url: https://github.com/Farama-Foundation/Arcade-Learning-Environment
+            - listitem [ref=e276]:
+              - link "ALE Release Notes" [ref=e277] [cursor=pointer]:
+                - /url: ../../release_notes/
+            - listitem [ref=e278]:
+              - link "Contribute to the Docs" [ref=e279] [cursor=pointer]:
+                - /url: https://github.com/Farama-Foundation/Arcade-Learning-Environment/blob/main/docs/README.md
+    - generic [ref=e281]:
+      - generic [ref=e282]:
+        - generic [ref=e283]:
+          - generic [ref=e284]:
+            - link "Edit this page" [ref=e286] [cursor=pointer]:
+              - /url: https://github.com/Farama-Foundation/arcade-Learning-Environment/edit/main/docs/environments/pong.md
+              - img [ref=e287]
+              - generic [ref=e291]: Edit this page
+            - button "Toggle Light / Dark / Auto color theme" [ref=e293] [cursor=pointer]:
+              - generic [ref=e294]: Toggle Light / Dark / Auto color theme
+              - img [ref=e295]
+            - generic [ref=e297] [cursor=pointer]:
+              - generic [ref=e298]: Toggle table of contents sidebar
+              - img [ref=e300]
+          - main [ref=e302]:
+            - generic [ref=e303]:
+              - heading "Pong" [level=1] [ref=e304]
+              - figure [ref=e305]:
+                - link "../../_images/pong.gif" [ref=e306] [cursor=pointer]:
+                  - /url: ../../_images/pong.gif
+                  - img "../../_images/pong.gif" [ref=e307]
+              - paragraph [ref=e308]:
+                - text: This environment is part of the
+                - link "Atari environments" [ref=e309] [cursor=pointer]:
+                  - /url: ..
+                - text: . Please read that page first for general information.
+              - table [ref=e311]:
+                - rowgroup [ref=e312]:
+                  - row [ref=e313]:
+                    - columnheader [ref=e314]:
+                      - paragraph
+                    - columnheader [ref=e315]:
+                      - paragraph
+                - rowgroup [ref=e316]:
+                  - row "Make gymnasium.make(“ALE/Pong-v5”)" [ref=e317]:
+                    - cell "Make" [ref=e318]:
+                      - paragraph [ref=e319]: Make
+                    - cell "gymnasium.make(“ALE/Pong-v5”)" [ref=e320]:
+                      - paragraph [ref=e321]: gymnasium.make(“ALE/Pong-v5”)
+                  - row "Action Space Discrete(6)" [ref=e322]:
+                    - cell "Action Space" [ref=e323]:
+                      - paragraph [ref=e324]: Action Space
+                    - cell "Discrete(6)" [ref=e325]:
+                      - paragraph [ref=e326]: Discrete(6)
+                  - row "Observation Space Box(0, 255, (210, 160, 3), uint8)" [ref=e327]:
+                    - cell "Observation Space" [ref=e328]:
+                      - paragraph [ref=e329]: Observation Space
+                    - cell "Box(0, 255, (210, 160, 3), uint8)" [ref=e330]:
+                      - paragraph [ref=e331]: Box(0, 255, (210, 160, 3), uint8)
+              - paragraph [ref=e332]: For more Pong variants with different observation and action spaces, see the variants section.
+              - generic [ref=e333]:
+                - heading "Description" [level=2] [ref=e334]
+                - paragraph [ref=e335]: You control the right paddle, you compete against the left paddle controlled by the computer. You each try to keep deflecting the ball away from your goal and into your opponent’s goal.
+                - paragraph [ref=e336]:
+                  - text: For a more detailed documentation, see
+                  - link "the AtariAge page" [ref=e337] [cursor=pointer]:
+                    - /url: https://atariage.com/manual_html_page.php?SoftwareLabelID=587
+              - generic [ref=e338]:
+                - heading "Actions" [level=2] [ref=e339]
+                - paragraph [ref=e340]:
+                  - text: Pong has the action space of
+                  - code [ref=e341]: Discrete(6)
+                  - text: with the table below listing the meaning of each action’s meanings. To enable all 18 possible actions that can be performed on an Atari 2600, specify
+                  - code [ref=e342]: full_action_space=True
+                  - text: during initialization or by passing
+                  - code [ref=e343]: full_action_space=True
+                  - text: to
+                  - code [ref=e344]: gymnasium.make
+                  - text: .
+                - table [ref=e346]:
+                  - rowgroup [ref=e347]:
+                    - row "Value Meaning" [ref=e348]:
+                      - columnheader "Value" [ref=e349]:
+                        - paragraph [ref=e350]: Value
+                      - columnheader "Meaning" [ref=e351]:
+                        - paragraph [ref=e352]: Meaning
+                  - rowgroup [ref=e353]:
+                    - row "0 NOOP" [ref=e354]:
+                      - cell "0" [ref=e355]:
+                        - paragraph [ref=e356]: "0"
+                      - cell "NOOP" [ref=e357]:
+                        - paragraph [ref=e358]: NOOP
+                    - row "1 FIRE" [ref=e359]:
+                      - cell "1" [ref=e360]:
+                        - paragraph [ref=e361]: "1"
+                      - cell "FIRE" [ref=e362]:
+                        - paragraph [ref=e363]: FIRE
+                    - row "2 RIGHT" [ref=e364]:
+                      - cell "2" [ref=e365]:
+                        - paragraph [ref=e366]: "2"
+                      - cell "RIGHT" [ref=e367]:
+                        - paragraph [ref=e368]: RIGHT
+                    - row "3 LEFT" [ref=e369]:
+                      - cell "3" [ref=e370]:
+                        - paragraph [ref=e371]: "3"
+                      - cell "LEFT" [ref=e372]:
+                        - paragraph [ref=e373]: LEFT
+                    - row "4 RIGHTFIRE" [ref=e374]:
+                      - cell "4" [ref=e375]:
+                        - paragraph [ref=e376]: "4"
+                      - cell "RIGHTFIRE" [ref=e377]:
+                        - paragraph [ref=e378]: RIGHTFIRE
+                    - row "5 LEFTFIRE" [ref=e379]:
+                      - cell "5" [ref=e380]:
+                        - paragraph [ref=e381]: "5"
+                      - cell "LEFTFIRE" [ref=e382]:
+                        - paragraph [ref=e383]: LEFTFIRE
+                - paragraph [ref=e384]:
+                  - text: See
+                  - link "environment specification" [ref=e385] [cursor=pointer]:
+                    - /url: ../../env-spec/
+                  - text: to see more information on the action meaning.
+              - generic [ref=e386]:
+                - heading "Observations" [level=2] [ref=e387]
+                - paragraph [ref=e388]: "Atari environments have three possible observation types:"
+                - list [ref=e389]:
+                  - listitem [ref=e390]:
+                    - paragraph [ref=e391]:
+                      - code [ref=e392]: obs_type="rgb"
+                      - text: "->"
+                      - code [ref=e393]: observation_space=Box(0, 255, (210, 160, 3), np.uint8)
+                  - listitem [ref=e394]:
+                    - paragraph [ref=e395]:
+                      - code [ref=e396]: obs_type="ram"
+                      - text: "->"
+                      - code [ref=e397]: observation_space=Box(0, 255, (128,), np.uint8)
+                  - listitem [ref=e398]:
+                    - paragraph [ref=e399]:
+                      - code [ref=e400]: obs_type="grayscale"
+                      - text: "->"
+                      - code [ref=e401]: Box(0, 255, (210, 160), np.uint8)
+                      - text: ", a grayscale version of the q”rgb” type"
+                - paragraph [ref=e402]: See variants section for the type of observation used by each environment id by default.
+                - generic [ref=e403]:
+                  - heading "Reward" [level=3] [ref=e404]
+                  - paragraph [ref=e405]:
+                    - text: You get score points for getting the ball to pass the opponent’s paddle. You lose points if the ball passes your paddle. For a more detailed documentation, see
+                    - link "the AtariAge page" [ref=e406] [cursor=pointer]:
+                      - /url: https://atariage.com/manual_html_page.php?SoftwareLabelID=587
+                    - text: .
+              - generic [ref=e407]:
+                - heading "Variants" [level=2] [ref=e408]
+                - paragraph [ref=e409]: Pong has the following variants of the environment id which have the following differences in observation, the number of frame-skips and the repeat action probability.
+                - table [ref=e411]:
+                  - rowgroup [ref=e412]:
+                    - row "Env-id obs_type= frameskip= repeat_action_probability=" [ref=e413]:
+                      - columnheader "Env-id" [ref=e414]:
+                        - paragraph [ref=e415]: Env-id
+                      - columnheader "obs_type=" [ref=e416]:
+                        - paragraph [ref=e417]: obs_type=
+                      - columnheader "frameskip=" [ref=e418]:
+                        - paragraph [ref=e419]: frameskip=
+                      - columnheader "repeat_action_probability=" [ref=e420]:
+                        - paragraph [ref=e421]: repeat_action_probability=
+                  - rowgroup [ref=e422]:
+                    - row "Pong-v0 rgb (2, 5) 0.25" [ref=e423]:
+                      - cell "Pong-v0" [ref=e424]:
+                        - paragraph [ref=e425]: Pong-v0
+                      - cell "rgb" [ref=e426]:
+                        - paragraph [ref=e427]:
+                          - code [ref=e428]: rgb
+                      - cell "(2, 5)" [ref=e429]:
+                        - paragraph [ref=e430]:
+                          - code [ref=e431]: (2, 5)
+                      - cell "0.25" [ref=e432]:
+                        - paragraph [ref=e433]:
+                          - code [ref=e434]: "0.25"
+                    - row "PongNoFrameskip-v0 rgb 1 0.25" [ref=e435]:
+                      - cell "PongNoFrameskip-v0" [ref=e436]:
+                        - paragraph [ref=e437]: PongNoFrameskip-v0
+                      - cell "rgb" [ref=e438]:
+                        - paragraph [ref=e439]:
+                          - code [ref=e440]: rgb
+                      - cell "1" [ref=e441]:
+                        - paragraph [ref=e442]:
+                          - code [ref=e443]: "1"
+                      - cell "0.25" [ref=e444]:
+                        - paragraph [ref=e445]:
+                          - code [ref=e446]: "0.25"
+                    - row "Pong-v4 rgb (2, 5) 0.00" [ref=e447]:
+                      - cell "Pong-v4" [ref=e448]:
+                        - paragraph [ref=e449]: Pong-v4
+                      - cell "rgb" [ref=e450]:
+                        - paragraph [ref=e451]:
+                          - code [ref=e452]: rgb
+                      - cell "(2, 5)" [ref=e453]:
+                        - paragraph [ref=e454]:
+                          - code [ref=e455]: (2, 5)
+                      - cell "0.00" [ref=e456]:
+                        - paragraph [ref=e457]:
+                          - code [ref=e458]: "0.00"
+                    - row "PongNoFrameskip-v4 rgb 1 0.00" [ref=e459]:
+                      - cell "PongNoFrameskip-v4" [ref=e460]:
+                        - paragraph [ref=e461]: PongNoFrameskip-v4
+                      - cell "rgb" [ref=e462]:
+                        - paragraph [ref=e463]:
+                          - code [ref=e464]: rgb
+                      - cell "1" [ref=e465]:
+                        - paragraph [ref=e466]:
+                          - code [ref=e467]: "1"
+                      - cell "0.00" [ref=e468]:
+                        - paragraph [ref=e469]:
+                          - code [ref=e470]: "0.00"
+                    - row "ALE/Pong-v5 rgb 4 0.25" [ref=e471]:
+                      - cell "ALE/Pong-v5" [ref=e472]:
+                        - paragraph [ref=e473]: ALE/Pong-v5
+                      - cell "rgb" [ref=e474]:
+                        - paragraph [ref=e475]:
+                          - code [ref=e476]: rgb
+                      - cell "4" [ref=e477]:
+                        - paragraph [ref=e478]:
+                          - code [ref=e479]: "4"
+                      - cell "0.25" [ref=e480]:
+                        - paragraph [ref=e481]:
+                          - code [ref=e482]: "0.25"
+                - paragraph [ref=e483]:
+                  - text: See the
+                  - link "version history page" [ref=e484] [cursor=pointer]:
+                    - /url: https://ale.farama.org/environments/#version-history-and-naming-schemes
+                  - text: to implement previously implemented environments, e.g.,
+                  - code [ref=e485]: PongNoFrameskip-v4
+                  - text: .
+              - generic [ref=e486]:
+                - heading "Difficulty and modes" [level=2] [ref=e487]
+                - paragraph [ref=e488]:
+                  - text: It is possible to specify various flavors of the environment via the keyword arguments
+                  - code [ref=e489]: difficulty
+                  - text: and
+                  - code [ref=e490]: mode
+                  - text: . A flavor is a combination of a game mode and a difficulty setting. The table below lists the possible difficulty and mode values along with the default values.
+                - table [ref=e492]:
+                  - rowgroup [ref=e493]:
+                    - row "Available Modes Default Mode Available Difficulties Default Difficulty" [ref=e494]:
+                      - columnheader "Available Modes" [ref=e495]:
+                        - paragraph [ref=e496]: Available Modes
+                      - columnheader "Default Mode" [ref=e497]:
+                        - paragraph [ref=e498]: Default Mode
+                      - columnheader "Available Difficulties" [ref=e499]:
+                        - paragraph [ref=e500]: Available Difficulties
+                      - columnheader "Default Difficulty" [ref=e501]:
+                        - paragraph [ref=e502]: Default Difficulty
+                  - rowgroup [ref=e503]:
+                    - row "[0, 1] 0 [0, 1, 2, 3] 0" [ref=e504]:
+                      - cell "[0, 1]" [ref=e505]:
+                        - paragraph [ref=e506]:
+                          - code [ref=e507]: "[0, 1]"
+                      - cell "0" [ref=e508]:
+                        - paragraph [ref=e509]:
+                          - code [ref=e510]: "0"
+                      - cell "[0, 1, 2, 3]" [ref=e511]:
+                        - paragraph [ref=e512]:
+                          - code [ref=e513]: "[0, 1, 2, 3]"
+                      - cell "0" [ref=e514]:
+                        - paragraph [ref=e515]:
+                          - code [ref=e516]: "0"
+              - generic [ref=e517]:
+                - heading "Version History" [level=2] [ref=e518]
+                - paragraph [ref=e519]: A thorough discussion of the intricate differences between the versions and configurations can be found in the general article on Atari environments.
+                - list [ref=e520]:
+                  - listitem [ref=e521]:
+                    - paragraph [ref=e522]: "v5: Stickiness was added back and stochastic frame-skipping was removed. The environments are now in the “ALE” namespace."
+                  - listitem [ref=e523]:
+                    - paragraph [ref=e524]: "v4: Stickiness of actions was removed"
+                  - listitem [ref=e525]:
+                    - paragraph [ref=e526]: "v0: Initial versions release"
+        - contentinfo [ref=e527]:
+          - generic [ref=e528]:
+            - link "Next Pooyan" [ref=e529] [cursor=pointer]:
+              - /url: ../pooyan/
+              - generic [ref=e530]:
+                - generic [ref=e532]: Next
+                - generic [ref=e533]: Pooyan
+              - img [ref=e534]
+            - link "Previous Pitfall2" [ref=e536] [cursor=pointer]:
+              - /url: ../pitfall2/
+              - img [ref=e537]
+              - generic [ref=e539]:
+                - generic [ref=e541]: Previous
+                - generic [ref=e542]: Pitfall2
+          - generic [ref=e543]:
+            - generic [ref=e545]: Copyright © 2023 Farama Foundation
+            - link "On GitHub" [ref=e548] [cursor=pointer]:
+              - /url: https://github.com/Farama-Foundation/arcade-Learning-Environment/
+              - img [ref=e549]
+      - complementary [ref=e550]:
+        - generic [ref=e551]:
+          - generic [ref=e552]: On this page
+          - list [ref=e555]:
+            - listitem [ref=e556]:
+              - list [ref=e557]:
+                - listitem [ref=e558]:
+                  - link "Description" [ref=e559] [cursor=pointer]:
+                    - /url: "#description"
+                - listitem [ref=e560]:
+                  - link "Actions" [ref=e561] [cursor=pointer]:
+                    - /url: "#actions"
+                - listitem [ref=e562]:
+                  - link "Observations" [ref=e563] [cursor=pointer]:
+                    - /url: "#observations"
+                  - list [ref=e564]:
+                    - listitem [ref=e565]:
+                      - link "Reward" [ref=e566] [cursor=pointer]:
+                        - /url: "#reward"
+                - listitem [ref=e567]:
+                  - link "Variants" [ref=e568] [cursor=pointer]:
+                    - /url: "#variants"
+                - listitem [ref=e569]:
+                  - link "Difficulty and modes" [ref=e570] [cursor=pointer]:
+                    - /url: "#difficulty-and-modes"
+                - listitem [ref=e571]:
+                  - link "Version History" [ref=e572] [cursor=pointer]:
+                    - /url: "#version-history"
+  - generic [ref=e573]:
+    - img [ref=e577] [cursor=pointer]
+    - generic:
+      - generic [ref=e579]: Versions
+      - list [ref=e580]

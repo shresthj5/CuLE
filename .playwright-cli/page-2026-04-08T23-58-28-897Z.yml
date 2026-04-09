@@ -1,0 +1,225 @@
+- generic [active] [ref=e1]:
+  - banner "Farama header" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Light Logo ALE Documentation" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - img "Light Logo" [ref=e6]
+        - generic [ref=e7]: ALE Documentation
+      - button "Open Farama Menu" [ref=e10] [cursor=pointer]:
+        - img [ref=e11]
+        - img [ref=e12]
+  - generic [ref=e14]: Hide navigation sidebar
+  - generic [ref=e15]: Hide table of contents sidebar
+  - generic [ref=e16]:
+    - complementary [ref=e17]:
+      - generic [ref=e19]:
+        - link "Light Logo ALE Documentation" [ref=e20] [cursor=pointer]:
+          - /url: ../
+          - img "Light Logo" [ref=e21]
+          - generic [ref=e22]: ALE Documentation
+        - search [ref=e23]:
+          - textbox "Search" [ref=e24]
+        - generic [ref=e26]:
+          - heading "Introduction" [ref=e27]
+          - list [ref=e28]:
+            - listitem [ref=e29]:
+              - link "Installation" [ref=e30] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e31]:
+              - link "Environment Specifications" [ref=e32] [cursor=pointer]:
+                - /url: ../env-spec/
+            - listitem [ref=e33]:
+              - link "Environments" [ref=e34] [cursor=pointer]:
+                - /url: ../environments/
+              - generic [ref=e35] [cursor=pointer]:
+                - generic [ref=e36]: Toggle navigation of Environments
+                - img [ref=e38]
+            - listitem [ref=e40]:
+              - link "ALE Vector Environment Guide" [ref=e41] [cursor=pointer]:
+                - /url: ../vector-environment/
+            - listitem [ref=e42]:
+              - link "Multi-agent environments" [ref=e43] [cursor=pointer]:
+                - /url: ../multi-agent-environments/
+              - generic [ref=e44] [cursor=pointer]:
+                - generic [ref=e45]: Toggle navigation of Multi-agent environments
+                - img [ref=e47]
+            - listitem [ref=e49]:
+              - link "WebAssembly (WASM) Support" [ref=e50] [cursor=pointer]:
+                - /url: ../wasm/
+            - listitem [ref=e51]:
+              - link "FAQ" [ref=e52] [cursor=pointer]:
+                - /url: ../faq/
+            - listitem [ref=e53]:
+              - link "Cite ALE" [ref=e54] [cursor=pointer]:
+                - /url: ../citing/
+          - heading "API" [ref=e55]
+          - list [ref=e56]:
+            - listitem [ref=e57]:
+              - link "Gymnasium Interface" [ref=e58] [cursor=pointer]:
+                - /url: ../gymnasium-interface/
+            - listitem [ref=e59]:
+              - link "C++ Interface" [ref=e60] [cursor=pointer]:
+                - /url: ../cpp-interface/
+            - listitem [ref=e61]:
+              - link "Python Interface" [ref=e62] [cursor=pointer]:
+                - /url: ../python-interface/
+            - listitem [ref=e63]:
+              - link "Visualization" [ref=e64] [cursor=pointer]:
+                - /url: ../visualization/
+          - heading "Development" [ref=e65]
+          - list [ref=e66]:
+            - listitem [ref=e67]:
+              - link "Github" [ref=e68] [cursor=pointer]:
+                - /url: https://github.com/Farama-Foundation/Arcade-Learning-Environment
+            - listitem [ref=e69]:
+              - link "ALE Release Notes" [ref=e70] [cursor=pointer]:
+                - /url: ../release_notes/
+            - listitem [ref=e71]:
+              - link "Contribute to the Docs" [ref=e72] [cursor=pointer]:
+                - /url: https://github.com/Farama-Foundation/Arcade-Learning-Environment/blob/main/docs/README.md
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - link "Edit this page" [ref=e79] [cursor=pointer]:
+              - /url: https://github.com/Farama-Foundation/Arcade-Learning-Environment/edit/main/docs/getting-started.md
+              - img [ref=e80]
+              - generic [ref=e84]: Edit this page
+            - button "Toggle Light / Dark / Auto color theme" [ref=e86] [cursor=pointer]:
+              - generic [ref=e87]: Toggle Light / Dark / Auto color theme
+              - img [ref=e88]
+            - generic [ref=e90] [cursor=pointer]:
+              - generic [ref=e91]: Toggle table of contents sidebar
+              - img [ref=e93]
+          - main [ref=e95]:
+            - generic [ref=e96]:
+              - heading "Installation" [level=1] [ref=e97]
+              - generic [ref=e98]:
+                - heading "Python Interface" [level=2] [ref=e99]
+                - paragraph [ref=e100]:
+                  - text: The Python interface
+                  - code [ref=e101]: ale-py
+                  - text: "supports the following configurations:"
+                - table [ref=e103]:
+                  - rowgroup [ref=e104]:
+                    - row "Platform Architecture Python Version" [ref=e105]:
+                      - columnheader "Platform" [ref=e106]:
+                        - paragraph [ref=e107]: Platform
+                      - columnheader "Architecture" [ref=e108]:
+                        - paragraph [ref=e109]: Architecture
+                      - columnheader "Python Version" [ref=e110]:
+                        - paragraph [ref=e111]: Python Version
+                  - rowgroup [ref=e112]:
+                    - row "Linux x64 3.9+" [ref=e113]:
+                      - cell "Linux" [ref=e114]:
+                        - paragraph [ref=e115]: Linux
+                      - cell "x64" [ref=e116]:
+                        - paragraph [ref=e117]: x64
+                      - cell "3.9+" [ref=e118]:
+                        - paragraph [ref=e119]: 3.9+
+                    - row "macOS x64, arm64 3.9+" [ref=e120]:
+                      - cell "macOS" [ref=e121]:
+                        - paragraph [ref=e122]: macOS
+                      - cell "x64, arm64" [ref=e123]:
+                        - paragraph [ref=e124]: x64, arm64
+                      - cell "3.9+" [ref=e125]:
+                        - paragraph [ref=e126]: 3.9+
+                    - row "Windows AMD64 3.9+" [ref=e127]:
+                      - cell "Windows" [ref=e128]:
+                        - paragraph [ref=e129]: Windows
+                      - cell "AMD64" [ref=e130]:
+                        - paragraph [ref=e131]: AMD64
+                      - cell "3.9+" [ref=e132]:
+                        - paragraph [ref=e133]: 3.9+
+                - paragraph [ref=e134]: "To install the Python interface from PyPi simply run:"
+                - generic [ref=e137]: pip install ale-py
+                - paragraph [ref=e138]:
+                  - text: Once installed you can import the native ALE interface as
+                  - code [ref=e139]: ale_py
+                - generic [ref=e142]: from ale_py import ALEInterface ale = ALEInterface()
+              - generic [ref=e143]:
+                - heading "Gymnasium API" [level=2] [ref=e144]
+                - paragraph [ref=e145]:
+                  - text: ALE supports the
+                  - link "Gymnasium" [ref=e146] [cursor=pointer]:
+                    - /url: https://github.com/farama-Foundation/gymnasium
+                  - text: API such that all the setup required for interacting with the emulator is complete. See the environment page for all the available ROMs and the gymnasium
+                  - link "getting started" [ref=e147] [cursor=pointer]:
+                    - /url: https://gymnasium.farama.org/content/basic_usage/
+                  - text: page for how to interact.
+                - generic [ref=e150]: import gymnasium as gym import ale_py gym.register_envs(ale_py) env = gym.make('ALE/Breakout-v5') obs, info = env.reset() obs, reward, terminated, truncated, info = env.step(env.action_space.sample()) env.close()
+              - generic [ref=e151]:
+                - heading "C++ Interface" [level=2] [ref=e152]
+                - paragraph [ref=e153]: "The C++ library requires:"
+                - list [ref=e154]:
+                  - listitem [ref=e155]:
+                    - paragraph [ref=e156]: A C++17 compiler
+                  - listitem [ref=e157]:
+                    - paragraph [ref=e158]: CMake 3.14+
+                  - listitem [ref=e159]:
+                    - paragraph [ref=e160]: zlib
+                  - listitem [ref=e161]:
+                    - paragraph [ref=e162]: (Optional) SDL 2 for display/audio support
+                - paragraph [ref=e163]:
+                  - text: SDL support allows for displaying the console’s screen and enabling audio output. For example,
+                  - emphasis [ref=e164]: without
+                  - text: "SDL support you’ll still be able to train your agents, but you won’t be able to visualize the resulting policy. It might be preferable to disable SDL support when compiled on a cluster but enable SDL locally. Note: SDL support defaults to"
+                  - strong [ref=e165]: "OFF"
+                  - text: .
+                - paragraph [ref=e166]:
+                  - text: You can use any package manager to install these dependencies but we recommend using
+                  - link "vcpkg" [ref=e167] [cursor=pointer]:
+                    - /url: https://github.com/microsoft/vcpkg
+                    - code [ref=e168]: vcpkg
+                  - text: . Here’s a minimal example of installing these dependencies and building/installing the C++ library.
+                - generic [ref=e171]: vcpkg install zlib sdl2 mkdir build && cd build cmake ../ -DCMAKE_BUILD_TYPE=Release cmake --build . --target install
+                - paragraph [ref=e172]:
+                  - text: These steps will work on any platform, just make sure to specify the environment variable
+                  - code [ref=e173]: VCPKG_INSTALLATION_ROOT
+                  - text: to point to your vcpkg installation so we can find the required dependencies. If you install any vcpkg dependencies using non-standard triplets you can specify the environment variable
+                  - code [ref=e174]: VCPKG_TARGET_TRIPLET
+                  - text: . For more info check out the
+                  - link "vcpkg docs" [ref=e175] [cursor=pointer]:
+                    - /url: https://vcpkg.readthedocs.io/en/latest/users/config-environment/
+                  - text: on how to configure your environment.
+                - paragraph [ref=e176]: Once the ALE is installed you can link against the library in your C++ project as follows
+                - generic [ref=e179]: find_package(ale REQUIRED) target_link_libraries(YourTarget ale::ale-lib)
+        - contentinfo [ref=e180]:
+          - generic [ref=e181]:
+            - link "Next Environment Specifications" [ref=e182] [cursor=pointer]:
+              - /url: ../env-spec/
+              - generic [ref=e183]:
+                - generic [ref=e185]: Next
+                - generic [ref=e186]: Environment Specifications
+              - img [ref=e187]
+            - link "Previous Home" [ref=e189] [cursor=pointer]:
+              - /url: ../
+              - img [ref=e190]
+              - generic [ref=e192]:
+                - generic [ref=e194]: Previous
+                - generic [ref=e195]: Home
+          - generic [ref=e196]:
+            - generic [ref=e198]: Copyright © 2023 Farama Foundation
+            - link "On GitHub" [ref=e201] [cursor=pointer]:
+              - /url: https://github.com/Farama-Foundation/Arcade-Learning-Environment/
+              - img [ref=e202]
+      - complementary [ref=e203]:
+        - generic [ref=e204]:
+          - generic [ref=e205]: On this page
+          - list [ref=e208]:
+            - listitem [ref=e209]:
+              - list [ref=e210]:
+                - listitem [ref=e211]:
+                  - link "Python Interface" [ref=e212] [cursor=pointer]:
+                    - /url: "#python-interface"
+                - listitem [ref=e213]:
+                  - link "Gymnasium API" [ref=e214] [cursor=pointer]:
+                    - /url: "#gymnasium-api"
+                - listitem [ref=e215]:
+                  - link "C++ Interface" [ref=e216] [cursor=pointer]:
+                    - /url: "#c-interface"
+  - generic [ref=e217]:
+    - img [ref=e221] [cursor=pointer]
+    - generic:
+      - generic [ref=e223]: Versions
+      - list [ref=e224]

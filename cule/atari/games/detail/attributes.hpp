@@ -2,6 +2,8 @@
 
 #include <cule/config.hpp>
 
+#include <cstdint>
+
 namespace cule
 {
 namespace atari
@@ -107,4 +109,3 @@ enum ROM_ATTR
 } // end namespace games
 } // end namespace atari
 } // end namespace cule
-

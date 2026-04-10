@@ -25,7 +25,7 @@ struct encode_states_functor
         /* cule::atari::frame_state& fs = dst_frame_states[index]; */
 
         s.resistance = ts.left_paddle;
-        Environment_t::setFrameNumber(s, cule::atari::ENV_BASE_FRAMES + 10 + ts.frame_number);
+        Environment_t::setFrameNumber(s, ts.frame_number);
 
         s.cpuCycles = ts.cycles;
 
@@ -47,6 +47,8 @@ struct encode_states_functor
         s.sysFlags.clear(cule::atari::FLAG_CPU_HALT);
         s.sysFlags.clear(cule::atari::FLAG_CPU_LAST_READ);
         s.tiaFlags.template change<cule::atari::FLAG_TIA_IS_NTSC>(cart.is_ntsc());
+        s.tiaFlags.template change<cule::atari::FLAG_TIA_HMOVE_ALLOW>(cart.allow_hmove_blanks());
+        s.tiaFlags.template change<cule::atari::FLAG_TIA_Y_SHIFT>(cart.game_id() != cule::atari::games::GAME_UP_N_DOWN);
 
         s.ram = reinterpret_cast<uint32_t*>(input_ram + (256 * index));
         uint8_t* ram_ptr = reinterpret_cast<uint8_t*>(s.ram);
@@ -87,7 +89,7 @@ struct encode_states_functor
         s.tiaFlags.template change<cule::atari::FLAG_TIA_CTRLPF>((ts.CTRLPF & 0x01) == 0x01);
         /* ds.playfieldPriorityAndScore = fs.playfieldPriorityAndScore; */
         s.tiaFlags.template change<cule::atari::FLAG_TIA_REFP0>(ts.REFP0 != 0);
-        s.tiaFlags.template change<cule::atari::FLAG_TIA_REFP1>(ts.REFP0 != 0);
+        s.tiaFlags.template change<cule::atari::FLAG_TIA_REFP1>(ts.REFP1 != 0);
         UPDATE_FIELD(s.PF,  cule::atari::FIELD_PFALL, ts.PF);
         UPDATE_FIELD(s.GRP, cule::atari::FIELD_GRP0, ts.GRP0);
         UPDATE_FIELD(s.GRP, cule::atari::FIELD_GRP1, ts.GRP1);
@@ -103,7 +105,7 @@ struct encode_states_functor
         UPDATE_FIELD(s.HM, cule::atari::FIELD_HMM1, ts.HMM1);
         UPDATE_FIELD(s.HM, cule::atari::FIELD_HMBL, ts.HMBL);
         s.tiaFlags.template change<cule::atari::FLAG_TIA_VDELP0>(ts.VDELP0 != 0);
-        s.tiaFlags.template change<cule::atari::FLAG_TIA_VDELP1>(ts.VDELP0 != 0);
+        s.tiaFlags.template change<cule::atari::FLAG_TIA_VDELP1>(ts.VDELP1 != 0);
         s.tiaFlags.template change<cule::atari::FLAG_TIA_VDELBL>(ts.VDELBL != 0);
         s.tiaFlags.template change<cule::atari::FLAG_TIA_RESMP0>(ts.RESMP0 != 0);
         s.tiaFlags.template change<cule::atari::FLAG_TIA_RESMP1>(ts.RESMP1 != 0);
@@ -263,8 +265,13 @@ struct decode_states_functor
 
         if(cart.game_id() == cule::atari::games::GAME_TENNIS)
         {
-            int16_t *ptr = (int16_t*) &ds.score;
-            ds.score = int32_t(ptr[1]);
+            const int32_t packed_score = ds.score;
+            ds.points = int32_t(int16_t(packed_score & 0xffff));
+            ds.score = int32_t(int16_t((packed_score >> 16) & 0xffff));
+        }
+        else
+        {
+            ds.points = 0;
         }
     }
 };

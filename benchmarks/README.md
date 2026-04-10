@@ -86,13 +86,34 @@ Current tuned default after Nsight-guided env-kernel tuning:
 - `ENV=32, PROCESS=64, 4096 envs`: about `31.09k env-steps/s` or `111.94M env-steps/hour`
 - `ENV=32, PROCESS=64, 8192 envs`: about `53.20k env-steps/s` or `191.52M env-steps/hour`
 - At Atari v5 `frameskip=4`, the 8192-env result corresponds to about `766.08M emulator frames/hour`.
+- A short April 10, 2026 8192-env rebuild spot check measured about `59.13k env-steps/s`, `212.87M env-steps/hour`, or `851.48M emulator frames/hour`.
 
 Important correctness note:
 
 - `ENV=32` requires an interleaved CUDA RAM layout. This path now pads the CUDA RAM allocation to the block geometry and specializes CUDA kernels to 128-byte RAM for normal cartridges and 256-byte RAM for F8SC/Superchip cartridges.
-- The full audited v5 test matrix passes on CPU and CUDA with `ENV=32, PROCESS=64`.
-- `ALE/ElevatorAction-v5`, the F8SC/Superchip representative, passes a CUDA spot benchmark with the corrected 256-byte RAM path at about `44.94M env-steps/hour`.
+- The full audited v5 smoke test matrix passes on CPU and CUDA with `ENV=32, PROCESS=64`.
+- `ALE/ElevatorAction-v5`, the F8SC/Superchip representative, passes CUDA spot benchmarks with the corrected 256-byte RAM path. A short April 10, 2026 8192-env spot run measured about `260.21M env-steps/hour`.
 - A100 compatibility is built through `TORCH_CUDA_ARCH_LIST="8.0 8.6"`, but the A100 runtime performance number still needs to be measured on an actual A100.
+
+## Current v5 validation
+
+The stricter validation entrypoint checks the currently supported ALE v5 subset:
+
+```bash
+source .venv/bin/activate
+python tools/validate_ale_v5_subset.py --steps 16 --num-envs 2 --json-output benchmarks/results/ale-v5-validation-20260410.json
+```
+
+April 10, 2026 result on the local RTX 3070 build (`ENV=32`, `PROCESS=64`, `sm_80` and `sm_86` cubins):
+
+- `63/63` supported ROM MD5 checks pass against installed `ale-py` ROMs.
+- `63/63` supported minimal action-name checks pass against `ale-py`.
+- `63/63` public state roundtrip checks pass on CPU and CUDA, excluding the transient `reward` field that the public state bridge does not encode as restorable state.
+- `63/63` restored CPU/CUDA transition checks pass for reward, done, and lives over the deterministic validation window.
+- `13/63` restored CPU/CUDA pixel checks still differ, which means the public state bridge is not yet a complete pixel-perfect framebuffer/TIA snapshot for every game.
+- Strict black-box CuLE-vs-`ale-py` trajectory parity still fails for `58/63` supported games in the first 16 validation steps. The passing games in that short check are `ALE/CrazyClimber-v5`, `ALE/Freeway-v5`, `ALE/IceHockey-v5`, `ALE/KungFuMaster-v5`, and `ALE/SpaceInvaders-v5`.
+
+Do not treat the supported subset as publication-grade ALE v5 parity yet. The validator is intentionally split so that CPU/CUDA regression gates can pass while the stricter `ale-py` parity gap remains visible.
 
 ## Nsight Compute workflow
 

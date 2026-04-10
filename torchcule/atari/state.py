@@ -123,7 +123,16 @@ class State(object):
     def _initialize_from_ale(self, env):
         state = AtariState()
 
-        deserializer = Deserializer(env.unwrapped.clone_full_state())
+        if hasattr(env.unwrapped, 'clone_full_state'):
+            serialized_state = env.unwrapped.clone_full_state()
+        else:
+            raise RuntimeError(
+                "Importing ale-py >= 0.11 ALEState objects into CuLE AtariState "
+                "is not currently supported; ale-py changed the serialized state "
+                "format from the legacy clone_full_state() format expected here."
+            )
+
+        deserializer = Deserializer(serialized_state)
 
         keys = ['left_paddle', 'right_paddle', 'frame_number', 'episode_frame_number', 'string_length', 'save_system', 'md5']
         vals = deserializer.getValues([int] * 5 + [bool, str])

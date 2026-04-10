@@ -25,8 +25,10 @@ void state_store_load_helper(frame_state& t, const frame_state& s)
     t.lastHMOVEClock = s.lastHMOVEClock;
 
     t.playfieldPriorityAndScore = s.playfieldPriorityAndScore;
+    t.cpuCycles = s.cpuCycles;
 
     t.tiaFlags = s.tiaFlags;
+    t.M0CosmicArkCounter = s.M0CosmicArkCounter;
 
     t.CurrentPFMask = s.CurrentPFMask;
     t.CurrentP0Mask = s.CurrentP0Mask;
@@ -38,4 +40,3 @@ void state_store_load_helper(frame_state& t, const frame_state& s)
 
 } // end namespace atari
 } // end namespace cule
-

@@ -13,6 +13,7 @@
 #include <cule/atari/paddles.hpp>
 #include <cule/atari/palettes.hpp>
 #include <cule/atari/png.hpp>
+#include <cule/atari/prng.hpp>
 #include <cule/atari/preprocess.hpp>
 #include <cule/atari/rom.hpp>
 
@@ -109,7 +110,8 @@ reset(ExecutionPolicy&& policy,
 
     for (size_t i = 0; i < wrap.size(); i++)
     {
-        const size_t index = rand() % wrap.noop_reset_steps;
+        prng gen(wrap.rand_states_ptr[i]);
+        const size_t index = gen.sample() % wrap.noop_reset_steps;
         wrap.states_ptr[i] = wrap.cached_states_ptr[index];
         wrap.states_ptr[i].ram = (uint32_t *) (wrap.ram_ptr + (wrap.cart.ram_size() * i));
         std::copy(wrap.cached_states_ptr[index].ram,

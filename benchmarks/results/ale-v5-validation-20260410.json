@@ -30,8 +30,8 @@
         {
           "differing_pixels": 39312,
           "kind": "pixels",
-          "max_abs_diff": 235,
-          "sum_abs_diff": 3149000
+          "max_abs_diff": 199,
+          "sum_abs_diff": 3173512
         }
       ],
       "step": 0
@@ -41,10 +41,10 @@
       "env": "ALE/Alien-v5",
       "mismatches": [
         {
-          "differing_pixels": 30,
+          "differing_pixels": 253,
           "kind": "pixels",
-          "max_abs_diff": 112,
-          "sum_abs_diff": 2900
+          "max_abs_diff": 169,
+          "sum_abs_diff": 33871
         }
       ],
       "step": 0
@@ -54,20 +54,15 @@
       "env": "ALE/Amidar-v5",
       "mismatches": [
         {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
-        },
-        {
           "ale_py": 11,
           "cule": 3,
           "kind": "lives"
+        },
+        {
+          "differing_pixels": 4379,
+          "kind": "pixels",
+          "max_abs_diff": 233,
+          "sum_abs_diff": 495464
         }
       ],
       "step": 0
@@ -77,28 +72,10 @@
       "env": "ALE/Assault-v5",
       "mismatches": [
         {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
-        }
-      ],
-      "step": 0
-    },
-    {
-      "action_index": 3,
-      "env": "ALE/Asterix-v5",
-      "mismatches": [
-        {
-          "differing_pixels": 742,
+          "differing_pixels": 212,
           "kind": "pixels",
-          "max_abs_diff": 172,
-          "sum_abs_diff": 68808
+          "max_abs_diff": 214,
+          "sum_abs_diff": 27416
         }
       ],
       "step": 0
@@ -121,31 +98,26 @@
       "env": "ALE/Atlantis-v5",
       "mismatches": [
         {
-          "differing_pixels": 420,
+          "differing_pixels": 58,
           "kind": "pixels",
-          "max_abs_diff": 181,
-          "sum_abs_diff": 26778
+          "max_abs_diff": 200,
+          "sum_abs_diff": 8501
         }
       ],
       "step": 0
     },
     {
-      "action_index": 3,
+      "action_index": 17,
       "env": "ALE/BankHeist-v5",
       "mismatches": [
         {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
+          "differing_pixels": 18,
+          "kind": "pixels",
+          "max_abs_diff": 110,
+          "sum_abs_diff": 1980
         }
       ],
-      "step": 0
+      "step": 2
     },
     {
       "action_index": 3,
@@ -161,40 +133,40 @@
       "step": 0
     },
     {
-      "action_index": 3,
+      "action_index": 5,
       "env": "ALE/BeamRider-v5",
       "mismatches": [
         {
-          "differing_pixels": 95,
+          "differing_pixels": 2130,
           "kind": "pixels",
-          "max_abs_diff": 78,
-          "sum_abs_diff": 7410
+          "max_abs_diff": 95,
+          "sum_abs_diff": 202350
         }
       ],
-      "step": 0
+      "step": 8
     },
     {
-      "action_index": 15,
+      "action_index": 3,
       "env": "ALE/Berzerk-v5",
       "mismatches": [
         {
-          "differing_pixels": 3602,
+          "differing_pixels": 1536,
           "kind": "pixels",
-          "max_abs_diff": 214,
-          "sum_abs_diff": 378128
+          "max_abs_diff": 104,
+          "sum_abs_diff": 159744
         }
       ],
-      "step": 12
+      "step": 0
     },
     {
       "action_index": 3,
       "env": "ALE/Bowling-v5",
       "mismatches": [
         {
-          "differing_pixels": 262,
+          "differing_pixels": 218,
           "kind": "pixels",
           "max_abs_diff": 131,
-          "sum_abs_diff": 10744
+          "sum_abs_diff": 9686
         }
       ],
       "step": 0
@@ -204,10 +176,10 @@
       "env": "ALE/Boxing-v5",
       "mismatches": [
         {
-          "differing_pixels": 824,
+          "differing_pixels": 235,
           "kind": "pixels",
           "max_abs_diff": 132,
-          "sum_abs_diff": 107128
+          "sum_abs_diff": 26830
         }
       ],
       "step": 0
@@ -230,15 +202,10 @@
       "env": "ALE/Carnival-v5",
       "mismatches": [
         {
-          "ale_py": [
-            214,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
+          "differing_pixels": 4888,
+          "kind": "pixels",
+          "max_abs_diff": 192,
+          "sum_abs_diff": 635996
         }
       ],
       "step": 0
@@ -248,15 +215,10 @@
       "env": "ALE/Centipede-v5",
       "mismatches": [
         {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
+          "differing_pixels": 95,
+          "kind": "pixels",
+          "max_abs_diff": 115,
+          "sum_abs_diff": 10709
         }
       ],
       "step": 0
@@ -266,10 +228,10 @@
       "env": "ALE/ChopperCommand-v5",
       "mismatches": [
         {
-          "differing_pixels": 910,
+          "differing_pixels": 82,
           "kind": "pixels",
-          "max_abs_diff": 131,
-          "sum_abs_diff": 52752
+          "max_abs_diff": 68,
+          "sum_abs_diff": 5276
         }
       ],
       "step": 0
@@ -292,10 +254,10 @@
       "env": "ALE/DemonAttack-v5",
       "mismatches": [
         {
-          "differing_pixels": 16,
+          "differing_pixels": 10,
           "kind": "pixels",
           "max_abs_diff": 174,
-          "sum_abs_diff": 2784
+          "sum_abs_diff": 1740
         }
       ],
       "step": 0
@@ -305,15 +267,10 @@
       "env": "ALE/DoubleDunk-v5",
       "mismatches": [
         {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
+          "differing_pixels": 190,
+          "kind": "pixels",
+          "max_abs_diff": 236,
+          "sum_abs_diff": 21922
         }
       ],
       "step": 0
@@ -337,33 +294,46 @@
       "step": 0
     },
     {
-      "action_index": 3,
+      "action_index": 0,
       "env": "ALE/Enduro-v5",
       "mismatches": [
         {
-          "differing_pixels": 178,
+          "differing_pixels": 8,
           "kind": "pixels",
-          "max_abs_diff": 152,
-          "sum_abs_diff": 16222
+          "max_abs_diff": 34,
+          "sum_abs_diff": 272
         }
       ],
-      "step": 0
+      "step": 15
     },
     {
       "action_index": 3,
       "env": "ALE/FishingDerby-v5",
       "mismatches": [
         {
-          "differing_pixels": 2119,
+          "differing_pixels": 1080,
           "kind": "pixels",
-          "max_abs_diff": 173,
-          "sum_abs_diff": 89588
+          "max_abs_diff": 24,
+          "sum_abs_diff": 23088
         }
       ],
       "step": 0
     },
     {
-      "action_index": 17,
+      "action_index": 0,
+      "env": "ALE/Freeway-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 180,
+          "kind": "pixels",
+          "max_abs_diff": 142,
+          "sum_abs_diff": 11088
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
       "env": "ALE/Frostbite-v5",
       "mismatches": [
         {
@@ -371,24 +341,6 @@
           "kind": "pixels",
           "max_abs_diff": 19,
           "sum_abs_diff": 10792
-        }
-      ],
-      "step": 2
-    },
-    {
-      "action_index": 3,
-      "env": "ALE/Gopher-v5",
-      "mismatches": [
-        {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
         }
       ],
       "step": 0
@@ -411,10 +363,10 @@
       "env": "ALE/Hero-v5",
       "mismatches": [
         {
-          "differing_pixels": 62,
+          "differing_pixels": 1,
           "kind": "pixels",
           "max_abs_diff": 214,
-          "sum_abs_diff": 9388
+          "sum_abs_diff": 214
         }
       ],
       "step": 0
@@ -429,10 +381,10 @@
           "kind": "lives"
         },
         {
-          "differing_pixels": 4,
+          "differing_pixels": 69,
           "kind": "pixels",
           "max_abs_diff": 167,
-          "sum_abs_diff": 668
+          "sum_abs_diff": 5426
         }
       ],
       "step": 0
@@ -442,10 +394,10 @@
       "env": "ALE/JourneyEscape-v5",
       "mismatches": [
         {
-          "differing_pixels": 3184,
+          "differing_pixels": 2722,
           "kind": "pixels",
-          "max_abs_diff": 233,
-          "sum_abs_diff": 194216
+          "max_abs_diff": 214,
+          "sum_abs_diff": 142272
         }
       ],
       "step": 0
@@ -460,10 +412,10 @@
           "kind": "lives"
         },
         {
-          "differing_pixels": 333,
+          "differing_pixels": 3,
           "kind": "pixels",
-          "max_abs_diff": 142,
-          "sum_abs_diff": 17626
+          "max_abs_diff": 102,
+          "sum_abs_diff": 242
         }
       ],
       "step": 0
@@ -494,27 +446,27 @@
       "step": 8
     },
     {
-      "action_index": 3,
+      "action_index": 10,
       "env": "ALE/MontezumaRevenge-v5",
       "mismatches": [
         {
-          "differing_pixels": 159,
+          "differing_pixels": 113,
           "kind": "pixels",
-          "max_abs_diff": 236,
-          "sum_abs_diff": 30548
+          "max_abs_diff": 179,
+          "sum_abs_diff": 13467
         }
       ],
-      "step": 0
+      "step": 1
     },
     {
       "action_index": 3,
       "env": "ALE/MsPacman-v5",
       "mismatches": [
         {
-          "differing_pixels": 60,
+          "differing_pixels": 182,
           "kind": "pixels",
-          "max_abs_diff": 20,
-          "sum_abs_diff": 1200
+          "max_abs_diff": 135,
+          "sum_abs_diff": 15258
         }
       ],
       "step": 0
@@ -524,10 +476,10 @@
       "env": "ALE/NameThisGame-v5",
       "mismatches": [
         {
-          "differing_pixels": 112,
+          "differing_pixels": 90,
           "kind": "pixels",
           "max_abs_diff": 129,
-          "sum_abs_diff": 12928
+          "sum_abs_diff": 10090
         }
       ],
       "step": 0
@@ -537,15 +489,10 @@
       "env": "ALE/Phoenix-v5",
       "mismatches": [
         {
-          "ale_py": 0.0,
-          "cule": 80.0,
-          "kind": "reward"
-        },
-        {
-          "differing_pixels": 498,
+          "differing_pixels": 303,
           "kind": "pixels",
-          "max_abs_diff": 236,
-          "sum_abs_diff": 62707
+          "max_abs_diff": 181,
+          "sum_abs_diff": 38483
         }
       ],
       "step": 0
@@ -586,15 +533,10 @@
       "env": "ALE/Pooyan-v5",
       "mismatches": [
         {
-          "ale_py": [
-            220,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
+          "differing_pixels": 8331,
+          "kind": "pixels",
+          "max_abs_diff": 204,
+          "sum_abs_diff": 704586
         }
       ],
       "step": 0
@@ -644,10 +586,10 @@
           "kind": "lives"
         },
         {
-          "differing_pixels": 3500,
+          "differing_pixels": 360,
           "kind": "pixels",
-          "max_abs_diff": 82,
-          "sum_abs_diff": 122494
+          "max_abs_diff": 59,
+          "sum_abs_diff": 12120
         }
       ],
       "step": 0
@@ -657,10 +599,10 @@
       "env": "ALE/RoadRunner-v5",
       "mismatches": [
         {
-          "differing_pixels": 225,
+          "differing_pixels": 166,
           "kind": "pixels",
           "max_abs_diff": 148,
-          "sum_abs_diff": 25092
+          "sum_abs_diff": 18372
         }
       ],
       "step": 1
@@ -670,10 +612,10 @@
       "env": "ALE/Robotank-v5",
       "mismatches": [
         {
-          "differing_pixels": 84,
+          "differing_pixels": 133,
           "kind": "pixels",
           "max_abs_diff": 132,
-          "sum_abs_diff": 5936
+          "sum_abs_diff": 9002
         }
       ],
       "step": 0
@@ -683,10 +625,10 @@
       "env": "ALE/Seaquest-v5",
       "mismatches": [
         {
-          "differing_pixels": 1248,
+          "differing_pixels": 892,
           "kind": "pixels",
-          "max_abs_diff": 140,
-          "sum_abs_diff": 42238
+          "max_abs_diff": 28,
+          "sum_abs_diff": 24976
         }
       ],
       "step": 0
@@ -696,20 +638,15 @@
       "env": "ALE/Skiing-v5",
       "mismatches": [
         {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
-        },
-        {
           "ale_py": -2.0,
           "cule": 0.0,
           "kind": "reward"
+        },
+        {
+          "differing_pixels": 200,
+          "kind": "pixels",
+          "max_abs_diff": 236,
+          "sum_abs_diff": 25476
         }
       ],
       "step": 0
@@ -719,10 +656,23 @@
       "env": "ALE/Solaris-v5",
       "mismatches": [
         {
-          "differing_pixels": 8,
+          "differing_pixels": 4,
           "kind": "pixels",
           "max_abs_diff": 63,
-          "sum_abs_diff": 504
+          "sum_abs_diff": 252
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/SpaceInvaders-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 44,
+          "kind": "pixels",
+          "max_abs_diff": 98,
+          "sum_abs_diff": 4312
         }
       ],
       "step": 0
@@ -732,10 +682,10 @@
       "env": "ALE/StarGunner-v5",
       "mismatches": [
         {
-          "differing_pixels": 826,
+          "differing_pixels": 218,
           "kind": "pixels",
           "max_abs_diff": 169,
-          "sum_abs_diff": 107123
+          "sum_abs_diff": 21293
         }
       ],
       "step": 0
@@ -745,15 +695,10 @@
       "env": "ALE/Tennis-v5",
       "mismatches": [
         {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
+          "differing_pixels": 189,
+          "kind": "pixels",
+          "max_abs_diff": 132,
+          "sum_abs_diff": 8844
         }
       ],
       "step": 0
@@ -772,37 +717,6 @@
     },
     {
       "action_index": 3,
-      "env": "ALE/Tutankham-v5",
-      "mismatches": [
-        {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
-        }
-      ],
-      "step": 0
-    },
-    {
-      "action_index": 3,
-      "env": "ALE/UpNDown-v5",
-      "mismatches": [
-        {
-          "differing_pixels": 167,
-          "kind": "pixels",
-          "max_abs_diff": 95,
-          "sum_abs_diff": 15865
-        }
-      ],
-      "step": 0
-    },
-    {
-      "action_index": 3,
       "env": "ALE/Venture-v5",
       "mismatches": [
         {
@@ -815,63 +729,40 @@
       "step": 0
     },
     {
-      "action_index": 3,
+      "action_index": 1,
       "env": "ALE/VideoPinball-v5",
       "mismatches": [
         {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
+          "differing_pixels": 24,
+          "kind": "pixels",
+          "max_abs_diff": 236,
+          "sum_abs_diff": 5664
         }
       ],
-      "step": 0
+      "step": 1
     },
     {
-      "action_index": 3,
-      "env": "ALE/WizardOfWor-v5",
-      "mismatches": [
-        {
-          "ale_py": [
-            210,
-            160
-          ],
-          "cule": [
-            250,
-            160
-          ],
-          "kind": "shape"
-        }
-      ],
-      "step": 0
-    },
-    {
-      "action_index": 3,
+      "action_index": 10,
       "env": "ALE/YarsRevenge-v5",
       "mismatches": [
         {
-          "differing_pixels": 2724,
+          "differing_pixels": 3650,
           "kind": "pixels",
-          "max_abs_diff": 153,
-          "sum_abs_diff": 243780
+          "max_abs_diff": 148,
+          "sum_abs_diff": 241199
         }
       ],
-      "step": 0
+      "step": 1
     },
     {
       "action_index": 3,
       "env": "ALE/Zaxxon-v5",
       "mismatches": [
         {
-          "differing_pixels": 1,
+          "differing_pixels": 11,
           "kind": "pixels",
           "max_abs_diff": 148,
-          "sum_abs_diff": 148
+          "sum_abs_diff": 1276
         }
       ],
       "step": 0
@@ -881,108 +772,105 @@
   "restored_cpu_cuda": {
     "pixel_failures": [
       {
-        "differing_pixels": 215,
+        "differing_pixels": 2982,
         "env": "ALE/Asteroids-v5",
         "max_abs_diff": 168,
         "step": 0,
-        "sum_abs_diff": 30025
+        "sum_abs_diff": 417690
       },
       {
-        "differing_pixels": 24653,
-        "env": "ALE/BeamRider-v5",
-        "max_abs_diff": 122,
-        "step": 0,
-        "sum_abs_diff": 3007666
-      },
-      {
-        "differing_pixels": 370,
+        "differing_pixels": 266,
         "env": "ALE/Centipede-v5",
-        "max_abs_diff": 169,
+        "max_abs_diff": 115,
         "step": 0,
-        "sum_abs_diff": 43386
+        "sum_abs_diff": 30446
       },
       {
-        "differing_pixels": 24408,
+        "differing_pixels": 1241,
         "env": "ALE/ChopperCommand-v5",
-        "max_abs_diff": 199,
+        "max_abs_diff": 131,
         "step": 1,
-        "sum_abs_diff": 586883
+        "sum_abs_diff": 77867
       },
       {
-        "differing_pixels": 206,
+        "differing_pixels": 32,
         "env": "ALE/DemonAttack-v5",
-        "max_abs_diff": 184,
+        "max_abs_diff": 174,
         "step": 0,
-        "sum_abs_diff": 31134
+        "sum_abs_diff": 5568
       },
       {
-        "differing_pixels": 1971,
+        "differing_pixels": 1252,
         "env": "ALE/Freeway-v5",
         "max_abs_diff": 142,
         "step": 0,
-        "sum_abs_diff": 112496
+        "sum_abs_diff": 78444
       },
       {
-        "differing_pixels": 21020,
+        "differing_pixels": 235,
         "env": "ALE/Kaboom-v5",
-        "max_abs_diff": 142,
+        "max_abs_diff": 170,
         "step": 0,
-        "sum_abs_diff": 178747
+        "sum_abs_diff": 11804
       },
       {
-        "differing_pixels": 33592,
-        "env": "ALE/Pong-v5",
-        "max_abs_diff": 162,
-        "step": 0,
-        "sum_abs_diff": 1265056
-      },
-      {
-        "differing_pixels": 454,
+        "differing_pixels": 105,
         "env": "ALE/PrivateEye-v5",
         "max_abs_diff": 236,
-        "step": 0,
-        "sum_abs_diff": 72324
+        "step": 3,
+        "sum_abs_diff": 15956
       },
       {
-        "differing_pixels": 67200,
-        "env": "ALE/Qbert-v5",
-        "max_abs_diff": 200,
-        "step": 1,
-        "sum_abs_diff": 6222256
-      },
-      {
-        "differing_pixels": 7638,
-        "env": "ALE/Riverraid-v5",
-        "max_abs_diff": 150,
-        "step": 1,
-        "sum_abs_diff": 303350
-      },
-      {
-        "differing_pixels": 24908,
+        "differing_pixels": 24883,
         "env": "ALE/Seaquest-v5",
         "max_abs_diff": 142,
         "step": 0,
-        "sum_abs_diff": 865432
-      },
-      {
-        "differing_pixels": 178,
-        "env": "ALE/YarsRevenge-v5",
-        "max_abs_diff": 142,
-        "step": 0,
-        "sum_abs_diff": 5900
+        "sum_abs_diff": 833179
       }
     ],
-    "transition_failures": []
+    "transition_failures": [
+      {
+        "cpu_done": [
+          true,
+          false
+        ],
+        "cpu_lives": [
+          88,
+          88
+        ],
+        "cpu_rewards": [
+          0.0,
+          0.0
+        ],
+        "cuda_done": [
+          true,
+          true
+        ],
+        "cuda_lives": [
+          88,
+          88
+        ],
+        "cuda_rewards": [
+          0.0,
+          0.0
+        ],
+        "done_match": false,
+        "env": "ALE/Riverraid-v5",
+        "lives_match": true,
+        "rewards_match": true,
+        "step": 1
+      }
+    ]
   },
   "state_roundtrip_excluded_fields": [
     "reward"
   ],
   "state_roundtrip_failures": [],
   "summary": {
-    "ale_blackbox_failure_count": 58,
+    "ale_blackbox_failure_count": 55,
     "metadata_failure_count": 0,
-    "restored_cpu_cuda_pixel_failure_count": 13,
-    "restored_cpu_cuda_transition_failure_count": 0,
+    "restored_cpu_cuda_pixel_failure_count": 8,
+    "restored_cpu_cuda_transition_failure_count": 1,
     "state_roundtrip_failure_count": 0
   },
   "supported_v5_env_count": 63

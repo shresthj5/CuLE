@@ -6,6 +6,7 @@
 #include <cule/atari/ale.hpp>
 #include <cule/atari/controller.hpp>
 #include <cule/atari/frame_state.hpp>
+#include <cule/atari/frame_state_helpers.hpp>
 #include <cule/atari/joystick.hpp>
 #include <cule/atari/m6502.hpp>
 #include <cule/atari/paddles.hpp>
@@ -324,14 +325,15 @@ struct set_states_functor
                     const rom* cart,
                     uint8_t* ram_buffer,
                     State_t* states_buffer,
-                    frame_state*,
+                    frame_state* frame_states_buffer,
                     const State_t* input_states_buffer,
-                    const frame_state*) const
+                    const frame_state* input_frame_states_buffer) const
     {
         const State_t& s = input_states_buffer[self.index()];
 
         const size_t index = indices[self.index()];
         State_t& t = states_buffer[index];
+        frame_state& tf = frame_states_buffer[index];
 
         t.A = s.A;
         t.X = s.X;
@@ -370,6 +372,8 @@ struct set_states_functor
         t.M0CosmicArkCounter = s.M0CosmicArkCounter;
 
         restore_state_runtime_pointers(t, cart, ram_buffer, index);
+        tf = input_frame_states_buffer[self.index()];
+        refresh_frame_state_masks(tf);
 
         for(size_t i = 0; i < (cart->ram_size() / sizeof(uint32_t)); i++)
         {

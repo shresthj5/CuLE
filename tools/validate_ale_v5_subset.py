@@ -160,6 +160,16 @@ def validate_metadata():
                 "ale_py": ale_actions,
             })
 
+        ale_dims = tuple(int(v) for v in ale_env.unwrapped.ale.getScreenDims())
+        cule_dims = (int(rom.screen_height()), int(rom.screen_width()))
+        if cule_dims != ale_dims:
+            failures.append({
+                "env": env_name,
+                "check": "screen_dims",
+                "cule": cule_dims,
+                "ale_py": ale_dims,
+            })
+
         v5_default_env = Env(env_name, 1, color_mode="gray", device="cpu", rescale=False)
         if v5_default_env.frameskip != 4 or v5_default_env.repeat_prob != 0.25:
             failures.append({

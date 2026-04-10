@@ -5,6 +5,7 @@
 #include <cule/atari/state.hpp>
 #include <cule/atari/rom.hpp>
 #include <cule/atari/preprocess.hpp>
+#include <cule/atari/frame_state_helpers.hpp>
 #include <cule/atari/prng.hpp>
 
 #include <cule/atari/cuda/frame_state.hpp>
@@ -533,6 +534,7 @@ void set_states_kernel(const uint32_t num_envs,
     const size_t index = indices[global_index];
     const State_t& s = input_states_buffer[global_index];
     State_t& t = states_buffer[index];
+    frame_state& tf = frame_states_buffer[index];
 
     t.A = s.A;
     t.X = s.X;
@@ -576,6 +578,9 @@ void set_states_kernel(const uint32_t num_envs,
     t.CurrentM0Mask = &missle_accessor(0, 0, 0, 0);
     t.CurrentM1Mask = &missle_accessor(0, 0, 0, 0);
     t.CurrentBLMask = &ball_accessor(0, 0, 0);
+
+    state_store_load_helper(tf, input_frame_states_buffer[global_index]);
+    refresh_frame_state_masks(tf);
 
     input_states_ram += 256 * global_index;
     const uint32_t* input_ram_words = reinterpret_cast<const uint32_t*>(input_states_ram);

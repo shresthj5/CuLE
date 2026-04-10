@@ -314,8 +314,7 @@ size_t rom::rom_size() const
 
 size_t rom::screen_height() const
 {
-    const bool is_pal_m = game_name().find("PAL-M") != std::string::npos;
-    return (is_ntsc() || is_pal_m) ? std::stoi(value_or_default(games::ROM_ATTR_Height)) : PAL_SCREEN_HEIGHT;
+    return std::stoi(value_or_default(games::ROM_ATTR_Height));
 }
 
 size_t rom::screen_width() const
@@ -376,7 +375,20 @@ bool rom::is_supported() const
 
 bool rom::is_ntsc() const
 {
-    return game_name().find("PAL") == std::string::npos;
+    const std::string format = value_or_default(games::ROM_ATTR_Format);
+    if(format == "PAL" || format == "SECAM")
+    {
+        return false;
+    }
+    if(format == "NTSC" || format == "PAL-M")
+    {
+        return true;
+    }
+
+    // Stella/ALE derives AUTO-DETECT formats from the visible display. If the
+    // effective display height stays below the PAL frame height, treat it as
+    // NTSC-like for CuLE's scanline handling.
+    return screen_height() < PAL_SCREEN_HEIGHT;
 }
 
 std::ostream& operator<< (std::ostream& os, rom const& cart)

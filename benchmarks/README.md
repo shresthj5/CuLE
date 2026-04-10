@@ -42,7 +42,7 @@ Local tuning build for the RTX 3070:
 ```bash
 source .venv/bin/activate
 TORCH_CUDA_ARCH_LIST=8.6 \
-CULE_ATARI_ENV_BLOCK_SIZE=1 \
+CULE_ATARI_ENV_BLOCK_SIZE=32 \
 CULE_ATARI_PROCESS_BLOCK_SIZE=64 \
 python setup.py build_ext --inplace
 ```
@@ -56,7 +56,7 @@ TORCH_CUDA_ARCH_LIST="8.0 8.6" python setup.py build_ext --inplace
 
 ## Current 3070 measurements
 
-Measured on the local RTX 3070 on April 8, 2026.
+Measured on the local RTX 3070 on April 8-9, 2026. These are env-only Pong v5 results with Atari v5 defaults (`frameskip=4`, `repeat_prob=0.25`) and random action sampling included in the timed loop.
 
 Baseline build:
 
@@ -81,11 +81,18 @@ Process-kernel sweep with `ENV=1`:
 - `PROCESS=128, 4096 envs`: about `31.70k env-steps/s` or `114.11M env-steps/hour`
 - `PROCESS=128, 8192 envs`: about `34.91k env-steps/s` or `125.67M env-steps/hour`
 
-Current best finding:
+Current tuned default after Nsight-guided env-kernel tuning:
 
-- `CULE_ATARI_ENV_BLOCK_SIZE=1` and `CULE_ATARI_PROCESS_BLOCK_SIZE=64` is the fastest measured configuration on this 3070.
-- The earlier process-block experiments were initially invalid because the tuning knob was accidentally wired to reset-time initialization instead of `process_kernel`. That bug is now fixed in the dispatch layer.
-- `ATARI_ENV_BLOCK_SIZE=32` remains a correctness-sensitive path because RAM storage becomes interleaved. The associated `get_data`, `get_states`, and `set_states` layout bug is fixed, but the env kernel itself is still slower than `1` on this card.
+- `ENV=32, PROCESS=64, 4096 envs`: about `31.09k env-steps/s` or `111.94M env-steps/hour`
+- `ENV=32, PROCESS=64, 8192 envs`: about `53.20k env-steps/s` or `191.52M env-steps/hour`
+- At Atari v5 `frameskip=4`, the 8192-env result corresponds to about `766.08M emulator frames/hour`.
+
+Important correctness note:
+
+- `ENV=32` requires an interleaved CUDA RAM layout. This path now pads the CUDA RAM allocation to the block geometry and specializes CUDA kernels to 128-byte RAM for normal cartridges and 256-byte RAM for F8SC/Superchip cartridges.
+- The full audited v5 test matrix passes on CPU and CUDA with `ENV=32, PROCESS=64`.
+- `ALE/ElevatorAction-v5`, the F8SC/Superchip representative, passes a CUDA spot benchmark with the corrected 256-byte RAM path at about `44.94M env-steps/hour`.
+- A100 compatibility is built through `TORCH_CUDA_ARCH_LIST="8.0 8.6"`, but the A100 runtime performance number still needs to be measured on an actual A100.
 
 ## Nsight Compute workflow
 
@@ -106,7 +113,9 @@ benchmarks/profile_env_ncu.sh --steps 200 --warmup-steps 50 --num-envs 1024 --de
 
 The report is written under `benchmarks/results/`.
 
-If `ncu` fails with `ERR_NVGPUCTRPERM`, the current shell does not have permission to access NVIDIA GPU performance counters. On this WSL/WDDM setup, retrying `ncu` under `sudo` still failed, which strongly suggests the remaining gate is the Windows host-side performance-counter setting documented by NVIDIA here:
+By default the wrapper filters to CuLE kernels with `NCU_KERNEL_NAME='regex:.*cule::atari::cuda::.*'`. Override that environment variable if you intentionally want to include PyTorch helper kernels in the same report.
+
+If `ncu` fails with `ERR_NVGPUCTRPERM`, the current shell does not have permission to access NVIDIA GPU performance counters. On this WSL/WDDM setup, enabling the NVIDIA Control Panel setting for all users fixed Nsight Compute access. NVIDIA documents the permission failure here:
 
 - https://developer.nvidia.com/ERR_NVGPUCTRPERM
 
@@ -137,6 +146,7 @@ These sections line up with the current modernization question:
 
 That matches the guidance in NVIDIA's documentation:
 
-- CUDA C++ Best Practices Guide: memory optimizations and coalesced access
-- CUDA C++ Programming Guide: `__launch_bounds__` and launch configuration effects
-- Nsight Compute Profiling Guide: `SpeedOfLight`, `Occupancy`, `LaunchStats`, `SchedulerStats`, and `WarpStateStats`
+- CUDA C++ Best Practices Guide: https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/#memory-optimizations
+- CUDA C++ Programming Guide: https://docs.nvidia.com/cuda/cuda-c-programming-guide/#launch-bounds
+- Ampere Tuning Guide: https://docs.nvidia.com/cuda/ampere-tuning-guide/index.html
+- Nsight Compute Profiling Guide: https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html

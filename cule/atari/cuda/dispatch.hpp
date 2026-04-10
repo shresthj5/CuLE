@@ -13,7 +13,7 @@
 #include <agency/agency.hpp>
 
 #ifndef CULE_ATARI_ENV_BLOCK_SIZE
-#define CULE_ATARI_ENV_BLOCK_SIZE 1
+#define CULE_ATARI_ENV_BLOCK_SIZE 32
 #endif
 
 #ifndef CULE_ATARI_PROCESS_BLOCK_SIZE
@@ -69,6 +69,7 @@ reset(cule::cuda::parallel_execution_policy& policy,
       uint32_t*)
 {
     constexpr size_t BLOCK_SIZE = detail::ENV_BLOCK_SIZE;
+    constexpr size_t RAM_WORDS_PER_ENV = Environment::RAM_WORDS_PER_ENV;
     const size_t NUM_BLOCKS = detail::num_blocks(wrap.size(), BLOCK_SIZE);
 
     using State_t = typename Wrapper::State_t;
@@ -125,7 +126,7 @@ reset(cule::cuda::parallel_execution_policy& policy,
         &ball_accessor(0, 0, 0));
     CULE_CUDA_PEEK_AND_SYNC;
 
-    cule::atari::cuda::initialize_states_kernel<State_t, BLOCK_SIZE>
+    cule::atari::cuda::initialize_states_kernel<State_t, BLOCK_SIZE, RAM_WORDS_PER_ENV>
     <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
         wrap.size(),
         wrap.noop_reset_steps,
@@ -148,9 +149,10 @@ reset_states(cule::cuda::parallel_execution_policy& policy,
     using State_t = typename Wrapper::State_t;
 
     constexpr size_t BLOCK_SIZE = detail::ENV_BLOCK_SIZE;
+    constexpr size_t RAM_WORDS_PER_ENV = Environment::RAM_WORDS_PER_ENV;
     const size_t NUM_BLOCKS = detail::num_blocks(wrap.size(), BLOCK_SIZE);
 
-    cule::atari::cuda::reset_kernel<State_t, BLOCK_SIZE>
+    cule::atari::cuda::reset_kernel<State_t, BLOCK_SIZE, RAM_WORDS_PER_ENV>
     <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
         wrap.size(),
         wrap.noop_reset_steps,
@@ -205,11 +207,12 @@ get_data(cule::cuda::parallel_execution_policy& policy,
 {
     using State_t = typename Wrapper::State_t;
     using ALE_t = typename Environment::ALE_t;
+    constexpr size_t RAM_WORDS_PER_ENV = Environment::RAM_WORDS_PER_ENV;
 
     const size_t BLOCK_SIZE = 256UL;
     const size_t NUM_BLOCKS = std::ceil(float(wrap.size()) / BLOCK_SIZE);
 
-    cule::atari::cuda::get_data_kernel<State_t, ALE_t, BLOCK_SIZE>
+    cule::atari::cuda::get_data_kernel<State_t, ALE_t, BLOCK_SIZE, RAM_WORDS_PER_ENV>
     <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
         wrap.size(),
         episodic_life,
@@ -320,6 +323,7 @@ get_states(cule::cuda::parallel_execution_policy& policy,
 
     const size_t BLOCK_SIZE = 128UL;
     const size_t NUM_BLOCKS = std::ceil(float(num_states) / BLOCK_SIZE);
+    const uint32_t RAM_WORDS_PER_ENV = wrap.cart.ram_size() / sizeof(uint32_t);
 
     cule::atari::cuda::get_states_kernel<State_t, BLOCK_SIZE>
     <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
@@ -330,6 +334,7 @@ get_states(cule::cuda::parallel_execution_policy& policy,
         output_states,
         output_frame_states,
         wrap.ram_ptr,
+        RAM_WORDS_PER_ENV,
         output_states_ram);
     // CULE_CUDA_PEEK_AND_SYNC;
 }
@@ -348,6 +353,7 @@ set_states(cule::cuda::parallel_execution_policy& policy,
 
     const size_t BLOCK_SIZE = 128UL;
     const size_t NUM_BLOCKS = std::ceil(float(num_states) / BLOCK_SIZE);
+    const uint32_t RAM_WORDS_PER_ENV = wrap.cart.ram_size() / sizeof(uint32_t);
 
     cule::atari::cuda::set_states_kernel<State_t, BLOCK_SIZE>
     <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
@@ -358,6 +364,7 @@ set_states(cule::cuda::parallel_execution_policy& policy,
         input_states,
         input_frame_states,
         wrap.ram_ptr,
+        RAM_WORDS_PER_ENV,
         input_states_ram);
     // CULE_CUDA_PEEK_AND_SYNC;
 }

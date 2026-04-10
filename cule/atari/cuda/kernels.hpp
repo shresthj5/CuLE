@@ -14,7 +14,7 @@
 #include <agency/cuda.hpp>
 
 #ifndef CULE_ATARI_ENV_BLOCK_SIZE
-#define CULE_ATARI_ENV_BLOCK_SIZE 1
+#define CULE_ATARI_ENV_BLOCK_SIZE 32
 #endif
 
 namespace cule
@@ -27,41 +27,81 @@ namespace cuda
 namespace detail
 {
 
-constexpr uint32_t RAM_BYTES_PER_ENV = 128;
-constexpr uint32_t RAM_WORDS_PER_ENV = RAM_BYTES_PER_ENV / sizeof(uint32_t);
+constexpr uint32_t MAX_RAM_BYTES_PER_ENV = 256;
+constexpr uint32_t MAX_RAM_WORDS_PER_ENV = MAX_RAM_BYTES_PER_ENV / sizeof(uint32_t);
 constexpr uint32_t ENV_RAM_LAYOUT_BLOCK_SIZE = CULE_ATARI_ENV_BLOCK_SIZE;
 
 __device__ inline uint32_t ram_word_offset(const uint32_t env_index,
-                                           const uint32_t word_index)
+                                           const uint32_t word_index,
+                                           const uint32_t ram_words_per_env)
 {
     const uint32_t block_index = env_index / ENV_RAM_LAYOUT_BLOCK_SIZE;
     const uint32_t lane_index = env_index % ENV_RAM_LAYOUT_BLOCK_SIZE;
-    return (RAM_WORDS_PER_ENV * ENV_RAM_LAYOUT_BLOCK_SIZE * block_index) +
+    return (ram_words_per_env * ENV_RAM_LAYOUT_BLOCK_SIZE * block_index) +
            (word_index * ENV_RAM_LAYOUT_BLOCK_SIZE) +
            lane_index;
 }
 
+template<size_t RAM_WORDS_PER_ENV>
+__device__ inline uint32_t ram_word_offset(const uint32_t env_index,
+                                           const uint32_t word_index)
+{
+    return ram_word_offset(env_index, word_index, RAM_WORDS_PER_ENV);
+}
+
 __device__ inline void load_env_ram_words(const uint8_t* ram_buffer,
                                           const uint32_t env_index,
+                                          const uint32_t ram_words_per_env,
                                           uint32_t* ram_words)
 {
     const uint32_t* ram_words_buffer = reinterpret_cast<const uint32_t*>(ram_buffer);
-    #pragma unroll
-    for(int32_t i = 0; i < int32_t(RAM_WORDS_PER_ENV); ++i)
+    for(uint32_t i = 0; i < ram_words_per_env; ++i)
     {
-        ram_words[i] = ram_words_buffer[ram_word_offset(env_index, i)];
+        ram_words[i] = ram_words_buffer[ram_word_offset(env_index, i, ram_words_per_env)];
     }
 }
 
 __device__ inline void store_env_ram_words(uint8_t* ram_buffer,
                                            const uint32_t env_index,
+                                           const uint32_t ram_words_per_env,
                                            const uint32_t* ram_words)
 {
+    uint32_t* ram_words_buffer = reinterpret_cast<uint32_t*>(ram_buffer);
+    for(uint32_t i = 0; i < ram_words_per_env; ++i)
+    {
+        ram_words_buffer[ram_word_offset(env_index, i, ram_words_per_env)] = ram_words[i];
+    }
+}
+
+template<size_t RAM_WORDS_PER_ENV>
+__device__ inline void load_env_ram_words(const uint8_t* ram_buffer,
+                                          const uint32_t env_index,
+                                          uint32_t* ram_words)
+{
+    static_assert(RAM_WORDS_PER_ENV <= MAX_RAM_WORDS_PER_ENV,
+                  "RAM_WORDS_PER_ENV exceeds CuLE's maximum Atari RAM allocation");
+
+    const uint32_t* ram_words_buffer = reinterpret_cast<const uint32_t*>(ram_buffer);
+    #pragma unroll
+    for(int32_t i = 0; i < int32_t(RAM_WORDS_PER_ENV); ++i)
+    {
+        ram_words[i] = ram_words_buffer[ram_word_offset<RAM_WORDS_PER_ENV>(env_index, i)];
+    }
+}
+
+template<size_t RAM_WORDS_PER_ENV>
+__device__ inline void store_env_ram_words(uint8_t* ram_buffer,
+                                           const uint32_t env_index,
+                                           const uint32_t* ram_words)
+{
+    static_assert(RAM_WORDS_PER_ENV <= MAX_RAM_WORDS_PER_ENV,
+                  "RAM_WORDS_PER_ENV exceeds CuLE's maximum Atari RAM allocation");
+
     uint32_t* ram_words_buffer = reinterpret_cast<uint32_t*>(ram_buffer);
     #pragma unroll
     for(int32_t i = 0; i < int32_t(RAM_WORDS_PER_ENV); ++i)
     {
-        ram_words_buffer[ram_word_offset(env_index, i)] = ram_words[i];
+        ram_words_buffer[ram_word_offset<RAM_WORDS_PER_ENV>(env_index, i)] = ram_words[i];
     }
 }
 
@@ -103,7 +143,7 @@ void initialize_frame_states_kernel(const uint32_t noop_reset_steps,
     s.CurrentBLMask = fs.CurrentBLMask;
 }
 
-template<typename State_t, size_t NT>
+template<typename State_t, size_t NT, size_t RAM_WORDS_PER_ENV>
 __launch_bounds__(NT) __global__
 void initialize_states_kernel(const uint32_t num_envs,
                               const uint32_t noop_reset_steps,
@@ -115,10 +155,8 @@ void initialize_states_kernel(const uint32_t num_envs,
                               frame_state* frame_states_buffer,
                               frame_state* cached_frame_states_buffer)
 {
-    enum
-    {
-        NUM_INT_REGS = detail::RAM_WORDS_PER_ENV,
-    };
+    static_assert(RAM_WORDS_PER_ENV <= detail::MAX_RAM_WORDS_PER_ENV,
+                  "RAM_WORDS_PER_ENV exceeds CuLE's maximum Atari RAM allocation");
 
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
 
@@ -130,23 +168,23 @@ void initialize_states_kernel(const uint32_t num_envs,
     prng gen(rand_states_buffer[global_index]);
     const size_t cache_index = gen.sample() % noop_reset_steps;
 
-    uint32_t ram[NUM_INT_REGS];
+    uint32_t ram[RAM_WORDS_PER_ENV];
 
     states_buffer[global_index] = cached_states_buffer[cache_index];
     frame_states_buffer[global_index] = cached_frame_states_buffer[cache_index];
 
-    uint32_t * ram_int = (uint32_t*) cached_ram_buffer + (NUM_INT_REGS * cache_index);
+    uint32_t * ram_int = (uint32_t*) cached_ram_buffer + (RAM_WORDS_PER_ENV * cache_index);
 
     #pragma loop unroll
-    for(int32_t i = 0; i < NUM_INT_REGS; i++)
+    for(int32_t i = 0; i < int32_t(RAM_WORDS_PER_ENV); i++)
     {
         ram[i] = ram_int[i];
     }
 
-    detail::store_env_ram_words(ram_buffer, global_index, ram);
+    detail::store_env_ram_words<RAM_WORDS_PER_ENV>(ram_buffer, global_index, ram);
 }
 
-template<typename State_t, size_t NT>
+template<typename State_t, size_t NT, size_t RAM_WORDS_PER_ENV>
 __launch_bounds__(NT) __global__
 void reset_kernel(const uint32_t num_envs,
                   const size_t noop_reset_steps,
@@ -159,10 +197,8 @@ void reset_kernel(const uint32_t num_envs,
                   uint32_t* cache_index_buffer,
                   uint32_t* rand_states_buffer)
 {
-    enum
-    {
-        NUM_INT_REGS = detail::RAM_WORDS_PER_ENV,
-    };
+    static_assert(RAM_WORDS_PER_ENV <= detail::MAX_RAM_WORDS_PER_ENV,
+                  "RAM_WORDS_PER_ENV exceeds CuLE's maximum Atari RAM allocation");
 
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
 
@@ -182,16 +218,16 @@ void reset_kernel(const uint32_t num_envs,
         cache_index_buffer[global_index] = cache_index;
         frame_states_buffer[global_index] = cached_frame_states_buffer[cache_index];
 
-        uint32_t ram[NUM_INT_REGS];
-        uint32_t * ram_int = ((uint32_t*) cached_ram_buffer) + (NUM_INT_REGS * cache_index);
+        uint32_t ram[RAM_WORDS_PER_ENV];
+        uint32_t * ram_int = ((uint32_t*) cached_ram_buffer) + (RAM_WORDS_PER_ENV * cache_index);
 
         #pragma loop unroll
-        for(int32_t i = 0; i < NUM_INT_REGS; i++)
+        for(int32_t i = 0; i < int32_t(RAM_WORDS_PER_ENV); i++)
         {
             ram[i] = ram_int[i];
         }
 
-        detail::store_env_ram_words(ram_buffer, global_index, ram);
+        detail::store_env_ram_words<RAM_WORDS_PER_ENV>(ram_buffer, global_index, ram);
     }
 }
 
@@ -206,10 +242,8 @@ void step_kernel(const uint32_t num_envs,
                  const Action* player_b_buffer,
                  bool* done_buffer)
 {
-    enum
-    {
-        NUM_INT_REGS = detail::RAM_WORDS_PER_ENV,
-    };
+    static_assert(Environment_t::RAM_WORDS_PER_ENV <= detail::MAX_RAM_WORDS_PER_ENV,
+                  "RAM_WORDS_PER_ENV exceeds CuLE's maximum Atari RAM allocation");
 
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
 
@@ -220,13 +254,13 @@ void step_kernel(const uint32_t num_envs,
 
     states_buffer += global_index;
 
-    uint32_t ram[NUM_INT_REGS];
+    uint32_t ram[Environment_t::RAM_WORDS_PER_ENV];
 
     State_t s;
 
     {
         state_store_load_helper(s, *states_buffer);
-        detail::load_env_ram_words(ram_buffer, global_index, ram);
+        detail::load_env_ram_words<Environment_t::RAM_WORDS_PER_ENV>(ram_buffer, global_index, ram);
     }
 
     Action player_a_action = ACTION_NOOP;
@@ -255,11 +289,11 @@ void step_kernel(const uint32_t num_envs,
 
     {
         state_store_load_helper(*states_buffer, s);
-        detail::store_env_ram_words(ram_buffer, global_index, ram);
+        detail::store_env_ram_words<Environment_t::RAM_WORDS_PER_ENV>(ram_buffer, global_index, ram);
     }
 }
 
-template<typename State_t, typename ALE_t, size_t NT>
+template<typename State_t, typename ALE_t, size_t NT, size_t RAM_WORDS_PER_ENV>
 __launch_bounds__(NT) __global__
 void get_data_kernel(const int32_t num_envs,
                      const bool episodic_life,
@@ -269,6 +303,8 @@ void get_data_kernel(const int32_t num_envs,
                      float* rewards_buffer,
                      int32_t* lives_buffer)
 {
+    static_assert(RAM_WORDS_PER_ENV <= detail::MAX_RAM_WORDS_PER_ENV,
+                  "RAM_WORDS_PER_ENV exceeds CuLE's maximum Atari RAM allocation");
 
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
 
@@ -278,8 +314,8 @@ void get_data_kernel(const int32_t num_envs,
     }
 
     State_t& s = states_buffer[global_index];
-    uint32_t ram[detail::RAM_WORDS_PER_ENV];
-    detail::load_env_ram_words(ram_buffer, global_index, ram);
+    uint32_t ram[RAM_WORDS_PER_ENV];
+    detail::load_env_ram_words<RAM_WORDS_PER_ENV>(ram_buffer, global_index, ram);
     s.ram = ram;
 
     const uint32_t old_lives = lives_buffer[global_index];
@@ -447,6 +483,7 @@ void get_states_kernel(const uint32_t num_envs,
                        State_t* output_states_buffer,
                        frame_state* output_frame_states_buffer,
                        const uint8_t* ram_buffer,
+                       const uint32_t ram_words_per_env,
                        uint8_t* output_states_ram)
 {
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
@@ -464,12 +501,11 @@ void get_states_kernel(const uint32_t num_envs,
     output_frame_states_buffer[global_index] = frame_states_buffer[index];
 
     output_states_ram += 256 * global_index;
-    uint32_t ram_words[detail::RAM_WORDS_PER_ENV];
+    uint32_t ram_words[detail::MAX_RAM_WORDS_PER_ENV];
     uint32_t* output_ram_words = reinterpret_cast<uint32_t*>(output_states_ram);
-    detail::load_env_ram_words(ram_buffer, index, ram_words);
+    detail::load_env_ram_words(ram_buffer, index, ram_words_per_env, ram_words);
 
-    #pragma unroll
-    for(int32_t i = 0; i < int32_t(detail::RAM_WORDS_PER_ENV); ++i)
+    for(int32_t i = 0; i < int32_t(ram_words_per_env); ++i)
     {
         output_ram_words[i] = ram_words[i];
     }
@@ -484,6 +520,7 @@ void set_states_kernel(const uint32_t num_envs,
                        const State_t* input_states_buffer,
                        const frame_state* input_frame_states_buffer,
                        uint8_t* ram_buffer,
+                       const uint32_t ram_words_per_env,
                        const uint8_t* input_states_ram)
 {
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
@@ -543,7 +580,7 @@ void set_states_kernel(const uint32_t num_envs,
     input_states_ram += 256 * global_index;
     const uint32_t* input_ram_words = reinterpret_cast<const uint32_t*>(input_states_ram);
 
-    detail::store_env_ram_words(ram_buffer, index, input_ram_words);
+    detail::store_env_ram_words(ram_buffer, index, ram_words_per_env, input_ram_words);
 }
 
 } // end namespace cuda

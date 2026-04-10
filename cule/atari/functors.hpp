@@ -24,6 +24,23 @@ namespace cule
 namespace atari
 {
 
+template<class State_t>
+void restore_state_runtime_pointers(State_t& s,
+                                    const rom* cart,
+                                    uint8_t* ram_buffer,
+                                    const size_t index)
+{
+    s.ram = reinterpret_cast<uint32_t*>(ram_buffer + (cart->ram_size() * index));
+    s.rom = cart->data();
+
+    s.CurrentPFMask = &playfield_accessor(0, 0);
+    s.CurrentP0Mask = &player_mask_accessor(0, 0, 0, 0);
+    s.CurrentP1Mask = &player_mask_accessor(0, 0, 0, 0);
+    s.CurrentM0Mask = &missle_accessor(0, 0, 0, 0);
+    s.CurrentM1Mask = &missle_accessor(0, 0, 0, 0);
+    s.CurrentBLMask = &ball_accessor(0, 0, 0);
+}
+
 template<typename Environment_t>
 struct initialize_functor
 {
@@ -104,7 +121,8 @@ struct reset_functor
 {
     template<class Agent, class State_t>
     void operator()(Agent& self,
-                    const size_t ram_size,
+                    const rom* cart,
+                    uint8_t* ram_buffer,
                     const size_t noop_reset_steps,
                     State_t* states_buffer,
                     const State_t* cached_states_buffer,
@@ -118,21 +136,20 @@ struct reset_functor
 
         if(s.tiaFlags[FLAG_ALE_TERMINAL])
         {
-            const size_t NUM_RAM_INTS = ram_size / sizeof(uint32_t);
+            const size_t NUM_RAM_INTS = cart->ram_size() / sizeof(uint32_t);
             prng gen(rand_states_buffer[self.index()]);
             const size_t cache_index = gen.sample() % noop_reset_steps;
 
-            uint32_t* ram = s.ram;
             s = cached_states_buffer[cache_index];
             s.tiaFlags.set(FLAG_ALE_TERMINAL);
-            s.ram = ram;
+            restore_state_runtime_pointers(s, cart, ram_buffer, self.index());
             cache_index_buffer[self.index()] = cache_index;
 
             uint32_t* ram_int = ((uint32_t*) cached_ram_buffer) + (NUM_RAM_INTS * cache_index);
 
             for(size_t i = 0; i < NUM_RAM_INTS; i++)
             {
-                ram[i] = ram_int[i];
+                s.ram[i] = ram_int[i];
             }
 
             frame_states_buffer[self.index()] = cached_frame_states_buffer[cache_index];
@@ -304,6 +321,8 @@ struct set_states_functor
     template<class Agent, class State_t>
     void operator()(Agent& self,
                     const int32_t* indices,
+                    const rom* cart,
+                    uint8_t* ram_buffer,
                     State_t* states_buffer,
                     frame_state*,
                     const State_t* input_states_buffer,
@@ -350,14 +369,9 @@ struct set_states_functor
         t.score = s.score;
         t.M0CosmicArkCounter = s.M0CosmicArkCounter;
 
-        t.CurrentPFMask = &playfield_accessor(0, 0);
-        t.CurrentP0Mask = &player_mask_accessor(0, 0, 0, 0);
-        t.CurrentP1Mask = &player_mask_accessor(0, 0, 0, 0);
-        t.CurrentM0Mask = &missle_accessor(0, 0, 0, 0);
-        t.CurrentM1Mask = &missle_accessor(0, 0, 0, 0);
-        t.CurrentBLMask = &ball_accessor(0, 0, 0);
+        restore_state_runtime_pointers(t, cart, ram_buffer, index);
 
-        for(size_t i = 0; i < (128 / sizeof(uint32_t)); i++)
+        for(size_t i = 0; i < (cart->ram_size() / sizeof(uint32_t)); i++)
         {
             t.ram[i] = s.ram[i];
         }
@@ -406,4 +420,3 @@ struct png_functor
 
 } // end namespace atari
 } // end namespace cule
-

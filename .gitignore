@@ -1,4 +1,5 @@
 # build artifacts
+.venv/
 *.o
 *.os
 *.pyc
@@ -20,3 +21,8 @@ dist
 # data files
 *.csv
 examples/*/runs
+
+# profiler outputs
+benchmarks/results/*.ncu-rep
+benchmarks/results/*.nsys-rep
+benchmarks/results/*.sqlite

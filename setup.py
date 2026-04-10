@@ -28,8 +28,8 @@ parser.add_argument(
 parser.add_argument(
     "--atari-env-block-size",
     type=int,
-    default=int(os.environ.get("CULE_ATARI_ENV_BLOCK_SIZE", "1")),
-    help="Compile-time block size for CuLE's env/reset/preprocess CUDA kernels",
+    default=int(os.environ.get("CULE_ATARI_ENV_BLOCK_SIZE", "32")),
+    help="Compile-time block size for CuLE's env reset/step CUDA kernels",
 )
 parser.add_argument(
     "--atari-process-block-size",

@@ -81,7 +81,17 @@ class Rom(AtariRom):
 
         for game_path in _candidate_rom_paths(game_name):
             if game_path.exists():
-                super(Rom, self).__init__(os.fspath(game_path), game_name)
+                try:
+                    super(Rom, self).__init__(os.fspath(game_path), game_name)
+                except RuntimeError as exc:
+                    if f"Unsupported game name {game_name}" in str(exc):
+                        raise ValueError(
+                            "CuLE does not currently support %s (canonical game %s). "
+                            "The ROM is installed, but CuLE lacks the game-specific "
+                            "metadata and reward/life/action handlers required to run it."
+                            % (env_name, game_name)
+                        ) from exc
+                    raise
                 return
 
         raise IOError(

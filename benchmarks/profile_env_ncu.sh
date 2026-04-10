@@ -13,12 +13,15 @@ source .venv/bin/activate
 
 mkdir -p benchmarks/results
 
+NCU_BIN="${NCU_BIN:-ncu}"
+PYTHON_BIN="${PYTHON_BIN:-$(command -v python)}"
+KERNEL_NAME="${NCU_KERNEL_NAME:-regex:.*cule::atari::cuda::.*}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 OUTPUT_PATH="${NCU_OUTPUT_PATH:-benchmarks/results/env-profile-${STAMP}}"
 LOG_FILE="$(mktemp)"
 
 set +e
-ncu \
+"$NCU_BIN" \
     --target-processes all \
     --force-overwrite \
     --set none \
@@ -28,8 +31,10 @@ ncu \
     --section SchedulerStats \
     --section WarpStateStats \
     --section MemoryWorkloadAnalysis \
+    --kernel-name-base demangled \
+    --kernel-name "$KERNEL_NAME" \
     -o "$OUTPUT_PATH" \
-    python benchmarks/benchmark_env.py "$@" 2>&1 | tee "$LOG_FILE"
+    "$PYTHON_BIN" benchmarks/benchmark_env.py "$@" 2>&1 | tee "$LOG_FILE"
 NCU_STATUS=${PIPESTATUS[0]}
 set -e
 

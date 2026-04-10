@@ -10,7 +10,7 @@
 #include <torchcule/atari_env.hpp>
 
 #ifndef CULE_ATARI_ENV_BLOCK_SIZE
-#define CULE_ATARI_ENV_BLOCK_SIZE 1
+#define CULE_ATARI_ENV_BLOCK_SIZE 32
 #endif
 
 #ifndef CULE_ATARI_PROCESS_BLOCK_SIZE

@@ -134,7 +134,7 @@ class Env(torchcule_atari.AtariEnv):
 
         self.states = torch.zeros((num_envs, self.state_size()), device=self.device, dtype=torch.uint8)
         self.frame_states = torch.zeros((num_envs, self.frame_state_size()), device=self.device, dtype=torch.uint8)
-        self.ram = torch.randint(0, 255, (num_envs, self.cart.ram_size()), device=self.device, dtype=torch.uint8)
+        self.ram = torch.randint(0, 255, (self._ram_buffer_size(self.device),), device=self.device, dtype=torch.uint8)
         self.tia = torch.zeros((num_envs, self.tia_update_size()), device=self.device, dtype=torch.int32)
         self.frame_buffer = torch.zeros((num_envs, 300 * self.cart.screen_width()), device=self.device, dtype=torch.uint8)
         self.cart_offsets = torch.zeros(num_envs, device=self.device, dtype=torch.int32)
@@ -145,7 +145,7 @@ class Env(torchcule_atari.AtariEnv):
         self.cached_tia = torch.zeros((max_noop_steps, self.tia_update_size()), device=self.device, dtype=torch.int32)
         self.cache_index = torch.zeros((num_envs,), device=self.device, dtype=torch.int32)
 
-        self.set_cuda(self.is_cuda, self.device.index if self.is_cuda else -1)
+        self.set_cuda(self.is_cuda, self._cuda_device_index(self.device))
         self.initialize(self.states.data_ptr(),
                         self.frame_states.data_ptr(),
                         self.ram.data_ptr(),
@@ -160,15 +160,58 @@ class Env(torchcule_atari.AtariEnv):
                         self.cached_tia.data_ptr(),
                         self.cache_index.data_ptr());
 
+    def _ram_buffer_size(self, device):
+        device = torch.device(device)
+        num_ram_envs = self._ram_env_capacity(device)
+
+        return num_ram_envs * self.cart.ram_size()
+
+    def _cuda_device_index(self, device):
+        device = torch.device(device)
+
+        if device.type != 'cuda':
+            return -1
+
+        return torch.cuda.current_device() if device.index is None else device.index
+
+    def _ram_env_capacity(self, device):
+        device = torch.device(device)
+        env_block_size = int(torchcule_atari.ATARI_ENV_BLOCK_SIZE)
+
+        if device.type == 'cuda' and env_block_size > 1:
+            return math.ceil(self.num_envs / env_block_size) * env_block_size
+
+        return self.num_envs
+
+    def _same_device(self, other_device):
+        other_device = torch.device(other_device)
+
+        if self.device.type != other_device.type:
+            return False
+
+        if self.device.type == 'cuda':
+            return self._cuda_device_index(self.device) == self._cuda_device_index(other_device)
+
+        return self.device.index == other_device.index
+
     def to(self, device):
+        device = torch.device(device)
+
+        if not self._same_device(device) and (self.device.type == 'cuda' or device.type == 'cuda'):
+            raise RuntimeError(
+                'Moving an existing Env between CPU/CUDA devices is not supported because '
+                'CuLE state caches contain device-specific runtime pointers; create the Env '
+                'directly on the target device instead.'
+            )
+
         if self.is_cuda:
             torch.cuda.current_stream().synchronize()
             self.sync_this_stream()
             self.sync_other_stream()
 
-        self.device = torch.device(device)
+        self.device = device
         self.is_cuda = self.device.type == 'cuda'
-        self.set_cuda(self.is_cuda, self.device.index if self.is_cuda else -1)
+        self.set_cuda(self.is_cuda, self._cuda_device_index(self.device))
 
         self.observations1 = self.observations1.to(self.device)
         self.observations2 = self.observations2.to(self.device)

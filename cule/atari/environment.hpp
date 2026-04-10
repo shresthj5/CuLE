@@ -28,6 +28,10 @@ template<int32_t ROM_FORMAT>
 struct environment
 {
 
+static constexpr int32_t ROM_FORMAT_VALUE = ROM_FORMAT;
+static constexpr uint32_t RAM_BYTES_PER_ENV = (ROM_FORMAT == ROM_F8SC) ? 256 : 128;
+static constexpr uint32_t RAM_WORDS_PER_ENV = RAM_BYTES_PER_ENV / sizeof(uint32_t);
+
 using Accessor_t = rom_accessor<ROM_FORMAT>;
 using ALE_t = ale;
 using Controller_t = controller;
@@ -192,4 +196,3 @@ void act(State_t& s, const Action& player_a_action, const Action& player_b_actio
 
 } // end namespace atari
 } // end namespace cule
-

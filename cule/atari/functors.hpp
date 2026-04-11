@@ -26,6 +26,9 @@ namespace cule
 namespace atari
 {
 
+constexpr uint32_t ALE_V5_SYSTEM_RANDOM_SEED = 4753849U;
+constexpr uint32_t ALE_V5_POWER_ON_RIOT_TIMER_WORD = 2754823758U;
+
 template<class State_t>
 void restore_state_runtime_pointers(State_t& s,
                                     const rom* cart,
@@ -97,7 +100,9 @@ struct initialize_functor
 
         State_t& s = states_buffer[self.index()];
 
-        s.rand = gen.sample();
+        s.rand = (seed_buffer[self.index()] == ALE_V5_SYSTEM_RANDOM_SEED)
+                     ? ALE_V5_POWER_ON_RIOT_TIMER_WORD
+                     : gen.sample();
 
         s.ram = (uint32_t*)(ram_buffer + (cart->ram_size() * self.index()));
         s.rom = rom_buffer;

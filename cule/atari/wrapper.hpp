@@ -49,9 +49,14 @@ public:
                          uint32_t* cached_tia_update_ptr,
                          uint32_t* cache_index_ptr);
 
+    void configure_reset_semantics(const bool ale_reset_semantics,
+                                   const uint32_t frame_skip,
+                                   const float repeat_action_probability);
+
     template<typename ExecutionPolicy>
     void reset(ExecutionPolicy&& policy,
-               uint32_t* seedBuffer = nullptr);
+               uint32_t* seedBuffer = nullptr,
+               const uint32_t* aleSeedBuffer = nullptr);
 
     template<typename ExecutionPolicy>
     void reset_states(ExecutionPolicy&& policy);
@@ -115,6 +120,9 @@ public:
 
     size_t num_envs;
     size_t noop_reset_steps;
+    bool ale_reset_semantics;
+    uint32_t reset_frame_skip;
+    float reset_repeat_action_probability;
 
     State_t* states_ptr;
     uint8_t* ram_ptr;

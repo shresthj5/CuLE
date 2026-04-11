@@ -21,7 +21,12 @@ class AtariEnv : public cule::atari::wrapper
 
       ~AtariEnv();
 
-      void reset(uint32_t* seedBuffer);
+      void reset(uint32_t* seedBuffer,
+                 uint32_t* aleSeedBuffer = nullptr);
+
+      void configure_reset_semantics(const bool ale_reset_semantics,
+                                     const uint32_t frame_skip,
+                                     const float repeat_action_probability);
 
       void reset_states();
 
@@ -72,4 +77,3 @@ class AtariEnv : public cule::atari::wrapper
       bool use_cuda;
       int32_t gpu_id;
 };
-

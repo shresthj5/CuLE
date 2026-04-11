@@ -93,8 +93,11 @@ int32_t lives(State& s)
     }
 
     // ALE's internal QBert lives counter stays at 4 during the initial
-    // startup frames even while the RAM byte is still zero.
-    if((lives_value == 0x00) && (cule::atari::games::getDecimalScore(s, 0xDB, 0xDA, 0xD9) == 0))
+    // reset boundary even while the RAM byte is still zero.
+    const int32_t frame_number = SELECT_FIELD(s.frameData, FIELD_FRAME_NUMBER);
+    if((lives_value == 0x00) &&
+       (frame_number <= 1) &&
+       (cule::atari::games::getDecimalScore(s, 0xDB, 0xDA, 0xD9) == 0))
     {
         return 4;
     }

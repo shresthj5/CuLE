@@ -232,10 +232,26 @@ PYBIND11_MODULE(torchcule_atari, m) {
                                 reinterpret_cast<uint32_t*>(cacheIndexBuffer));
         }
     )
-    .def("reset", [](AtariEnv &env, uint64_t seedBuffer)
+    .def("reset", [](AtariEnv &env, uint64_t seedBuffer, uint64_t aleSeedBuffer)
         {
-            env.reset((uint32_t*) seedBuffer);
-        }
+            env.reset((uint32_t*) seedBuffer, (uint32_t*) aleSeedBuffer);
+        },
+        py::arg("seed_buffer"),
+        py::arg("ale_seed_buffer") = 0
+    )
+    .def("configure_reset_semantics",
+        [](AtariEnv& env,
+           const bool ale_reset_semantics,
+           const uint32_t frame_skip,
+           const float repeat_action_probability)
+        {
+            env.configure_reset_semantics(ale_reset_semantics,
+                                          frame_skip,
+                                          repeat_action_probability);
+        },
+        py::arg("ale_reset_semantics"),
+        py::arg("frame_skip"),
+        py::arg("repeat_action_probability")
     )
     .def("reset_states", [](AtariEnv &env)
         {

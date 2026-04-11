@@ -169,17 +169,18 @@ void reset(State_t& s)
     // Reset the paddles
     Controller_t::reset(s);
 
-    // Reset timers
+    // Stella resets hardware devices in system attach order before the CPU:
+    // M6532, TIA, cartridge, then the processor.
     M6532_t::reset(s);
+
+    TIA_t::reset(s);
 
     // Reset cartridge power-on state such as active banks and SC RAM.
     Accessor_t::reset(s);
 
-    // Reset the processor
+    // Reset the processor after device reset so the reset vector is read from
+    // the finalized cartridge/bus state.
     M6502_t::reset(s);
-
-    // Reset the TIA
-    TIA_t::reset(s);
 
     // Reset the frame number
     setFrameNumber(s, 0);

@@ -76,16 +76,28 @@ AtariEnv::
 
 void
 AtariEnv::
-reset(uint32_t* seedBuffer)
+reset(uint32_t* seedBuffer,
+      uint32_t* aleSeedBuffer)
 {
     if(use_cuda)
     {
-        super_t::reset(get_policy<cule_policy>(), seedBuffer);
+        super_t::reset(get_policy<cule_policy>(), seedBuffer, aleSeedBuffer);
     }
     else
     {
-        super_t::reset(get_policy<agency::parallel_execution_policy>(), seedBuffer);
+        super_t::reset(get_policy<agency::parallel_execution_policy>(), seedBuffer, aleSeedBuffer);
     }
+}
+
+void
+AtariEnv::
+configure_reset_semantics(const bool ale_reset_semantics,
+                          const uint32_t frame_skip,
+                          const float repeat_action_probability)
+{
+    super_t::configure_reset_semantics(ale_reset_semantics,
+                                       frame_skip,
+                                       repeat_action_probability);
 }
 
 void

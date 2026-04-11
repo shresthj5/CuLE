@@ -12,6 +12,8 @@
 
 #include <agency/agency.hpp>
 
+#include <array>
+
 #ifndef CULE_ATARI_ENV_BLOCK_SIZE
 #define CULE_ATARI_ENV_BLOCK_SIZE 32
 #endif
@@ -66,7 +68,8 @@ template<typename Environment,
 void
 reset(cule::cuda::parallel_execution_policy& policy,
       Wrapper& wrap,
-      uint32_t*)
+      uint32_t* seedBuffer,
+      const uint32_t* aleSeedBuffer)
 {
     constexpr size_t BLOCK_SIZE = detail::ENV_BLOCK_SIZE;
     constexpr size_t RAM_WORDS_PER_ENV = Environment::RAM_WORDS_PER_ENV;
@@ -75,7 +78,37 @@ reset(cule::cuda::parallel_execution_policy& policy,
     using State_t = typename Wrapper::State_t;
 
     wrapped_environment<agency::allocator> env(wrap.cart, 1, wrap.noop_reset_steps);
-    env.reset(agency::seq);
+    env.configure_reset_semantics(wrap.ale_reset_semantics,
+                                  wrap.reset_frame_skip,
+                                  wrap.reset_repeat_action_probability);
+
+    std::array<uint32_t, 1> host_seed_buffer = {};
+    std::array<uint32_t, 1> host_ale_seed_buffer = {};
+    uint32_t* host_seed_ptr = nullptr;
+    const uint32_t* host_ale_seed_ptr = nullptr;
+
+    if(seedBuffer != nullptr)
+    {
+        CULE_ERRCHK(cudaMemcpyAsync(host_seed_buffer.data(),
+                                    seedBuffer,
+                                    sizeof(uint32_t),
+                                    cudaMemcpyDeviceToHost,
+                                    policy.getStream()));
+        host_seed_ptr = host_seed_buffer.data();
+    }
+
+    if(aleSeedBuffer != nullptr)
+    {
+        CULE_ERRCHK(cudaMemcpyAsync(host_ale_seed_buffer.data(),
+                                    aleSeedBuffer,
+                                    sizeof(uint32_t),
+                                    cudaMemcpyDeviceToHost,
+                                    policy.getStream()));
+        host_ale_seed_ptr = host_ale_seed_buffer.data();
+    }
+
+    policy.sync();
+    env.reset(agency::seq, host_seed_ptr, host_ale_seed_ptr);
 
     assert(env.cached_states_ptr != nullptr);
     assert(env.cached_ram_ptr != nullptr);

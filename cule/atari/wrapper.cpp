@@ -47,6 +47,9 @@ wrapper(const rom& cart,
 :   cart(cart),
     num_envs(num_envs),
     noop_reset_steps(noop_reset_steps),
+    ale_reset_semantics(false),
+    reset_frame_skip(1),
+    reset_repeat_action_probability(0.0f),
     states_ptr(nullptr),
     frame_states_ptr(nullptr),
     ram_ptr(nullptr),
@@ -102,13 +105,25 @@ initialize_ptrs(State_t* states_ptr,
     this->cache_index_ptr = cache_index_ptr;
 }
 
+void
+wrapper::
+configure_reset_semantics(const bool ale_reset_semantics,
+                          const uint32_t frame_skip,
+                          const float repeat_action_probability)
+{
+    this->ale_reset_semantics = ale_reset_semantics;
+    this->reset_frame_skip = frame_skip == 0 ? 1U : frame_skip;
+    this->reset_repeat_action_probability = repeat_action_probability;
+}
+
 template<typename ExecutionPolicy>
 void
 wrapper::
 reset(ExecutionPolicy&& policy,
-      uint32_t* seedBuffer)
+      uint32_t* seedBuffer,
+      const uint32_t* aleSeedBuffer)
 {
-    ROM_SWITCH(dispatch::reset, policy, *this, seedBuffer)
+    ROM_SWITCH(dispatch::reset, policy, *this, seedBuffer, aleSeedBuffer)
 }
 
 template<typename ExecutionPolicy>

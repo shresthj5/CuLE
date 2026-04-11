@@ -15,6 +15,7 @@
 #include <cule/atari/prng.hpp>
 #include <cule/atari/preprocess.hpp>
 #include <cule/atari/rom.hpp>
+#include <cule/atari/system_state_init.hpp>
 
 #include <agency/agency.hpp>
 
@@ -40,6 +41,18 @@ void restore_state_runtime_pointers(State_t& s,
     s.CurrentM0Mask = &missle_accessor(0, 0, 0, 0);
     s.CurrentM1Mask = &missle_accessor(0, 0, 0, 0);
     s.CurrentBLMask = &ball_accessor(0, 0, 0);
+}
+
+template<class State_t>
+void sync_state_masks_from_frame_state(State_t& s,
+                                       const frame_state& fs)
+{
+    s.CurrentPFMask = fs.CurrentPFMask;
+    s.CurrentP0Mask = fs.CurrentP0Mask;
+    s.CurrentP1Mask = fs.CurrentP1Mask;
+    s.CurrentM0Mask = fs.CurrentM0Mask;
+    s.CurrentM1Mask = fs.CurrentM1Mask;
+    s.CurrentBLMask = fs.CurrentBLMask;
 }
 
 template<typename Environment_t>
@@ -73,6 +86,8 @@ struct initialize_functor
         const bool right_difficulty_B = cart->player_right_difficulty_B();
         const bool is_ntsc = cart->is_ntsc();
         const bool hmove_blanks = cart->allow_hmove_blanks();
+        const uint16_t display_y_start = cart->screen_y_start();
+        const uint16_t display_height = cart->screen_height();
         const games::GAME_TYPE game_id = cart->game_id();
         const bool y_shift = game_id != games::GAME_UP_N_DOWN;
         const uint8_t * rom_buffer = cart->data();
@@ -88,6 +103,7 @@ struct initialize_functor
         s.rom = rom_buffer;
         s.tia_update_buffer = nullptr;
 
+        detail::initialize_power_on_riot_ram(s);
         Accessor_t::initialize(s);
 
         // update controller settings
@@ -99,21 +115,29 @@ struct initialize_functor
         s.tiaFlags.template change<FLAG_TIA_IS_NTSC>(is_ntsc);
         s.tiaFlags.template change<FLAG_TIA_HMOVE_ALLOW>(hmove_blanks);
         s.tiaFlags.template change<FLAG_TIA_Y_SHIFT>(y_shift);
+        s.displayYStart = display_y_start;
+        s.displayHeight = display_height;
 
         s.tiaFlags.set(FLAG_ALE_TERMINAL);
         s.tiaFlags.set(FLAG_ALE_STARTED);
         s.tiaFlags.clear(FLAG_ALE_LOST_LIFE);
 
-        const int32_t num_actions = 1;
-        const Action starting_action = ACTION_FIRE;
+        const int32_t num_actions = ALE_t::getStartingActionCount(game_id);
+        const Action starting_action = ALE_t::getStartingAction(game_id);
 
         Environment_t::setStartNumber(s, num_actions);
         Environment_t::setStartAction(s, starting_action);
+        Environment_t::setAuxState(s, 0);
+        Environment_t::setBootProgress(s, 0);
+        Environment_t::setBootPhase(s, BOOT_NOOP);
 
         frame_state& fs = frame_states_buffer[self.index()];
+        preprocess::reset(fs);
         fs.tiaFlags.template change<FLAG_TIA_IS_NTSC>(is_ntsc);
         fs.tiaFlags.template change<FLAG_TIA_HMOVE_ALLOW>(hmove_blanks);
         fs.tiaFlags.template change<FLAG_TIA_Y_SHIFT>(y_shift);
+        fs.displayYStart = display_y_start;
+        fs.displayHeight = display_height;
     }
 };
 
@@ -124,12 +148,16 @@ struct reset_functor
     void operator()(Agent& self,
                     const rom* cart,
                     uint8_t* ram_buffer,
+                    uint32_t* tia_update_buffer,
+                    uint8_t* frame_buffer,
                     const size_t noop_reset_steps,
                     State_t* states_buffer,
                     const State_t* cached_states_buffer,
                     const uint8_t* cached_ram_buffer,
+                    const uint32_t* cached_tia_update_buffer,
                     frame_state* frame_states_buffer,
                     frame_state* cached_frame_states_buffer,
+                    const uint8_t* cached_frame_buffer,
                     uint32_t* cache_index_buffer,
                     uint32_t* rand_states_buffer) const
     {
@@ -153,7 +181,19 @@ struct reset_functor
                 s.ram[i] = ram_int[i];
             }
 
+            uint32_t* tia = tia_update_buffer + (ENV_UPDATE_SIZE * self.index());
+            const uint32_t* cached_tia = cached_tia_update_buffer + (ENV_UPDATE_SIZE * cache_index);
+            std::copy(cached_tia, cached_tia + ENV_UPDATE_SIZE, tia);
+            tia[0] = 0;
+
             frame_states_buffer[self.index()] = cached_frame_states_buffer[cache_index];
+            sync_state_masks_from_frame_state(s, frame_states_buffer[self.index()]);
+            if((frame_buffer != nullptr) && (cached_frame_buffer != nullptr))
+            {
+                std::copy(cached_frame_buffer + (cache_index * 300 * SCREEN_WIDTH),
+                          cached_frame_buffer + ((cache_index + 1) * 300 * SCREEN_WIDTH),
+                          frame_buffer + (self.index() * 300 * SCREEN_WIDTH));
+            }
         }
     }
 };
@@ -359,6 +399,8 @@ struct set_states_functor
         t.dumpDisabledCycle = s.dumpDisabledCycle;
         t.VSYNCFinishClock = s.VSYNCFinishClock;
         t.lastHMOVEClock = s.lastHMOVEClock;
+        t.displayYStart = s.displayYStart;
+        t.displayHeight = s.displayHeight;
 
         t.riotData = s.riotData;
         t.cyclesWhenTimerSet = s.cyclesWhenTimerSet;
@@ -374,6 +416,7 @@ struct set_states_functor
         restore_state_runtime_pointers(t, cart, ram_buffer, index);
         tf = input_frame_states_buffer[self.index()];
         refresh_frame_state_masks(tf);
+        sync_state_masks_from_frame_state(t, tf);
 
         for(size_t i = 0; i < (cart->ram_size() / sizeof(uint32_t)); i++)
         {

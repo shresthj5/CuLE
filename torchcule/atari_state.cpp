@@ -32,6 +32,10 @@ struct encode_states_functor
 
         s.resistance = ts.left_paddle;
         Environment_t::setFrameNumber(s, ts.frame_number);
+        Environment_t::setBootProgress(
+            s,
+            ts.started ? (cule::atari::ENV_BASE_FRAMES + ALE_t::getStartingActionCount(cart.game_id())) : 0);
+        Environment_t::setBootPhase(s, ts.started ? cule::atari::BOOT_DONE : cule::atari::BOOT_NOOP);
 
         s.cpuCycles = ts.cycles;
 
@@ -58,6 +62,8 @@ struct encode_states_functor
         s.tiaFlags.template change<cule::atari::FLAG_TIA_IS_NTSC>(cart.is_ntsc());
         s.tiaFlags.template change<cule::atari::FLAG_TIA_HMOVE_ALLOW>(cart.allow_hmove_blanks());
         s.tiaFlags.template change<cule::atari::FLAG_TIA_Y_SHIFT>(cart.game_id() != cule::atari::games::GAME_UP_N_DOWN);
+        s.displayYStart = cart.screen_y_start();
+        s.displayHeight = cart.screen_height();
 
         s.ram = reinterpret_cast<uint32_t*>(input_ram + (256 * index));
         uint8_t* ram_ptr = reinterpret_cast<uint8_t*>(s.ram);
@@ -179,6 +185,8 @@ struct encode_states_functor
         fs.lastHMOVEClock = ts.lastHMOVEClock;
         fs.playfieldPriorityAndScore = ts.playfieldPriorityAndScore;
         fs.cpuCycles = ts.cycles;
+        fs.displayYStart = cart.screen_y_start();
+        fs.displayHeight = cart.screen_height();
         fs.M0CosmicArkCounter = ts.M0CosmicArkCounter;
         fs.framePointer = nullptr;
         fs.srcBuffer = nullptr;

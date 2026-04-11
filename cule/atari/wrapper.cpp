@@ -58,6 +58,7 @@ wrapper(const rom& cart,
     cached_states_ptr(nullptr),
     cached_ram_ptr(nullptr),
     cached_frame_states_ptr(nullptr),
+    cached_frame_ptr(nullptr),
     cached_tia_update_ptr(nullptr),
     cache_index_ptr(nullptr)
 {}
@@ -75,6 +76,7 @@ initialize_ptrs(State_t* states_ptr,
                 State_t* cached_states_ptr,
                 uint8_t* cached_ram_ptr,
                 frame_state* cached_frame_states_ptr,
+                uint8_t* cached_frame_ptr,
                 uint32_t* cached_tia_update_ptr,
                 uint32_t* cache_index_ptr)
 {
@@ -89,6 +91,7 @@ initialize_ptrs(State_t* states_ptr,
     this->cached_states_ptr = cached_states_ptr;
     this->cached_ram_ptr = cached_ram_ptr;
     this->cached_frame_states_ptr = cached_frame_states_ptr;
+    this->cached_frame_ptr = cached_frame_ptr;
     this->cached_tia_update_ptr = cached_tia_update_ptr;
     this->cache_index_ptr = cache_index_ptr;
 }
@@ -236,6 +239,7 @@ wrapped_environment(const rom& cart,
   cached_states_buffer(noop_reset_steps, State_t{}),
   cached_ram_buffer(cart.ram_size() * noop_reset_steps, 0),
   cached_frame_states_buffer(noop_reset_steps, frame_state{}),
+  cached_frame_buffer(300 * SCREEN_WIDTH * noop_reset_steps, 0),
   cached_tia_update_buffer(ENV_UPDATE_SIZE * noop_reset_steps, 0),
   cache_index_buffer(num_envs, 0)
 {
@@ -253,10 +257,10 @@ wrapped_environment(const rom& cart,
                              cached_states_buffer.data(),
                              cached_ram_buffer.data(),
                              cached_frame_states_buffer.data(),
+                             cached_frame_buffer.data(),
                              cached_tia_update_buffer.data(),
                              cache_index_buffer.data());
 }
 
 } // end namespace atari
 } // end namespace cule
-

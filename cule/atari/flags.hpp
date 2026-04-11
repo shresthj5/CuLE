@@ -112,8 +112,20 @@ enum
 {
     ENV_UPDATE_SIZE  = 5000,
     ENV_NOOP_FRAMES  = 60,
-    ENV_RESET_FRAMES = 4,
+    // Official ALE reset performs two 4-frame soft resets: one after the
+    // deterministic 60-frame NOOP warmup and one after mode selection.
+    ENV_RESET_FRAMES = 8,
     ENV_BASE_FRAMES  = ENV_NOOP_FRAMES + ENV_RESET_FRAMES,
+};
+
+enum BOOT_PHASE : uint8_t
+{
+    BOOT_NOOP = 0,
+    BOOT_RESET1,
+    BOOT_MODE_SETUP,
+    BOOT_RESET2,
+    BOOT_START_ACTIONS,
+    BOOT_DONE,
 };
 
 // status flags
@@ -213,7 +225,8 @@ enum : uint32_t
     FIELD_TIA_STATUS   = 0x03FBFF7F,
     FIELD_TIA_ENABLED  = 0x01F80000,
     FIELD_FRAME_NUMBER = 0x0000FFFF,
-    FIELD_START_ACTION = 0x00FF0000,
+    FIELD_START_ACTION = 0x003F0000,
+    FIELD_ALE_AUX      = 0x00C00000,
     FIELD_START_NUMBER = 0xFF000000
 };
 

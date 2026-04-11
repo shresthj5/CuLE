@@ -52,7 +52,9 @@ void reset(State_t& s)
     UPDATE_FIELD(s.riotData, FIELD_RIOT_DDRA, 0);
     UPDATE_FIELD(s.riotData, FIELD_RIOT_SHIFT, 6);
 
-    UPDATE_FIELD(s.riotData, FIELD_RIOT_TIMER, uint8_t(s.rand & 0xFF));
+    // Official ALE/Stella seeds the RIOT timer into the inclusive range
+    // [25, 99] on reset before advancing the system RNG.
+    UPDATE_FIELD(s.riotData, FIELD_RIOT_TIMER, uint8_t(25 + (s.rand % 75)));
     s.rand = hash(s.rand);
 
     s.tiaFlags.clear(FLAG_RIOT_READ_INT);
@@ -231,4 +233,3 @@ void write(State_t& s, const maddr_t& addr, const uint8_t& value)
 
 } // end namespace atari
 } // end namespace cule
-

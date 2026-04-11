@@ -26,6 +26,8 @@ void state_store_load_helper(frame_state& t, const frame_state& s)
 
     t.playfieldPriorityAndScore = s.playfieldPriorityAndScore;
     t.cpuCycles = s.cpuCycles;
+    t.displayYStart = s.displayYStart;
+    t.displayHeight = s.displayHeight;
 
     t.tiaFlags = s.tiaFlags;
     t.M0CosmicArkCounter = s.M0CosmicArkCounter;

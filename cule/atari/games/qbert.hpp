@@ -13,6 +13,12 @@ namespace games
 namespace qbert
 {
 
+enum : uint8_t
+{
+    QBERT_LIVES_ACTIVE = 0,
+    QBERT_LIVES_PREV_NEGATIVE_ONE = 1,
+};
+
 template<typename State>
 CULE_ANNOTATION
  void reset(State& s)
@@ -80,7 +86,20 @@ template<typename State>
 CULE_ANNOTATION
 int32_t lives(State& s)
 {
-    return cule::atari::ram::read(s.ram, 0x88);
+    const int32_t lives_value = cule::atari::ram::read(s.ram, 0x88);
+    if(lives_value == 0xFE)
+    {
+        return 0;
+    }
+
+    // ALE's internal QBert lives counter stays at 4 during the initial
+    // startup frames even while the RAM byte is still zero.
+    if((lives_value == 0x00) && (cule::atari::games::getDecimalScore(s, 0xDB, 0xDA, 0xD9) == 0))
+    {
+        return 4;
+    }
+
+    return static_cast<int8_t>(lives_value) + 2;
 }
 
 template<typename State>
@@ -88,13 +107,22 @@ CULE_ANNOTATION
  void setTerminal(State& s)
 {
     // update terminal status
-    int lives_value = cule::atari::ram::read(s.ram, 0x88);
+    const int lives_value = cule::atari::ram::read(s.ram, 0x88);
     // Lives start at 2 (4 lives, 3 displayed) and go down to 0xFE (death)
     // Alternatively we can die and reset within one frame; we catch this case
-    s.tiaFlags.template change<FLAG_ALE_TERMINAL>((lives_value == 0xFE) || ((lives_value == 0x02) && s.tiaFlags[FLAG_ALE_STARTED]));
+    const uint8_t aux_state = SELECT_FIELD(s.frameData, FIELD_ALE_AUX);
+    s.tiaFlags.template change<FLAG_ALE_TERMINAL>(
+        (lives_value == 0xFE) ||
+        ((lives_value == 0x02) && (aux_state == QBERT_LIVES_PREV_NEGATIVE_ONE)));
 
-    int livesAsChar = static_cast<char>(lives_value);
-    s.tiaFlags.template change<FLAG_ALE_STARTED>(livesAsChar == -1);
+    uint8_t next_aux_state = QBERT_LIVES_ACTIVE;
+    const int livesAsChar = static_cast<int8_t>(lives_value);
+    if(livesAsChar == -1)
+    {
+        next_aux_state = QBERT_LIVES_PREV_NEGATIVE_ONE;
+    }
+
+    UPDATE_FIELD(s.frameData, FIELD_ALE_AUX, next_aux_state);
 }
 
 template<typename State>
@@ -125,4 +153,3 @@ int32_t reward(State& s)
 } // end namespace games
 } // end namespace atari
 } // end namespace cule
-

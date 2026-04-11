@@ -82,7 +82,7 @@ static
 CULE_ANNOTATION
 int32_t clockStartDisplay(State_t& s)
 {
-    return s.clockWhenFrameStarted + (228 * (30 + (4 * s.tiaFlags[FLAG_TIA_Y_SHIFT])));
+    return s.clockWhenFrameStarted + (228 * s.displayYStart);
 }
 
 template<typename State_t>
@@ -90,7 +90,7 @@ static
 CULE_ANNOTATION
 int32_t clockStopDisplay(State_t& s)
 {
-    return clockStartDisplay(s) + (228 *  (is_ntsc(s) ? 210 : 250));
+    return clockStartDisplay(s) + (228 * s.displayHeight);
 }
 
 template<typename State_t>
@@ -108,9 +108,10 @@ void systemCyclesReset(State_t& s)
     int32_t clocks = 3 * cycles;
 
     // Adjust the clocks by this amount since we're reseting the clock to zero
+    s.clockWhenFrameStarted -= clocks;
     s.VSYNCFinishClock -= clocks;
-
     s.clockAtLastUpdate -= clocks;
+    s.lastHMOVEClock -= clocks;
 }
 
 template<typename State_t>
@@ -129,15 +130,20 @@ static
 CULE_ANNOTATION
 void startFrame(State_t& s)
 {
-    M6532_t::systemCyclesReset(s);
-
     storeTiaUpdate(s, 0, maddr_t(0xfe));
 
+    int32_t clocks = ((3 * int32_t(s.cpuCycles)) - s.clockWhenFrameStarted) % 228;
+    if(clocks < 0)
+    {
+        clocks += 228;
+    }
+
+    M6532_t::systemCyclesReset(s);
     systemCyclesReset(s);
-    int32_t clocks = clocksThisLine(s);
+
+    s.cpuCycles = 0;
     s.clockWhenFrameStarted = -clocks;
     s.clockAtLastUpdate = clockStartDisplay(s);
-    s.cpuCycles = 0;
 
     if(s.tia_update_buffer != nullptr)
     {
@@ -250,11 +256,8 @@ void updateFrame(State_t& s, const int32_t& clock)
         return;
     }
 
-    // Truncate the number of cycles to full line update
-    int32_t temp_clock = min(s.clockAtLastUpdate + 228, clock);
-
     // Truncate the number of cycles to update to the stop display point
-    temp_clock = min(temp_clock, clockStopDisplay(s));
+    const int32_t temp_clock = min(clock, clockStopDisplay(s));
 
     const uint32_t PF = SELECT_FIELD(s.PF,  FIELD_PFALL);
 
@@ -267,9 +270,10 @@ void updateFrame(State_t& s, const int32_t& clock)
         // Remember how many clocks we are from the left side of the screen
         uint8_t clocksFromStartOfScanLine = (s.clockAtLastUpdate - s.clockWhenFrameStarted) % 228;
         uint8_t clocksToEndOfScanLine = 228 - clocksFromStartOfScanLine;
+        const bool finishedScanLine = temp_clock > (s.clockAtLastUpdate + clocksToEndOfScanLine);
 
         // See if we're updating more than the current scanline
-        if(temp_clock > (s.clockAtLastUpdate + clocksToEndOfScanLine))
+        if(finishedScanLine)
         {
             // Yes, we have more than one scanline to update so finish current one
             clocksToUpdate = clocksToEndOfScanLine;
@@ -298,7 +302,10 @@ void updateFrame(State_t& s, const int32_t& clock)
         }
 
         // Handle HMOVE blanks if they are enabled
-        if(s.tiaFlags[FLAG_TIA_HMOVE_ENABLE] && (clocksFromStartOfScanLine < (HBLANK + 8)))
+        constexpr uint8_t displayStartOfScanLine = HBLANK;
+        if(s.tiaFlags[FLAG_TIA_HMOVE_ENABLE] &&
+           (displayStartOfScanLine < (HBLANK + 8)) &&
+           (clocksFromStartOfScanLine < (HBLANK + 8)))
         {
             if((clocksToUpdate + clocksFromStartOfScanLine) >= (HBLANK + 8))
             {
@@ -306,7 +313,7 @@ void updateFrame(State_t& s, const int32_t& clock)
             }
         }
 
-        if(clocksToEndOfScanLine == 228)
+        if(finishedScanLine)
         {
             // Yes, so set PF mask based on current CTRLPF reflection state
             s.CurrentPFMask = &playfield_accessor(s.tiaFlags[FLAG_TIA_CTRLPF], 0);
@@ -347,8 +354,6 @@ void updateFrame(State_t& s, const int32_t& clock)
         }
     }
     while(s.clockAtLastUpdate < temp_clock);
-
-    s.clockAtLastUpdate = min(clock, clockStopDisplay(s));
 }
 
 template<typename State_t>
@@ -969,7 +974,7 @@ void write(State_t& s, const maddr_t& addr, const uint8_t& value)
         case ADR_HMOVE:    // Apply horizontal motion
         {
             // Figure out what cycle we're at
-            uint8_t x = clocksThisLine(s) / 3;
+            uint8_t x = (((3 * s.cpuCycles) - s.clockWhenFrameStarted) % 228) / 3;
 
             // See if we need to enable the HMOVE blank bug
             s.tiaFlags.template change<FLAG_TIA_HMOVE_ENABLE>(s.tiaFlags[FLAG_TIA_HMOVE_ALLOW] && hmove_accessor(x));
@@ -1031,4 +1036,3 @@ void write(State_t& s, const maddr_t& addr, const uint8_t& value)
 
 } // end namespace atari
 } // end namespace cule
-

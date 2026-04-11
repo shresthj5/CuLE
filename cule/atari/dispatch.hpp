@@ -58,7 +58,10 @@ reset(ExecutionPolicy&& policy,
                         wrap.rand_states_ptr,
                         seedBuffer);
 
-    for (size_t i = 0; i < ENV_BASE_FRAMES; i++)
+    size_t boot_frames = 0;
+    constexpr size_t MAX_EXTRA_BOOT_FRAMES = 4096;
+    while((boot_frames < ENV_BASE_FRAMES) ||
+          !wrap.cached_states_ptr[0].tiaFlags[FLAG_ALE_STARTED])
     {
         agency::bulk_invoke(policy(1),
                             step_functor<Environment>{},
@@ -76,7 +79,33 @@ reset(ExecutionPolicy&& policy,
                             wrap.cached_states_ptr,
                             wrap.cache_index_ptr,
                             wrap.cached_frame_states_ptr,
-                            nullptr);
+                            wrap.cached_frame_ptr);
+
+        if(!wrap.cached_states_ptr[0].tiaFlags[FLAG_ALE_STARTED] &&
+           (wrap.cached_states_ptr[0].bootPhase == BOOT_DONE))
+        {
+            wrap.cached_states_ptr[0].tiaFlags.set(FLAG_ALE_STARTED);
+        }
+        else if((wrap.cart.game_id() == games::GAME_QBERT) &&
+                ((boot_frames + 1) >= ENV_BASE_FRAMES) &&
+                !wrap.cached_states_ptr[0].tiaFlags[FLAG_ALE_STARTED])
+        {
+            // Official ALE reaches QBert's default start state without any
+            // ROM-specific mode selection or startup actions. CuLE's generic
+            // boot script reproduces the exact RAM state, but the internal
+            // started flag can remain unset; finalize that bookkeeping on the
+            // frame that reaches the reset state itself instead of overshooting
+            // by one extra NOOP frame.
+            Environment::setBootProgress(wrap.cached_states_ptr[0], 0);
+            Environment::setBootPhase(wrap.cached_states_ptr[0], BOOT_DONE);
+            wrap.cached_states_ptr[0].tiaFlags.set(FLAG_ALE_STARTED);
+        }
+        ++boot_frames;
+        CULE_ASSERT(boot_frames <= (ENV_BASE_FRAMES + MAX_EXTRA_BOOT_FRAMES),
+                    "ALE reset did not reach a started state for "
+                        << wrap.cart.game_name() << " within "
+                        << (ENV_BASE_FRAMES + MAX_EXTRA_BOOT_FRAMES)
+                        << " frames");
     }
 
     for (size_t i = 1; i < wrap.noop_reset_steps; i++)
@@ -117,7 +146,15 @@ reset(ExecutionPolicy&& policy,
         std::copy(wrap.cached_states_ptr[index].ram,
                   wrap.cached_states_ptr[index].ram + (wrap.cart.ram_size() / sizeof(uint32_t)),
                   wrap.states_ptr[i].ram);
+        wrap.cache_index_ptr[i] = index;
+        std::copy(wrap.cached_tia_update_ptr + (index * ENV_UPDATE_SIZE),
+                  wrap.cached_tia_update_ptr + ((index + 1) * ENV_UPDATE_SIZE),
+                  wrap.tia_update_ptr + (i * ENV_UPDATE_SIZE));
         wrap.frame_states_ptr[i] = wrap.cached_frame_states_ptr[index];
+        std::copy(wrap.cached_frame_ptr + (index * 300 * SCREEN_WIDTH),
+                  wrap.cached_frame_ptr + ((index + 1) * 300 * SCREEN_WIDTH),
+                  wrap.frame_ptr + (i * 300 * SCREEN_WIDTH));
+        wrap.tia_update_ptr[i * ENV_UPDATE_SIZE] = 0;
     }
 }
 
@@ -132,12 +169,16 @@ reset_states(ExecutionPolicy&& policy,
                         reset_functor<Environment>{},
                         &wrap.cart,
                         wrap.ram_ptr,
+                        wrap.tia_update_ptr,
+                        wrap.frame_ptr,
                         wrap.noop_reset_steps,
                         wrap.states_ptr,
                         wrap.cached_states_ptr,
                         wrap.cached_ram_ptr,
+                        wrap.cached_tia_update_ptr,
                         wrap.frame_states_ptr,
                         wrap.cached_frame_states_ptr,
+                        wrap.cached_frame_ptr,
                         wrap.cache_index_ptr,
                         wrap.rand_states_ptr);
 }

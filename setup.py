@@ -73,10 +73,11 @@ include_dirs = [
 cxx_flags = ["-O3", "-Wall", "-Wextra", "-fPIC"]
 nvcc_flags = [
     "-O3",
-    "-Xptxas=-v",
     "-lineinfo",
     "-Xcompiler=-Wall,-Wextra,-fPIC",
 ]
+if os.environ.get("CULE_VERBOSE_PTXAS", "0") == "1":
+    nvcc_flags.append("-Xptxas=-v")
 libraries = ["z"]
 extra_link_args = []
 

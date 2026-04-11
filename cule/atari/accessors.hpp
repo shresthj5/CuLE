@@ -3,6 +3,7 @@
 #include <cule/config.hpp>
 
 #include <cule/atari/ram.hpp>
+#include <cule/atari/system_state_init.hpp>
 
 #include <cule/atari/types/types.hpp>
 
@@ -18,6 +19,12 @@ struct rom_accessor
     static
     CULE_ANNOTATION
     void initialize(State_t&)
+    {}
+
+    template<class State_t>
+    static
+    CULE_ANNOTATION
+    void reset(State_t&)
     {}
 
     template<class State_t>
@@ -47,6 +54,12 @@ struct rom_accessor<ROM_2K>
     template<class State_t>
     static
     CULE_ANNOTATION
+    void reset(State_t&)
+    {}
+
+    template<class State_t>
+    static
+    CULE_ANNOTATION
     void write(State_t&, const maddr_t&, const uint8_t&)
     {}
 
@@ -66,6 +79,12 @@ struct rom_accessor<ROM_4K>
     static
     CULE_ANNOTATION
     void initialize(State_t&)
+    {}
+
+    template<class State_t>
+    static
+    CULE_ANNOTATION
+    void reset(State_t&)
     {}
 
     template<class State_t>
@@ -92,6 +111,15 @@ struct rom_accessor<ROM_F8SC>
     void initialize(State_t& s)
     {
         s.bank = 1;
+    }
+
+    template<class State_t>
+    static
+    CULE_ANNOTATION
+    void reset(State_t& s)
+    {
+        s.bank = 1;
+        detail::initialize_f8sc_reset_ram(s);
     }
 
     template<class State_t>
@@ -162,6 +190,14 @@ struct rom_accessor<ROM_F8>
     template<class State_t>
     static
     CULE_ANNOTATION
+    void reset(State_t& s)
+    {
+        s.bank = 1;
+    }
+
+    template<class State_t>
+    static
+    CULE_ANNOTATION
     void write(State_t& s, const maddr_t& addr, const uint8_t&)
     {
         //if(addr < 0x1080)
@@ -206,6 +242,12 @@ struct rom_accessor<ROM_FE>
     template<class State_t>
     static
     CULE_ANNOTATION
+    void reset(State_t&)
+    {}
+
+    template<class State_t>
+    static
+    CULE_ANNOTATION
     void write(State_t&, const maddr_t&, const uint8_t&)
     {}
 
@@ -225,6 +267,14 @@ struct rom_accessor<ROM_F6>
     static
     CULE_ANNOTATION
     void initialize(State_t& s)
+    {
+        s.bank = 0;
+    }
+
+    template<class State_t>
+    static
+    CULE_ANNOTATION
+    void reset(State_t& s)
     {
         s.bank = 0;
     }
@@ -287,6 +337,14 @@ struct rom_accessor<ROM_E0>
     template<class State_t>
     static
     CULE_ANNOTATION
+    void reset(State_t& s)
+    {
+        s.bank = 0x7654;
+    }
+
+    template<class State_t>
+    static
+    CULE_ANNOTATION
     void write(State_t& s, const maddr_t& addr, const uint8_t&)
     {
         maddr_t address(addr & 0x0FFF);
@@ -318,4 +376,3 @@ struct rom_accessor<ROM_E0>
 
 } // end namespace atari
 } // end namespace cule
-

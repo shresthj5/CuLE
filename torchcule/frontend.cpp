@@ -208,6 +208,7 @@ PYBIND11_MODULE(torchcule_atari, m) {
                           uint64_t cachedStatesBuffer,
                           uint64_t cachedRamBuffer,
                           uint64_t cachedFrameStatesBuffer,
+                          uint64_t cachedFrameBuffer,
                           uint64_t cachedTiaUpdateBuffer,
                           uint64_t cacheIndexBuffer)
         {
@@ -222,6 +223,7 @@ PYBIND11_MODULE(torchcule_atari, m) {
                                 reinterpret_cast<cule::atari::state*>(cachedStatesBuffer),
                                 reinterpret_cast<uint8_t*>(cachedRamBuffer),
                                 reinterpret_cast<cule::atari::frame_state*>(cachedFrameStatesBuffer),
+                                reinterpret_cast<uint8_t*>(cachedFrameBuffer),
                                 reinterpret_cast<uint32_t*>(cachedTiaUpdateBuffer),
                                 reinterpret_cast<uint32_t*>(cacheIndexBuffer));
         }

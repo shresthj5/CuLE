@@ -43,6 +43,7 @@ public:
                          State_t* cached_states_ptr,
                          uint8_t* cached_ram_ptr,
                          frame_state* cached_frame_states_ptr,
+                         uint8_t* cached_frame_ptr,
                          uint32_t* cached_tia_update_ptr,
                          uint32_t* cache_index_ptr);
 
@@ -129,6 +130,7 @@ public:
     State_t* cached_states_ptr;
     uint8_t* cached_ram_ptr;
     uint32_t* cached_tia_update_ptr;
+    uint8_t* cached_frame_ptr;
 
     frame_state* cached_frame_states_ptr;
 };
@@ -168,9 +170,9 @@ protected:
     VecType<uint8_t> cached_ram_buffer;
 
     VecType<frame_state> cached_frame_states_buffer;
+    VecType<uint8_t> cached_frame_buffer;
     VecType<uint32_t> cached_tia_update_buffer;
 };
 
 } // end namespace atari
 } // end namespace cule
-

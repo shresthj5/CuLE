@@ -152,7 +152,12 @@ void initialize_states_kernel(const uint32_t num_envs,
                               uint8_t* ram_buffer,
                               const State_t* cached_states_buffer,
                               const uint8_t* cached_ram_buffer,
+                              uint32_t* tia_update_buffer,
+                              const uint32_t* cached_tia_update_buffer,
+                              uint8_t* frame_buffer,
+                              const uint8_t* cached_frame_buffer,
                               uint32_t* rand_states_buffer,
+                              uint32_t* cache_index_buffer,
                               frame_state* frame_states_buffer,
                               frame_state* cached_frame_states_buffer)
 {
@@ -168,6 +173,7 @@ void initialize_states_kernel(const uint32_t num_envs,
 
     prng gen(rand_states_buffer[global_index]);
     const size_t cache_index = gen.sample() % noop_reset_steps;
+    cache_index_buffer[global_index] = cache_index;
 
     uint32_t ram[RAM_WORDS_PER_ENV];
 
@@ -183,6 +189,23 @@ void initialize_states_kernel(const uint32_t num_envs,
     }
 
     detail::store_env_ram_words<RAM_WORDS_PER_ENV>(ram_buffer, global_index, ram);
+
+    const uint32_t* cached_tia = cached_tia_update_buffer + (ENV_UPDATE_SIZE * cache_index);
+    uint32_t* tia = tia_update_buffer + (ENV_UPDATE_SIZE * global_index);
+    #pragma unroll 1
+    for(int32_t i = 0; i < int32_t(ENV_UPDATE_SIZE); ++i)
+    {
+        tia[i] = cached_tia[i];
+    }
+    tia[0] = 0;
+
+    const uint8_t* cached_frame = cached_frame_buffer + (cache_index * 300 * SCREEN_WIDTH);
+    uint8_t* frame = frame_buffer + (global_index * 300 * SCREEN_WIDTH);
+    #pragma unroll 1
+    for(int32_t i = 0; i < int32_t(300 * SCREEN_WIDTH); ++i)
+    {
+        frame[i] = cached_frame[i];
+    }
 }
 
 template<typename State_t, size_t NT, size_t RAM_WORDS_PER_ENV>
@@ -193,6 +216,10 @@ void reset_kernel(const uint32_t num_envs,
                   uint8_t* ram_buffer,
                   const State_t* cached_states_buffer,
                   const uint8_t* cached_ram_buffer,
+                  uint32_t* tia_update_buffer,
+                  const uint32_t* cached_tia_update_buffer,
+                  uint8_t* frame_buffer,
+                  const uint8_t* cached_frame_buffer,
                   frame_state* frame_states_buffer,
                   frame_state* cached_frame_states_buffer,
                   uint32_t* cache_index_buffer,
@@ -229,6 +256,23 @@ void reset_kernel(const uint32_t num_envs,
         }
 
         detail::store_env_ram_words<RAM_WORDS_PER_ENV>(ram_buffer, global_index, ram);
+
+        const uint32_t* cached_tia = cached_tia_update_buffer + (ENV_UPDATE_SIZE * cache_index);
+        uint32_t* tia = tia_update_buffer + (ENV_UPDATE_SIZE * global_index);
+        #pragma unroll 1
+        for(int32_t i = 0; i < int32_t(ENV_UPDATE_SIZE); ++i)
+        {
+            tia[i] = cached_tia[i];
+        }
+        tia[0] = 0;
+
+        const uint8_t* cached_frame = cached_frame_buffer + (cache_index * 300 * SCREEN_WIDTH);
+        uint8_t* frame = frame_buffer + (global_index * 300 * SCREEN_WIDTH);
+        #pragma unroll 1
+        for(int32_t i = 0; i < int32_t(300 * SCREEN_WIDTH); ++i)
+        {
+            frame[i] = cached_frame[i];
+        }
     }
 }
 
@@ -354,9 +398,8 @@ void process_kernel(const uint32_t num_envs,
 
     frame_state fs;
     state_store_load_helper(fs, *frame_states_buffer);
-    fs.srcBuffer = tia_update_buffer + (global_index * ENV_UPDATE_SIZE);
-
     const State_t& s = states_buffer[global_index];
+    fs.srcBuffer = tia_update_buffer + (global_index * ENV_UPDATE_SIZE);
     const bool is_terminal = s.tiaFlags[FLAG_ALE_TERMINAL];
     const bool is_started  = s.tiaFlags[FLAG_ALE_STARTED];
 

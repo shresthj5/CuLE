@@ -37,6 +37,11 @@ def _default_semantics(env_name, frameskip, repeat_prob):
     return frameskip, repeat_prob
 
 
+def _map_ale_v5_seed(seed_value):
+    state = np.random.SeedSequence(int(seed_value)).generate_state(2)
+    return np.asarray(state, dtype=np.int32)[1].item()
+
+
 class Env(torchcule_atari.AtariEnv):
     """
     ALE (Atari Learning Environment)
@@ -95,8 +100,11 @@ class Env(torchcule_atari.AtariEnv):
             raise ValueError('Rescaling is only valid in grayscale color mode')
 
         frameskip, repeat_prob = _default_semantics(env_name, frameskip, repeat_prob)
+        if _is_ale_v5_env(env_name) and max_noop_steps == 30:
+            max_noop_steps = 1
 
         self.cart = Rom(env_name)
+        self.is_ale_v5_env = _is_ale_v5_env(env_name)
         super(Env, self).__init__(self.cart, num_envs, max_noop_steps)
 
         self.device = torch.device(device)
@@ -142,6 +150,7 @@ class Env(torchcule_atari.AtariEnv):
         self.cached_states = torch.zeros((max_noop_steps, self.state_size()), device=self.device, dtype=torch.uint8)
         self.cached_ram = torch.randint(0, 255, (max_noop_steps, self.cart.ram_size()), device=self.device, dtype=torch.uint8)
         self.cached_frame_states = torch.zeros((max_noop_steps, self.frame_state_size()), device=self.device, dtype=torch.uint8)
+        self.cached_frames = torch.zeros((max_noop_steps, 300 * self.cart.screen_width()), device=self.device, dtype=torch.uint8)
         self.cached_tia = torch.zeros((max_noop_steps, self.tia_update_size()), device=self.device, dtype=torch.int32)
         self.cache_index = torch.zeros((num_envs,), device=self.device, dtype=torch.int32)
 
@@ -157,6 +166,7 @@ class Env(torchcule_atari.AtariEnv):
                         self.cached_states.data_ptr(),
                         self.cached_ram.data_ptr(),
                         self.cached_frame_states.data_ptr(),
+                        self.cached_frames.data_ptr(),
                         self.cached_tia.data_ptr(),
                         self.cache_index.data_ptr());
 
@@ -233,6 +243,7 @@ class Env(torchcule_atari.AtariEnv):
         self.cached_states = self.cached_states.to(self.device)
         self.cached_ram = self.cached_ram.to(self.device)
         self.cached_frame_states = self.cached_frame_states.to(self.device)
+        self.cached_frames = self.cached_frames.to(self.device)
         self.cached_tia = self.cached_tia.to(self.device)
         self.cache_index = self.cache_index.to(self.device)
 
@@ -247,6 +258,7 @@ class Env(torchcule_atari.AtariEnv):
                         self.cached_states.data_ptr(),
                         self.cached_ram.data_ptr(),
                         self.cached_frame_states.data_ptr(),
+                        self.cached_frames.data_ptr(),
                         self.cached_tia.data_ptr(),
                         self.cache_index.data_ptr());
 
@@ -300,6 +312,13 @@ class Env(torchcule_atari.AtariEnv):
         """
         if seeds is None:
             seeds = torch.randint(np.iinfo(np.int32).max, (self.num_envs,), dtype=torch.int32, device=self.device)
+        elif not isinstance(seeds, torch.Tensor):
+            seeds = torch.as_tensor(seeds, dtype=torch.int32, device=self.device)
+
+        if self.is_ale_v5_env:
+            host_seeds = seeds.detach().cpu().tolist()
+            mapped = [_map_ale_v5_seed(seed) for seed in host_seeds]
+            seeds = torch.tensor(mapped, dtype=torch.int32, device=self.device)
 
         if self.is_cuda:
             self.sync_other_stream()
@@ -308,6 +327,9 @@ class Env(torchcule_atari.AtariEnv):
         super(Env, self).reset(seeds.data_ptr())
         self.last_actions.fill_(self.noop_action_index)
         self.last_player_b_actions.fill_(self.noop_action_index)
+        self.observations1.zero_()
+        self.observations2.zero_()
+        self.generate_frames(self.rescale, True, self.num_channels, self.observations1.data_ptr())
 
         if self.is_training:
             iterator = range(math.ceil(initial_steps / self.frameskip))

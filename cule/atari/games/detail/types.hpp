@@ -253,7 +253,7 @@ static std::map<GAME_TYPE, std::array<std::string,_ROM_ATTR_MAX>> rom_attr_data 
     // 8K Games
     { GAME_ASTERIX, {{"Atari", "CX2696", "Asterix (1988) (Atari) (Prototype) (NTSC)", "", "Extremely Rare", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" }}},
     { GAME_ASTEROIDS, {{"", "CX2649", "Asteroids [p1]", "", "Common", "", "", "", "", "", "", "", "", "", "", "", "", "YES", "", "NO" }}},
-    { GAME_BATTLE_ZONE, {{"", "", "Battle Zone", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" }}},
+    { GAME_BATTLE_ZONE, {{"", "", "Battle Zone", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "NO" }}},
     { GAME_BEAM_RIDER, {{"Activision", "AZ-037-04", "Beamrider (1983) (Activision) [!]", "", "Rare", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" }}},
     { GAME_CENTIPEDE, {{"Atari", "CX2676", "Centipede (1982) (Atari) (PAL) [!]", "", "Common", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" }}},
     { GAME_CRAZY_CLIMBER, {{"", "CX2683", "Crazy Climber (1983) (Atari)", "", "Extremely Rare", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" }}},

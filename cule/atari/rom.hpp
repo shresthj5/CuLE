@@ -60,6 +60,8 @@ public:
 
     size_t rom_size() const;
 
+    size_t screen_y_start() const;
+
     size_t screen_height() const;
 
     size_t screen_width() const;

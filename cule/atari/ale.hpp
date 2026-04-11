@@ -166,6 +166,38 @@ int32_t getLives(State_t& s)
     return value;
 }
 
+static
+CULE_ANNOTATION
+Action getStartingAction(const games::GAME_TYPE& game_id)
+{
+    switch(game_id)
+    {
+    case games::GAME_DOUBLE_DUNK:
+        return ACTION_UPFIRE;
+    case games::GAME_GRAVITAR:
+    case games::GAME_YARS_REVENGE:
+        return ACTION_FIRE;
+    default:
+        return ACTION_NOOP;
+    }
+}
+
+static
+CULE_ANNOTATION
+int32_t getStartingActionCount(const games::GAME_TYPE& game_id)
+{
+    switch(game_id)
+    {
+    case games::GAME_DOUBLE_DUNK:
+    case games::GAME_YARS_REVENGE:
+        return 1;
+    case games::GAME_GRAVITAR:
+        return 16;
+    default:
+        return 0;
+    }
+}
+
 // is end of game
 template<typename State_t>
 static
@@ -234,4 +266,3 @@ std::vector<Action> getMinimalActionSet(const games::GAME_TYPE& game_id)
 
 } // end namespace atari
 } // end namespace cule
-

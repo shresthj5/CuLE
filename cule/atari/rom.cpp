@@ -312,6 +312,11 @@ size_t rom::rom_size() const
     return _rom_size;
 }
 
+size_t rom::screen_y_start() const
+{
+    return std::stoi(value_or_default(games::ROM_ATTR_YStart));
+}
+
 size_t rom::screen_height() const
 {
     return std::stoi(value_or_default(games::ROM_ATTR_Height));

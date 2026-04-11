@@ -28,6 +28,8 @@ struct frame_state
 
     uint8_t playfieldPriorityAndScore;
     uint16_t cpuCycles;
+    uint16_t displayYStart;
+    uint16_t displayHeight;
 
     tia_flag_t tiaFlags;
 
@@ -46,4 +48,3 @@ struct frame_state
 
 } // end namespace atari
 } // end namespace cule
-

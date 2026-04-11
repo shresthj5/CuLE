@@ -770,4 +770,3 @@ void run(State_t& s)
 }; // end namespace m6502
 } // end namespace atari
 } // end namespace cule
-

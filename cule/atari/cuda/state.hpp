@@ -39,6 +39,8 @@ void state_store_load_helper(State& t, const State& s)
     t.dumpDisabledCycle = s.dumpDisabledCycle;
     t.VSYNCFinishClock = s.VSYNCFinishClock;
     t.lastHMOVEClock = s.lastHMOVEClock;
+    t.displayYStart = s.displayYStart;
+    t.displayHeight = s.displayHeight;
 
     t.riotData = s.riotData;
     t.cyclesWhenTimerSet = s.cyclesWhenTimerSet;
@@ -61,4 +63,3 @@ void state_store_load_helper(State& t, const State& s)
 
 } // end namespace atari
 } // end namespace cule
-

@@ -58,6 +58,10 @@ struct state
 
     // frame data
     uint32_t frameData;
+    uint16_t bootProgress;
+    uint16_t displayYStart;
+    uint16_t displayHeight;
+    uint8_t bootPhase;
     uint32_t rand;
     int32_t score;
     uint8_t M0CosmicArkCounter;
@@ -77,4 +81,3 @@ struct state
 
 } // end namespace atari
 } // end namespace cule
-

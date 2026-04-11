@@ -145,12 +145,14 @@ class Env(torchcule_atari.AtariEnv):
         self.ram = torch.randint(0, 255, (self._ram_buffer_size(self.device),), device=self.device, dtype=torch.uint8)
         self.tia = torch.zeros((num_envs, self.tia_update_size()), device=self.device, dtype=torch.int32)
         self.frame_buffer = torch.zeros((num_envs, 300 * self.cart.screen_width()), device=self.device, dtype=torch.uint8)
+        self._previous_frame_buffer = torch.zeros((num_envs, 300 * self.cart.screen_width()), device=self.device, dtype=torch.uint8)
         self.cart_offsets = torch.zeros(num_envs, device=self.device, dtype=torch.int32)
         self.rand_states = torch.randint(0, np.iinfo(np.int32).max, (num_envs,), device=self.device, dtype=torch.int32)
         self.cached_states = torch.zeros((max_noop_steps, self.state_size()), device=self.device, dtype=torch.uint8)
         self.cached_ram = torch.randint(0, 255, (max_noop_steps, self.cart.ram_size()), device=self.device, dtype=torch.uint8)
         self.cached_frame_states = torch.zeros((max_noop_steps, self.frame_state_size()), device=self.device, dtype=torch.uint8)
         self.cached_frames = torch.zeros((max_noop_steps, 300 * self.cart.screen_width()), device=self.device, dtype=torch.uint8)
+        self._cached_previous_frames = torch.zeros((max_noop_steps, 300 * self.cart.screen_width()), device=self.device, dtype=torch.uint8)
         self.cached_tia = torch.zeros((max_noop_steps, self.tia_update_size()), device=self.device, dtype=torch.int32)
         self.cache_index = torch.zeros((num_envs,), device=self.device, dtype=torch.int32)
 
@@ -160,6 +162,7 @@ class Env(torchcule_atari.AtariEnv):
                         self.ram.data_ptr(),
                         self.tia.data_ptr(),
                         self.frame_buffer.data_ptr(),
+                        self._previous_frame_buffer.data_ptr(),
                         self.cart_offsets.data_ptr(),
                         self.action_set.data_ptr(),
                         self.rand_states.data_ptr(),
@@ -167,6 +170,7 @@ class Env(torchcule_atari.AtariEnv):
                         self.cached_ram.data_ptr(),
                         self.cached_frame_states.data_ptr(),
                         self.cached_frames.data_ptr(),
+                        self._cached_previous_frames.data_ptr(),
                         self.cached_tia.data_ptr(),
                         self.cache_index.data_ptr());
 
@@ -238,12 +242,14 @@ class Env(torchcule_atari.AtariEnv):
         self.ram = self.ram.to(self.device)
         self.tia = self.tia.to(self.device)
         self.frame_buffer = self.frame_buffer.to(self.device)
+        self._previous_frame_buffer = self._previous_frame_buffer.to(self.device)
         self.cart_offsets = self.cart_offsets.to(self.device)
         self.rand_states = self.rand_states.to(self.device)
         self.cached_states = self.cached_states.to(self.device)
         self.cached_ram = self.cached_ram.to(self.device)
         self.cached_frame_states = self.cached_frame_states.to(self.device)
         self.cached_frames = self.cached_frames.to(self.device)
+        self._cached_previous_frames = self._cached_previous_frames.to(self.device)
         self.cached_tia = self.cached_tia.to(self.device)
         self.cache_index = self.cache_index.to(self.device)
 
@@ -252,6 +258,7 @@ class Env(torchcule_atari.AtariEnv):
                         self.ram.data_ptr(),
                         self.tia.data_ptr(),
                         self.frame_buffer.data_ptr(),
+                        self._previous_frame_buffer.data_ptr(),
                         self.cart_offsets.data_ptr(),
                         self.action_set.data_ptr(),
                         self.rand_states.data_ptr(),
@@ -259,6 +266,7 @@ class Env(torchcule_atari.AtariEnv):
                         self.cached_ram.data_ptr(),
                         self.cached_frame_states.data_ptr(),
                         self.cached_frames.data_ptr(),
+                        self._cached_previous_frames.data_ptr(),
                         self.cached_tia.data_ptr(),
                         self.cache_index.data_ptr());
 

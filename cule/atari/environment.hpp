@@ -207,13 +207,13 @@ bool emulate(State_t& s)
     if(!s.tiaFlags[FLAG_TIA_PARTIAL])
     {
         TIA_t::finishFrame(s);
-
-        // update ale reward
-        ALE_t::setTerminal(s);
-        return true;
     }
 
-    return false;
+    // ALE evaluates terminal/lives state after every mediaSource().update()
+    // call, not only after a completed TIA frame.
+    ALE_t::setTerminal(s);
+
+    return !s.tiaFlags[FLAG_TIA_PARTIAL];
 }
 
 template<typename State_t>
@@ -608,11 +608,6 @@ void act(State_t& s, const Action& player_a_action, const Action& player_b_actio
     }
 
     const bool finished_frame = emulate(s);
-    if(!finished_frame)
-    {
-        return;
-    }
-
     if(booting)
     {
         if(count_public_frame)

@@ -155,7 +155,9 @@ void initialize_states_kernel(const uint32_t num_envs,
                               uint32_t* tia_update_buffer,
                               const uint32_t* cached_tia_update_buffer,
                               uint8_t* frame_buffer,
+                              uint8_t* previous_frame_buffer,
                               const uint8_t* cached_frame_buffer,
+                              const uint8_t* cached_previous_frame_buffer,
                               uint32_t* rand_states_buffer,
                               uint32_t* cache_index_buffer,
                               frame_state* frame_states_buffer,
@@ -201,10 +203,13 @@ void initialize_states_kernel(const uint32_t num_envs,
 
     const uint8_t* cached_frame = cached_frame_buffer + (cache_index * 300 * SCREEN_WIDTH);
     uint8_t* frame = frame_buffer + (global_index * 300 * SCREEN_WIDTH);
+    const uint8_t* cached_previous_frame = cached_previous_frame_buffer + (cache_index * 300 * SCREEN_WIDTH);
+    uint8_t* previous_frame = previous_frame_buffer + (global_index * 300 * SCREEN_WIDTH);
     #pragma unroll 1
     for(int32_t i = 0; i < int32_t(300 * SCREEN_WIDTH); ++i)
     {
         frame[i] = cached_frame[i];
+        previous_frame[i] = cached_previous_frame[i];
     }
 }
 
@@ -219,7 +224,9 @@ void reset_kernel(const uint32_t num_envs,
                   uint32_t* tia_update_buffer,
                   const uint32_t* cached_tia_update_buffer,
                   uint8_t* frame_buffer,
+                  uint8_t* previous_frame_buffer,
                   const uint8_t* cached_frame_buffer,
+                  const uint8_t* cached_previous_frame_buffer,
                   frame_state* frame_states_buffer,
                   frame_state* cached_frame_states_buffer,
                   uint32_t* cache_index_buffer,
@@ -268,10 +275,13 @@ void reset_kernel(const uint32_t num_envs,
 
         const uint8_t* cached_frame = cached_frame_buffer + (cache_index * 300 * SCREEN_WIDTH);
         uint8_t* frame = frame_buffer + (global_index * 300 * SCREEN_WIDTH);
+        const uint8_t* cached_previous_frame = cached_previous_frame_buffer + (cache_index * 300 * SCREEN_WIDTH);
+        uint8_t* previous_frame = previous_frame_buffer + (global_index * 300 * SCREEN_WIDTH);
         #pragma unroll 1
         for(int32_t i = 0; i < int32_t(300 * SCREEN_WIDTH); ++i)
         {
             frame[i] = cached_frame[i];
+            previous_frame[i] = cached_previous_frame[i];
         }
     }
 }
@@ -385,7 +395,8 @@ void process_kernel(const uint32_t num_envs,
                     const uint32_t* cache_index_buffer,
                     State_t* states_buffer,
                     frame_state* frame_states_buffer,
-                    uint8_t* frame_buffer)
+                    uint8_t* frame_buffer,
+                    uint8_t* previous_frame_buffer)
 {
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
 
@@ -408,9 +419,12 @@ void process_kernel(const uint32_t num_envs,
         states_buffer[global_index].tiaFlags.clear(FLAG_ALE_TERMINAL);
         fs.srcBuffer = cached_tia_update_buffer + (cache_index_buffer[global_index] * ENV_UPDATE_SIZE);
     }
-    fs.framePointer = frame_buffer == nullptr ? nullptr : &frame_buffer[global_index * 300 * SCREEN_WIDTH];
+    fs.cpuCycles = s.cpuCycles;
+    preprocess::bindFrameBuffers(fs,
+                                 frame_buffer == nullptr ? nullptr : &frame_buffer[global_index * 300 * SCREEN_WIDTH],
+                                 previous_frame_buffer == nullptr ? nullptr : &previous_frame_buffer[global_index * 300 * SCREEN_WIDTH]);
 
-    preprocess::state_to_buffer(fs);
+    preprocess::state_to_buffer(fs, s.clockAtLastUpdate);
 
     state_store_load_helper(*frame_states_buffer, fs);
 }
@@ -421,19 +435,22 @@ void apply_palette_kernel(const int32_t num_envs,
                           const int32_t screen_height,
                           const int32_t num_channels,
                           uint8_t* dst_buffer,
-                          const uint8_t* src_buffer)
+                          const frame_state* frame_states_buffer,
+                          const uint8_t* src_buffer,
+                          const uint8_t* previous_frame_buffer)
 {
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
 
     if(global_index < num_envs * screen_height * SCREEN_WIDTH)
     {
         const uint32_t state_index = global_index / (screen_height * SCREEN_WIDTH);
+        const uint8_t* source = frame_states_buffer[state_index].frameBufferIndex == 0 ? src_buffer : previous_frame_buffer;
 
         // slide the start index of the src_buffer forward to account for the
         // mismatch between the number of PAL and NTSC rows
-        src_buffer += state_index * SCREEN_WIDTH * (300 - screen_height);
+        source += state_index * SCREEN_WIDTH * (300 - screen_height);
 
-        int32_t color = src_buffer[global_index];
+        int32_t color = source[global_index];
         dst_buffer += num_channels * global_index;
 
         if(num_channels == 3)
@@ -455,7 +472,9 @@ __launch_bounds__(NT) __global__
 void apply_rescale_kernel(const int32_t num_envs,
                           const int32_t screen_height,
                           uint8_t * dst_buffer,
-                          const uint8_t * src_buffer)
+                          const frame_state* frame_states_buffer,
+                          const uint8_t * src_buffer,
+                          const uint8_t * previous_frame_buffer)
 {
     const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
 
@@ -464,7 +483,8 @@ void apply_rescale_kernel(const int32_t num_envs,
         // slide the start index of the src_buffer forward to account for the
         // mismatch between the number of PAL and NTSC rows
         const uint32_t state_index = global_index / SCALED_SCREEN_SIZE;
-        src_buffer += state_index * SCREEN_WIDTH * (300 - screen_height);
+        const uint8_t* source = frame_states_buffer[state_index].frameBufferIndex == 0 ? src_buffer : previous_frame_buffer;
+        source += state_index * SCREEN_WIDTH * (300 - screen_height);
 
         const float S_R = float(screen_height) / 84.0f;
         const float S_C = float(SCREEN_WIDTH) / 84.0f;
@@ -480,10 +500,10 @@ void apply_rescale_kernel(const int32_t num_envs,
         const float delta_R = rf - (0.5f + r);
         const float delta_C = cf - (0.5f + c);
 
-        const float color_0_0 = gpu_NTSCPalette[src_buffer[(r + 0) * SCREEN_WIDTH + (c + 0)] + 1] & 0xFF;
-        const float color_0_1 = gpu_NTSCPalette[src_buffer[(r + 1) * SCREEN_WIDTH + (c + 0)] + 1] & 0xFF;
-        const float color_1_0 = gpu_NTSCPalette[src_buffer[(r + 0) * SCREEN_WIDTH + (c + 1)] + 1] & 0xFF;
-        const float color_1_1 = gpu_NTSCPalette[src_buffer[(r + 1) * SCREEN_WIDTH + (c + 1)] + 1] & 0xFF;
+        const float color_0_0 = gpu_NTSCPalette[source[(r + 0) * SCREEN_WIDTH + (c + 0)] + 1] & 0xFF;
+        const float color_0_1 = gpu_NTSCPalette[source[(r + 1) * SCREEN_WIDTH + (c + 0)] + 1] & 0xFF;
+        const float color_1_0 = gpu_NTSCPalette[source[(r + 0) * SCREEN_WIDTH + (c + 1)] + 1] & 0xFF;
+        const float color_1_1 = gpu_NTSCPalette[source[(r + 1) * SCREEN_WIDTH + (c + 1)] + 1] & 0xFF;
 
         const float value = (color_0_0 * (1.0f - delta_R) * (1.0f - delta_C)) +
                             (color_0_1 * delta_R * (1.0f - delta_C)) +
@@ -584,6 +604,9 @@ void set_states_kernel(const uint32_t num_envs,
     t.Y = s.Y;
     t.SP = s.SP;
     t.PC = s.PC;
+    t.addr = s.addr;
+    t.value = s.value;
+    t.noise = s.noise;
 
     t.cpuCycles = s.cpuCycles;
     t.bank = s.bank;
@@ -603,6 +626,8 @@ void set_states_kernel(const uint32_t num_envs,
     t.dumpDisabledCycle = s.dumpDisabledCycle;
     t.VSYNCFinishClock = s.VSYNCFinishClock;
     t.lastHMOVEClock = s.lastHMOVEClock;
+    t.displayYStart = s.displayYStart;
+    t.displayHeight = s.displayHeight;
 
     t.riotData = s.riotData;
     t.cyclesWhenTimerSet = s.cyclesWhenTimerSet;
@@ -612,6 +637,9 @@ void set_states_kernel(const uint32_t num_envs,
     t.tiaFlags = s.tiaFlags;
 
     t.frameData = s.frameData;
+    t.bootProgress = s.bootProgress;
+    t.bootPhase = s.bootPhase;
+    t.rand = s.rand;
     t.score = s.score;
     t.M0CosmicArkCounter = s.M0CosmicArkCounter;
 

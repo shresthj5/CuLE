@@ -31,6 +31,7 @@ void state_store_load_helper(frame_state& t, const frame_state& s)
 
     t.tiaFlags = s.tiaFlags;
     t.M0CosmicArkCounter = s.M0CosmicArkCounter;
+    t.frameBufferIndex = s.frameBufferIndex;
 
     t.CurrentPFMask = s.CurrentPFMask;
     t.CurrentP0Mask = s.CurrentP0Mask;

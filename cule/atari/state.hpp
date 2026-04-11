@@ -26,7 +26,7 @@ struct state
     uint8_t value; // operand
     uint8_t noise;
 
-    uint16_t cpuCycles;
+    uint32_t cpuCycles;
     uint16_t bank;
 
     // controller vars

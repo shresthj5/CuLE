@@ -17,6 +17,11 @@ namespace cule
 namespace atari
 {
 
+enum : uint8_t
+{
+    TIA_UPDATE_CYCLE_BASE = 0xFC,
+};
+
 template<typename M6532_t,
          typename Controller_t>
 struct tia
@@ -121,7 +126,14 @@ void storeTiaUpdate(State_t& s, const uint8_t& value, const maddr_t& addr)
 {
     if(s.tia_update_buffer != nullptr)
     {
-        *s.tia_update_buffer++ = int32_t((int32_t(s.cpuCycles) << 16) | (value << 8) | addr);
+        const uint32_t cycle_base = uint32_t(s.cpuCycles) >> 16;
+        if(cycle_base != 0)
+        {
+            *s.tia_update_buffer++ = uint32_t((cycle_base << 16) | TIA_UPDATE_CYCLE_BASE);
+        }
+
+        const uint32_t cycle_low = uint32_t(s.cpuCycles) & 0xFFFF;
+        *s.tia_update_buffer++ = uint32_t((cycle_low << 16) | (uint32_t(value) << 8) | uint32_t(addr));
     }
 }
 

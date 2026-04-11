@@ -27,14 +27,17 @@ struct frame_state
     int32_t lastHMOVEClock;
 
     uint8_t playfieldPriorityAndScore;
-    uint16_t cpuCycles;
+    uint32_t cpuCycles;
     uint16_t displayYStart;
     uint16_t displayHeight;
 
     tia_flag_t tiaFlags;
 
     uint8_t M0CosmicArkCounter;
+    uint8_t frameBufferIndex;
 
+    uint8_t* currentFrameBuffer;
+    uint8_t* previousFrameBuffer;
     uint8_t* framePointer;
     const uint32_t* srcBuffer;
 

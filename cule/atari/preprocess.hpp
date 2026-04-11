@@ -16,6 +16,11 @@ namespace atari
 namespace preprocess
 {
 
+enum : uint8_t
+{
+    TIA_UPDATE_CYCLE_BASE = 0xFC,
+};
+
 CULE_ANNOTATION
 void reset(frame_state& s)
 {
@@ -30,9 +35,15 @@ void reset(frame_state& s)
     s.lastHMOVEClock = 0;
     s.playfieldPriorityAndScore = 0;
     s.M0CosmicArkCounter = 0;
+    s.frameBufferIndex = 0;
 
     s.CurrentGRP0 = 0;
     s.CurrentGRP1 = 0;
+
+    s.currentFrameBuffer = nullptr;
+    s.previousFrameBuffer = nullptr;
+    s.framePointer = nullptr;
+    s.srcBuffer = nullptr;
 
     s.CurrentPFMask = &playfield_accessor(0, 0);
     s.CurrentP0Mask = &player_mask_accessor(0, 0, 0, 0);
@@ -75,6 +86,23 @@ CULE_ANNOTATION
 int32_t clockStopDisplay(State_t& s)
 {
     return clockStartDisplay(s) + (228 * s.displayHeight);
+}
+
+template<typename State_t>
+CULE_ANNOTATION
+int32_t frameBufferOffset(State_t& s)
+{
+    const int32_t clamped_clock = max(clockStartDisplay(s), min(s.clockAtLastUpdate, clockStopDisplay(s)));
+    return clamped_clock - clockStartDisplay(s);
+}
+
+template<typename State_t>
+CULE_ANNOTATION
+void bindFrameBuffers(State_t& s, uint8_t* primary_frame_buffer, uint8_t* secondary_frame_buffer)
+{
+    s.currentFrameBuffer = (s.frameBufferIndex == 0) ? primary_frame_buffer : secondary_frame_buffer;
+    s.previousFrameBuffer = (s.frameBufferIndex == 0) ? secondary_frame_buffer : primary_frame_buffer;
+    s.framePointer = (s.currentFrameBuffer == nullptr) ? nullptr : (s.currentFrameBuffer + frameBufferOffset(s));
 }
 
 CULE_ANNOTATION
@@ -791,29 +819,56 @@ void poke(frame_state &s, const uint8_t& value, const uint8_t& addr)
 }
 
 CULE_ANNOTATION
-bool state_to_buffer(frame_state& s)
+bool state_to_buffer(frame_state& s, const int32_t target_clock)
 {
-    if((*s.srcBuffer++ & 0xFF) != 0xFE)
+    uint32_t cycle_base = 0;
+    uint32_t entry = *(s.srcBuffer++);
+
+    if(entry == 0)
     {
         return false;
     }
 
-    s.clockWhenFrameStarted = -(*s.srcBuffer++);
-    s.clockAtLastUpdate = clockStartDisplay(s);
+    while((entry & 0xFF) == TIA_UPDATE_CYCLE_BASE)
+    {
+        cycle_base = entry >> 16;
+        entry = *(s.srcBuffer++);
+    }
 
-    uint32_t entry = *(s.srcBuffer++);
+    if((entry & 0xFF) == 0xFE)
+    {
+        s.frameBufferIndex ^= 1;
+        uint8_t* tmp = s.currentFrameBuffer;
+        s.currentFrameBuffer = s.previousFrameBuffer;
+        s.previousFrameBuffer = tmp;
+        s.clockWhenFrameStarted = -(*s.srcBuffer++);
+        s.clockAtLastUpdate = clockStartDisplay(s);
+        s.framePointer = s.currentFrameBuffer;
+        cycle_base = 0;
+        entry = *(s.srcBuffer++);
+    }
 
     while((entry & 0xFF) != 0xFD)
     {
-        s.cpuCycles = entry >> 16;
+        const uint8_t raw_addr = entry & 0xFF;
+        if(raw_addr == TIA_UPDATE_CYCLE_BASE)
+        {
+            cycle_base = entry >> 16;
+            entry = *(s.srcBuffer++);
+            continue;
+        }
+
+        s.cpuCycles = (cycle_base << 16) | (entry >> 16);
         uint8_t value = (entry >> 8) & 0xFF;
-        uint8_t addr  = entry & 0x3F;
+        uint8_t addr  = raw_addr & 0x3F;
 
         // printf("cycles: %d, value: 0x%02X, address: 0x%02X\n", s.cpuCycles, value, addr);
 
         poke(s, value, addr);
         entry = *(s.srcBuffer++);
     }
+
+    updateFrame(s, target_clock);
 
     return true;
 }

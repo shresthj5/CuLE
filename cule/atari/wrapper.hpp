@@ -37,6 +37,7 @@ public:
                          uint8_t* ram_ptr,
                          uint32_t* tia_update_ptr,
                          uint8_t* frame_ptr,
+                         uint8_t* previous_frame_ptr,
                          uint32_t* rom_indices_ptr,
                          Action* minimal_actions_ptr,
                          uint32_t* rand_states_ptr,
@@ -44,6 +45,7 @@ public:
                          uint8_t* cached_ram_ptr,
                          frame_state* cached_frame_states_ptr,
                          uint8_t* cached_frame_ptr,
+                         uint8_t* cached_previous_frame_ptr,
                          uint32_t* cached_tia_update_ptr,
                          uint32_t* cache_index_ptr);
 
@@ -120,6 +122,7 @@ public:
     frame_state* frame_states_ptr;
     uint32_t* tia_update_ptr;
     uint8_t* frame_ptr;
+    uint8_t* previous_frame_ptr;
 
     uint32_t* rom_indices_ptr;
     uint32_t* rand_states_ptr;
@@ -131,6 +134,7 @@ public:
     uint8_t* cached_ram_ptr;
     uint32_t* cached_tia_update_ptr;
     uint8_t* cached_frame_ptr;
+    uint8_t* cached_previous_frame_ptr;
 
     frame_state* cached_frame_states_ptr;
 };
@@ -159,6 +163,7 @@ protected:
     VecType<uint8_t> ram_buffer;
     VecType<uint32_t> tia_update_buffer;
     VecType<uint8_t> frame_buffer;
+    VecType<uint8_t> previous_frame_buffer;
 
     VecType<uint32_t> rom_indices_buffer;
     VecType<uint32_t> rand_states_buffer;
@@ -171,6 +176,7 @@ protected:
 
     VecType<frame_state> cached_frame_states_buffer;
     VecType<uint8_t> cached_frame_buffer;
+    VecType<uint8_t> cached_previous_frame_buffer;
     VecType<uint32_t> cached_tia_update_buffer;
 };
 

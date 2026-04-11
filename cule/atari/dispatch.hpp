@@ -79,25 +79,12 @@ reset(ExecutionPolicy&& policy,
                             wrap.cached_states_ptr,
                             wrap.cache_index_ptr,
                             wrap.cached_frame_states_ptr,
-                            wrap.cached_frame_ptr);
+                            wrap.cached_frame_ptr,
+                            wrap.cached_previous_frame_ptr);
 
         if(!wrap.cached_states_ptr[0].tiaFlags[FLAG_ALE_STARTED] &&
            (wrap.cached_states_ptr[0].bootPhase == BOOT_DONE))
         {
-            wrap.cached_states_ptr[0].tiaFlags.set(FLAG_ALE_STARTED);
-        }
-        else if((wrap.cart.game_id() == games::GAME_QBERT) &&
-                ((boot_frames + 1) >= ENV_BASE_FRAMES) &&
-                !wrap.cached_states_ptr[0].tiaFlags[FLAG_ALE_STARTED])
-        {
-            // Official ALE reaches QBert's default start state without any
-            // ROM-specific mode selection or startup actions. CuLE's generic
-            // boot script reproduces the exact RAM state, but the internal
-            // started flag can remain unset; finalize that bookkeeping on the
-            // frame that reaches the reset state itself instead of overshooting
-            // by one extra NOOP frame.
-            Environment::setBootProgress(wrap.cached_states_ptr[0], 0);
-            Environment::setBootPhase(wrap.cached_states_ptr[0], BOOT_DONE);
             wrap.cached_states_ptr[0].tiaFlags.set(FLAG_ALE_STARTED);
         }
         ++boot_frames;
@@ -117,6 +104,12 @@ reset(ExecutionPolicy&& policy,
         std::copy(wrap.cached_states_ptr[i - 1].ram,
                   wrap.cached_states_ptr[i - 1].ram + (wrap.cart.ram_size() / sizeof(uint32_t)),
                   wrap.cached_states_ptr[i].ram);
+        std::copy(wrap.cached_frame_ptr + ((i - 1) * 300 * SCREEN_WIDTH),
+                  wrap.cached_frame_ptr + (i * 300 * SCREEN_WIDTH),
+                  wrap.cached_frame_ptr + (i * 300 * SCREEN_WIDTH));
+        std::copy(wrap.cached_previous_frame_ptr + ((i - 1) * 300 * SCREEN_WIDTH),
+                  wrap.cached_previous_frame_ptr + (i * 300 * SCREEN_WIDTH),
+                  wrap.cached_previous_frame_ptr + (i * 300 * SCREEN_WIDTH));
 
         agency::bulk_invoke(policy(1),
                             step_functor<Environment>{},
@@ -134,7 +127,8 @@ reset(ExecutionPolicy&& policy,
                             wrap.cached_states_ptr + i,
                             wrap.cache_index_ptr + i,
                             wrap.cached_frame_states_ptr + i,
-                            nullptr);
+                            wrap.cached_frame_ptr + (i * 300 * SCREEN_WIDTH),
+                            wrap.cached_previous_frame_ptr + (i * 300 * SCREEN_WIDTH));
     }
 
     for (size_t i = 0; i < wrap.size(); i++)
@@ -154,6 +148,9 @@ reset(ExecutionPolicy&& policy,
         std::copy(wrap.cached_frame_ptr + (index * 300 * SCREEN_WIDTH),
                   wrap.cached_frame_ptr + ((index + 1) * 300 * SCREEN_WIDTH),
                   wrap.frame_ptr + (i * 300 * SCREEN_WIDTH));
+        std::copy(wrap.cached_previous_frame_ptr + (index * 300 * SCREEN_WIDTH),
+                  wrap.cached_previous_frame_ptr + ((index + 1) * 300 * SCREEN_WIDTH),
+                  wrap.previous_frame_ptr + (i * 300 * SCREEN_WIDTH));
         wrap.tia_update_ptr[i * ENV_UPDATE_SIZE] = 0;
     }
 }
@@ -171,6 +168,7 @@ reset_states(ExecutionPolicy&& policy,
                         wrap.ram_ptr,
                         wrap.tia_update_ptr,
                         wrap.frame_ptr,
+                        wrap.previous_frame_ptr,
                         wrap.noop_reset_steps,
                         wrap.states_ptr,
                         wrap.cached_states_ptr,
@@ -179,6 +177,7 @@ reset_states(ExecutionPolicy&& policy,
                         wrap.frame_states_ptr,
                         wrap.cached_frame_states_ptr,
                         wrap.cached_frame_ptr,
+                        wrap.cached_previous_frame_ptr,
                         wrap.cache_index_ptr,
                         wrap.rand_states_ptr);
 }
@@ -284,7 +283,8 @@ preprocess(ExecutionPolicy&& policy,
                         wrap.states_ptr,
                         wrap.cache_index_ptr,
                         wrap.frame_states_ptr,
-                        frameBuffer);
+                        frameBuffer,
+                        wrap.previous_frame_ptr);
 }
 
 template<typename ExecutionPolicy,
@@ -301,7 +301,9 @@ generate_frames(ExecutionPolicy&& policy,
                         num_channels,
                         wrap.cart.screen_height(),
                         rescale,
+                        wrap.frame_states_ptr,
                         wrap.frame_ptr,
+                        wrap.previous_frame_ptr,
                         imageBuffer);
 }
 

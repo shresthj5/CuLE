@@ -150,6 +150,7 @@ struct reset_functor
                     uint8_t* ram_buffer,
                     uint32_t* tia_update_buffer,
                     uint8_t* frame_buffer,
+                    uint8_t* previous_frame_buffer,
                     const size_t noop_reset_steps,
                     State_t* states_buffer,
                     const State_t* cached_states_buffer,
@@ -158,6 +159,7 @@ struct reset_functor
                     frame_state* frame_states_buffer,
                     frame_state* cached_frame_states_buffer,
                     const uint8_t* cached_frame_buffer,
+                    const uint8_t* cached_previous_frame_buffer,
                     uint32_t* cache_index_buffer,
                     uint32_t* rand_states_buffer) const
     {
@@ -193,6 +195,12 @@ struct reset_functor
                 std::copy(cached_frame_buffer + (cache_index * 300 * SCREEN_WIDTH),
                           cached_frame_buffer + ((cache_index + 1) * 300 * SCREEN_WIDTH),
                           frame_buffer + (self.index() * 300 * SCREEN_WIDTH));
+            }
+            if((previous_frame_buffer != nullptr) && (cached_previous_frame_buffer != nullptr))
+            {
+                std::copy(cached_previous_frame_buffer + (cache_index * 300 * SCREEN_WIDTH),
+                          cached_previous_frame_buffer + ((cache_index + 1) * 300 * SCREEN_WIDTH),
+                          previous_frame_buffer + (self.index() * 300 * SCREEN_WIDTH));
             }
         }
     }
@@ -242,6 +250,13 @@ struct step_functor
         }
 
         Environment_t::act(s, player_a_action, player_b_action);
+
+        // Always terminate the per-step TIA stream so preprocess can replay
+        // partial ALE-style updates without reading stale trailing entries.
+        if(s.tia_update_buffer != nullptr)
+        {
+            *s.tia_update_buffer++ = uint32_t(0xFD);
+        }
     }
 };
 
@@ -290,7 +305,8 @@ struct preprocess_functor
                     State_t* states_buffer,
                     const uint32_t* cache_index_buffer,
                     frame_state* frame_states_buffer,
-                    uint8_t* frame_buffer)
+                    uint8_t* frame_buffer,
+                    uint8_t* previous_frame_buffer)
     {
         CULE_ASSERT(tia_update_buffer != nullptr);
         CULE_ASSERT(states_buffer != nullptr);
@@ -310,9 +326,12 @@ struct preprocess_functor
             s.tiaFlags.clear(FLAG_ALE_TERMINAL);
             fs.srcBuffer = cached_tia_update_buffer + (cache_index_buffer[self.index()] * ENV_UPDATE_SIZE);
         }
-        fs.framePointer = frame_buffer == nullptr ? nullptr : &frame_buffer[self.index() * 300 * SCREEN_WIDTH];
+        fs.cpuCycles = s.cpuCycles;
+        preprocess::bindFrameBuffers(fs,
+                                     frame_buffer == nullptr ? nullptr : &frame_buffer[self.index() * 300 * SCREEN_WIDTH],
+                                     previous_frame_buffer == nullptr ? nullptr : &previous_frame_buffer[self.index() * 300 * SCREEN_WIDTH]);
 
-        preprocess::state_to_buffer(fs);
+        preprocess::state_to_buffer(fs, s.clockAtLastUpdate);
     }
 };
 
@@ -323,10 +342,14 @@ struct generate_frame_functor
                     const size_t num_channels,
                     const size_t screen_height,
                     const bool rescale,
+                    const frame_state* frame_states_buffer,
                     const uint8_t* frame_buffer,
+                    const uint8_t* previous_frame_buffer,
                     uint8_t* image_buffer)
     {
-        const uint8_t* framePointer = &frame_buffer[self.index() * 300 * SCREEN_WIDTH];
+        const frame_state& fs = frame_states_buffer[self.index()];
+        const uint8_t* base = (fs.frameBufferIndex == 0) ? frame_buffer : previous_frame_buffer;
+        const uint8_t* framePointer = &base[self.index() * 300 * SCREEN_WIDTH];
 
         if(rescale)
         {
@@ -380,6 +403,9 @@ struct set_states_functor
         t.Y = s.Y;
         t.SP = s.SP;
         t.PC = s.PC;
+        t.addr = s.addr;
+        t.value = s.value;
+        t.noise = s.noise;
 
         t.cpuCycles = s.cpuCycles;
         t.bank = s.bank;
@@ -410,6 +436,9 @@ struct set_states_functor
         t.tiaFlags = s.tiaFlags;
 
         t.frameData = s.frameData;
+        t.bootProgress = s.bootProgress;
+        t.bootPhase = s.bootPhase;
+        t.rand = s.rand;
         t.score = s.score;
         t.M0CosmicArkCounter = s.M0CosmicArkCounter;
 

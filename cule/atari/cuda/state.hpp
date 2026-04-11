@@ -50,8 +50,11 @@ void state_store_load_helper(State& t, const State& s)
     t.tiaFlags = s.tiaFlags;
 
     t.frameData = s.frameData;
-    // t.rand = s.rand;
+    t.bootProgress = s.bootProgress;
+    t.bootPhase = s.bootPhase;
+    t.rand = s.rand;
     t.score = s.score;
+    t.M0CosmicArkCounter = s.M0CosmicArkCounter;
 
     t.CurrentPFMask = s.CurrentPFMask;
     t.CurrentP0Mask = s.CurrentP0Mask;

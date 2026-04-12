@@ -41,11 +41,48 @@ requires_frame_complete_reset_state(const rom& cart)
     }
 }
 
+template<typename State_t>
+void
+apply_ale_v5_post_reset_normalization(const rom& cart,
+                                      State_t& s)
+{
+    switch(cart.game_id())
+    {
+    case games::GAME_ASSAULT:
+        // Official ALE reset consistently lands Assault with these startup
+        // bytes cleared/seeded, while CuLE's generic boot sequence can leave
+        // the stale pre-start values around. Those bytes drive later live-play
+        // state and are the source of the deterministic step-31/32 drift.
+        ram::write(s.ram, 0xB9, uint8_t(0x00));
+        ram::write(s.ram, 0xE6, uint8_t(0xCF));
+        break;
+    default:
+        break;
+    }
+}
+
 inline double
 stella_next_double(std::mt19937& rng)
 {
     return static_cast<double>(rng()) /
            (static_cast<double>(std::mt19937::max()) + 1.0);
+}
+
+template<typename State_t>
+void
+terminate_cached_tia_stream(State_t& s,
+                            uint32_t* tia_update_begin)
+{
+    if(s.tia_update_buffer == nullptr)
+    {
+        return;
+    }
+
+    if((s.tia_update_buffer == tia_update_begin) ||
+       (*(s.tia_update_buffer - 1) != uint32_t(0xFD)))
+    {
+        *s.tia_update_buffer++ = uint32_t(0xFD);
+    }
 }
 
 template<typename Environment,
@@ -68,11 +105,12 @@ replay_cached_frame(Wrapper& wrap)
 template<typename Environment,
          typename Wrapper>
 void
-raw_cached_reset_step(Wrapper& wrap,
-                      const Action player_a_action,
-                      const Action player_b_action,
-                      const bool select_pressed,
-                      const bool count_public_frame)
+raw_cached_emulate_steps(Wrapper& wrap,
+                         const Action player_a_action,
+                         const Action player_b_action,
+                         const bool select_pressed,
+                         const size_t num_steps,
+                         const bool count_public_frame_each_step)
 {
     using ALE_t = typename Environment::ALE_t;
     using Controller_t = typename Environment::Controller_t;
@@ -83,19 +121,37 @@ raw_cached_reset_step(Wrapper& wrap,
     ALE_t::noopIllegalActions(s);
     Environment::setSelectPressed(s, select_pressed);
     Controller_t::set_actions(s, player_a_action, player_b_action);
-    Environment::emulate(s);
 
-    if(count_public_frame)
+    for(size_t step = 0; step < num_steps; ++step)
     {
-        Environment::increment(s);
+        Environment::emulate(s);
+
+        if(count_public_frame_each_step)
+        {
+            Environment::increment(s);
+        }
     }
 
-    if(s.tia_update_buffer != nullptr)
-    {
-        *s.tia_update_buffer++ = uint32_t(0xFD);
-    }
+    terminate_cached_tia_stream(s, wrap.cached_tia_update_ptr);
 
     replay_cached_frame<Environment>(wrap);
+}
+
+template<typename Environment,
+         typename Wrapper>
+void
+raw_cached_reset_step(Wrapper& wrap,
+                      const Action player_a_action,
+                      const Action player_b_action,
+                      const bool select_pressed,
+                      const bool count_public_frame)
+{
+    raw_cached_emulate_steps<Environment>(wrap,
+                                          player_a_action,
+                                          player_b_action,
+                                          select_pressed,
+                                          1,
+                                          count_public_frame);
 }
 
 template<typename Environment,
@@ -126,10 +182,36 @@ perform_ale_style_reset_act(Wrapper& wrap,
                                            last_player_a_action,
                                            last_player_b_action,
                                            false,
-                                           false);
+                                           true);
+    }
+}
+
+template<typename Environment,
+         typename Wrapper>
+void
+perform_doubledunk_scripted_sticky_frame(Wrapper& wrap,
+                                         const Action requested_player_a_action,
+                                         std::mt19937& rng,
+                                         Action& last_player_a_action,
+                                         Action& last_player_b_action)
+{
+    const double repeat_action_probability =
+        static_cast<double>(wrap.reset_repeat_action_probability);
+
+    if(stella_next_double(rng) >= repeat_action_probability)
+    {
+        last_player_a_action = requested_player_a_action;
+    }
+    if(stella_next_double(rng) >= repeat_action_probability)
+    {
+        last_player_b_action = ACTION_NOOP;
     }
 
-    Environment::increment(wrap.cached_states_ptr[0]);
+    raw_cached_reset_step<Environment>(wrap,
+                                       last_player_a_action,
+                                       last_player_b_action,
+                                       false,
+                                       true);
 }
 
 template<typename Environment,
@@ -137,14 +219,12 @@ template<typename Environment,
 void
 perform_cached_soft_reset(Wrapper& wrap)
 {
-    for(size_t step = 0; step < (ENV_RESET_FRAMES / 2); ++step)
-    {
-        raw_cached_reset_step<Environment>(wrap,
-                                           ACTION_RESET,
-                                           ACTION_NOOP,
-                                           false,
-                                           false);
-    }
+    raw_cached_emulate_steps<Environment>(wrap,
+                                          ACTION_RESET,
+                                          ACTION_NOOP,
+                                          false,
+                                          ENV_RESET_FRAMES / 2,
+                                          false);
 }
 
 template<typename Environment,
@@ -157,10 +237,7 @@ perform_generic_cached_boot_step(Wrapper& wrap)
 
     Environment::act(s, ACTION_NOOP, ACTION_NOOP);
 
-    if(s.tia_update_buffer != nullptr)
-    {
-        *s.tia_update_buffer++ = uint32_t(0xFD);
-    }
+    terminate_cached_tia_stream(s, wrap.cached_tia_update_ptr);
 
     replay_cached_frame<Environment>(wrap);
 }
@@ -179,16 +256,16 @@ perform_doubledunk_go_down(Wrapper& wrap,
     size_t attempts = 0;
     while(previous_selection == ram::read(s.ram, 0xB0))
     {
-        perform_ale_style_reset_act<Environment>(wrap,
-                                                 ACTION_DOWN,
-                                                 rng,
-                                                 last_player_a_action,
-                                                 last_player_b_action);
-        perform_ale_style_reset_act<Environment>(wrap,
-                                                 ACTION_NOOP,
-                                                 rng,
-                                                 last_player_a_action,
-                                                 last_player_b_action);
+        perform_doubledunk_scripted_sticky_frame<Environment>(wrap,
+                                                              ACTION_DOWN,
+                                                              rng,
+                                                              last_player_a_action,
+                                                              last_player_b_action);
+        perform_doubledunk_scripted_sticky_frame<Environment>(wrap,
+                                                              ACTION_NOOP,
+                                                              rng,
+                                                              last_player_a_action,
+                                                              last_player_b_action);
         ++attempts;
         CULE_ASSERT(attempts <= 256,
                     "DoubleDunk reset failed to advance the menu selection");
@@ -209,16 +286,17 @@ perform_doubledunk_option_adjustment(Wrapper& wrap,
     size_t attempts = 0;
     while(((ram::read(s.ram, 0x80) & bit_of_interest) == bit_of_interest) != enabled)
     {
-        perform_ale_style_reset_act<Environment>(wrap,
-                                                 enabled ? ACTION_RIGHT : ACTION_LEFT,
-                                                 rng,
-                                                 last_player_a_action,
-                                                 last_player_b_action);
-        perform_ale_style_reset_act<Environment>(wrap,
-                                                 ACTION_NOOP,
-                                                 rng,
-                                                 last_player_a_action,
-                                                 last_player_b_action);
+        perform_doubledunk_scripted_sticky_frame<Environment>(
+            wrap,
+            enabled ? ACTION_RIGHT : ACTION_LEFT,
+            rng,
+            last_player_a_action,
+            last_player_b_action);
+        perform_doubledunk_scripted_sticky_frame<Environment>(wrap,
+                                                              ACTION_NOOP,
+                                                              rng,
+                                                              last_player_a_action,
+                                                              last_player_b_action);
         ++attempts;
         CULE_ASSERT(attempts <= 256,
                     "DoubleDunk reset failed to converge on the requested mode bits");
@@ -306,16 +384,25 @@ perform_exact_doubledunk_reset(Wrapper& wrap,
     last_player_a_action = ACTION_NOOP;
     last_player_b_action = ACTION_NOOP;
 
-    perform_ale_style_reset_act<Environment>(wrap,
-                                             ACTION_UPFIRE,
-                                             rng,
-                                             last_player_a_action,
-                                             last_player_b_action);
-    perform_ale_style_reset_act<Environment>(wrap,
-                                             ACTION_NOOP,
-                                             rng,
-                                             last_player_a_action,
-                                             last_player_b_action);
+    perform_doubledunk_scripted_sticky_frame<Environment>(wrap,
+                                                          ACTION_UPFIRE,
+                                                          rng,
+                                                          last_player_a_action,
+                                                          last_player_b_action);
+    perform_doubledunk_scripted_sticky_frame<Environment>(wrap,
+                                                          ACTION_NOOP,
+                                                          rng,
+                                                          last_player_a_action,
+                                                          last_player_b_action);
+
+    // StellaEnvironment::reset() applies a second softReset() after setMode(),
+    // then replays the ROM's starting action list via raw emulate() calls.
+    perform_cached_soft_reset<Environment>(wrap);
+    raw_cached_reset_step<Environment>(wrap,
+                                       Environment::getStartAction(s),
+                                       ACTION_NOOP,
+                                       false,
+                                       false);
 
     Environment::setBootProgress(s, 0);
     Environment::setBootPhase(s, BOOT_DONE);
@@ -402,6 +489,11 @@ reset(ExecutionPolicy&& policy,
                         << wrap.cart.game_name() << " within "
                         << (ENV_BASE_FRAMES + MAX_EXTRA_BOOT_FRAMES)
                         << " frames");
+    }
+
+    if(wrap.ale_reset_semantics)
+    {
+        apply_ale_v5_post_reset_normalization(wrap.cart, wrap.cached_states_ptr[0]);
     }
 
     for (size_t i = 1; i < wrap.noop_reset_steps; i++)

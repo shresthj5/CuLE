@@ -64,6 +64,7 @@ class EnvSmokeTests(unittest.TestCase):
     def test_sticky_action_wrapper_repeats_previous_action(self):
         env = Env("ALE/Pong-v5", num_envs=2, color_mode="gray", device="cpu", rescale=False, frameskip=4, repeat_prob=1.0)
 
+        env.reset(seeds=torch.tensor([123, 456], dtype=torch.int32), initial_steps=0)
         env.last_actions.fill_(1)
         requested = torch.zeros(2, dtype=torch.uint8)
         sticky = env._apply_sticky_actions(requested, env.last_actions)

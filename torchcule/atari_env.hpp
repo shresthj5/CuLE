@@ -9,6 +9,9 @@
 
 #include <torchcule/atari_state.hpp>
 
+#include <random>
+#include <vector>
+
 class AtariEnv : public cule::atari::wrapper
 {
     private:
@@ -27,6 +30,14 @@ class AtariEnv : public cule::atari::wrapper
       void configure_reset_semantics(const bool ale_reset_semantics,
                                      const uint32_t frame_skip,
                                      const float repeat_action_probability);
+
+      void seed_sticky_actions(const uint32_t* seedBuffer,
+                               const bool enabled,
+                               const uint64_t sticky_threshold);
+
+      void apply_exact_sticky_actions(const uint8_t* requestedActions,
+                                      const uint8_t* previousActions,
+                                      uint8_t* outputActions);
 
       void reset_states();
 
@@ -71,9 +82,18 @@ class AtariEnv : public cule::atari::wrapper
       ExecutionPolicy& get_policy();
 
     private:
+      void ensure_sticky_mask_buffers();
+      void release_sticky_mask_buffers();
+
       void* cule_par;
       size_t num_channels;
       bool rescale;
       bool use_cuda;
       int32_t gpu_id;
+      bool sticky_actions_enabled;
+      uint64_t sticky_threshold;
+      uint8_t* sticky_mask_host;
+      uint8_t* sticky_mask_device;
+      size_t sticky_mask_capacity;
+      std::vector<std::mt19937> sticky_random_states;
 };

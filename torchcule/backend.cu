@@ -1,11 +1,15 @@
 #include <cule/cule.hpp>
 #include <cule/cuda.hpp>
 
+#include <ATen/cuda/CUDAContext.h>
 #include <cuda_runtime.h>
 
 #include <torchcule/atari_env.hpp>
 #include <torchcule/atari_state.hpp>
 #include <torchcule/atari_state.cpp>
+
+#include <algorithm>
+#include <vector>
 
 using cule_policy = cule::cuda::parallel_execution_policy;
 
@@ -48,6 +52,21 @@ public:
 private:
     void* ptr_;
 };
+
+__global__ void
+apply_sticky_actions_kernel(const size_t num_envs,
+                            const uint8_t* sticky_mask,
+                            const uint8_t* requested_actions,
+                            const uint8_t* previous_actions,
+                            uint8_t* output_actions)
+{
+    const size_t index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if(index < num_envs)
+    {
+        output_actions[index] =
+            sticky_mask[index] != 0 ? previous_actions[index] : requested_actions[index];
+    }
+}
 } // namespace
 
 AtariEnv::
@@ -55,15 +74,24 @@ AtariEnv(const cule::atari::rom& cart,
          const size_t num_envs,
          const size_t noop_reset_steps)
     : super_t(cart, num_envs, noop_reset_steps),
+      cule_par(new agency::parallel_execution_policy()),
+      num_channels(0),
+      rescale(false),
       use_cuda(false),
       gpu_id(-1),
-      cule_par(new agency::parallel_execution_policy())
+      sticky_actions_enabled(false),
+      sticky_threshold(0),
+      sticky_mask_host(nullptr),
+      sticky_mask_device(nullptr),
+      sticky_mask_capacity(0)
 {
 }
 
 AtariEnv::
 ~AtariEnv()
 {
+    release_sticky_mask_buffers();
+
     if(use_cuda)
     {
         delete &get_policy<cule_policy>();
@@ -71,6 +99,148 @@ AtariEnv::
     else
     {
         delete &get_policy<agency::parallel_execution_policy>();
+    }
+}
+
+void
+AtariEnv::
+ensure_sticky_mask_buffers()
+{
+    if(!use_cuda || (size() == 0))
+    {
+        return;
+    }
+
+    if(sticky_mask_capacity >= size())
+    {
+        return;
+    }
+
+    release_sticky_mask_buffers();
+
+    if(gpu_id != -1)
+    {
+        CULE_ERRCHK(cudaSetDevice(gpu_id));
+    }
+
+    CULE_ERRCHK(cudaMallocHost(reinterpret_cast<void**>(&sticky_mask_host),
+                               sizeof(uint8_t) * size()));
+    CULE_ERRCHK(cudaMalloc(reinterpret_cast<void**>(&sticky_mask_device),
+                           sizeof(uint8_t) * size()));
+    sticky_mask_capacity = size();
+}
+
+void
+AtariEnv::
+release_sticky_mask_buffers()
+{
+    if(gpu_id != -1)
+    {
+        CULE_ERRCHK(cudaSetDevice(gpu_id));
+    }
+
+    if(sticky_mask_device != nullptr)
+    {
+        CULE_ERRCHK(cudaFree(sticky_mask_device));
+        sticky_mask_device = nullptr;
+    }
+
+    if(sticky_mask_host != nullptr)
+    {
+        CULE_ERRCHK(cudaFreeHost(sticky_mask_host));
+        sticky_mask_host = nullptr;
+    }
+
+    sticky_mask_capacity = 0;
+}
+
+void
+AtariEnv::
+seed_sticky_actions(const uint32_t* seedBuffer,
+                    const bool enabled,
+                    const uint64_t sticky_threshold)
+{
+    sticky_actions_enabled = enabled;
+    this->sticky_threshold = sticky_threshold;
+    sticky_random_states.clear();
+
+    if(!sticky_actions_enabled || (size() == 0))
+    {
+        return;
+    }
+
+    sticky_random_states.resize(size());
+    std::vector<uint32_t> host_seeds(size(), 0);
+
+    if(use_cuda)
+    {
+        auto stream = at::cuda::getCurrentCUDAStream().stream();
+        CULE_ERRCHK(cudaMemcpyAsync(host_seeds.data(),
+                                    seedBuffer,
+                                    sizeof(uint32_t) * size(),
+                                    cudaMemcpyDeviceToHost,
+                                    stream));
+        CULE_ERRCHK(cudaStreamSynchronize(stream));
+        ensure_sticky_mask_buffers();
+    }
+    else
+    {
+        std::copy(seedBuffer, seedBuffer + size(), host_seeds.begin());
+    }
+
+    for(size_t index = 0; index < host_seeds.size(); ++index)
+    {
+        sticky_random_states[index].seed(host_seeds[index]);
+    }
+}
+
+void
+AtariEnv::
+apply_exact_sticky_actions(const uint8_t* requestedActions,
+                           const uint8_t* previousActions,
+                           uint8_t* outputActions)
+{
+    if(!sticky_actions_enabled || (size() == 0))
+    {
+        return;
+    }
+
+    if(use_cuda)
+    {
+        ensure_sticky_mask_buffers();
+
+        for(size_t index = 0; index < size(); ++index)
+        {
+            sticky_mask_host[index] =
+                static_cast<uint64_t>(sticky_random_states[index]()) < sticky_threshold ? 1U : 0U;
+        }
+
+        auto stream = at::cuda::getCurrentCUDAStream().stream();
+        CULE_ERRCHK(cudaMemcpyAsync(sticky_mask_device,
+                                    sticky_mask_host,
+                                    sizeof(uint8_t) * size(),
+                                    cudaMemcpyHostToDevice,
+                                    stream));
+
+        constexpr size_t BLOCK_SIZE = 256;
+        const size_t num_blocks = (size() + BLOCK_SIZE - 1) / BLOCK_SIZE;
+        apply_sticky_actions_kernel<<<num_blocks, BLOCK_SIZE, 0, stream>>>(
+            size(),
+            sticky_mask_device,
+            requestedActions,
+            previousActions,
+            outputActions);
+        CULE_ERRCHK(cudaPeekAtLastError());
+    }
+    else
+    {
+        for(size_t index = 0; index < size(); ++index)
+        {
+            outputActions[index] =
+                static_cast<uint64_t>(sticky_random_states[index]()) < sticky_threshold
+                    ? previousActions[index]
+                    : requestedActions[index];
+        }
     }
 }
 
@@ -320,6 +490,7 @@ set_cuda(const bool use_cuda, const int32_t gpu_id)
 {
     if(this->use_cuda != use_cuda)
     {
+        release_sticky_mask_buffers();
         this->use_cuda = use_cuda;
 
         if(use_cuda)

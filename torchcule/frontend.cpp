@@ -253,6 +253,34 @@ PYBIND11_MODULE(torchcule_atari, m) {
         py::arg("frame_skip"),
         py::arg("repeat_action_probability")
     )
+    .def("seed_sticky_actions",
+        [](AtariEnv& env,
+           uint64_t seedBuffer,
+           const bool enabled,
+           const uint64_t stickyThreshold)
+        {
+            env.seed_sticky_actions(reinterpret_cast<uint32_t*>(seedBuffer),
+                                    enabled,
+                                    stickyThreshold);
+        },
+        py::arg("seed_buffer"),
+        py::arg("enabled"),
+        py::arg("sticky_threshold")
+    )
+    .def("apply_exact_sticky_actions",
+        [](AtariEnv& env,
+           uint64_t requestedActions,
+           uint64_t previousActions,
+           uint64_t outputActions)
+        {
+            env.apply_exact_sticky_actions(reinterpret_cast<uint8_t*>(requestedActions),
+                                           reinterpret_cast<uint8_t*>(previousActions),
+                                           reinterpret_cast<uint8_t*>(outputActions));
+        },
+        py::arg("requested_actions"),
+        py::arg("previous_actions"),
+        py::arg("output_actions")
+    )
     .def("reset_states", [](AtariEnv &env)
         {
             env.reset_states();

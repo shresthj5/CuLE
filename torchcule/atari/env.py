@@ -142,9 +142,13 @@ class Env(torchcule_atari.AtariEnv):
         self.last_actions = torch.full((num_envs,), self.noop_action_index, device=self.device, dtype=torch.uint8)
         self.last_player_b_actions = torch.full((num_envs,), self.noop_action_index, device=self.device, dtype=torch.uint8)
         self.noop_action_indices = torch.full((num_envs,), self.noop_action_index, device=self.device, dtype=torch.uint8)
+        self.player_b_action_indices = torch.full((num_envs,), self.noop_action_index, device=self.device, dtype=torch.uint8)
+        self.player_a_actions = torch.zeros(num_envs, device=self.device, dtype=torch.uint8)
+        self.player_b_actions = torch.zeros(num_envs, device=self.device, dtype=torch.uint8)
         self.lives = torch.zeros(num_envs, device=self.device, dtype=torch.int32)
         self.rewards = torch.zeros(num_envs, device=self.device, dtype=torch.float32)
         self._sticky_random_states = None
+        self._sticky_rng_seeded = False
         self._sticky_threshold = int(float(self.repeat_prob) * _UINT32_MODULUS)
 
         self.states = torch.zeros((num_envs, self.state_size()), device=self.device, dtype=torch.uint8)
@@ -241,6 +245,9 @@ class Env(torchcule_atari.AtariEnv):
         self.last_actions = self.last_actions.to(self.device)
         self.last_player_b_actions = self.last_player_b_actions.to(self.device)
         self.noop_action_indices = self.noop_action_indices.to(self.device)
+        self.player_b_action_indices = self.player_b_action_indices.to(self.device)
+        self.player_a_actions = self.player_a_actions.to(self.device)
+        self.player_b_actions = self.player_b_actions.to(self.device)
         self.lives = self.lives.to(self.device)
         self.rewards = self.rewards.to(self.device)
         self.action_set = self.action_set.to(self.device)
@@ -353,12 +360,15 @@ class Env(torchcule_atari.AtariEnv):
             ale_reset_seeds = seeds
 
         if self.repeat_prob > 0.0:
-            self._sticky_random_states = [
-                np.random.RandomState(int(seed_value) & 0xFFFFFFFF)
-                for seed_value in host_ale_seeds
-            ]
+            self.seed_sticky_actions(
+                ale_reset_seeds.data_ptr(),
+                self.is_ale_v5_env,
+                int(self._sticky_threshold),
+            )
+            self._sticky_rng_seeded = self.is_ale_v5_env
         else:
-            self._sticky_random_states = None
+            self.seed_sticky_actions(0, False, 0)
+            self._sticky_rng_seeded = False
 
         if self.is_cuda:
             self.sync_other_stream()
@@ -374,6 +384,8 @@ class Env(torchcule_atari.AtariEnv):
         self.last_player_b_actions.fill_(self.noop_action_index)
         self.observations1.zero_()
         self.observations2.zero_()
+        if self.is_cuda:
+            self.sync_other_stream()
         self.generate_frames(self.rescale, True, self.num_channels, self.observations1.data_ptr())
 
         if self.is_training:
@@ -394,26 +406,26 @@ class Env(torchcule_atari.AtariEnv):
 
         return self.observations1
 
-    def _apply_sticky_actions(self, requested_actions, previous_actions):
+    def _apply_sticky_actions(self, requested_actions, previous_actions, output=None):
         requested_actions = requested_actions.to(self.device, dtype=torch.uint8)
+        if output is None:
+            output = torch.empty_like(requested_actions, device=self.device)
 
         if self.repeat_prob <= 0.0:
-            return requested_actions
+            output.copy_(requested_actions)
+            return output
 
-        if self.is_ale_v5_env and self._sticky_random_states is not None:
-            sticky_mask_host = np.fromiter(
-                (
-                    int(rng.randint(0, _UINT32_MODULUS, dtype=np.uint32)) < self._sticky_threshold
-                    for rng in self._sticky_random_states
-                ),
-                dtype=np.bool_,
-                count=self.num_envs,
+        if self.is_ale_v5_env and self._sticky_rng_seeded:
+            self.apply_exact_sticky_actions(
+                requested_actions.data_ptr(),
+                previous_actions.data_ptr(),
+                output.data_ptr(),
             )
-            sticky_mask = torch.from_numpy(sticky_mask_host).to(self.device)
         else:
             sticky_mask = torch.rand(self.num_envs, device=self.device) < self.repeat_prob
+            output.copy_(torch.where(sticky_mask, previous_actions, requested_actions))
 
-        return torch.where(sticky_mask, previous_actions, requested_actions)
+        return output
 
     def step(self, player_a_actions, player_b_actions=None, asyn=False):
         """Take a step in the environment by apply a set of actions
@@ -436,12 +448,9 @@ class Env(torchcule_atari.AtariEnv):
         self.observations2.zero_()
         self.done.zero_()
 
-        if self.is_cuda:
-            self.sync_other_stream()
-
         for frame in range(self.frameskip):
-            self.actions = self._apply_sticky_actions(player_a_actions, self.last_actions)
-            self.player_a_actions = self.action_set[self.actions.long()]
+            self._apply_sticky_actions(player_a_actions, self.last_actions, output=self.actions)
+            torch.index_select(self.action_set, 0, self.actions.long(), out=self.player_a_actions)
             player_a_actions_ptr = self.player_a_actions.data_ptr()
             self.last_actions.copy_(self.actions)
 
@@ -450,18 +459,21 @@ class Env(torchcule_atari.AtariEnv):
             else:
                 requested_player_b_actions = self.noop_action_indices
 
-            self.player_b_action_indices = self._apply_sticky_actions(
+            self._apply_sticky_actions(
                 requested_player_b_actions,
                 self.last_player_b_actions,
+                output=self.player_b_action_indices,
             )
             self.last_player_b_actions.copy_(self.player_b_action_indices)
 
             if player_b_actions is not None:
-                self.player_b_actions = self.action_set[self.player_b_action_indices.long()]
+                torch.index_select(self.action_set, 0, self.player_b_action_indices.long(), out=self.player_b_actions)
                 player_b_actions_ptr = self.player_b_actions.data_ptr()
             else:
                 player_b_actions_ptr = 0
 
+            if self.is_cuda:
+                self.sync_other_stream()
             super(Env, self).step(self.fire_reset and self.is_training, player_a_actions_ptr, player_b_actions_ptr, self.done.data_ptr())
             self.get_data(self.episodic_life, self.done.data_ptr(), self.rewards.data_ptr(), self.lives.data_ptr())
             if self.is_ale_v5_env:

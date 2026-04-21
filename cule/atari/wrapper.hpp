@@ -123,6 +123,7 @@ public:
     bool ale_reset_semantics;
     uint32_t reset_frame_skip;
     float reset_repeat_action_probability;
+    uint64_t reset_sticky_rng_draws;
 
     State_t* states_ptr;
     uint8_t* ram_ptr;

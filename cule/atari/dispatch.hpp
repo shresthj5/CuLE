@@ -21,6 +21,7 @@
 #include <agency/agency.hpp>
 
 #include <random>
+#include <vector>
 
 namespace cule
 {
@@ -62,8 +63,14 @@ apply_ale_v5_post_reset_normalization(const rom& cart,
 }
 
 inline double
-stella_next_double(std::mt19937& rng)
+stella_next_double(std::mt19937& rng,
+                   uint64_t* draw_count = nullptr)
 {
+    if(draw_count != nullptr)
+    {
+        ++(*draw_count);
+    }
+
     return static_cast<double>(rng()) /
            (static_cast<double>(std::mt19937::max()) + 1.0);
 }
@@ -161,7 +168,8 @@ perform_ale_style_reset_act(Wrapper& wrap,
                             const Action requested_player_a_action,
                             std::mt19937& rng,
                             Action& last_player_a_action,
-                            Action& last_player_b_action)
+                            Action& last_player_b_action,
+                            uint64_t& sticky_draw_count)
 {
     const uint32_t frame_skip = wrap.reset_frame_skip == 0 ? 1U : wrap.reset_frame_skip;
     const double repeat_action_probability =
@@ -169,11 +177,11 @@ perform_ale_style_reset_act(Wrapper& wrap,
 
     for(uint32_t frame = 0; frame < frame_skip; ++frame)
     {
-        if(stella_next_double(rng) >= repeat_action_probability)
+        if(stella_next_double(rng, &sticky_draw_count) >= repeat_action_probability)
         {
             last_player_a_action = requested_player_a_action;
         }
-        if(stella_next_double(rng) >= repeat_action_probability)
+        if(stella_next_double(rng, &sticky_draw_count) >= repeat_action_probability)
         {
             last_player_b_action = ACTION_NOOP;
         }
@@ -193,16 +201,17 @@ perform_doubledunk_scripted_sticky_frame(Wrapper& wrap,
                                          const Action requested_player_a_action,
                                          std::mt19937& rng,
                                          Action& last_player_a_action,
-                                         Action& last_player_b_action)
+                                         Action& last_player_b_action,
+                                         uint64_t& sticky_draw_count)
 {
     const double repeat_action_probability =
         static_cast<double>(wrap.reset_repeat_action_probability);
 
-    if(stella_next_double(rng) >= repeat_action_probability)
+    if(stella_next_double(rng, &sticky_draw_count) >= repeat_action_probability)
     {
         last_player_a_action = requested_player_a_action;
     }
-    if(stella_next_double(rng) >= repeat_action_probability)
+    if(stella_next_double(rng, &sticky_draw_count) >= repeat_action_probability)
     {
         last_player_b_action = ACTION_NOOP;
     }
@@ -248,7 +257,8 @@ void
 perform_doubledunk_go_down(Wrapper& wrap,
                            std::mt19937& rng,
                            Action& last_player_a_action,
-                           Action& last_player_b_action)
+                           Action& last_player_b_action,
+                           uint64_t& sticky_draw_count)
 {
     auto& s = wrap.cached_states_ptr[0];
     const uint8_t previous_selection = ram::read(s.ram, 0xB0);
@@ -260,12 +270,14 @@ perform_doubledunk_go_down(Wrapper& wrap,
                                                               ACTION_DOWN,
                                                               rng,
                                                               last_player_a_action,
-                                                              last_player_b_action);
+                                                              last_player_b_action,
+                                                              sticky_draw_count);
         perform_doubledunk_scripted_sticky_frame<Environment>(wrap,
                                                               ACTION_NOOP,
                                                               rng,
                                                               last_player_a_action,
-                                                              last_player_b_action);
+                                                              last_player_b_action,
+                                                              sticky_draw_count);
         ++attempts;
         CULE_ASSERT(attempts <= 256,
                     "DoubleDunk reset failed to advance the menu selection");
@@ -280,7 +292,8 @@ perform_doubledunk_option_adjustment(Wrapper& wrap,
                                      Action& last_player_a_action,
                                      Action& last_player_b_action,
                                      const uint8_t bit_of_interest,
-                                     const bool enabled)
+                                     const bool enabled,
+                                     uint64_t& sticky_draw_count)
 {
     auto& s = wrap.cached_states_ptr[0];
     size_t attempts = 0;
@@ -291,12 +304,14 @@ perform_doubledunk_option_adjustment(Wrapper& wrap,
             enabled ? ACTION_RIGHT : ACTION_LEFT,
             rng,
             last_player_a_action,
-            last_player_b_action);
+            last_player_b_action,
+            sticky_draw_count);
         perform_doubledunk_scripted_sticky_frame<Environment>(wrap,
                                                               ACTION_NOOP,
                                                               rng,
                                                               last_player_a_action,
-                                                              last_player_b_action);
+                                                              last_player_b_action,
+                                                              sticky_draw_count);
         ++attempts;
         CULE_ASSERT(attempts <= 256,
                     "DoubleDunk reset failed to converge on the requested mode bits");
@@ -306,22 +321,11 @@ perform_doubledunk_option_adjustment(Wrapper& wrap,
 template<typename Environment,
          typename Wrapper>
 void
-perform_exact_doubledunk_reset(Wrapper& wrap,
-                               const uint32_t ale_seed)
+perform_exact_doubledunk_reset_sequence(Wrapper& wrap,
+                                        std::mt19937& rng,
+                                        uint64_t& sticky_draw_count)
 {
     auto& s = wrap.cached_states_ptr[0];
-    size_t boot_frames = 0;
-    constexpr size_t MAX_BOOT_FRAMES_TO_MODE_SETUP = ENV_BASE_FRAMES + 4096;
-    while((Environment::getBootPhase(s) != BOOT_MODE_SETUP) ||
-          (Environment::getBootProgress(s) != 0))
-    {
-        perform_generic_cached_boot_step<Environment>(wrap);
-        ++boot_frames;
-        CULE_ASSERT(boot_frames <= MAX_BOOT_FRAMES_TO_MODE_SETUP,
-                    "DoubleDunk reset did not reach BOOT_MODE_SETUP");
-    }
-
-    std::mt19937 rng(ale_seed);
     Action last_player_a_action = ACTION_NOOP;
     Action last_player_b_action = ACTION_NOOP;
 
@@ -342,8 +346,10 @@ perform_exact_doubledunk_reset(Wrapper& wrap,
     // randomness can affect menu traversal in the same places as upstream.
     constexpr uint32_t DEFAULT_DOUBLE_DUNK_MODE = 0U;
 
-    perform_doubledunk_go_down<Environment>(wrap, rng, last_player_a_action, last_player_b_action);
-    perform_doubledunk_go_down<Environment>(wrap, rng, last_player_a_action, last_player_b_action);
+    perform_doubledunk_go_down<Environment>(
+        wrap, rng, last_player_a_action, last_player_b_action, sticky_draw_count);
+    perform_doubledunk_go_down<Environment>(
+        wrap, rng, last_player_a_action, last_player_b_action, sticky_draw_count);
 
     perform_doubledunk_option_adjustment<Environment>(
         wrap,
@@ -351,34 +357,41 @@ perform_exact_doubledunk_reset(Wrapper& wrap,
         last_player_a_action,
         last_player_b_action,
         0x08,
-        (DEFAULT_DOUBLE_DUNK_MODE & 0x1U) != 0U);
+        (DEFAULT_DOUBLE_DUNK_MODE & 0x1U) != 0U,
+        sticky_draw_count);
 
-    perform_doubledunk_go_down<Environment>(wrap, rng, last_player_a_action, last_player_b_action);
+    perform_doubledunk_go_down<Environment>(
+        wrap, rng, last_player_a_action, last_player_b_action, sticky_draw_count);
     perform_doubledunk_option_adjustment<Environment>(
         wrap,
         rng,
         last_player_a_action,
         last_player_b_action,
         0x10,
-        (DEFAULT_DOUBLE_DUNK_MODE & 0x2U) != 0U);
+        (DEFAULT_DOUBLE_DUNK_MODE & 0x2U) != 0U,
+        sticky_draw_count);
 
-    perform_doubledunk_go_down<Environment>(wrap, rng, last_player_a_action, last_player_b_action);
+    perform_doubledunk_go_down<Environment>(
+        wrap, rng, last_player_a_action, last_player_b_action, sticky_draw_count);
     perform_doubledunk_option_adjustment<Environment>(
         wrap,
         rng,
         last_player_a_action,
         last_player_b_action,
         0x04,
-        (DEFAULT_DOUBLE_DUNK_MODE & 0x4U) != 0U);
+        (DEFAULT_DOUBLE_DUNK_MODE & 0x4U) != 0U,
+        sticky_draw_count);
 
-    perform_doubledunk_go_down<Environment>(wrap, rng, last_player_a_action, last_player_b_action);
+    perform_doubledunk_go_down<Environment>(
+        wrap, rng, last_player_a_action, last_player_b_action, sticky_draw_count);
     perform_doubledunk_option_adjustment<Environment>(
         wrap,
         rng,
         last_player_a_action,
         last_player_b_action,
         0x20,
-        (DEFAULT_DOUBLE_DUNK_MODE & 0x8U) != 0U);
+        (DEFAULT_DOUBLE_DUNK_MODE & 0x8U) != 0U,
+        sticky_draw_count);
 
     perform_cached_soft_reset<Environment>(wrap);
     last_player_a_action = ACTION_NOOP;
@@ -388,12 +401,14 @@ perform_exact_doubledunk_reset(Wrapper& wrap,
                                                           ACTION_UPFIRE,
                                                           rng,
                                                           last_player_a_action,
-                                                          last_player_b_action);
+                                                          last_player_b_action,
+                                                          sticky_draw_count);
     perform_doubledunk_scripted_sticky_frame<Environment>(wrap,
                                                           ACTION_NOOP,
                                                           rng,
                                                           last_player_a_action,
-                                                          last_player_b_action);
+                                                          last_player_b_action,
+                                                          sticky_draw_count);
 
     // StellaEnvironment::reset() applies a second softReset() after setMode(),
     // then replays the ROM's starting action list via raw emulate() calls.
@@ -410,6 +425,62 @@ perform_exact_doubledunk_reset(Wrapper& wrap,
 }
 
 template<typename Environment,
+         typename Wrapper>
+void
+perform_exact_doubledunk_reset(Wrapper& wrap,
+                               const uint32_t ale_seed)
+{
+    auto& s = wrap.cached_states_ptr[0];
+    size_t boot_frames = 0;
+    constexpr size_t MAX_BOOT_FRAMES_TO_MODE_SETUP = ENV_BASE_FRAMES + 4096;
+    while((Environment::getBootPhase(s) != BOOT_MODE_SETUP) ||
+          (Environment::getBootProgress(s) != 0))
+    {
+        perform_generic_cached_boot_step<Environment>(wrap);
+        ++boot_frames;
+        CULE_ASSERT(boot_frames <= MAX_BOOT_FRAMES_TO_MODE_SETUP,
+                    "DoubleDunk reset did not reach BOOT_MODE_SETUP");
+    }
+
+    // Gymnasium's ALE v5 wrapper seeds ALE, then calls loadROM() and finally
+    // reset_game(). The second reset therefore starts from the post-loadROM
+    // sticky RNG state, not from the initial seed. Consume one hidden reset's
+    // RNG stream on a scratch copy, then replay the visible reset from the
+    // original pre-mode-setup state.
+    const state state_backup = wrap.cached_states_ptr[0];
+    const frame_state frame_state_backup = wrap.cached_frame_states_ptr[0];
+    const std::vector<uint8_t> ram_backup(
+        wrap.cached_ram_ptr,
+        wrap.cached_ram_ptr + wrap.cart.ram_size());
+    constexpr size_t FRAME_BUFFER_BYTES = 300 * SCREEN_WIDTH;
+    const std::vector<uint8_t> frame_backup(
+        wrap.cached_frame_ptr,
+        wrap.cached_frame_ptr + FRAME_BUFFER_BYTES);
+    const std::vector<uint8_t> previous_frame_backup(
+        wrap.cached_previous_frame_ptr,
+        wrap.cached_previous_frame_ptr + FRAME_BUFFER_BYTES);
+    const std::vector<uint32_t> tia_backup(
+        wrap.cached_tia_update_ptr,
+        wrap.cached_tia_update_ptr + ENV_UPDATE_SIZE);
+
+    std::mt19937 rng(ale_seed);
+    uint64_t sticky_draw_count = 0;
+    perform_exact_doubledunk_reset_sequence<Environment>(wrap, rng, sticky_draw_count);
+
+    wrap.cached_states_ptr[0] = state_backup;
+    std::copy(ram_backup.begin(), ram_backup.end(), wrap.cached_ram_ptr);
+    wrap.cached_frame_states_ptr[0] = frame_state_backup;
+    std::copy(frame_backup.begin(), frame_backup.end(), wrap.cached_frame_ptr);
+    std::copy(previous_frame_backup.begin(),
+              previous_frame_backup.end(),
+              wrap.cached_previous_frame_ptr);
+    std::copy(tia_backup.begin(), tia_backup.end(), wrap.cached_tia_update_ptr);
+
+    perform_exact_doubledunk_reset_sequence<Environment>(wrap, rng, sticky_draw_count);
+    wrap.reset_sticky_rng_draws = sticky_draw_count;
+}
+
+template<typename Environment,
          typename ExecutionPolicy,
          typename Wrapper>
 void
@@ -419,6 +490,7 @@ reset(ExecutionPolicy&& policy,
       const uint32_t* aleSeedBuffer)
 {
     agency::vector<uint32_t, agency::allocator<uint32_t>> rand_temp_buffer;
+    wrap.reset_sticky_rng_draws = 0;
 
     if(seedBuffer == nullptr)
     {

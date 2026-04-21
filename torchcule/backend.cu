@@ -257,6 +257,17 @@ reset(uint32_t* seedBuffer,
     {
         super_t::reset(get_policy<agency::parallel_execution_policy>(), seedBuffer, aleSeedBuffer);
     }
+
+    if(sticky_actions_enabled && (reset_sticky_rng_draws != 0))
+    {
+        for(auto& rng : sticky_random_states)
+        {
+            for(uint64_t draw = 0; draw < reset_sticky_rng_draws; ++draw)
+            {
+                rng();
+            }
+        }
+    }
 }
 
 void

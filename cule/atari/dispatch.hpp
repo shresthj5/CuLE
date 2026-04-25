@@ -95,6 +95,29 @@ terminate_cached_tia_stream(State_t& s,
 template<typename Environment,
          typename Wrapper>
 void
+capture_cached_reset_screen(Wrapper& wrap,
+                            const size_t cache_index = 0)
+{
+    if((wrap.cached_reset_screen_ptr == nullptr) ||
+       (wrap.cached_frame_ptr == nullptr) ||
+       (wrap.cached_previous_frame_ptr == nullptr) ||
+       (wrap.cached_frame_states_ptr == nullptr))
+    {
+        return;
+    }
+
+    const uint8_t* visible_frame =
+        wrap.cached_frame_states_ptr[cache_index].frameBufferIndex == 0
+            ? wrap.cached_frame_ptr
+            : wrap.cached_previous_frame_ptr;
+    std::copy(visible_frame + (cache_index * 300 * SCREEN_WIDTH),
+              visible_frame + ((cache_index + 1) * 300 * SCREEN_WIDTH),
+              wrap.cached_reset_screen_ptr + (cache_index * 300 * SCREEN_WIDTH));
+}
+
+template<typename Environment,
+         typename Wrapper>
+void
 replay_cached_frame(Wrapper& wrap)
 {
     auto& s = wrap.cached_states_ptr[0];
@@ -323,7 +346,8 @@ template<typename Environment,
 void
 perform_exact_doubledunk_reset_sequence(Wrapper& wrap,
                                         std::mt19937& rng,
-                                        uint64_t& sticky_draw_count)
+                                        uint64_t& sticky_draw_count,
+                                        const bool capture_reset_screen)
 {
     auto& s = wrap.cached_states_ptr[0];
     Action last_player_a_action = ACTION_NOOP;
@@ -418,6 +442,10 @@ perform_exact_doubledunk_reset_sequence(Wrapper& wrap,
                                        ACTION_NOOP,
                                        false,
                                        false);
+    if(capture_reset_screen)
+    {
+        capture_cached_reset_screen<Environment>(wrap);
+    }
 
     Environment::setBootProgress(s, 0);
     Environment::setBootPhase(s, BOOT_DONE);
@@ -443,40 +471,29 @@ perform_exact_doubledunk_reset(Wrapper& wrap,
     }
 
     // Gymnasium's ALE v5 wrapper seeds ALE, then calls loadROM() and finally
-    // reset_game(). The second reset therefore starts from the post-loadROM
-    // sticky RNG state, not from the initial seed. Consume one hidden reset's
-    // RNG stream on a scratch copy, then replay the visible reset from the
-    // original pre-mode-setup state.
+    // reset_game(). The visible reset therefore starts from the post-loadROM
+    // sticky RNG state, while ALE's wrapper-level screen bookkeeping has also
+    // observed the hidden loadROM reset. Consume that hidden reset first, then
+    // restore only emulator state/RAM/TIA input stream before replaying the
+    // visible reset. Leaving frame_state/framebuffer history intact mirrors the
+    // separate ALE m_screen/processScreen snapshot path used for reset().
     const state state_backup = wrap.cached_states_ptr[0];
-    const frame_state frame_state_backup = wrap.cached_frame_states_ptr[0];
     const std::vector<uint8_t> ram_backup(
         wrap.cached_ram_ptr,
         wrap.cached_ram_ptr + wrap.cart.ram_size());
-    constexpr size_t FRAME_BUFFER_BYTES = 300 * SCREEN_WIDTH;
-    const std::vector<uint8_t> frame_backup(
-        wrap.cached_frame_ptr,
-        wrap.cached_frame_ptr + FRAME_BUFFER_BYTES);
-    const std::vector<uint8_t> previous_frame_backup(
-        wrap.cached_previous_frame_ptr,
-        wrap.cached_previous_frame_ptr + FRAME_BUFFER_BYTES);
     const std::vector<uint32_t> tia_backup(
         wrap.cached_tia_update_ptr,
         wrap.cached_tia_update_ptr + ENV_UPDATE_SIZE);
 
     std::mt19937 rng(ale_seed);
     uint64_t sticky_draw_count = 0;
-    perform_exact_doubledunk_reset_sequence<Environment>(wrap, rng, sticky_draw_count);
+    perform_exact_doubledunk_reset_sequence<Environment>(wrap, rng, sticky_draw_count, false);
 
     wrap.cached_states_ptr[0] = state_backup;
     std::copy(ram_backup.begin(), ram_backup.end(), wrap.cached_ram_ptr);
-    wrap.cached_frame_states_ptr[0] = frame_state_backup;
-    std::copy(frame_backup.begin(), frame_backup.end(), wrap.cached_frame_ptr);
-    std::copy(previous_frame_backup.begin(),
-              previous_frame_backup.end(),
-              wrap.cached_previous_frame_ptr);
     std::copy(tia_backup.begin(), tia_backup.end(), wrap.cached_tia_update_ptr);
 
-    perform_exact_doubledunk_reset_sequence<Environment>(wrap, rng, sticky_draw_count);
+    perform_exact_doubledunk_reset_sequence<Environment>(wrap, rng, sticky_draw_count, true);
     wrap.reset_sticky_rng_draws = sticky_draw_count;
 }
 
@@ -567,6 +584,10 @@ reset(ExecutionPolicy&& policy,
     {
         apply_ale_v5_post_reset_normalization(wrap.cart, wrap.cached_states_ptr[0]);
     }
+    if(!use_exact_doubledunk_reset)
+    {
+        capture_cached_reset_screen<Environment>(wrap, 0);
+    }
 
     for (size_t i = 1; i < wrap.noop_reset_steps; i++)
     {
@@ -602,6 +623,7 @@ reset(ExecutionPolicy&& policy,
                             wrap.cached_frame_states_ptr + i,
                             wrap.cached_frame_ptr + (i * 300 * SCREEN_WIDTH),
                             wrap.cached_previous_frame_ptr + (i * 300 * SCREEN_WIDTH));
+        capture_cached_reset_screen<Environment>(wrap, i);
     }
 
     for (size_t i = 0; i < wrap.size(); i++)
@@ -624,6 +646,18 @@ reset(ExecutionPolicy&& policy,
         std::copy(wrap.cached_previous_frame_ptr + (index * 300 * SCREEN_WIDTH),
                   wrap.cached_previous_frame_ptr + ((index + 1) * 300 * SCREEN_WIDTH),
                   wrap.previous_frame_ptr + (i * 300 * SCREEN_WIDTH));
+        if(wrap.reset_screen_ptr != nullptr)
+        {
+            const uint8_t* reset_screen =
+                wrap.cached_reset_screen_ptr != nullptr
+                    ? wrap.cached_reset_screen_ptr
+                    : (wrap.cached_frame_states_ptr[index].frameBufferIndex == 0
+                           ? wrap.cached_frame_ptr
+                           : wrap.cached_previous_frame_ptr);
+            std::copy(reset_screen + (index * 300 * SCREEN_WIDTH),
+                      reset_screen + ((index + 1) * 300 * SCREEN_WIDTH),
+                      wrap.reset_screen_ptr + (i * 300 * SCREEN_WIDTH));
+        }
         wrap.tia_update_ptr[i * ENV_UPDATE_SIZE] = 0;
     }
 }
@@ -642,6 +676,7 @@ reset_states(ExecutionPolicy&& policy,
                         wrap.tia_update_ptr,
                         wrap.frame_ptr,
                         wrap.previous_frame_ptr,
+                        wrap.reset_screen_ptr,
                         wrap.noop_reset_steps,
                         wrap.states_ptr,
                         wrap.cached_states_ptr,
@@ -651,6 +686,7 @@ reset_states(ExecutionPolicy&& policy,
                         wrap.cached_frame_states_ptr,
                         wrap.cached_frame_ptr,
                         wrap.cached_previous_frame_ptr,
+                        wrap.cached_reset_screen_ptr,
                         wrap.cache_index_ptr,
                         wrap.rand_states_ptr);
 }
@@ -777,6 +813,24 @@ generate_frames(ExecutionPolicy&& policy,
                         wrap.frame_states_ptr,
                         wrap.frame_ptr,
                         wrap.previous_frame_ptr,
+                        imageBuffer);
+}
+
+template<typename ExecutionPolicy,
+         typename Wrapper>
+void
+generate_reset_screen_frames(ExecutionPolicy&& policy,
+                             Wrapper& wrap,
+                             const bool rescale,
+                             const size_t num_channels,
+                             uint8_t* imageBuffer)
+{
+    agency::bulk_invoke(policy(wrap.size()),
+                        generate_screen_frame_functor{},
+                        num_channels,
+                        wrap.cart.screen_height(),
+                        rescale,
+                        wrap.reset_screen_ptr,
                         imageBuffer);
 }
 

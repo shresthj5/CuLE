@@ -113,8 +113,12 @@ struct AtariState
     int32_t lives;
     int32_t points;
     int32_t last_lives;
+
+    uint8_t frame_buffer_index;
+    std::array<uint8_t, 300 * 160> frame_buffer;
+    std::array<uint8_t, 300 * 160> previous_frame_buffer;
+    std::string sticky_rng_state;
 };
 
 struct encode_states_functor;
 struct decode_states_functor;
-

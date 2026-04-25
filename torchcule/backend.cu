@@ -9,12 +9,15 @@
 #include <torchcule/atari_state.cpp>
 
 #include <algorithm>
+#include <sstream>
 #include <vector>
 
 using cule_policy = cule::cuda::parallel_execution_policy;
 
 namespace
 {
+constexpr size_t FRAME_BUFFER_BYTES = 300 * cule::atari::SCREEN_WIDTH;
+
 template<typename T>
 class device_buffer
 {
@@ -350,6 +353,45 @@ get_states(const size_t num_states,
                         output_states.data(),
                         output_frame_states.data(),
                         output_states_ram.data());
+
+    for(size_t state_index = 0; state_index < num_states; ++state_index)
+    {
+        const int32_t env_index = indices_ptr[state_index];
+        AtariState& atari_state = states_ptr[state_index];
+
+        if(use_cuda)
+        {
+            CULE_ERRCHK(cudaMemcpy(atari_state.frame_buffer.data(),
+                                   this->frame_ptr + (env_index * FRAME_BUFFER_BYTES),
+                                   FRAME_BUFFER_BYTES,
+                                   cudaMemcpyDeviceToHost));
+            CULE_ERRCHK(cudaMemcpy(atari_state.previous_frame_buffer.data(),
+                                   this->previous_frame_ptr + (env_index * FRAME_BUFFER_BYTES),
+                                   FRAME_BUFFER_BYTES,
+                                   cudaMemcpyDeviceToHost));
+        }
+        else
+        {
+            std::copy(this->frame_ptr + (env_index * FRAME_BUFFER_BYTES),
+                      this->frame_ptr + ((env_index + 1) * FRAME_BUFFER_BYTES),
+                      atari_state.frame_buffer.begin());
+            std::copy(this->previous_frame_ptr + (env_index * FRAME_BUFFER_BYTES),
+                      this->previous_frame_ptr + ((env_index + 1) * FRAME_BUFFER_BYTES),
+                      atari_state.previous_frame_buffer.begin());
+        }
+
+        if(sticky_actions_enabled &&
+           (static_cast<size_t>(env_index) < sticky_random_states.size()))
+        {
+            std::ostringstream stream;
+            stream << sticky_random_states[env_index];
+            atari_state.sticky_rng_state = stream.str();
+        }
+        else
+        {
+            atari_state.sticky_rng_state.clear();
+        }
+    }
 }
 
 void
@@ -402,11 +444,53 @@ set_states(const size_t num_states,
         super_t::set_states(policy, num_states, indices_gpu.data(), input_states_gpu.data(),
                             input_frame_states_gpu.data(), input_states_ram_gpu.data());
         policy.sync();
+
+        for(size_t state_index = 0; state_index < num_states; ++state_index)
+        {
+            const int32_t env_index = indices_ptr[state_index];
+            const AtariState& atari_state = states_ptr[state_index];
+            CULE_ERRCHK(cudaMemcpy(this->frame_ptr + (env_index * FRAME_BUFFER_BYTES),
+                                   atari_state.frame_buffer.data(),
+                                   FRAME_BUFFER_BYTES,
+                                   cudaMemcpyHostToDevice));
+            CULE_ERRCHK(cudaMemcpy(this->previous_frame_ptr + (env_index * FRAME_BUFFER_BYTES),
+                                   atari_state.previous_frame_buffer.data(),
+                                   FRAME_BUFFER_BYTES,
+                                   cudaMemcpyHostToDevice));
+        }
     }
     else
     {
         super_t::set_states(get_policy<agency::parallel_execution_policy>(), num_states, indices_ptr,
                             input_states.data(), input_frame_states.data(), input_states_ram.data());
+
+        for(size_t state_index = 0; state_index < num_states; ++state_index)
+        {
+            const int32_t env_index = indices_ptr[state_index];
+            const AtariState& atari_state = states_ptr[state_index];
+            this->frame_states_ptr[env_index].frameBufferIndex = atari_state.frame_buffer_index;
+            std::copy(atari_state.frame_buffer.begin(),
+                      atari_state.frame_buffer.end(),
+                      this->frame_ptr + (env_index * FRAME_BUFFER_BYTES));
+            std::copy(atari_state.previous_frame_buffer.begin(),
+                      atari_state.previous_frame_buffer.end(),
+                      this->previous_frame_ptr + (env_index * FRAME_BUFFER_BYTES));
+        }
+    }
+
+    if(sticky_actions_enabled)
+    {
+        for(size_t state_index = 0; state_index < num_states; ++state_index)
+        {
+            const int32_t env_index = indices_ptr[state_index];
+            const AtariState& atari_state = states_ptr[state_index];
+            if(!atari_state.sticky_rng_state.empty() &&
+               (static_cast<size_t>(env_index) < sticky_random_states.size()))
+            {
+                std::istringstream stream(atari_state.sticky_rng_state);
+                stream >> sticky_random_states[env_index];
+            }
+        }
     }
 }
 
@@ -458,6 +542,22 @@ generate_frames(const bool rescale,
     else
     {
         super_t::generate_frames(get_policy<agency::parallel_execution_policy>(), rescale, last_frame, num_channels, imageBuffer);
+    }
+}
+
+void
+AtariEnv::
+generate_reset_screen_frames(const bool rescale,
+                             const size_t num_channels,
+                             uint8_t* imageBuffer)
+{
+    if(use_cuda)
+    {
+        super_t::generate_reset_screen_frames(get_policy<cule_policy>(), rescale, num_channels, imageBuffer);
+    }
+    else
+    {
+        super_t::generate_reset_screen_frames(get_policy<agency::parallel_execution_policy>(), rescale, num_channels, imageBuffer);
     }
 }
 

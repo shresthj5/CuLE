@@ -156,8 +156,10 @@ void initialize_states_kernel(const uint32_t num_envs,
                               const uint32_t* cached_tia_update_buffer,
                               uint8_t* frame_buffer,
                               uint8_t* previous_frame_buffer,
+                              uint8_t* reset_screen_buffer,
                               const uint8_t* cached_frame_buffer,
                               const uint8_t* cached_previous_frame_buffer,
+                              const uint8_t* cached_reset_screen_buffer,
                               uint32_t* rand_states_buffer,
                               uint32_t* cache_index_buffer,
                               frame_state* frame_states_buffer,
@@ -211,6 +213,22 @@ void initialize_states_kernel(const uint32_t num_envs,
         frame[i] = cached_frame[i];
         previous_frame[i] = cached_previous_frame[i];
     }
+
+    if(reset_screen_buffer != nullptr)
+    {
+        const uint8_t* visible_frame =
+            cached_reset_screen_buffer != nullptr
+                ? cached_reset_screen_buffer + (cache_index * 300 * SCREEN_WIDTH)
+                : (cached_frame_states_buffer[cache_index].frameBufferIndex == 0
+                       ? cached_frame
+                       : cached_previous_frame);
+        uint8_t* reset_screen = reset_screen_buffer + (global_index * 300 * SCREEN_WIDTH);
+        #pragma unroll 1
+        for(int32_t i = 0; i < int32_t(300 * SCREEN_WIDTH); ++i)
+        {
+            reset_screen[i] = visible_frame[i];
+        }
+    }
 }
 
 template<typename State_t, size_t NT, size_t RAM_WORDS_PER_ENV>
@@ -225,8 +243,10 @@ void reset_kernel(const uint32_t num_envs,
                   const uint32_t* cached_tia_update_buffer,
                   uint8_t* frame_buffer,
                   uint8_t* previous_frame_buffer,
+                  uint8_t* reset_screen_buffer,
                   const uint8_t* cached_frame_buffer,
                   const uint8_t* cached_previous_frame_buffer,
+                  const uint8_t* cached_reset_screen_buffer,
                   frame_state* frame_states_buffer,
                   frame_state* cached_frame_states_buffer,
                   uint32_t* cache_index_buffer,
@@ -282,6 +302,22 @@ void reset_kernel(const uint32_t num_envs,
         {
             frame[i] = cached_frame[i];
             previous_frame[i] = cached_previous_frame[i];
+        }
+
+        if(reset_screen_buffer != nullptr)
+        {
+            const uint8_t* visible_frame =
+                cached_reset_screen_buffer != nullptr
+                    ? cached_reset_screen_buffer + (cache_index * 300 * SCREEN_WIDTH)
+                    : (cached_frame_states_buffer[cache_index].frameBufferIndex == 0
+                           ? cached_frame
+                           : cached_previous_frame);
+            uint8_t* reset_screen = reset_screen_buffer + (global_index * 300 * SCREEN_WIDTH);
+            #pragma unroll 1
+            for(int32_t i = 0; i < int32_t(300 * SCREEN_WIDTH); ++i)
+            {
+                reset_screen[i] = visible_frame[i];
+            }
         }
     }
 }
@@ -373,15 +409,16 @@ void get_data_kernel(const int32_t num_envs,
     detail::load_env_ram_words<RAM_WORDS_PER_ENV>(ram_buffer, global_index, ram);
     s.ram = ram;
 
+    const bool terminal = s.tiaFlags[FLAG_ALE_TERMINAL];
     const uint32_t old_lives = lives_buffer[global_index];
-    const uint32_t new_lives = ALE_t::getLives(s);
+    const uint32_t new_lives = terminal ? 0 : ALE_t::getLives(s);
     lives_buffer[global_index] = new_lives;
 
     const bool lost_life = new_lives < old_lives;
     s.tiaFlags.template change<FLAG_ALE_LOST_LIFE>(lost_life);
 
     rewards_buffer[global_index] += ALE_t::getRewards(s);
-    done_buffer[global_index] |= s.tiaFlags[FLAG_ALE_TERMINAL] || (episodic_life && lost_life);
+    done_buffer[global_index] |= terminal || (episodic_life && lost_life);
 
     s.score = ALE_t::getScore(s);
 }
@@ -469,6 +506,39 @@ void apply_palette_kernel(const int32_t num_envs,
 
 template<size_t NT>
 __launch_bounds__(NT) __global__
+void apply_palette_screen_kernel(const int32_t num_envs,
+                                 const int32_t screen_height,
+                                 const int32_t num_channels,
+                                 uint8_t* dst_buffer,
+                                 const uint8_t* screen_buffer)
+{
+    const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
+
+    if(global_index < num_envs * screen_height * SCREEN_WIDTH)
+    {
+        const uint32_t state_index = global_index / (screen_height * SCREEN_WIDTH);
+        const uint32_t pixel_index = global_index % (screen_height * SCREEN_WIDTH);
+        const uint8_t* source = screen_buffer + (state_index * 300 * SCREEN_WIDTH);
+
+        const int32_t color = source[pixel_index];
+        dst_buffer += num_channels * global_index;
+
+        if(num_channels == 3)
+        {
+            int32_t rgb = gpu_NTSCPalette[color];
+            dst_buffer[0] = uint8_t(rgb >> 16);
+            dst_buffer[1] = uint8_t(rgb >>  8);
+            dst_buffer[2] = uint8_t(rgb >>  0);
+        }
+        else
+        {
+            dst_buffer[0] = uint8_t(gpu_NTSCPalette[color + 1] & 0xFF);
+        }
+    }
+}
+
+template<size_t NT>
+__launch_bounds__(NT) __global__
 void apply_rescale_kernel(const int32_t num_envs,
                           const int32_t screen_height,
                           uint8_t * dst_buffer,
@@ -490,6 +560,47 @@ void apply_rescale_kernel(const int32_t num_envs,
         const float S_C = float(SCREEN_WIDTH) / 84.0f;
 
         const size_t row  = std::floor(float(global_index) / 84.0f);
+        const size_t col  = global_index % 84;
+
+        const float rf = (0.5f + row) * S_R;
+        const float cf = (0.5f + col) * S_C;
+        const size_t r = std::floor(rf - 0.5f);
+        const size_t c = std::floor(cf - 0.5f);
+
+        const float delta_R = rf - (0.5f + r);
+        const float delta_C = cf - (0.5f + c);
+
+        const float color_0_0 = gpu_NTSCPalette[source[(r + 0) * SCREEN_WIDTH + (c + 0)] + 1] & 0xFF;
+        const float color_0_1 = gpu_NTSCPalette[source[(r + 1) * SCREEN_WIDTH + (c + 0)] + 1] & 0xFF;
+        const float color_1_0 = gpu_NTSCPalette[source[(r + 0) * SCREEN_WIDTH + (c + 1)] + 1] & 0xFF;
+        const float color_1_1 = gpu_NTSCPalette[source[(r + 1) * SCREEN_WIDTH + (c + 1)] + 1] & 0xFF;
+
+        const float value = (color_0_0 * (1.0f - delta_R) * (1.0f - delta_C)) +
+                            (color_0_1 * delta_R * (1.0f - delta_C)) +
+                            (color_1_0 * (1.0f - delta_R) * delta_C) +
+                            (color_1_1 * delta_R * delta_C);
+        dst_buffer[global_index] = value + 0.5f;
+    }
+}
+
+template<size_t NT>
+__launch_bounds__(NT) __global__
+void apply_rescale_screen_kernel(const int32_t num_envs,
+                                 const int32_t screen_height,
+                                 uint8_t * dst_buffer,
+                                 const uint8_t * screen_buffer)
+{
+    const uint32_t global_index = (NT * blockIdx.x) + threadIdx.x;
+
+    if(global_index < (num_envs * SCALED_SCREEN_SIZE))
+    {
+        const uint32_t state_index = global_index / SCALED_SCREEN_SIZE;
+        const uint8_t* source = screen_buffer + (state_index * 300 * SCREEN_WIDTH);
+
+        const float S_R = float(screen_height) / 84.0f;
+        const float S_C = float(SCREEN_WIDTH) / 84.0f;
+
+        const size_t row  = std::floor(float(global_index % SCALED_SCREEN_SIZE) / 84.0f);
         const size_t col  = global_index % 84;
 
         const float rf = (0.5f + row) * S_R;

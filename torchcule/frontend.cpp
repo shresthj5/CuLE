@@ -192,6 +192,10 @@ PYBIND11_MODULE(torchcule_atari, m) {
     .def_readwrite("lives", &AtariState::lives)
     .def_readwrite("points", &AtariState::points)
     .def_readwrite("last_lives", &AtariState::last_lives)
+    .def_readwrite("frame_buffer_index", &AtariState::frame_buffer_index)
+    .def_readwrite("frame_buffer", &AtariState::frame_buffer)
+    .def_readwrite("previous_frame_buffer", &AtariState::previous_frame_buffer)
+    .def_readwrite("sticky_rng_state", &AtariState::sticky_rng_state)
     ;
 
     py::class_<AtariEnv>(m, "AtariEnv")
@@ -203,6 +207,7 @@ PYBIND11_MODULE(torchcule_atari, m) {
                           uint64_t tiaUpdateBuffer,
                           uint64_t frameBuffer,
                           uint64_t previousFrameBuffer,
+                          uint64_t resetScreenBuffer,
                           uint64_t romIndicesBuffer,
                           uint64_t minimalActionsBuffer,
                           uint64_t randStatesBuffer,
@@ -211,6 +216,7 @@ PYBIND11_MODULE(torchcule_atari, m) {
                           uint64_t cachedFrameStatesBuffer,
                           uint64_t cachedFrameBuffer,
                           uint64_t cachedPreviousFrameBuffer,
+                          uint64_t cachedResetScreenBuffer,
                           uint64_t cachedTiaUpdateBuffer,
                           uint64_t cacheIndexBuffer)
         {
@@ -220,6 +226,7 @@ PYBIND11_MODULE(torchcule_atari, m) {
                                 reinterpret_cast<uint32_t*>(tiaUpdateBuffer),
                                 reinterpret_cast<uint8_t*>(frameBuffer),
                                 reinterpret_cast<uint8_t*>(previousFrameBuffer),
+                                reinterpret_cast<uint8_t*>(resetScreenBuffer),
                                 reinterpret_cast<uint32_t*>(romIndicesBuffer),
                                 reinterpret_cast<AtariAction*>(minimalActionsBuffer),
                                 reinterpret_cast<uint32_t*>(randStatesBuffer),
@@ -228,6 +235,7 @@ PYBIND11_MODULE(torchcule_atari, m) {
                                 reinterpret_cast<cule::atari::frame_state*>(cachedFrameStatesBuffer),
                                 reinterpret_cast<uint8_t*>(cachedFrameBuffer),
                                 reinterpret_cast<uint8_t*>(cachedPreviousFrameBuffer),
+                                reinterpret_cast<uint8_t*>(cachedResetScreenBuffer),
                                 reinterpret_cast<uint32_t*>(cachedTiaUpdateBuffer),
                                 reinterpret_cast<uint32_t*>(cacheIndexBuffer));
         }
@@ -308,6 +316,13 @@ PYBIND11_MODULE(torchcule_atari, m) {
                                 last_frame,
                                 num_channels,
                                 reinterpret_cast<uint8_t*>(imageBuffer));
+        }
+    )
+    .def("generate_reset_screen_frames", [](AtariEnv& env, const bool rescale, const size_t num_channels, uint64_t imageBuffer)
+        {
+            env.generate_reset_screen_frames(rescale,
+                                             num_channels,
+                                             reinterpret_cast<uint8_t*>(imageBuffer));
         }
     )
     .def("generate_random_actions", [](AtariEnv& env, uint64_t actionBuffer)

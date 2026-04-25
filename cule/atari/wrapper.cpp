@@ -57,6 +57,7 @@ wrapper(const rom& cart,
     tia_update_ptr(nullptr),
     frame_ptr(nullptr),
     previous_frame_ptr(nullptr),
+    reset_screen_ptr(nullptr),
     rom_indices_ptr(nullptr),
     rand_states_ptr(nullptr),
     minimal_actions_ptr(nullptr),
@@ -65,6 +66,7 @@ wrapper(const rom& cart,
     cached_frame_states_ptr(nullptr),
     cached_frame_ptr(nullptr),
     cached_previous_frame_ptr(nullptr),
+    cached_reset_screen_ptr(nullptr),
     cached_tia_update_ptr(nullptr),
     cache_index_ptr(nullptr)
 {}
@@ -77,6 +79,7 @@ initialize_ptrs(State_t* states_ptr,
                 uint32_t* tia_update_ptr,
                 uint8_t* frame_ptr,
                 uint8_t* previous_frame_ptr,
+                uint8_t* reset_screen_ptr,
                 uint32_t* rom_indices_ptr,
                 Action* minimal_actions_ptr,
                 uint32_t* rand_states_ptr,
@@ -85,6 +88,7 @@ initialize_ptrs(State_t* states_ptr,
                 frame_state* cached_frame_states_ptr,
                 uint8_t* cached_frame_ptr,
                 uint8_t* cached_previous_frame_ptr,
+                uint8_t* cached_reset_screen_ptr,
                 uint32_t* cached_tia_update_ptr,
                 uint32_t* cache_index_ptr)
 {
@@ -94,6 +98,7 @@ initialize_ptrs(State_t* states_ptr,
     this->tia_update_ptr = tia_update_ptr;
     this->frame_ptr = frame_ptr;
     this->previous_frame_ptr = previous_frame_ptr;
+    this->reset_screen_ptr = reset_screen_ptr;
     this->rom_indices_ptr = rom_indices_ptr;
     this->minimal_actions_ptr = minimal_actions_ptr;
     this->rand_states_ptr = rand_states_ptr;
@@ -102,6 +107,7 @@ initialize_ptrs(State_t* states_ptr,
     this->cached_frame_states_ptr = cached_frame_states_ptr;
     this->cached_frame_ptr = cached_frame_ptr;
     this->cached_previous_frame_ptr = cached_previous_frame_ptr;
+    this->cached_reset_screen_ptr = cached_reset_screen_ptr;
     this->cached_tia_update_ptr = cached_tia_update_ptr;
     this->cache_index_ptr = cache_index_ptr;
 }
@@ -186,6 +192,17 @@ generate_frames(ExecutionPolicy&& policy,
 template<typename ExecutionPolicy>
 void
 wrapper::
+generate_reset_screen_frames(ExecutionPolicy&& policy,
+                             const bool rescale,
+                             const size_t num_channels,
+                             uint8_t* imageBuffer)
+{
+    dispatch::generate_reset_screen_frames(policy, *this, rescale, num_channels, imageBuffer);
+}
+
+template<typename ExecutionPolicy>
+void
+wrapper::
 generate_random_actions(ExecutionPolicy&& policy,
                         Action* actionsBuffer,
                         const size_t N)
@@ -257,6 +274,7 @@ wrapped_environment(const rom& cart,
   tia_update_buffer(ENV_UPDATE_SIZE * num_envs, 0),
   frame_buffer(300 * SCREEN_WIDTH * num_envs, 0),
   previous_frame_buffer(300 * SCREEN_WIDTH * num_envs, 0),
+  reset_screen_buffer(300 * SCREEN_WIDTH * num_envs, 0),
   rom_indices_buffer(num_envs, 0),
   rand_states_buffer(num_envs, 0),
   cached_states_buffer(noop_reset_steps, State_t{}),
@@ -264,6 +282,7 @@ wrapped_environment(const rom& cart,
   cached_frame_states_buffer(noop_reset_steps, frame_state{}),
   cached_frame_buffer(300 * SCREEN_WIDTH * noop_reset_steps, 0),
   cached_previous_frame_buffer(300 * SCREEN_WIDTH * noop_reset_steps, 0),
+  cached_reset_screen_buffer(300 * SCREEN_WIDTH * noop_reset_steps, 0),
   cached_tia_update_buffer(ENV_UPDATE_SIZE * noop_reset_steps, 0),
   cache_index_buffer(num_envs, 0)
 {
@@ -276,6 +295,7 @@ wrapped_environment(const rom& cart,
                              tia_update_buffer.data(),
                              frame_buffer.data(),
                              previous_frame_buffer.data(),
+                             reset_screen_buffer.data(),
                              rom_indices_buffer.data(),
                              minimal_actions_buffer.data(),
                              rand_states_buffer.data(),
@@ -284,6 +304,7 @@ wrapped_environment(const rom& cart,
                              cached_frame_states_buffer.data(),
                              cached_frame_buffer.data(),
                              cached_previous_frame_buffer.data(),
+                             cached_reset_screen_buffer.data(),
                              cached_tia_update_buffer.data(),
                              cache_index_buffer.data());
 }

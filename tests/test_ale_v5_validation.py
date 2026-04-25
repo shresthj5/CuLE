@@ -134,6 +134,60 @@ class AleV5ValidationTests(unittest.TestCase):
             self.assertEqual(ale_trunc, False)
             self.assertEqual(ale_info["lives"], int(cule_info["ale.lives"].item()))
 
+    def test_v5_terminal_step_matches_ale_without_auto_reset(self):
+        gym.register_envs(ale_py)
+
+        cases = (
+            ("ALE/Assault-v5", 2, 453, 0.0),
+            ("ALE/MsPacman-v5", 0, 450, 0.0),
+            ("ALE/Phoenix-v5", 2, 498, 0.25),
+        )
+        for env_name, seed, terminal_step, repeat_prob in cases:
+            with self.subTest(env_name=env_name, seed=seed):
+                ale_env = gym.make(
+                    env_name,
+                    obs_type="grayscale",
+                    frameskip=4,
+                    repeat_action_probability=repeat_prob,
+                    full_action_space=False,
+                )
+                cule_env = Env(
+                    env_name,
+                    1,
+                    color_mode="gray",
+                    device="cpu",
+                    rescale=False,
+                    frameskip=4,
+                    repeat_prob=repeat_prob,
+                )
+
+                ale_env.reset(seed=seed)
+                cule_env.reset(
+                    seeds=torch.tensor([seed], dtype=torch.int32),
+                    initial_steps=0,
+                )
+
+                for step in range(terminal_step + 1):
+                    action = (
+                        seed * 5
+                        + step * 11
+                        + (step // 17) * 3
+                        + 1
+                    ) % cule_env.action_space.n
+                    ale_obs, ale_reward, ale_done, ale_trunc, ale_info = ale_env.step(action)
+                    cule_obs, cule_reward, cule_done, cule_info = cule_env.step(
+                        torch.tensor([action], dtype=torch.uint8)
+                    )
+
+                np.testing.assert_array_equal(ale_obs, cule_obs.cpu().numpy()[0, :, :, 0])
+                self.assertEqual(float(ale_reward), float(cule_reward.item()))
+                self.assertEqual(bool(ale_done or ale_trunc), bool(cule_done.item()))
+                self.assertTrue(ale_done)
+                self.assertFalse(ale_trunc)
+                self.assertEqual(int(ale_info["lives"]), int(cule_info["ale.lives"].item()))
+                self.assertEqual(int(cule_info["ale.lives"].item()), 0)
+                ale_env.close()
+
 
 if __name__ == "__main__":
     unittest.main()

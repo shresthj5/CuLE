@@ -64,6 +64,10 @@ class AtariEnv : public cule::atari::wrapper
                            const size_t num_channels,
                            uint8_t* imageBuffer);
 
+      void generate_reset_screen_frames(const bool rescale,
+                                        const size_t num_channels,
+                                        uint8_t* imageBuffer);
+
       void generate_random_actions(cule::atari::Action* actionBuffer);
 
       void set_cuda(const bool use_cuda, const int32_t gpu_id);

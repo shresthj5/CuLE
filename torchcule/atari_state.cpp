@@ -188,6 +188,7 @@ struct encode_states_functor
         fs.displayYStart = cart.screen_y_start();
         fs.displayHeight = cart.screen_height();
         fs.M0CosmicArkCounter = ts.M0CosmicArkCounter;
+        fs.frameBufferIndex = ts.frame_buffer_index;
         fs.framePointer = nullptr;
         fs.srcBuffer = nullptr;
 
@@ -328,6 +329,7 @@ struct decode_states_functor
         ds.started = cule::atari::ale::isStarted(s);
         ds.lives = cule::atari::ale::getLives(s);
         ds.last_lives = 0;
+        ds.frame_buffer_index = fs.frameBufferIndex;
 
         if(cart.game_id() == cule::atari::games::GAME_TENNIS)
         {

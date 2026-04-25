@@ -38,6 +38,7 @@ public:
                          uint32_t* tia_update_ptr,
                          uint8_t* frame_ptr,
                          uint8_t* previous_frame_ptr,
+                         uint8_t* reset_screen_ptr,
                          uint32_t* rom_indices_ptr,
                          Action* minimal_actions_ptr,
                          uint32_t* rand_states_ptr,
@@ -46,6 +47,7 @@ public:
                          frame_state* cached_frame_states_ptr,
                          uint8_t* cached_frame_ptr,
                          uint8_t* cached_previous_frame_ptr,
+                         uint8_t* cached_reset_screen_ptr,
                          uint32_t* cached_tia_update_ptr,
                          uint32_t* cache_index_ptr);
 
@@ -105,6 +107,12 @@ public:
                          uint8_t* imageBuffer);
 
     template<typename ExecutionPolicy>
+    void generate_reset_screen_frames(ExecutionPolicy&& policy,
+                                      const bool rescale,
+                                      const size_t num_channels,
+                                      uint8_t* imageBuffer);
+
+    template<typename ExecutionPolicy>
     void generate_random_actions(ExecutionPolicy&& policy,
                                  Action* actionsBuffer,
                                  const size_t N = 0);
@@ -132,6 +140,7 @@ public:
     uint32_t* tia_update_ptr;
     uint8_t* frame_ptr;
     uint8_t* previous_frame_ptr;
+    uint8_t* reset_screen_ptr;
 
     uint32_t* rom_indices_ptr;
     uint32_t* rand_states_ptr;
@@ -144,6 +153,7 @@ public:
     uint32_t* cached_tia_update_ptr;
     uint8_t* cached_frame_ptr;
     uint8_t* cached_previous_frame_ptr;
+    uint8_t* cached_reset_screen_ptr;
 
     frame_state* cached_frame_states_ptr;
 };
@@ -173,6 +183,7 @@ protected:
     VecType<uint32_t> tia_update_buffer;
     VecType<uint8_t> frame_buffer;
     VecType<uint8_t> previous_frame_buffer;
+    VecType<uint8_t> reset_screen_buffer;
 
     VecType<uint32_t> rom_indices_buffer;
     VecType<uint32_t> rand_states_buffer;
@@ -186,6 +197,7 @@ protected:
     VecType<frame_state> cached_frame_states_buffer;
     VecType<uint8_t> cached_frame_buffer;
     VecType<uint8_t> cached_previous_frame_buffer;
+    VecType<uint8_t> cached_reset_screen_buffer;
     VecType<uint32_t> cached_tia_update_buffer;
 };
 

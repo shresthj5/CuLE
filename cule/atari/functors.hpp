@@ -156,6 +156,7 @@ struct reset_functor
                     uint32_t* tia_update_buffer,
                     uint8_t* frame_buffer,
                     uint8_t* previous_frame_buffer,
+                    uint8_t* reset_screen_buffer,
                     const size_t noop_reset_steps,
                     State_t* states_buffer,
                     const State_t* cached_states_buffer,
@@ -165,6 +166,7 @@ struct reset_functor
                     frame_state* cached_frame_states_buffer,
                     const uint8_t* cached_frame_buffer,
                     const uint8_t* cached_previous_frame_buffer,
+                    const uint8_t* cached_reset_screen_buffer,
                     uint32_t* cache_index_buffer,
                     uint32_t* rand_states_buffer) const
     {
@@ -206,6 +208,24 @@ struct reset_functor
                 std::copy(cached_previous_frame_buffer + (cache_index * 300 * SCREEN_WIDTH),
                           cached_previous_frame_buffer + ((cache_index + 1) * 300 * SCREEN_WIDTH),
                           previous_frame_buffer + (self.index() * 300 * SCREEN_WIDTH));
+            }
+            if((reset_screen_buffer != nullptr) && (cached_reset_screen_buffer != nullptr))
+            {
+                std::copy(cached_reset_screen_buffer + (cache_index * 300 * SCREEN_WIDTH),
+                          cached_reset_screen_buffer + ((cache_index + 1) * 300 * SCREEN_WIDTH),
+                          reset_screen_buffer + (self.index() * 300 * SCREEN_WIDTH));
+            }
+            else if((reset_screen_buffer != nullptr) &&
+                    (cached_frame_buffer != nullptr) &&
+                    (cached_previous_frame_buffer != nullptr) &&
+                    (cached_frame_states_buffer != nullptr))
+            {
+                const frame_state& cached_fs = cached_frame_states_buffer[cache_index];
+                const uint8_t* visible_frame =
+                    cached_fs.frameBufferIndex == 0 ? cached_frame_buffer : cached_previous_frame_buffer;
+                std::copy(visible_frame + (cache_index * 300 * SCREEN_WIDTH),
+                          visible_frame + ((cache_index + 1) * 300 * SCREEN_WIDTH),
+                          reset_screen_buffer + (self.index() * 300 * SCREEN_WIDTH));
             }
         }
     }
@@ -285,15 +305,16 @@ struct get_data_functor
 
         State_t& s = states_buffer[self.index()];
 
+        const bool terminal = s.tiaFlags[FLAG_ALE_TERMINAL];
         const uint32_t old_lives = lives_buffer[self.index()];
-        const uint32_t new_lives = ALE_t::getLives(s);
+        const uint32_t new_lives = terminal ? 0 : ALE_t::getLives(s);
         lives_buffer[self.index()] = new_lives;
 
         const bool lost_life = new_lives < old_lives;
         s.tiaFlags.template change<FLAG_ALE_LOST_LIFE>(lost_life);
 
         rewards_buffer[self.index()] += ALE_t::getRewards(s);
-        done_buffer[self.index()] |= s.tiaFlags[FLAG_ALE_TERMINAL] || (episodic_life && lost_life);
+        done_buffer[self.index()] |= terminal || (episodic_life && lost_life);
 
         s.score = ALE_t::getScore(s);
     }
@@ -355,6 +376,31 @@ struct generate_frame_functor
         const frame_state& fs = frame_states_buffer[self.index()];
         const uint8_t* base = (fs.frameBufferIndex == 0) ? frame_buffer : previous_frame_buffer;
         const uint8_t* framePointer = &base[self.index() * 300 * SCREEN_WIDTH];
+
+        if(rescale)
+        {
+            uint8_t * image_buffer_temp = &image_buffer[self.index() * num_channels * SCALED_SCREEN_SIZE];
+            apply_rescale(screen_height, num_channels, image_buffer_temp, framePointer);
+        }
+        else
+        {
+            uint8_t * image_buffer_temp = &image_buffer[self.index() * num_channels * screen_height * SCREEN_WIDTH];
+            apply_palette(screen_height, num_channels, image_buffer_temp, framePointer);
+        }
+    }
+};
+
+struct generate_screen_frame_functor
+{
+    template<class Agent>
+    void operator()(Agent& self,
+                    const size_t num_channels,
+                    const size_t screen_height,
+                    const bool rescale,
+                    const uint8_t* screen_buffer,
+                    uint8_t* image_buffer)
+    {
+        const uint8_t* framePointer = &screen_buffer[self.index() * 300 * SCREEN_WIDTH];
 
         if(rescale)
         {

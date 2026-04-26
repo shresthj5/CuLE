@@ -318,6 +318,11 @@ PYBIND11_MODULE(torchcule_atari, m) {
                                 reinterpret_cast<uint8_t*>(imageBuffer));
         }
     )
+    .def("preprocess_frame", [](AtariEnv& env, const bool last_frame)
+        {
+            env.preprocess_frame(last_frame);
+        }
+    )
     .def("generate_reset_screen_frames", [](AtariEnv& env, const bool rescale, const size_t num_channels, uint64_t imageBuffer)
         {
             env.generate_reset_screen_frames(rescale,

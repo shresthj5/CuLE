@@ -378,6 +378,13 @@ void step_kernel(const uint32_t num_envs,
 
     Environment_t::act(s, player_a_action, player_b_action);
 
+    // Match the CPU step functor: preprocess replays a bounded per-step TIA
+    // stream, so partial frames need an explicit sentinel before stale data.
+    if(s.tia_update_buffer != nullptr)
+    {
+        *s.tia_update_buffer++ = uint32_t(0xFD);
+    }
+
     {
         state_store_load_helper(*states_buffer, s);
         detail::store_env_ram_words<Environment_t::RAM_WORDS_PER_ENV>(ram_buffer, global_index, ram);

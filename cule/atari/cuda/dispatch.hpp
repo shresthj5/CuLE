@@ -109,6 +109,7 @@ reset(cule::cuda::parallel_execution_policy& policy,
 
     policy.sync();
     env.reset(agency::seq, host_seed_ptr, host_ale_seed_ptr);
+    wrap.reset_sticky_rng_draws = env.reset_sticky_rng_draws;
 
     assert(env.cached_states_ptr != nullptr);
     assert(env.cached_ram_ptr != nullptr);

@@ -1,0 +1,2 @@
+[     280ms] [ERROR] [JavaScript Error: "Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at https://raw.githubusercontent.com/favicon.ico because it violates the following directive: “default-src 'none'”" {file: "resource:///modules/FaviconLoader.sys.mjs" line: 224}] @ resource:///modules/FaviconLoader.sys.mjs:224
+[   10328ms] [WARNING] [JavaScript Warning: "“raw.githubusercontent.com” has been classified as a bounce tracker. If it does not receive user activation within the next 3,600 seconds it will have its state purged."] @ :0

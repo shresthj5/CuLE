@@ -64,6 +64,8 @@ class AtariEnv : public cule::atari::wrapper
                            const size_t num_channels,
                            uint8_t* imageBuffer);
 
+      void preprocess_frame(const bool last_frame);
+
       void generate_reset_screen_frames(const bool rescale,
                                         const size_t num_channels,
                                         uint8_t* imageBuffer);
@@ -99,5 +101,8 @@ class AtariEnv : public cule::atari::wrapper
       uint8_t* sticky_mask_host;
       uint8_t* sticky_mask_device;
       size_t sticky_mask_capacity;
+      size_t sticky_mask_slot;
+      std::vector<cudaEvent_t> sticky_mask_events;
+      std::vector<uint8_t> sticky_mask_event_recorded;
       std::vector<std::mt19937> sticky_random_states;
 };

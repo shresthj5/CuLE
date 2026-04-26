@@ -146,6 +146,8 @@ class Env(torchcule_atari.AtariEnv):
         self.player_b_action_indices = torch.full((num_envs,), self.noop_action_index, device=self.device, dtype=torch.uint8)
         self.player_a_actions = torch.zeros(num_envs, device=self.device, dtype=torch.uint8)
         self.player_b_actions = torch.zeros(num_envs, device=self.device, dtype=torch.uint8)
+        self.player_a_actions_by_frame = torch.zeros((max(1, int(self.frameskip)), num_envs), device=self.device, dtype=torch.uint8)
+        self.player_b_actions_by_frame = torch.zeros((max(1, int(self.frameskip)), num_envs), device=self.device, dtype=torch.uint8)
         self.lives = torch.zeros(num_envs, device=self.device, dtype=torch.int32)
         self.rewards = torch.zeros(num_envs, device=self.device, dtype=torch.float32)
         self._sticky_random_states = None
@@ -253,6 +255,8 @@ class Env(torchcule_atari.AtariEnv):
         self.player_b_action_indices = self.player_b_action_indices.to(self.device)
         self.player_a_actions = self.player_a_actions.to(self.device)
         self.player_b_actions = self.player_b_actions.to(self.device)
+        self.player_a_actions_by_frame = self.player_a_actions_by_frame.to(self.device)
+        self.player_b_actions_by_frame = self.player_b_actions_by_frame.to(self.device)
         self.lives = self.lives.to(self.device)
         self.rewards = self.rewards.to(self.device)
         self.action_set = self.action_set.to(self.device)
@@ -446,6 +450,22 @@ class Env(torchcule_atari.AtariEnv):
             and self.repeat_prob > 0.0
         )
 
+    def _ensure_action_frame_buffers(self):
+        required_frames = max(1, int(self.frameskip))
+        if self.player_a_actions_by_frame.size(0) >= required_frames:
+            return
+
+        self.player_a_actions_by_frame = torch.zeros(
+            (required_frames, self.num_envs),
+            device=self.device,
+            dtype=torch.uint8,
+        )
+        self.player_b_actions_by_frame = torch.zeros(
+            (required_frames, self.num_envs),
+            device=self.device,
+            dtype=torch.uint8,
+        )
+
     def step(self, player_a_actions, player_b_actions=None, asyn=False):
         """Take a step in the environment by apply a set of actions
 
@@ -466,11 +486,14 @@ class Env(torchcule_atari.AtariEnv):
         self.observations1.zero_()
         self.observations2.zero_()
         self.done.zero_()
+        self._ensure_action_frame_buffers()
 
         for frame in range(self.frameskip):
             self._apply_sticky_actions(player_a_actions, self.last_actions, output=self.actions)
-            torch.index_select(self.action_set, 0, self.actions.long(), out=self.player_a_actions)
-            player_a_actions_ptr = self.player_a_actions.data_ptr()
+            player_a_actions_buffer = self.player_a_actions_by_frame[frame]
+            torch.index_select(self.action_set, 0, self.actions.long(), out=player_a_actions_buffer)
+            self.player_a_actions = player_a_actions_buffer
+            player_a_actions_ptr = player_a_actions_buffer.data_ptr()
             self.last_actions.copy_(self.actions)
 
             if player_b_actions is not None:
@@ -486,8 +509,10 @@ class Env(torchcule_atari.AtariEnv):
             self.last_player_b_actions.copy_(self.player_b_action_indices)
 
             if player_b_actions is not None:
-                torch.index_select(self.action_set, 0, self.player_b_action_indices.long(), out=self.player_b_actions)
-                player_b_actions_ptr = self.player_b_actions.data_ptr()
+                player_b_actions_buffer = self.player_b_actions_by_frame[frame]
+                torch.index_select(self.action_set, 0, self.player_b_action_indices.long(), out=player_b_actions_buffer)
+                self.player_b_actions = player_b_actions_buffer
+                player_b_actions_ptr = player_b_actions_buffer.data_ptr()
             else:
                 player_b_actions_ptr = 0
 
@@ -501,7 +526,7 @@ class Env(torchcule_atari.AtariEnv):
                     # but the replay state still has to advance across intermediate
                     # subframes so the last-frame render starts from the correct
                     # framebuffer/TIA state.
-                    self.generate_frames(self.rescale, False, self.num_channels, self.observations2.data_ptr())
+                    self.preprocess_frame(False)
             elif frame == (self.frameskip - 2):
                 self.generate_frames(self.rescale, False, self.num_channels, self.observations2.data_ptr())
 

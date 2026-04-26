@@ -17,6 +17,7 @@ using cule_policy = cule::cuda::parallel_execution_policy;
 namespace
 {
 constexpr size_t FRAME_BUFFER_BYTES = 300 * cule::atari::SCREEN_WIDTH;
+constexpr size_t STICKY_MASK_SLOTS = 64;
 
 template<typename T>
 class device_buffer
@@ -86,7 +87,8 @@ AtariEnv(const cule::atari::rom& cart,
       sticky_threshold(0),
       sticky_mask_host(nullptr),
       sticky_mask_device(nullptr),
-      sticky_mask_capacity(0)
+      sticky_mask_capacity(0),
+      sticky_mask_slot(0)
 {
 }
 
@@ -127,10 +129,17 @@ ensure_sticky_mask_buffers()
     }
 
     CULE_ERRCHK(cudaMallocHost(reinterpret_cast<void**>(&sticky_mask_host),
-                               sizeof(uint8_t) * size()));
+                               sizeof(uint8_t) * size() * STICKY_MASK_SLOTS));
     CULE_ERRCHK(cudaMalloc(reinterpret_cast<void**>(&sticky_mask_device),
-                           sizeof(uint8_t) * size()));
+                           sizeof(uint8_t) * size() * STICKY_MASK_SLOTS));
+    sticky_mask_events.resize(STICKY_MASK_SLOTS, nullptr);
+    sticky_mask_event_recorded.assign(STICKY_MASK_SLOTS, 0);
+    for(auto& event : sticky_mask_events)
+    {
+        CULE_ERRCHK(cudaEventCreateWithFlags(&event, cudaEventDisableTiming));
+    }
     sticky_mask_capacity = size();
+    sticky_mask_slot = 0;
 }
 
 void
@@ -154,7 +163,19 @@ release_sticky_mask_buffers()
         sticky_mask_host = nullptr;
     }
 
+    for(auto& event : sticky_mask_events)
+    {
+        if(event != nullptr)
+        {
+            CULE_ERRCHK(cudaEventDestroy(event));
+            event = nullptr;
+        }
+    }
+    sticky_mask_events.clear();
+    sticky_mask_event_recorded.clear();
+
     sticky_mask_capacity = 0;
+    sticky_mask_slot = 0;
 }
 
 void
@@ -166,6 +187,7 @@ seed_sticky_actions(const uint32_t* seedBuffer,
     sticky_actions_enabled = enabled;
     this->sticky_threshold = sticky_threshold;
     sticky_random_states.clear();
+    sticky_mask_slot = 0;
 
     if(!sticky_actions_enabled || (size() == 0))
     {
@@ -211,16 +233,27 @@ apply_exact_sticky_actions(const uint8_t* requestedActions,
     if(use_cuda)
     {
         ensure_sticky_mask_buffers();
+        auto stream = at::cuda::getCurrentCUDAStream().stream();
+        const size_t slot = sticky_mask_slot % STICKY_MASK_SLOTS;
+        if((slot < sticky_mask_event_recorded.size()) &&
+           (sticky_mask_event_recorded[slot] != 0))
+        {
+            CULE_ERRCHK(cudaEventSynchronize(sticky_mask_events[slot]));
+            sticky_mask_event_recorded[slot] = 0;
+        }
+        ++sticky_mask_slot;
+
+        uint8_t* sticky_mask_host_slot = sticky_mask_host + (slot * size());
+        uint8_t* sticky_mask_device_slot = sticky_mask_device + (slot * size());
 
         for(size_t index = 0; index < size(); ++index)
         {
-            sticky_mask_host[index] =
+            sticky_mask_host_slot[index] =
                 static_cast<uint64_t>(sticky_random_states[index]()) < sticky_threshold ? 1U : 0U;
         }
 
-        auto stream = at::cuda::getCurrentCUDAStream().stream();
-        CULE_ERRCHK(cudaMemcpyAsync(sticky_mask_device,
-                                    sticky_mask_host,
+        CULE_ERRCHK(cudaMemcpyAsync(sticky_mask_device_slot,
+                                    sticky_mask_host_slot,
                                     sizeof(uint8_t) * size(),
                                     cudaMemcpyHostToDevice,
                                     stream));
@@ -229,11 +262,13 @@ apply_exact_sticky_actions(const uint8_t* requestedActions,
         const size_t num_blocks = (size() + BLOCK_SIZE - 1) / BLOCK_SIZE;
         apply_sticky_actions_kernel<<<num_blocks, BLOCK_SIZE, 0, stream>>>(
             size(),
-            sticky_mask_device,
+            sticky_mask_device_slot,
             requestedActions,
             previousActions,
             outputActions);
         CULE_ERRCHK(cudaPeekAtLastError());
+        CULE_ERRCHK(cudaEventRecord(sticky_mask_events[slot], stream));
+        sticky_mask_event_recorded[slot] = 1;
     }
     else
     {
@@ -542,6 +577,20 @@ generate_frames(const bool rescale,
     else
     {
         super_t::generate_frames(get_policy<agency::parallel_execution_policy>(), rescale, last_frame, num_channels, imageBuffer);
+    }
+}
+
+void
+AtariEnv::
+preprocess_frame(const bool last_frame)
+{
+    if(use_cuda)
+    {
+        super_t::preprocess(get_policy<cule_policy>(), last_frame, tia_update_ptr, frame_ptr);
+    }
+    else
+    {
+        super_t::preprocess(get_policy<agency::parallel_execution_policy>(), last_frame, tia_update_ptr, frame_ptr);
     }
 }
 

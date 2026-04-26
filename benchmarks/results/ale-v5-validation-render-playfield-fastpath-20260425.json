@@ -1,0 +1,476 @@
+{
+  "ale_blackbox_failures": [
+    {
+      "action_index": 3,
+      "env": "ALE/Adventure-v5",
+      "mismatches": [
+        {
+          "ale_py": 1,
+          "cule": 0,
+          "kind": "lives"
+        },
+        {
+          "differing_pixels": 30709,
+          "kind": "pixels",
+          "max_abs_diff": 25,
+          "sum_abs_diff": 670561
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/AirRaid-v5",
+      "mismatches": [
+        {
+          "ale_py": 1,
+          "cule": 2,
+          "kind": "lives"
+        },
+        {
+          "differing_pixels": 39320,
+          "kind": "pixels",
+          "max_abs_diff": 235,
+          "sum_abs_diff": 3210089
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Alien-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 30,
+          "kind": "pixels",
+          "max_abs_diff": 112,
+          "sum_abs_diff": 2900
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Amidar-v5",
+      "mismatches": [
+        {
+          "ale_py": 11,
+          "cule": 3,
+          "kind": "lives"
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Asterix-v5",
+      "mismatches": [
+        {
+          "ale_py": 3,
+          "cule": 0,
+          "kind": "lives"
+        },
+        {
+          "differing_pixels": 30240,
+          "kind": "pixels",
+          "max_abs_diff": 192,
+          "sum_abs_diff": 5274276
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Asteroids-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 1168,
+          "kind": "pixels",
+          "max_abs_diff": 214,
+          "sum_abs_diff": 197812
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Atlantis-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 32,
+          "kind": "pixels",
+          "max_abs_diff": 200,
+          "sum_abs_diff": 4396
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Berzerk-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 1424,
+          "kind": "pixels",
+          "max_abs_diff": 104,
+          "sum_abs_diff": 148096
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 1,
+      "env": "ALE/Breakout-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 16,
+          "kind": "pixels",
+          "max_abs_diff": 110,
+          "sum_abs_diff": 1760
+        }
+      ],
+      "step": 2
+    },
+    {
+      "action_index": 10,
+      "env": "ALE/Centipede-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 68,
+          "kind": "pixels",
+          "max_abs_diff": 115,
+          "sum_abs_diff": 7820
+        }
+      ],
+      "step": 1
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/ChopperCommand-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 50,
+          "kind": "pixels",
+          "max_abs_diff": 68,
+          "sum_abs_diff": 3400
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Defender-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 8,
+          "kind": "pixels",
+          "max_abs_diff": 129,
+          "sum_abs_diff": 1032
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/ElevatorAction-v5",
+      "mismatches": [
+        {
+          "ale_py": 4,
+          "cule": 0,
+          "kind": "lives"
+        },
+        {
+          "differing_pixels": 742,
+          "kind": "pixels",
+          "max_abs_diff": 183,
+          "sum_abs_diff": 135786
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Enduro-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 190,
+          "kind": "pixels",
+          "max_abs_diff": 150,
+          "sum_abs_diff": 17080
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 17,
+      "env": "ALE/Frostbite-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 608,
+          "kind": "pixels",
+          "max_abs_diff": 19,
+          "sum_abs_diff": 10792
+        }
+      ],
+      "step": 2
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Gopher-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 156,
+          "kind": "pixels",
+          "max_abs_diff": 150,
+          "sum_abs_diff": 23400
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Jamesbond-v5",
+      "mismatches": [
+        {
+          "ale_py": 6,
+          "cule": 0,
+          "kind": "lives"
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/JourneyEscape-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 444,
+          "kind": "pixels",
+          "max_abs_diff": 233,
+          "sum_abs_diff": 54325
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Kaboom-v5",
+      "mismatches": [
+        {
+          "ale_py": 1,
+          "cule": 3,
+          "kind": "lives"
+        },
+        {
+          "differing_pixels": 31,
+          "kind": "pixels",
+          "max_abs_diff": 214,
+          "sum_abs_diff": 1624
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Kangaroo-v5",
+      "mismatches": [
+        {
+          "ale_py": 3,
+          "cule": 2,
+          "kind": "lives"
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Pitfall-v5",
+      "mismatches": [
+        {
+          "ale_py": 0.0,
+          "cule": 2000.0,
+          "kind": "reward"
+        },
+        {
+          "differing_pixels": 58,
+          "kind": "pixels",
+          "max_abs_diff": 98,
+          "sum_abs_diff": 3029
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 4,
+      "env": "ALE/Pooyan-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 39,
+          "kind": "pixels",
+          "max_abs_diff": 118,
+          "sum_abs_diff": 4602
+        }
+      ],
+      "step": 1
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/PrivateEye-v5",
+      "mismatches": [
+        {
+          "ale_py": 0.0,
+          "cule": 1000.0,
+          "kind": "reward"
+        },
+        {
+          "differing_pixels": 105,
+          "kind": "pixels",
+          "max_abs_diff": 236,
+          "sum_abs_diff": 15956
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Riverraid-v5",
+      "mismatches": [
+        {
+          "ale_py": false,
+          "cule": true,
+          "kind": "done"
+        },
+        {
+          "ale_py": 4,
+          "cule": 0,
+          "kind": "lives"
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/RoadRunner-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 9119,
+          "kind": "pixels",
+          "max_abs_diff": 236,
+          "sum_abs_diff": 1209208
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Seaquest-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 10,
+          "kind": "pixels",
+          "max_abs_diff": 129,
+          "sum_abs_diff": 930
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 0,
+      "env": "ALE/Skiing-v5",
+      "mismatches": [
+        {
+          "ale_py": -2.0,
+          "cule": 0.0,
+          "kind": "reward"
+        },
+        {
+          "differing_pixels": 200,
+          "kind": "pixels",
+          "max_abs_diff": 236,
+          "sum_abs_diff": 25476
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/Solaris-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 3,
+          "kind": "pixels",
+          "max_abs_diff": 63,
+          "sum_abs_diff": 189
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 10,
+      "env": "ALE/StarGunner-v5",
+      "mismatches": [
+        {
+          "ale_py": 5,
+          "cule": 6,
+          "kind": "lives"
+        }
+      ],
+      "step": 1
+    },
+    {
+      "action_index": 3,
+      "env": "ALE/TimePilot-v5",
+      "mismatches": [
+        {
+          "ale_py": 5,
+          "cule": 6,
+          "kind": "lives"
+        }
+      ],
+      "step": 0
+    },
+    {
+      "action_index": 4,
+      "env": "ALE/UpNDown-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 167,
+          "kind": "pixels",
+          "max_abs_diff": 95,
+          "sum_abs_diff": 15865
+        }
+      ],
+      "step": 1
+    },
+    {
+      "action_index": 8,
+      "env": "ALE/VideoPinball-v5",
+      "mismatches": [
+        {
+          "differing_pixels": 39,
+          "kind": "pixels",
+          "max_abs_diff": 236,
+          "sum_abs_diff": 9204
+        }
+      ],
+      "step": 2
+    }
+  ],
+  "metadata_failures": [],
+  "restored_cpu_cuda": {
+    "pixel_failures": [],
+    "transition_failures": []
+  },
+  "state_roundtrip_excluded_fields": [
+    "reward"
+  ],
+  "state_roundtrip_failures": [],
+  "summary": {
+    "ale_blackbox_failure_count": 32,
+    "metadata_failure_count": 0,
+    "restored_cpu_cuda_pixel_failure_count": 0,
+    "restored_cpu_cuda_transition_failure_count": 0,
+    "state_roundtrip_failure_count": 0
+  },
+  "supported_v5_env_count": 63
+}

@@ -298,7 +298,8 @@ preprocess(cule::cuda::parallel_execution_policy& policy,
            Wrapper& wrap,
            const bool last_frame,
            const uint32_t* tiaBuffer,
-           uint8_t* frameBuffer)
+           uint8_t* frameBuffer,
+           const bool render_frame)
 {
     using State_t = typename Wrapper::State_t;
 
@@ -309,6 +310,7 @@ preprocess(cule::cuda::parallel_execution_policy& policy,
     <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
         wrap.size(),
         last_frame,
+        render_frame,
         tiaBuffer,
         wrap.cached_tia_update_ptr,
         wrap.cache_index_ptr,

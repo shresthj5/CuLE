@@ -434,6 +434,7 @@ template<typename State_t, size_t NT>
 __launch_bounds__(NT) __global__
 void process_kernel(const uint32_t num_envs,
                     const bool last_frame,
+                    const bool render_frame,
                     const uint32_t* tia_update_buffer,
                     const uint32_t* cached_tia_update_buffer,
                     const uint32_t* cache_index_buffer,
@@ -464,9 +465,11 @@ void process_kernel(const uint32_t num_envs,
         fs.srcBuffer = cached_tia_update_buffer + (cache_index_buffer[global_index] * ENV_UPDATE_SIZE);
     }
     fs.cpuCycles = s.cpuCycles;
+    uint8_t* primary_frame_buffer = render_frame ? frame_buffer : nullptr;
+    uint8_t* secondary_frame_buffer = render_frame ? previous_frame_buffer : nullptr;
     preprocess::bindFrameBuffers(fs,
-                                 frame_buffer == nullptr ? nullptr : &frame_buffer[global_index * 300 * SCREEN_WIDTH],
-                                 previous_frame_buffer == nullptr ? nullptr : &previous_frame_buffer[global_index * 300 * SCREEN_WIDTH]);
+                                 primary_frame_buffer == nullptr ? nullptr : &primary_frame_buffer[global_index * 300 * SCREEN_WIDTH],
+                                 secondary_frame_buffer == nullptr ? nullptr : &secondary_frame_buffer[global_index * 300 * SCREEN_WIDTH]);
 
     preprocess::state_to_buffer(fs, s.clockAtLastUpdate);
 

@@ -318,10 +318,12 @@ PYBIND11_MODULE(torchcule_atari, m) {
                                 reinterpret_cast<uint8_t*>(imageBuffer));
         }
     )
-    .def("preprocess_frame", [](AtariEnv& env, const bool last_frame)
+    .def("preprocess_frame", [](AtariEnv& env, const bool last_frame, const bool render_frame)
         {
-            env.preprocess_frame(last_frame);
-        }
+            env.preprocess_frame(last_frame, render_frame);
+        },
+        py::arg("last_frame"),
+        py::arg("render_frame") = true
     )
     .def("generate_reset_screen_frames", [](AtariEnv& env, const bool rescale, const size_t num_channels, uint64_t imageBuffer)
         {

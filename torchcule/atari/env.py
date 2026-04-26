@@ -526,7 +526,7 @@ class Env(torchcule_atari.AtariEnv):
                     # but the replay state still has to advance across intermediate
                     # subframes so the last-frame render starts from the correct
                     # framebuffer/TIA state.
-                    self.preprocess_frame(False)
+                    self.preprocess_frame(False, False)
             elif frame == (self.frameskip - 2):
                 self.generate_frames(self.rescale, False, self.num_channels, self.observations2.data_ptr())
 

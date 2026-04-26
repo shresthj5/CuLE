@@ -171,9 +171,10 @@ wrapper::
 preprocess(ExecutionPolicy&& policy,
            const bool last_frame,
            const uint32_t* tiaBuffer,
-           uint8_t* frameBuffer)
+           uint8_t* frameBuffer,
+           const bool render_frame)
 {
-    ROM_SWITCH(dispatch::preprocess, policy, *this, last_frame, tiaBuffer, frameBuffer);
+    ROM_SWITCH(dispatch::preprocess, policy, *this, last_frame, tiaBuffer, frameBuffer, render_frame);
 }
 
 template<typename ExecutionPolicy>

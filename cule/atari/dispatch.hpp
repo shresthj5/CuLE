@@ -565,7 +565,8 @@ reset(ExecutionPolicy&& policy,
                             wrap.cache_index_ptr,
                             wrap.cached_frame_states_ptr,
                             wrap.cached_frame_ptr,
-                            wrap.cached_previous_frame_ptr);
+                            wrap.cached_previous_frame_ptr,
+                            true);
 
         if(!wrap.cached_states_ptr[0].tiaFlags[FLAG_ALE_STARTED] &&
            (wrap.cached_states_ptr[0].bootPhase == BOOT_DONE))
@@ -622,7 +623,8 @@ reset(ExecutionPolicy&& policy,
                             wrap.cache_index_ptr + i,
                             wrap.cached_frame_states_ptr + i,
                             wrap.cached_frame_ptr + (i * 300 * SCREEN_WIDTH),
-                            wrap.cached_previous_frame_ptr + (i * 300 * SCREEN_WIDTH));
+                            wrap.cached_previous_frame_ptr + (i * 300 * SCREEN_WIDTH),
+                            true);
         capture_cached_reset_screen<Environment>(wrap, i);
     }
 
@@ -782,7 +784,8 @@ preprocess(ExecutionPolicy&& policy,
            Wrapper& wrap,
            const bool last_frame,
            const uint32_t* tiaBuffer,
-           uint8_t* frameBuffer)
+           uint8_t* frameBuffer,
+           const bool render_frame)
 {
     agency::bulk_invoke(policy(wrap.size()),
                         preprocess_functor<Environment>{},
@@ -793,7 +796,8 @@ preprocess(ExecutionPolicy&& policy,
                         wrap.cache_index_ptr,
                         wrap.frame_states_ptr,
                         frameBuffer,
-                        wrap.previous_frame_ptr);
+                        wrap.previous_frame_ptr,
+                        render_frame);
 }
 
 template<typename ExecutionPolicy,

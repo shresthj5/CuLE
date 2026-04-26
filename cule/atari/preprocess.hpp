@@ -123,18 +123,42 @@ void updateFrameScanline(frame_state& s,
     else
     {
         int32_t end_pos = begin_pos + clocksToUpdate;
+        const bool has_playfield = PF != 0;
+        const bool has_movable_objects =
+            s.tiaFlags[FLAG_TIA_BLBit] ||
+            (s.CurrentGRP1 != 0) ||
+            s.tiaFlags[FLAG_TIA_M1Bit] ||
+            (s.CurrentGRP0 != 0) ||
+            s.tiaFlags[FLAG_TIA_M0Bit];
 
-        for(int32_t hpos = begin_pos; hpos < end_pos; ++hpos)
+        if(!has_playfield && !has_movable_objects)
         {
-            uint8_t enabled = ((PF & s.CurrentPFMask[hpos]) > 0) * PFBit;
-            enabled |= (s.tiaFlags[FLAG_TIA_BLBit] && s.CurrentBLMask[hpos]) * BLBit;
-            enabled |= (s.CurrentGRP1 && (s.CurrentGRP1 & s.CurrentP1Mask[hpos])) * P1Bit;
-            enabled |= (s.tiaFlags[FLAG_TIA_M1Bit] && s.CurrentM1Mask[hpos]) * M1Bit;
-            enabled |= (s.CurrentGRP0 && (s.CurrentGRP0 & s.CurrentP0Mask[hpos])) * P0Bit;
-            enabled |= (s.tiaFlags[FLAG_TIA_M0Bit] && s.CurrentM0Mask[hpos]) * M0Bit;
+            memset(s.framePointer, SELECT_FIELD(s.Color, FIELD_COLUBK), clocksToUpdate);
+        }
+        else if(!has_movable_objects)
+        {
+            for(int32_t hpos = begin_pos; hpos < end_pos; ++hpos)
+            {
+                const uint8_t enabled = ((PF & s.CurrentPFMask[hpos]) > 0) * PFBit;
+                const int32_t shift =
+                    8 * int(priority_accessor(hpos < 80 ? 0 : 1, enabled | s.playfieldPriorityAndScore));
+                *s.framePointer++ = SELECT_FIELD(s.Color, 0xFF << shift);
+            }
+        }
+        else
+        {
+            for(int32_t hpos = begin_pos; hpos < end_pos; ++hpos)
+            {
+                uint8_t enabled = ((PF & s.CurrentPFMask[hpos]) > 0) * PFBit;
+                enabled |= (s.tiaFlags[FLAG_TIA_BLBit] && s.CurrentBLMask[hpos]) * BLBit;
+                enabled |= (s.CurrentGRP1 && (s.CurrentGRP1 & s.CurrentP1Mask[hpos])) * P1Bit;
+                enabled |= (s.tiaFlags[FLAG_TIA_M1Bit] && s.CurrentM1Mask[hpos]) * M1Bit;
+                enabled |= (s.CurrentGRP0 && (s.CurrentGRP0 & s.CurrentP0Mask[hpos])) * P0Bit;
+                enabled |= (s.tiaFlags[FLAG_TIA_M0Bit] && s.CurrentM0Mask[hpos]) * M0Bit;
 
-            int32_t shift = 8 * int(priority_accessor(hpos < 80 ? 0 : 1, enabled | s.playfieldPriorityAndScore));
-            *s.framePointer++ = SELECT_FIELD(s.Color, 0xFF << shift);
+                int32_t shift = 8 * int(priority_accessor(hpos < 80 ? 0 : 1, enabled | s.playfieldPriorityAndScore));
+                *s.framePointer++ = SELECT_FIELD(s.Color, 0xFF << shift);
+            }
         }
     }
     s.framePointer = ending;

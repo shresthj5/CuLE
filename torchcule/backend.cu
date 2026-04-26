@@ -582,15 +582,16 @@ generate_frames(const bool rescale,
 
 void
 AtariEnv::
-preprocess_frame(const bool last_frame)
+preprocess_frame(const bool last_frame,
+                 const bool render_frame)
 {
     if(use_cuda)
     {
-        super_t::preprocess(get_policy<cule_policy>(), last_frame, tia_update_ptr, frame_ptr);
+        super_t::preprocess(get_policy<cule_policy>(), last_frame, tia_update_ptr, frame_ptr, render_frame);
     }
     else
     {
-        super_t::preprocess(get_policy<agency::parallel_execution_policy>(), last_frame, tia_update_ptr, frame_ptr);
+        super_t::preprocess(get_policy<agency::parallel_execution_policy>(), last_frame, tia_update_ptr, frame_ptr, render_frame);
     }
 }
 

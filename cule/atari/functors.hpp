@@ -332,7 +332,8 @@ struct preprocess_functor
                     const uint32_t* cache_index_buffer,
                     frame_state* frame_states_buffer,
                     uint8_t* frame_buffer,
-                    uint8_t* previous_frame_buffer)
+                    uint8_t* previous_frame_buffer,
+                    const bool render_frame)
     {
         CULE_ASSERT(tia_update_buffer != nullptr);
         CULE_ASSERT(states_buffer != nullptr);
@@ -353,9 +354,11 @@ struct preprocess_functor
             fs.srcBuffer = cached_tia_update_buffer + (cache_index_buffer[self.index()] * ENV_UPDATE_SIZE);
         }
         fs.cpuCycles = s.cpuCycles;
+        uint8_t* primary_frame_buffer = render_frame ? frame_buffer : nullptr;
+        uint8_t* secondary_frame_buffer = render_frame ? previous_frame_buffer : nullptr;
         preprocess::bindFrameBuffers(fs,
-                                     frame_buffer == nullptr ? nullptr : &frame_buffer[self.index() * 300 * SCREEN_WIDTH],
-                                     previous_frame_buffer == nullptr ? nullptr : &previous_frame_buffer[self.index() * 300 * SCREEN_WIDTH]);
+                                     primary_frame_buffer == nullptr ? nullptr : &primary_frame_buffer[self.index() * 300 * SCREEN_WIDTH],
+                                     secondary_frame_buffer == nullptr ? nullptr : &secondary_frame_buffer[self.index() * 300 * SCREEN_WIDTH]);
 
         preprocess::state_to_buffer(fs, s.clockAtLastUpdate);
     }

@@ -64,7 +64,8 @@ class AtariEnv : public cule::atari::wrapper
                            const size_t num_channels,
                            uint8_t* imageBuffer);
 
-      void preprocess_frame(const bool last_frame);
+      void preprocess_frame(const bool last_frame,
+                            const bool render_frame = true);
 
       void generate_reset_screen_frames(const bool rescale,
                                         const size_t num_channels,

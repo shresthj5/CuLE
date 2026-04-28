@@ -345,15 +345,31 @@ generate_frames(cule::cuda::parallel_execution_policy& policy,
     }
     else
     {
-        cule::atari::cuda::apply_palette_kernel<BLOCK_SIZE>
-        <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
-            wrap.size(),
-            wrap.cart.screen_height(),
-            num_channels,
-            imageBuffer,
-            wrap.frame_states_ptr,
-            wrap.frame_ptr,
-            wrap.previous_frame_ptr);
+        if(num_channels == 1)
+        {
+            const size_t GRAY_BLOCKS =
+                std::ceil(float(wrap.image_buffer_size(num_channels, rescale) / 4) / BLOCK_SIZE);
+            cule::atari::cuda::apply_palette_gray4_kernel<BLOCK_SIZE>
+            <<<GRAY_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
+                wrap.size(),
+                wrap.cart.screen_height(),
+                imageBuffer,
+                wrap.frame_states_ptr,
+                wrap.frame_ptr,
+                wrap.previous_frame_ptr);
+        }
+        else
+        {
+            cule::atari::cuda::apply_palette_kernel<BLOCK_SIZE>
+            <<<NUM_BLOCKS, BLOCK_SIZE, 0, policy.getStream()>>>(
+                wrap.size(),
+                wrap.cart.screen_height(),
+                num_channels,
+                imageBuffer,
+                wrap.frame_states_ptr,
+                wrap.frame_ptr,
+                wrap.previous_frame_ptr);
+        }
     }
     // CULE_CUDA_PEEK_AND_SYNC;
 }

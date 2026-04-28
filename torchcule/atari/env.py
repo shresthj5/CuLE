@@ -395,8 +395,6 @@ class Env(torchcule_atari.AtariEnv):
         super(Env, self).reset(reset_seeds.data_ptr(), ale_reset_seeds.data_ptr())
         self.last_actions.fill_(self.noop_action_index)
         self.last_player_b_actions.fill_(self.noop_action_index)
-        self.observations1.zero_()
-        self.observations2.zero_()
         if self.is_cuda:
             self.sync_other_stream()
         if self._use_reset_screen_snapshot():
@@ -483,8 +481,6 @@ class Env(torchcule_atari.AtariEnv):
         assert player_a_actions.size(0) == self.num_envs
 
         self.rewards.zero_()
-        self.observations1.zero_()
-        self.observations2.zero_()
         self.done.zero_()
         self._ensure_action_frame_buffers()
 

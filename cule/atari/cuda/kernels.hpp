@@ -516,6 +516,39 @@ void apply_palette_kernel(const int32_t num_envs,
 
 template<size_t NT>
 __launch_bounds__(NT) __global__
+void apply_palette_gray4_kernel(const int32_t num_envs,
+                                const int32_t screen_height,
+                                uint8_t* dst_buffer,
+                                const frame_state* frame_states_buffer,
+                                const uint8_t* src_buffer,
+                                const uint8_t* previous_frame_buffer)
+{
+    constexpr uint32_t PIXELS_PER_THREAD = 4;
+    const uint32_t pixels_per_env = screen_height * SCREEN_WIDTH;
+    const uint32_t words_per_env = pixels_per_env / PIXELS_PER_THREAD;
+    const uint32_t global_word_index = (NT * blockIdx.x) + threadIdx.x;
+
+    if(global_word_index < uint32_t(num_envs) * words_per_env)
+    {
+        const uint32_t state_index = global_word_index / words_per_env;
+        const uint32_t word_index = global_word_index - (state_index * words_per_env);
+        const uint8_t* source =
+            frame_states_buffer[state_index].frameBufferIndex == 0 ? src_buffer : previous_frame_buffer;
+        source += (state_index * 300 * SCREEN_WIDTH) + (word_index * PIXELS_PER_THREAD);
+
+        const uint32_t colors = *reinterpret_cast<const uint32_t*>(source);
+        const uint32_t gray =
+            ((gpu_NTSCPalette[(colors & 0x000000FFU) + 1] & 0xFFU) << 0) |
+            ((gpu_NTSCPalette[((colors >> 8) & 0x000000FFU) + 1] & 0xFFU) << 8) |
+            ((gpu_NTSCPalette[((colors >> 16) & 0x000000FFU) + 1] & 0xFFU) << 16) |
+            ((gpu_NTSCPalette[((colors >> 24) & 0x000000FFU) + 1] & 0xFFU) << 24);
+
+        reinterpret_cast<uint32_t*>(dst_buffer)[global_word_index] = gray;
+    }
+}
+
+template<size_t NT>
+__launch_bounds__(NT) __global__
 void apply_palette_screen_kernel(const int32_t num_envs,
                                  const int32_t screen_height,
                                  const int32_t num_channels,
